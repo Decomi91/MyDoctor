@@ -1,3 +1,125 @@
 create user mydoctor identified by 20000
 
 grant connect, resource to mydoctor;
+
+select * from tabs;
+
+create table members(
+	id			varchar2(15) primary key,
+	password	varchar2(15) not null,
+	name		varchar2(20) not null,
+	phone		number(12) not null,
+	address		varchar2(100),
+	email		varchar2(50),
+	birth		date,
+	gender		number(1),
+	userkey		number(1)
+)
+
+insert into members values('test', '123', 'testing', 01033333333, 'testADDR',
+		'dd@dd.com', '1991-02-11', 1, 1)
+
+create table hospitals(
+	id			varchar2(15) primary key,
+	password	varchar2(15) not null,
+	yadmNm		varchar2(50) not null,
+	addr		varchar2(100) not null,
+	hphone		number(12) not null,
+	yki			varchar2(100) not null,
+	monStart	number(4),
+	monEnd		number(4),
+	tueStart	number(4),
+	tueEnd		number(4),
+	wedStart	number(4),
+	wedEnd		number(4),
+	thuStart	number(4),
+	thuEnd		number(4),
+	friStart	number(4),
+	friEnd		number(4),
+	satStart	number(4) default 0,
+	satEnd		number(4) default 0,
+	sunStart	number(4) default 0,
+	sunEnd		number(4) default 0,
+	joinok		number(1) default 0
+)
+
+insert into hospitals values('testing','123','test',
+			'testaddr',029579599,'ABCD',0900,1700,0900,1700,0900,1700,
+			0900,1700,0900,1700,0900,1700,0900,1700,1);
+
+create table reservation(
+	reserveNo		number(10) primary key,
+	id				varchar2(15) references members(id),
+	name			varchar2(15) not null,
+	hosid			varchar2(15) references hospitals(id),
+	hosname			varchar2(15) not null,
+	disease			varchar2(100) not null,
+	reserveTime		date,
+	acceptance		number(1) default 0,
+	moreRes			number(1)
+)
+
+create table treatment(
+	treatNo			number(10) primary key,
+	reserveNo		number(10) references reservation(reserveNo),
+	id				varchar2(15) references members(id),
+	name			varchar2(15) not null,
+	hosid			varchar2(15) references hospitals(id),
+	hosname			varchar2(15) not null,
+	disease			varchar2(100) not null,
+	prescription	varchar2(1000) not null,
+	reserveTime		date,
+	treatTime		date
+)
+
+
+
+create table adminBoard(
+  id varchar2(15) references members(id),
+  password varchar2(15) not null,
+  boardNum number(10) primary key,
+  subject varchar2(100) not null,
+  content varchar2(4000) not null,
+  checking number(1) not null default 0,
+  reply varchar2(3000)
+)
+
+create table boards (
+  writeId varchar2(15),
+  password varchar2(15) not null,
+  boardsTarget varchar2(15) references hospitals(id),
+  boardNum number primary key,
+  secret number(1) not null default 1,
+  head varchar2(30) not null,
+  subject varchar2(100) not null,
+  content varchar2(4000) not null,
+  uploaddate date,
+  reply varchar2(3000)
+)
+
+create table reviews(
+  id varchar2(15) references members(id),
+  password varchar2(15) not null,
+  hospital varchar2(15) references hospitals(id),
+  reviewNum number(10) primary key,
+  subject varchar2(100) not null,
+  content varchar2(4000) not null,
+  kindness number(2) not null,
+  ability number(2) not null,
+  price number(2) not null,
+  uploaddate date,
+  reply varchar2(3000)
+)
+
+insert into reviews values('test', '123', 'testing', 1, 'testSub',
+			'testCont', 5,5,5,sysdate,'ok')
+
+create table favorites (
+  id varchar2(15) references members(id),
+  hosid varchar2(15) references hospitals(id),
+  hosname varchar2(50)
+)
+			
+			
+delete members cascade constraints;
+delete reviews
