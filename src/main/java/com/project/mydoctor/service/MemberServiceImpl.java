@@ -20,5 +20,10 @@ public class MemberServiceImpl implements MemberService {
 	public int isId(Member member) {
 		return mDao.isID(member);
 	}
+
+	@Override
+	public int isHosId(Member member) {
+		return mDao.isHosId(member);
+	}
 	
 }

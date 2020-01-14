@@ -26,6 +26,7 @@ create table hospitals(
 	addr		varchar2(100) not null,
 	hphone		number(12) not null,
 	yki			varchar2(100) not null,
+	doctors		number(3),
 	monStart	number(4),
 	monEnd		number(4),
 	tueStart	number(4),

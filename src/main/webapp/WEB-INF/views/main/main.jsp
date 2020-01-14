@@ -80,9 +80,10 @@
 						<header class="major">
 							<h2>Login</h2>
 						</header>
-						
-						<form action="login" method="post">
-							<ul>
+						<form action="loginMember" method="post" id="loginForm">
+							<input type="radio" id="pub" name="user" value="pub" checked> <label for="pub">일반회원</label> 
+							<input type="radio" id="hos" name="user" value="hos"> <label for="hos">병원회원</label>
+							<ul>	
 								<li class="nobordertop">ID<input type="text" id="id" class="logininput" name="id"></li>
 								<li class="nobordertop">PASSWORD<input type="password" id="password" name="password"
 									class="logininput"></li> 

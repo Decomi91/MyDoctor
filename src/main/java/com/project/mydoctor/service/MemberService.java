@@ -8,4 +8,6 @@ public interface MemberService {
 
 	int isId(Member member);
 
+	int isHosId(Member member);
+
 }

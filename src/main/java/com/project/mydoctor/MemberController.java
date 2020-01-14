@@ -37,9 +37,15 @@ public class MemberController {
 		return mv;
 	}
 	
-	@PostMapping(value="/login")
-	public ModelAndView login(Member member, ModelAndView mv, HttpSession session, HttpServletResponse response) throws Exception {
-		int result = memberService.isId(member);
+	@PostMapping(value="/loginMember")
+	public ModelAndView loginMember(Member member, String user, ModelAndView mv, HttpSession session, HttpServletResponse response) throws Exception {
+		int result = 0;
+		
+		if(user.equals("pub")) {
+			result = memberService.isId(member);
+		}else {
+			result = memberService.isHosId(member);
+		}
 		if(result == 1) {
 			session.setAttribute("loginid", member.getId());
 			mv.setViewName("redirect:/main");

@@ -5,10 +5,12 @@
 <configuration>    
 	<typeAliases>
 		<typeAlias type="com.project.mydoctor.model.Member" alias="member"/>
+		<typeAlias type="com.project.mydoctor.model.Hospital" alias="hospital"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="sql/member.xml"/>
+		<mapper resource="sql/hospital.xml"/>
 	</mappers>
 </configuration>
 

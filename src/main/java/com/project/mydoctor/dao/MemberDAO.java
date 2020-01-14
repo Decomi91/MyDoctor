@@ -18,4 +18,8 @@ public class MemberDAO {
 	public int isID(Member member) {
 		return sqlSession.selectOne("Members.isId", member);
 	}
+
+	public int isHosId(Member member) {
+		return sqlSession.selectOne("Hospitals.isId", member);
+	}
 }

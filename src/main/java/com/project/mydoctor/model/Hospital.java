@@ -7,6 +7,7 @@ public class Hospital {
 	private String addr;
 	private int hphone;
 	private String yki;
+	private int doctors;
 	private int monStart;
 	private int monEnd;
 	private int tueStart;
@@ -57,6 +58,13 @@ public class Hospital {
 	}
 	public void setYki(String yki) {
 		this.yki = yki;
+	}
+	
+	public int getDoctors() {
+		return doctors;
+	}
+	public void setDoctors(int doctors) {
+		this.doctors = doctors;
 	}
 	public int getMonStart() {
 		return monStart;
