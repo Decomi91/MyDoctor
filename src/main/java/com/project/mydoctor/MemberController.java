@@ -7,6 +7,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -36,5 +37,25 @@ public class MemberController {
 		return mv;
 	}
 	
+	@PostMapping(value="/login")
+	public ModelAndView login(Member member, ModelAndView mv, HttpSession session, HttpServletResponse response) throws Exception {
+		int result = memberService.isId(member);
+		if(result == 1) {
+			session.setAttribute("loginid", member.getId());
+			mv.setViewName("redirect:/main");
+		}else {
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('로그인 오류 발생'); history.go(-1);</script>");
+			out.close();
+			return null;
+		}
+		return mv;
+	}
 	
+	@GetMapping(value="/logout")
+	public ModelAndView logout(HttpSession session, ModelAndView mv) {
+		session.invalidate();
+		mv.setViewName("redirect:/main");
+		return mv;
+	}
 }

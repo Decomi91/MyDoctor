@@ -6,4 +6,6 @@ public interface MemberService {
 
 	int insertMember(Member member);
 
+	int isId(Member member);
+
 }

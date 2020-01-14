@@ -15,4 +15,7 @@ public class MemberDAO {
 		return sqlSession.insert("Members.insertMember", member);
 	}
 
+	public int isID(Member member) {
+		return sqlSession.selectOne("Members.isId", member);
+	}
 }
