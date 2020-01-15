@@ -71,10 +71,12 @@
 
 				<nav id="boardMenu">
 					<ul>
-						<li id="reviewli"><a class="menuLink" href="#" id="reviewa">
-								후기 </a></li>
-						<li id="qnali"><a class="menuLink" href="#" id="qnaa"> 문의
-						</a></li>
+						<li id="reviewli">
+							<a class="menuLink" href="#" id="reviewa">후기 </a>
+						</li>
+						<li id="qnali">
+							<a class="menuLink" href="#" id="qnaa"> 문의</a>
+						</li>
 					</ul>
 				</nav>
 

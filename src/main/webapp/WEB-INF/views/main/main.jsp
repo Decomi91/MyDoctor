@@ -53,7 +53,7 @@
 										<table>
 											<tr>
 												<td rowspan = "3" class = "table-wrapper"><img alt="" src="resources/images/pic10.jpg" width = "50px"></td>
-												<th onclick = "location.href=''">가나다병원</th>
+												<th onclick = "location.href='detail.net'">가나다병원</th>
 											</tr>
 											<tr>
 												<td>내과, 가정의학과, 소아과</td>
