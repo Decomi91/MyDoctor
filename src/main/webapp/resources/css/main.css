@@ -2286,7 +2286,7 @@ button,
   .privacybtnline{border-right:1px solid rgba(210, 215, 217, 0.75) }
   .loginbtn{width:100%; text-align:center; padding-bottom:2px; font-weight:bold;}
 .nearhospital, .nearpharmacy{display:inline-block; width: 48%; margin-bottom:5%}
-.mapsize{width:97%; margin-right:1%}
+.mapsize{width:97%; margin-right:1%; height : 400px}
 
 .categorysel{height: 3.5em; width: 30%; margin-bottom:4%; font-size: 0.8em;
 margin-right:0 !important;display:inline-block; font-family: "Open Sans", sans-serif; }
@@ -2306,7 +2306,7 @@ input[type=button]:focus {outline:none !important;}
                         list-style: none;           
                          color: #f56a6a;                
                         background-color: white;   
-                        width:50%;  margin:0 !important;              
+                        width:49%;  margin:0 !important;              
                         line-height: 3em;          
                         vertical-align: middle;    
                         text-align: center; 
