@@ -19,8 +19,8 @@
 	<div class="mypageMenu">
 		<div id='cssmenu'>
 			<ul>
-				<li><a href='#'><span>예약 확인</span></a></li>
-				<li><a href='#'><span>진료 기록</span></a></li>
+				<li><a href='reserve.net'><span>예약 확인</span></a></li>
+				<li><a href='chart.net'><span>진료 기록</span></a></li>
 				<li><a href='#'><span>관심 병원</span></a></li>
 				<li><a href='#'><span>나의 정보 수정</span></a></li>
 				<li><a href='#'><span>내가 쓴 후기</span></a></li>

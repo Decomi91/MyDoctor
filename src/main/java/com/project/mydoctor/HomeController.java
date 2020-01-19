@@ -25,4 +25,10 @@ public class HomeController {
 	public String detail() {
 		return "details/hospitaldetail";
 	}
+	
+	// 예약 폼
+	@RequestMapping(value = "/reserve.do")
+	public String reserve() {
+		return "details/reserve";
+	}
 }
