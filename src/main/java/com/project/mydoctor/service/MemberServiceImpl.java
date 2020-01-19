@@ -1,5 +1,7 @@
 package com.project.mydoctor.service;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,6 +26,16 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int isHosId(Member member) {
 		return mDao.isHosId(member);
+	}
+
+	@Override
+	public int getlistCount() {
+		return mDao.getlistcount();
+	}
+
+	@Override
+	public List<Member> getmemList(int pages) {
+		return mDao.getmemList(pages);
 	}
 	
 }

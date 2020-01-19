@@ -18,10 +18,15 @@ import com.project.mydoctor.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	
+	@GetMapping(value="/joinForm")
+	public ModelAndView joinForm(ModelAndView mv) {
+		mv.setViewName("member/joinForm");
+		return mv;
+	}
 	@PostMapping(value="/join")
 	public ModelAndView joinProcess(Member member, ModelAndView mv, HttpServletResponse response, HttpSession session) throws Exception {
 		int result = memberService.insertMember(member);
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		
 		if(result == 1) {
@@ -40,15 +45,23 @@ public class MemberController {
 	@PostMapping(value="/loginMember")
 	public ModelAndView loginMember(Member member, String user, ModelAndView mv, HttpSession session, HttpServletResponse response) throws Exception {
 		int result = 0;
-		
+		int chk = 0;
+		response.setContentType("text/html;charset=utf-8");
 		if(user.equals("pub")) {
 			result = memberService.isId(member);
+			chk=1;
 		}else {
 			result = memberService.isHosId(member);
+			chk=2;
 		}
 		if(result == 1) {
 			session.setAttribute("loginid", member.getId());
-			mv.setViewName("redirect:/main");
+			session.setAttribute("chk", chk);
+			if(member.getId().equals("admin")) {
+				mv.setViewName("redirect:/hospitalcontrol");
+			}else {
+				mv.setViewName("redirect:/main");
+			}
 		}else {
 			PrintWriter out = response.getWriter();
 			out.print("<script>alert('로그인 오류 발생'); history.go(-1);</script>");

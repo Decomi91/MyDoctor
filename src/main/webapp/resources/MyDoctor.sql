@@ -3,7 +3,7 @@ create user mydoctor identified by 20000
 grant connect, resource to mydoctor;
 
 select * from tabs;
-
+select * from members;
 create table members(
 	id			varchar2(15) primary key,
 	password	varchar2(15) not null,
@@ -16,9 +16,18 @@ create table members(
 	userkey		number(1)
 )
 
-insert into members values('test', '123', 'testing', 01033333333, 'testADDR',
+insert into members values('test', '123', 'testing', 
+		01033333333, 'testADDR',
 		'dd@dd.com', '1991-02-11', 1, 1)
-
+insert into members values('admin', '20000', 'admin', 
+		01032308711, '서울 어딘가',
+		'd@naver.com', '1991-02-11', 1, 1)
+		
+select rownum, h.* from hospitals h
+select a.*
+	 	from (select rownum r, h.*
+	 		from hospitals h
+	 		order by yadmNm) a
 create table hospitals(
 	id			varchar2(15) primary key,
 	password	varchar2(15) not null,
@@ -41,13 +50,15 @@ create table hospitals(
 	satEnd		number(4) default 0,
 	sunStart	number(4) default 0,
 	sunEnd		number(4) default 0,
-	joinok		number(1) default 0
+	joinok		number(1) default 0,
+	joindate	date
 )
 
 insert into hospitals values('testing','123','test',
 			'testaddr',029579599,'ABCD',0900,1700,0900,1700,0900,1700,
 			0900,1700,0900,1700,0900,1700,0900,1700,1);
-
+alter table hospitals add(joindate date)
+update hospitals set joindate = sysdate
 create table reservation(
 	reserveNo		number(10) primary key,
 	id				varchar2(15) references members(id),

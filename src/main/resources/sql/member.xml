@@ -4,11 +4,25 @@
  
  <mapper namespace="Members">
  	<insert id="insertMember" parameterType="member">
- 	
+ 		insert into members
+ 		(id, password, name, phone, address, email, birth, gender, userkey)
+ 		values(#{id}, #{password}, #{name}, #{phone}, #{address}, #{email}, #{birth}, #{gender}, 1)
  	</insert>
  	
  	<select id="isId" parameterType="member" resultType="int">
  		select count(*) from members
  		where id = #{id} and password = #{password}
+ 	</select>
+ 	
+ 	<select id="getlistcount" resultType="int">
+ 		select count(*) from members
+ 	</select>
+ 	
+ 	<select id="getmemlist" parameterType="int" resultType="member">
+ 		select a.*
+ 		from (select rownum r, m.*
+ 				from members m
+ 				order by name) a
+ 		where a.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
  	</select>
  </mapper>

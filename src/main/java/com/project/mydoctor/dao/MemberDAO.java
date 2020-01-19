@@ -1,5 +1,7 @@
 package com.project.mydoctor.dao;
 
+import java.util.List;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,5 +23,13 @@ public class MemberDAO {
 
 	public int isHosId(Member member) {
 		return sqlSession.selectOne("Hospitals.isId", member);
+	}
+
+	public int getlistcount() {
+		return sqlSession.selectOne("Members.getlistcount");
+	}
+
+	public List<Member> getmemList(int pages) {
+		return sqlSession.selectList("Members.getmemlist", pages);
 	}
 }

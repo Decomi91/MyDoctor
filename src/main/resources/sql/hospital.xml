@@ -7,5 +7,17 @@
  		select count(*) from hospitals
  		where id = #{id} and password = #{password}
  	</select>
+ 	
+ 	<select id="getlistcount" resultType="int">
+ 		select count(*) from hospitals
+ 	</select>
+ 	
+ 	<select id="gethoslist" parameterType="int" resultType="hospital">
+ 		select a.*
+	 	from (select rownum r, h.*
+	 		from hospitals h
+	 		order by yadmNm) a
+	 	where a.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
+ 	</select>
  </mapper>
  

@@ -23,6 +23,7 @@ public class Hospital {
 	private int sunStart;
 	private int sunEnd;
 	private byte joinok;
+	private String joindate;
 	public String getId() {
 		return id;
 	}
@@ -156,6 +157,13 @@ public class Hospital {
 	public void setJoinok(byte joinok) {
 		this.joinok = joinok;
 	}
+	public String getJoindate() {
+		return joindate;
+	}
+	public void setJoindate(String joindate) {
+		this.joindate = joindate.split(" ")[0];
+	}
+	
 	
 	
 }
