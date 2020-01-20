@@ -40,10 +40,12 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public String idcheck(String id, String pub) {
-		if(pub.equals("hos")) {
-			return mDao.idcheckhos(id);
-		}else {
+		if(pub.equals("hos")) {	
 			return mDao.idcheckpub(id);
+		}else {
+			
+			return mDao.idcheckhos(id);
+			
 		}
 	}
 	

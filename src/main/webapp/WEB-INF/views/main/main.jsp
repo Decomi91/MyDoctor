@@ -92,7 +92,7 @@ $(function() {
 								   out +="<tr>";
 								  /*  out +="<td rowspan ='3' class='table-wrapper'></td>"; */
 								   //out +="<th onclick='location.href=locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</th>";
-								   out +="<th><a href='detail.net?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+" (상세정보)</a></th>";
+								   out +="<th><a style='color: black;' href='detail.net?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+" (상세정보)</a></th>";
 								   out +="</tr>";
 								    
 								   out +="<tr>";

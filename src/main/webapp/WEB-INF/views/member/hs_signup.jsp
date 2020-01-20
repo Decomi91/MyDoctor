@@ -82,7 +82,7 @@ body {
 
 .card {
 	/* height: 430px; */
-	height: 680px;
+	height: 710px;
 	margin-top: auto;
 	margin-bottom: auto;
 	width: 510px;
@@ -237,9 +237,11 @@ input:focus {
 								<span class="input-group-text"><i
 									class='fas fa-user-graduate ml-2' style='font-size: 22px'></i></span>
 								<input type="text" class="form-control" placeholder="아이디"
-									id="id" name="id" required pattern="^([A-Za-z0-9_]){5,10}$" title="형식과 맞지않습니다 대소문자숫자 5~10글자">
+									id="id" name="id" required pattern="^([A-Za-z0-9_]){5,10}$" title="대소문자숫자 5~10글자">
 							</div>
 						</div>
+						<p id="id_check" style="color: white; font: bold; text-align: center;">
+						
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class='fa fa-key ml-2'
@@ -257,6 +259,10 @@ input:focus {
 									required pattern="^([A-Za-z0-9!><?/:+~@#$%^&*()]){5,15}$" maxlength="15" title="5~15대소문자 숫자 !><?/:+~@#$%^&*()특수기호">
 							</div>
 						</div>
+						
+						<p id="alert-success" style="color: white; font: bold; text-align: center;">비밀번호가 일치합니다.</p>
+						<p id="alert-danger" style="color: white; font: bold; text-align: center;">비밀번호가 일치하지 않습니다.</p>
+						
 						<input id="yki" name="yki" type="hidden">
 
 						<div class="input-group form-group">
@@ -274,34 +280,34 @@ input:focus {
 						<!-- 진료시간 -->
 						<!-- required -->
 						<input id="monStart" name="monStart" placeholder="월 시작시간 (기호 :생략)"
-							class="day" required maxlength="4"> <span
+							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
 							style="color: white;">~</span> <input id="monEnd" name="monEnd"
-							placeholder="월 종료시간 (기호 :생략)" class="day" required maxlength="4"><input
+							placeholder="월 종료시간 (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"><input
 							id="tueStart" name="tueStart" placeholder="화 시작시간 (기호 :생략)"
-							class="day" required maxlength="4"> <span
+							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
 							style="color: white;">~</span> <input id="tueEnd" name="tueEnd"
-							placeholder="화 종료시간 (기호 :생략)" class="day" required maxlength="4">
+							placeholder="화 종료시간 (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100">
 						<input id="wedStart" name="wedStart" placeholder="수 시작시간 (기호 :생략)"
-							class="day" required maxlength="4"> <span
+							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
 							style="color: white;">~</span> <input id="wedEnd" name="wedEnd"
-							placeholder="수 종료시간 (기호 :생략)" class="day" required maxlength="4">
+							placeholder="수 종료시간 (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100">
 						<input id="thuStart" name="thuStart" placeholder="목 시작시간 (기호 :생략)"
-							class="day" required maxlength="4"> <span
+							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
 							style="color: white;">~</span> <input id="thuEnd" name="thuEnd"
-							placeholder="목 종료시간  (기호 :생략)" class="day" required maxlength="4"><input
+							placeholder="목 종료시간  (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"><input
 							id="friStart" name="friStart" placeholder="금 시작시간  (기호 :생략)"
-							class="day" required maxlength="4"> <span
+							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
 							style="color: white;">~</span> <input id="friEnd" name="friEnd"
-							placeholder="금 종료시간  (기호 :생략)" class="day" required maxlength="4"><input
+							placeholder="금 종료시간  (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"><input
 							id="satStart" name="satStart" placeholder="토 시작시간 (휴무 00 표기)"
-							class="day" required maxlength="4"> <span
+							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
 							style="color: white;">~</span> <input id="satEnd" name="satEnd"
 							placeholder="토 종료시간 (휴무 00 표기)" class="day" required
-							maxlength="4"><input id="sunStart" name="sunStart"
+							maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"><input id="sunStart" name="sunStart"
 							placeholder="일 시작시간 (휴무 00 표기)" class="day" required
-							maxlength="4"> <span style="color: white;">~</span> <input
+							maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span style="color: white;">~</span> <input
 							id="sunEnd" name="sunEnd" placeholder="일 종료시간 (휴무 00 표기)"
-							class="day" required maxlength="4">
+							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100">
 
 					</div>
 					<div class="card-footer p-2">
@@ -705,11 +711,66 @@ input:focus {
         	   }			
 		}); 
            
-        
+          
+           $("#id").blur(function(){
+        	  var id= $("#id").val();
+        	  var pub = "hos";
+        	  $.ajax({
+                  async: true,
+                  type : 'POST',
+                  data : {"id":id,"pub":pub},
+                  url : "idcheck",
+                 // dataType : "json",
+                 // contentType: "application/json; charset=UTF-8",
+                  success : function(data) {
+                	  if(data==1){
+                		  $("#id_check").html("중복된아이디입니다");                	
+                		  $("#id").val("");
+                		  $("#id").focus();
+                		  $("#btnKayıtOl").attr("disabled", "disabled");
+                		  
+                	  }else{
+                		  $("#id_check").html("");
+                		  $("#btnKayıtOl").removeAttr("disabled");
+  
+                	  }
+                	                   
+                  },
+                  error : function(error) {
+                      
+                      alert("error : " + error);
+                  }
+              });
+          });
+        	   
        	   
        	   
        	   
-        	  
+        	  $("#alert-success").hide(); 
+       	   	  $("#alert-danger").hide();
+
+       	  	$("#repassword").keyup(function(){
+       	  		var password = $("#password").val();
+       	  		var repassword = $("#repassword").val();
+       	  		
+       	  		if(password !="" || repassword!=""){
+       	  			if(password==repassword){
+       	  			$("#alert-success").show(); 
+       	  			$("#alert-danger").hide();
+       	  		$("#btnKayıtOl").removeAttr("disabled");
+       	  			
+       	  			}else{
+       	  			$("#alert-success").hide(); 
+       	  			$("#alert-danger").show();
+       	  		$("#btnKayıtOl").attr("disabled", "disabled");
+       	  	
+       	  			}
+       	  			
+       	  		}
+       	  		
+       	  		
+       	  		
+       	  	});
         	  
 	
           
@@ -805,7 +866,23 @@ input:focus {
            
            
            
-          });
+          }); //onload;
+          
+          //폼서브밋 하이픈삭제
+			$("#form1").submit(function() {
+				var hphone = $("#hphone").val();
+    	   		 hphone =hphone.replace(/-/g,"");    	   		 
+    	   	$("#hphone").val(hphone);
+				return true;
+      	  	}); 
+          
+          
+          
+          
+          
+          
+          
+          
           (function(){
         'use strict';
         window.addEventListener('load',function(){
@@ -825,12 +902,6 @@ input:focus {
           
           
           
-  			$("#form1").submit(function() {
-  				var hphone = $("#hphone").val();
-      	   		 hphone =hphone.replace(/-/g,"");    	   		 
-      	   	$("#hphone").val(hphone);
-  				return true;
-        	  	}); 
           
     </script>
 

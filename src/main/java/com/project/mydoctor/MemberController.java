@@ -1,6 +1,7 @@
 package com.project.mydoctor;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -164,26 +165,30 @@ public class MemberController {
 	 * @param req
 	 * @param 병원가입시 vo
 	 * @author 김건수
+	 * @throws Exception 
 	 */
 	@RequestMapping(value = "hs_signup.do", method = RequestMethod.POST)
-	public String signup(HttpServletRequest req, Hospital vo) {
-		//https://programmingsummaries.tistory.com/318
-		//뒤로가기했을시 정보남아있음
-		
-		System.out.println(vo);
+	public void signup(HttpServletRequest req,HttpServletResponse res ,Hospital vo) throws Exception {
 		
 		int result = hospitalService.hs_insert(vo);
+		res.setContentType("text/html;charset=utf-8");
+		PrintWriter out = res.getWriter();
+		out.println("<script>");
+		if(result==1) {
+			out.println("alert('회원가입을 축하합니다');");
+			out.println("location.href='main';");
+		}else{
+			out.println("alert('실패했습니다');");
+			out.println("history.back()");
+		}
+		out.println("</script>");
+		out.close();
 		
-		
-		
-		
-		
-		return "main/main";
 	}
 	
 	@ResponseBody
 	@PostMapping(value="/idcheck")
-	public String idcheck(String id, String pub) {
+	public String idcheck(String id, String pub) {				
 		return memberService.idcheck(id, pub);
 	}
 }

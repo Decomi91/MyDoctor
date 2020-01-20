@@ -118,13 +118,15 @@ public class MapController {
 			JSONObject body = (JSONObject) json.get("body");
 			JSONObject items = (JSONObject) body.get("items");
 			JSONObject item = (JSONObject) items.get("item");
+			System.out.println(item);
 
 			HdetailVO result = new HdetailVO();
 			result.setYadmNm((String) item.get("yadmNm"));
 			result.setAddr((String) item.get("addr"));
 			result.setTelno((String) item.get("telno"));
 			result.setHospUrl((String) item.get("hospUrl"));
-			result.setEstbDd((String) item.get("estDd"));
+			result.setEstbDd((Long)item.get("estbDd"));
+			System.out.println(result);
 			return result;
 
 		} catch (Exception e) {

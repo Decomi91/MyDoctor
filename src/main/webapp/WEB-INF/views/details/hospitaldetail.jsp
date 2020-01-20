@@ -63,12 +63,13 @@
 								class="button large reservationbtn koreanfont"
 								style="float: right; margin-top: 3%;" id="res_hos">예약하기</a>
 							<div>
-								<i class="fas fa-phone-alt"></i> ${vo.telno }<br> <a href="">사이트
+								<i class="fas fa-phone-alt"></i> ${vo.telno }<br> <a href="${vo.hospUrl}">사이트
 									방문하기</a>
 							</div>
 						</div>
 					</div>
 				</section>
+				<a href="#">길찾기</a>
 
 				<nav id="boardMenu">
 					<ul>
