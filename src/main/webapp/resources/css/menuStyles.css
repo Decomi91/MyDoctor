@@ -201,7 +201,7 @@ div.signoutpassck {
 .signoutmsg{font-size: 2em; padding:3%; margin:0%}
 div.passck1, div.passck2{width: 50% !important; display: inline-block; text-align: center; 
 margin:0 !important;height:100%; vertical-align: bottom;}
-div.passck1{ padding:1% !important; background-color:#755656; color: white; 
+div.passck1{ padding:1% !important; background-color:#77A8C7; color: white; 
 }
 .passck2{
  border-top:none !important;border-right:none !important;
@@ -212,7 +212,7 @@ div.passck1{ padding:1% !important; background-color:#755656; color: white;
   height:100%
   }
   
-#passckbox{border-bottom: 2px solid #755656 !important;
+#passckbox{border-bottom: 2px solid #77A8C7 !important;
 margin:0 auto; width:70%; 
 }
 .signoutsubbtn{
@@ -280,3 +280,9 @@ padding:4%; width:100% }
 .accordion__copy--open {
   display: block;
 }
+
+.qnabtn{width: 49%; display:inline-block !important; text-align:center;
+font-size:1.75em !important; margin-top:0 !important; margin-bottom:1em !important;
+color:#7f888f}
+.qnabtn:firstchild{margin-right:1% !important}
+.qnabtn:hover{cursor:pointer;}

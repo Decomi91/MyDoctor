@@ -28,5 +28,10 @@ public class MypageController {
 
 		return "mypage/mypage_signout";
 	}
+	@RequestMapping(value="/myqna.net")
+	public String gomyqna() {
+
+		return "mypage/mypage_req";
+	}
 }
  
