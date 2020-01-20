@@ -102,7 +102,7 @@ public class MemberController {
 	@RequestMapping(value = "hs_signup.do")
 	public String hs_signup() {
 		
-		return "main/hs_signup";		
+		return "member/hs_signup";		
 	}
 	
 	
@@ -173,6 +173,8 @@ public class MemberController {
 		System.out.println(vo);
 		
 		int result = hospitalService.hs_insert(vo);
+		
+		
 		
 		
 		

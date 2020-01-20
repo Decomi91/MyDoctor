@@ -6,7 +6,8 @@
 <html>
 <head>
 <title>My Doctor - 병원상세</title>
-<jsp:include page="../main/header.jsp" />
+<%-- <jsp:include page="../main/header.jsp" /> --%>
+
 <meta charset="utf-8" />
 </head>
 <body class="is-preload">
@@ -27,7 +28,7 @@
 							<h1 class="koreanfont hospitalnamesize">
 								<i class="icon far fa-heart"
 									style="float: right; color: #f56a6a; margin-right: 5%"
-									id="fav_hos"></i>병원이름
+									id="fav_hos"></i>${vo.yadmNm }
 							</h1>
 							<p
 								style="font-size: 12pt; font-family: Open Sans, sans-serif; color: #7f888f; margin-top: 2%">내과,
@@ -62,7 +63,7 @@
 								class="button large reservationbtn koreanfont"
 								style="float: right; margin-top: 3%;" id="res_hos">예약하기</a>
 							<div>
-								<i class="fas fa-phone-alt"></i> 02-123-1234<br> <a href="">사이트
+								<i class="fas fa-phone-alt"></i> ${vo.telno }<br> <a href="">사이트
 									방문하기</a>
 							</div>
 						</div>
