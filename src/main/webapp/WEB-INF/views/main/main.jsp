@@ -202,7 +202,7 @@
 			
 						</header>
 						<p>
-							제휴 관련하여 문의 사항이 있는 병원에서는 연락주세요 &nbsp;&nbsp;<a href="#">지금바로 요청,
+							제휴 관련하여 문의 사항이 있는 병원에서는 연락주세요 &nbsp;&nbsp;<a href="hs_signup.do">지금바로 요청,
 								Click Here!</a>
 						</p>
 						<ul class="contact">

@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.project.mydoctor.model.Hospital;
 
 @Repository
-public class HospitalDAO {
+public class HospitalDAO { 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -21,5 +21,11 @@ public class HospitalDAO {
 		System.out.println(page);
 		return sqlSession.selectList("Hospitals.gethoslist", page);
 	}
+	
+	public int hs_insert(Hospital vo) {
+		return sqlSession.insert("Hospitals.hs_insert", vo);
+	}
+	
+	
 
 }

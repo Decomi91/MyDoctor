@@ -1,12 +1,18 @@
 package com.project.mydoctor.model;
 
+/**
+ * @author 김건수
+ * @병원회원가입
+ * 
+ */
 public class Hospital {
-	private String id;
-	private String password;
-	private String yadmNm;
-	private String addr;
-	private int hphone;
-	private String yki;
+	private String id; //아이디
+	private String password; //비밀번호
+	private String yadmNm; //병원명
+	private String addr; //주소
+	private int hphone; //전화번호
+	private String yki; //요양기호
+	//근무시간
 	private int doctors;
 	private int monStart;
 	private int monEnd;
@@ -24,6 +30,7 @@ public class Hospital {
 	private int sunEnd;
 	private byte joinok;
 	private String joindate;
+	
 	public String getId() {
 		return id;
 	}
@@ -163,6 +170,17 @@ public class Hospital {
 	public void setJoindate(String joindate) {
 		this.joindate = joindate.split(" ")[0];
 	}
+	@Override
+	public String toString() {
+		return "Hospital [id=" + id + ", password=" + password + ", yadmNm=" + yadmNm + ", addr=" + addr + ", hphone="
+				+ hphone + ", yki=" + yki + ", doctors=" + doctors + ", monStart=" + monStart + ", monEnd=" + monEnd
+				+ ", tueStart=" + tueStart + ", tueEnd=" + tueEnd + ", wedStart=" + wedStart + ", wedEnd=" + wedEnd
+				+ ", thuStart=" + thuStart + ", thuEnd=" + thuEnd + ", friStart=" + friStart + ", friEnd=" + friEnd
+				+ ", satStart=" + satStart + ", satEnd=" + satEnd + ", sunStart=" + sunStart + ", sunEnd=" + sunEnd
+				+ ", joinok=" + joinok + ", joindate=" + joindate + "]";
+	}
+	
+	
 	
 	
 	
