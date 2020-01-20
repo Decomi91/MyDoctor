@@ -3,7 +3,7 @@ package com.project.mydoctor.model;
 /**
  * @author 김건수
  * @병원회원가입
- *
+ * 
  */
 public class Hospital {
 	private String id; //아이디

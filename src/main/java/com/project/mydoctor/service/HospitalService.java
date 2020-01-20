@@ -10,7 +10,7 @@ import com.project.mydoctor.model.Hospital;
 
 @Service
 public class HospitalService {
-
+ 
 	@Autowired
 	private HospitalDAO hDAO;
 	

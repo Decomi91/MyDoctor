@@ -7,7 +7,7 @@
  		select count(*) from hospitals
  		where id = #{id} and password = #{password}
  	</select>
- 	
+ 	 
  	<select id="getlistcount" resultType="int">
  		select count(*) from hospitals
  	</select>

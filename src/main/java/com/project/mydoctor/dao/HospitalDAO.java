@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.project.mydoctor.model.Hospital;
 
 @Repository
-public class HospitalDAO {
+public class HospitalDAO { 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 

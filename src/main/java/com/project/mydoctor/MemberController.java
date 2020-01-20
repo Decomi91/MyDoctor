@@ -28,7 +28,7 @@ import com.project.mydoctor.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-	
+	 
 	@Autowired
 	private HospitalService hospitalService;
 	
