@@ -247,3 +247,36 @@ padding:4%; width:100% }
 .mod_body{}
 #myInfo, #myPassword{background-color:#f5f6f7;}
 .mypageContent_mod{padding-top:0 !important}
+.accordion {
+ 
+  margin: 3rem auto;
+  width: 100%;
+  font-family: 'Lato', sans-serif !important;
+  background: #f4f4f4;
+}
+.accordion__title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 1rem 1.5rem;
+  background: #77A8C7;
+  color: white;
+  cursor: pointer;
+  -webkit-transition: .3s ease;
+          transition: .3s ease;
+          font-family: 'Lato', sans-serif !important;
+}
+.accordion__title:hover {
+  background: #4574A8;
+}
+.accordion__copy {
+  display: none;
+  padding: 1rem 1.5rem 2rem 1.5rem;
+  color: gray;
+  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 500;
+}
+.accordion__copy--open {
+  display: block;
+}
