@@ -59,9 +59,7 @@ public class MapController {
 		parameter = parameter + "&yPos=" + yPos;
 		parameter = parameter + "&radius=" + radius;
 		parameter = parameter + "&_type=json";
-
-		System.out.println(parameter);
-
+	
 		URL url = new URL(parameter);
 
 		InputStream in = url.openStream();
@@ -74,7 +72,7 @@ public class MapController {
 		String mbos = bos1.toString("UTF-8");
 		byte[] b = mbos.getBytes("UTF-8");
 		String s = new String(b, "UTF-8");
-		System.out.println(s);
+		
 		out.println(s);
 
 	}
@@ -95,7 +93,7 @@ public class MapController {
 		model.addAttribute("YPos", YPos);
 		model.addAttribute("XPos", XPos);
 
-		System.out.println(vo);
+		
 		
 		return "details/hospitaldetail";
 
@@ -115,7 +113,7 @@ public class MapController {
 			jsonobject = (JSONObject) jsonparser.parse(readUrl(
 					"http://apis.data.go.kr/B551182/medicInsttDetailInfoService/getFacilityInfo?ServiceKey=G9rzPM3G3d1FVN%2F8ZyPSkwQ7B0IICxPX3Sks%2FrUY2wLu94BsUzYPUHzcNhSwJj%2FIjuLsoBMYMJ7JcX4thVA7Lg%3D%3D&_type=json&ykiho="
 							+ ykiho));
-			System.out.println(jsonobject);
+			
 			JSONObject json = (JSONObject) jsonobject.get("response");
 			JSONObject body = (JSONObject) json.get("body");
 			JSONObject items = (JSONObject) body.get("items");
@@ -136,8 +134,7 @@ public class MapController {
 		return null;
 	}
 
-	private static String readUrl(String urlString) throws Exception {
-		System.out.println(urlString);
+	private static String readUrl(String urlString) throws Exception {		
 		BufferedReader reader = null;
 		try {
 			URL url = new URL(urlString);

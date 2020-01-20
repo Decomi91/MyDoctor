@@ -23,12 +23,12 @@ $(function() {
 			var lon = position.coords.longitude, // 경도
 			lat = position.coords.latitude; // 위도
 			
-			console.log(lon+"위도"+lat)
+			
 			//지도
 			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			mapOption = {
 				center : new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
-				level : 3
+				level : 8
 			// 지도의 확대 레벨
 			};
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
@@ -73,8 +73,8 @@ $(function() {
 								
 								
 							
+								 console.log(item);
 								 
-								 console.log(item)
 								 var out ="";
 								$.each(item,function(index,items){		
 									var iwContent = '<div style="padding:5px;">'+((index++)+1)+"."+items.yadmNm+'</div>'; 
@@ -90,17 +90,17 @@ $(function() {
 								   
 								   out +="<table>";
 								   out +="<tr>";
-								   out +="<td rowspan ='3' class='table-wrapper'><img alt='"+(index+1)+"' src='resources/images/pic10.jpg' width = '50px'></td>";
+								  /*  out +="<td rowspan ='3' class='table-wrapper'></td>"; */
 								   //out +="<th onclick='location.href=locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</th>";
-								   out +="<th><a href='detail.net?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</a></th>";
+								   out +="<th><a href='detail.net?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+" (상세정보)</a></th>";
 								   out +="</tr>";
 								    
 								   out +="<tr>";
-								   out +="<td>내과등등</td>";
+								   out +="<td>"+items.clCdNm+"</td>";
 								   out +="</tr>";
 								    
 								   out +="<tr>";
-								   out +="<td><i class='fas fa-grin-hearts'></i> ? / 10</td>";
+								   out +="<td>거리 : "+Math.ceil(items.distance)+"M</td>";
 								   out +="</tr>";
 								    
 								   out +="</table>";
@@ -125,7 +125,7 @@ $(function() {
 									
 								
 								    kakao.maps.event.addListener(marker, 'click', function() {
-								    	console.log("asda");
+								    	
 								    	//console.log($("a[id='yadm"+$(this)[0].label+"']"));
 								    	//$("a[id='yadm"+$(this)[0].label+"']").focus();
 								    	$("a[id=yadm"+(index+1)+"]").focus();
@@ -161,8 +161,8 @@ $(function() {
 			
 			
 			$("#nearpharmacy").click(function() {
-				
 				$("#map").empty();
+				$("#div_result").empty();
 				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
 				var infowindow = new kakao.maps.InfoWindow({zIndex:1});
 
@@ -181,17 +181,41 @@ $(function() {
 				// 카테고리로 은행을 검색합니다
 				ps.categorySearch('PM9', placesSearchCB, {useMapBounds:true}); 
 
+				//data.place_name 이름
+				//data.address_name 주소
+				//data.place_url 길찾기
+				
+				
+				var out ="";
 				// 키워드 검색 완료 시 호출되는 콜백함수 입니다
 				function placesSearchCB (data, status, pagination) {
+					
 				    if (status === kakao.maps.services.Status.OK) {
 				        for (var i=0; i<data.length; i++) {
-				            displayMarker(data[i]);    
+				            displayMarker(data[i],i);				            				            
+				            out +="<table>";
+							   out +="<tr>";
+							   /* out +="<td rowspan ='3' class='table-wrapper'></td>"; */							 
+							   out +="<th>"+data[i].place_name+"</th>";
+							   out +="</tr>";
+							    
+							   out +="<tr>";
+							   out +="<td>"+data[i].address_name+"</td>";
+							   out +="</tr>";
+							    
+							   out +="<tr>";
+							   out +="<td><a id = 'place_name"+i+"' href='"+data[i].place_url+"'>상세정보</a></td>";
+							   out +="</tr>";
+							    
+							   out +="</table>";
+							   
+							   $("#div_result").html(out);
 				        }       
 				    }
 				}
 
 				// 지도에 마커를 표시하는 함수입니다
-				function displayMarker(place) {
+				function displayMarker(place,i) {
 				    // 마커를 생성하고 지도에 표시합니다
 				    var marker = new kakao.maps.Marker({
 				        map: map,
@@ -200,11 +224,15 @@ $(function() {
 
 				    // 마커에 클릭이벤트를 등록합니다
 				    kakao.maps.event.addListener(marker, 'click', function() {
+				    	
 				        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
 				        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
 				        infowindow.open(map, marker);
+				        $("a[id=place_name"+i+"]").focus();
+				        
+				        
 				    });
-				}			
+				}				
 									});//pha
 		
 			
