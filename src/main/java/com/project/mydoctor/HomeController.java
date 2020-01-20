@@ -36,7 +36,7 @@ public class HomeController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "/detail.net")
+	//@RequestMapping(value = "/detail.net")
 	public String detail() {
 		return "details/hospitaldetail";
 	}
