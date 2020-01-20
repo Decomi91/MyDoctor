@@ -32,29 +32,30 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th colspan = "4">유저 정보 리스트</th>
-										<th><font size="3">유저의 수 : ${listcount }</font></th>
+										<th colspan = "4">병원 정보 리스트</th>
+										<th><font size="3">병원의 수 : ${listcount }</font></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<th width="10%">번호</th>
-										<th width="30%">ID</th>
-										<th width="20%">이름</th>
-										<th width="20%">생일</th>
-										<th width="20%">관리</th>
+										<th width="25%">병원ID</th>
+										<th width="30%">병원명</th>
+										<th width="20%">등록일</th>
+										<th width="15%">관리</th>
 									</tr>
-									<c:set var="num" value="${listcount-(page-1)*10 }"/>
-									<c:forEach var="list" items="${memlist }">
+<%-- 									<c:set var="num" value="${listcount-(page-1)*10 }"/> --%>
+									<c:forEach var="list" items="${boardlist }">
 										<tr>
-											<td>
-												<c:out value="${num }"/>
-												<c:set var="num" value="${num-1 }"/>
+											<td>${list.boardNum }
+<%-- 												<c:out value="${num }"/> --%>
+<%-- 												<c:set var="num" value="${num-1 }"/> --%>
 											</td>
 											<td>${list.id }</td>
-											<td>${list.name }</td>
-											<td>${list.birth }</td>
-											<td><a class="btn btn-primary" href="userDetail?id=${list.id}">관리</a></td>
+											<td>${list.subject }</td>
+											<td><c:if test="${list.checking==1 }">처리완료 </c:if>
+												<c:if test="${list.checking==0 }">승인대기 </c:if></td>
+											<td><a class="btn btn-primary" href="adminBoardDetail?boardnum=${list.boardNum}">관리</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -70,7 +71,7 @@
 											</c:if>
 											<c:if test="${page > 1}">
 												<li class="page-item">
-													<a href="usercontrol?page=${page-1 }" class="page-link">이전</a>&nbsp;
+													<a href="requestToAdmin?page=${page-1 }" class="page-link">이전</a>&nbsp;
 												</li>								
 											</c:if>
 											
@@ -79,7 +80,7 @@
 													<li class="page-item"><a href="#" class="page-link gray">${i }</a></li>
 												</c:if>
 												<c:if test="${i!=page }">
-													<li class="page-item"><a href="usercontrol?page=${i }" class="page-link">${i }</a></li>
+													<li class="page-item"><a href="requestToAdmin?page=${i }" class="page-link">${i }</a></li>
 												</c:if>
 											</c:forEach>
 											
@@ -90,7 +91,7 @@
 											</c:if>
 											<c:if test="${page != endpage}">
 												<li class="page-item">
-													<a href="usercontrol?page=${page+1 }" class="page-link">&nbsp;다음</a>
+													<a href="requestToAdmin?page=${page+1 }" class="page-link">&nbsp;다음</a>
 												</li>								
 											</c:if>								
 										</ul>
@@ -147,26 +148,6 @@
 								href="requestToAdmin">요청 게시판</a></li>
 						</ul>
 						<a href="logout" class="button primary fit koreanfont">로그아웃</a>
-					</section>
-				</c:if>
-				<c:if test="${loginid != 'admin'}">
-					<!-- Section2_Contact -->
-					<section>
-						<header class="major">
-							<h2>Contact</h2>
-			
-						</header>
-						<p>
-							제휴 관련하여 문의 사항이 있는 병원에서는 연락주세요 &nbsp;&nbsp;<a href="#">지금바로 요청,
-								Click Here!</a>
-						</p>
-						<ul class="contact">
-							<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-							<li class="icon solid fa-phone">(000) 000-0000</li>
-							<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-								Seoul, TN 00000-0000
-							</li>
-						</ul>
 					</section>
 				</c:if>
 			

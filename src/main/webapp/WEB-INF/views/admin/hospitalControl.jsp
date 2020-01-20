@@ -144,7 +144,7 @@
 							<li class="icon solid far fa-clipboard-list mypagelisecond-child mypageacess"><a
 								href="usercontrol">회원 관리</a></li>
 							<li class="icon solid fas fa-folder-open mypageacess"><a
-								href="#">요청 게시판</a></li>
+								href="requestToAdmin">요청 게시판</a></li>
 						</ul>
 						<a href="logout" class="button primary fit koreanfont">로그아웃</a>
 					</section>

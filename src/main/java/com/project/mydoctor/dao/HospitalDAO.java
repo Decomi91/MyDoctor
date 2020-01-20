@@ -18,7 +18,6 @@ public class HospitalDAO {
 	}
 
 	public List<Hospital> gethosList(int page) {
-		System.out.println(page);
 		return sqlSession.selectList("Hospitals.gethoslist", page);
 	}
 	
