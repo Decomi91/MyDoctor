@@ -11,4 +11,7 @@
  		select count(*) from members
  		where id = #{id} and password = #{password}
  	</select>
+ 	<select id="passck" parameterType="map" resultType="member">
+ 	select * from members where id = #{id} and password = #{password}
+ 	</select>
  </mapper>

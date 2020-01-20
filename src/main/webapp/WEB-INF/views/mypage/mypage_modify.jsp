@@ -40,7 +40,7 @@
 			 <div id="passckbox"><div class="passck1">비밀번호 확인
 			 </div><input type="password" class="passck2"></div>
 			  <div class="signoutsubbtn"><a href="#" class="passckbtn_">취소</a>
-		<a href="#" class="passckbtn_ passckbtn_ok">확인</a></div>
+		<a href="modifyck.do" class="passckbtn_ passckbtn_ok">확인</a></div>
 			 
 				</div>
 				</div>

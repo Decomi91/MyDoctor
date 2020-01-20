@@ -1,5 +1,10 @@
 package com.project.mydoctor.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,5 +30,20 @@ public class MemberServiceImpl implements MemberService {
 	public int isHosId(Member member) {
 		return mDao.isHosId(member);
 	}
+
+	@Override
+	public boolean passck(HttpSession id, String password) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("password", password);
+		Member result=mDao.passck(map);
+		if(result==null)
+			return false;
+		else
+			return true;
+		
+	}
+
+	
 	
 }

@@ -1,5 +1,7 @@
 package com.project.mydoctor.dao;
 
+import java.util.Map;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -21,5 +23,10 @@ public class MemberDAO {
 
 	public int isHosId(Member member) {
 		return sqlSession.selectOne("Hospitals.isId", member);
+	}
+
+	public Member passck(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Members.passck",map);
 	}
 }
