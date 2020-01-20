@@ -16,4 +16,6 @@ public interface MemberService {
 
 	List<Member> getmemList(int pages);
 
+	String idcheck(String id, String pub);
+
 }

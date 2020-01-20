@@ -32,4 +32,12 @@ public class MemberDAO {
 	public List<Member> getmemList(int pages) {
 		return sqlSession.selectList("Members.getmemlist", pages);
 	}
+
+	public String idcheckpub(String id) {
+		return sqlSession.selectOne("Hospitals.idcheck", id);
+	}
+
+	public String idcheckhos(String id) {
+		return sqlSession.selectOne("Members.idcheck", id);
+	}
 }
