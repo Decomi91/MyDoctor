@@ -21,5 +21,11 @@ public class HospitalDAO {
 		System.out.println(page);
 		return sqlSession.selectList("Hospitals.gethoslist", page);
 	}
+	
+	public int hs_insert(Hospital vo) {
+		return sqlSession.insert("Hospitals.hs_insert", vo);
+	}
+	
+	
 
 }

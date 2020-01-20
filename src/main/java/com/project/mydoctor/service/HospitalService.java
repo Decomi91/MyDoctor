@@ -22,4 +22,8 @@ public class HospitalService {
 		return hDAO.gethosList(page);
 	}
 	
+	public int hs_insert(Hospital vo) {
+		return hDAO.hs_insert(vo);
+	}
+	
 }
