@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mydoctor.model.Member;
@@ -76,5 +77,11 @@ public class MemberController {
 		session.invalidate();
 		mv.setViewName("redirect:/main");
 		return mv;
+	}
+	
+	@ResponseBody
+	@PostMapping(value="/idcheck")
+	public String idcheck(String id, String pub) {
+		return memberService.idcheck(id, pub);
 	}
 }

@@ -37,5 +37,14 @@ public class MemberServiceImpl implements MemberService {
 	public List<Member> getmemList(int pages) {
 		return mDao.getmemList(pages);
 	}
+
+	@Override
+	public String idcheck(String id, String pub) {
+		if(pub.equals("hos")) {
+			return mDao.idcheckhos(id);
+		}else {
+			return mDao.idcheckpub(id);
+		}
+	}
 	
 }

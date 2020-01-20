@@ -19,5 +19,11 @@
 	 		order by yadmNm) a
 	 	where a.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
  	</select>
+ 	
+ 	<select id="idcheck" parameterType="String" resultType="String">
+ 		select count(*)
+ 		from hospitals
+ 		where id=#{id}
+ 	</select>
  </mapper>
  
