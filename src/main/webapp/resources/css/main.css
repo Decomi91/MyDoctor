@@ -1407,6 +1407,7 @@ ul.contact {
 ul.pagination {
   cursor: default;
   list-style: none;
+  justify-content: center;
   padding-left: 0; }
   ul.pagination li {
     display: inline-block;
@@ -1428,6 +1429,10 @@ ul.pagination {
       min-width: 2em;
       padding: 0 0.5em;
       text-align: center; }
+      ul.pagination li > .gray{
+      	color : gray;
+      	cursor:default;
+      }
       ul.pagination li > .page.active {
         background-color: #f56a6a;
         color: #ffffff !important; }
@@ -1435,10 +1440,10 @@ ul.pagination {
           background-color: #f67878; }
         ul.pagination li > .page.active:active {
           background-color: #f45c5c; }
-    ul.pagination li:first-child {
-      padding-right: 0.75em; }
-    ul.pagination li:last-child {
-      padding-left: 0.75em; }
+/*     ul.pagination li:first-child { */
+/*       padding-right: 0.75em; } */
+/*     ul.pagination li:last-child { */
+/*       padding-left: 0.75em; } */
   @media screen and (max-width: 480px) {
     ul.pagination li:nth-child(n+2):nth-last-child(n+2) {
       display: none; }
@@ -1866,7 +1871,7 @@ button,
   #main > .inner {
     padding: 0 6em 0.1em 6em ;
     margin: 0 auto;
-    max-width: 110em; }
+    max-width: 70em; }
     #main > .inner > section {
       padding: 6em 0 4em 0 ;
       border-top: solid 2px rgba(210, 215, 217, 0.75); }
@@ -2286,7 +2291,7 @@ button,
   .privacybtnline{border-right:1px solid rgba(210, 215, 217, 0.75) }
   .loginbtn{width:100%; text-align:center; padding-bottom:2px; font-weight:bold;}
 .nearhospital, .nearpharmacy{display:inline-block; width: 48%; margin-bottom:5%}
-.mapsize{width:97%; margin-right:1%}
+.mapsize{width:97%; margin-right:1%; height : 400px}
 
 .categorysel{height: 3.5em; width: 30%; margin-bottom:4%; font-size: 0.8em;
 margin-right:0 !important;display:inline-block; font-family: "Open Sans", sans-serif; }
@@ -2306,7 +2311,7 @@ input[type=button]:focus {outline:none !important;}
                         list-style: none;           
                          color: #f56a6a;                
                         background-color: white;   
-                        width:50%;  margin:0 !important;              
+                        width:49%;  margin:0 !important;              
                         line-height: 3em;          
                         vertical-align: middle;    
                         text-align: center; 

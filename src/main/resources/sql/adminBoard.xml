@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <mapper namespace="AdminBoards">
+ 	<select id="getlistcount" resultType="int">
+ 		select count(*) from adminBoard
+ 	</select>
+ 	
+ 	<select id="getboardlist" parameterType="int" resultType="member">
+ 		select b.*
+ 		from (select rownum r, a.*
+ 				from adminBoard a
+ 				order by boardnum desc) b
+ 		where b.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
+ 	</select>
+ </mapper>

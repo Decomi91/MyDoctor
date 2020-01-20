@@ -4,6 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -45,5 +46,22 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	
+	public int getlistCount() {
+		return mDao.getlistcount();
+	}
+
+	@Override
+	public List<Member> getmemList(int pages) {
+		return mDao.getmemList(pages);
+	}
+
+	@Override
+	public String idcheck(String id, String pub) {
+		if(pub.equals("hos")) {
+			return mDao.idcheckhos(id);
+		}else {
+			return mDao.idcheckpub(id);
+		}
+	}
 	
 }
