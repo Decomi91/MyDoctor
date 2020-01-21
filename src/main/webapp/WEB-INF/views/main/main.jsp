@@ -61,19 +61,20 @@
 									
 									<!-- 병원 list -->
 									<div style="overflow:auto;" class="mapsize">
-										<table>
-											<tr>
-												<td rowspan = "3" class = "table-wrapper"><img alt="" src="resources/images/pic10.jpg" width = "50px"></td>
-												<th onclick = "location.href='detail.net'">가나다병원</th>
-											</tr>
-											<tr>
-												<td>내과, 가정의학과, 소아과</td>
-											</tr>
-											<tr>
-												<td><i class="fas fa-grin-hearts"></i> ? / 10</td>
-											</tr>
-											
-										</table>
+										<c:forEach var = "h" items = "${hoslist }">
+											<table>
+												<tr>
+													<td rowspan = "3" class = "table-wrapper"><img alt="" src="resources/images/pic10.jpg" width = "50px"></td>
+													<th onclick = "location.href='detail.net?id=${h.id}'">${h.yadmNm }</th>
+												</tr>
+												<tr>
+													<td>내과, 가정의학과, 소아과</td>
+												</tr>
+												<tr>
+													<td><i class="fas fa-grin-hearts"></i> ? / 10</td>
+												</tr>
+											</table>
+										</c:forEach>
 									</div>
 								</div>
 							</td>
@@ -202,7 +203,7 @@
 			
 						</header>
 						<p>
-							제휴 관련하여 문의 사항이 있는 병원에서는 연락주세요 &nbsp;&nbsp;<a href="#">지금바로 요청,
+							제휴 관련하여 문의 사항이 있는 병원에서는 연락주세요 &nbsp;&nbsp;<a href="hs_signup.do">지금바로 요청,
 								Click Here!</a>
 						</p>
 						<ul class="contact">

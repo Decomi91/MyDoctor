@@ -9,7 +9,7 @@ import org.springframework.stereotype.Repository;
 import com.project.mydoctor.model.Hospital;
 
 @Repository
-public class HospitalDAO {
+public class HospitalDAO { 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 
@@ -20,5 +20,20 @@ public class HospitalDAO {
 	public List<Hospital> gethosList(int page) {
 		return sqlSession.selectList("Hospitals.gethoslist", page);
 	}
+	
+	public int hs_insert(Hospital vo) {
+		return sqlSession.insert("Hospitals.hs_insert", vo);
+	}
+
+	public List<Hospital> getHosListTest() {
+		return sqlSession.selectList("Hospitals.gethoslisttest");
+	}
+
+	public Hospital getDetail(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Hospitals.getdetail", id);
+	}
+	
+	
 
 }

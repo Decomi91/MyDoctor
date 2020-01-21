@@ -20,7 +20,7 @@ public class MemberDAO {
 	public int isID(Member member) {
 		return sqlSession.selectOne("Members.isId", member);
 	}
-
+ 
 	public int isHosId(Member member) {
 		return sqlSession.selectOne("Hospitals.isId", member);
 	}
@@ -39,5 +39,9 @@ public class MemberDAO {
 
 	public String idcheckhos(String id) {
 		return sqlSession.selectOne("Members.idcheck", id);
+	}
+	
+	public Member select(String id) {
+		return sqlSession.selectOne("Members.select", id);
 	}
 }

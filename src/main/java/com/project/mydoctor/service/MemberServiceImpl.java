@@ -47,4 +47,8 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 	
+	@Override
+	public Member select(String id) {
+		return mDao.select(id);
+	}
 }

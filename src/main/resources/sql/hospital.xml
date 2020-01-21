@@ -7,7 +7,7 @@
  		select count(*) from hospitals
  		where id = #{id} and password = #{password}
  	</select>
- 	
+ 	 
  	<select id="getlistcount" resultType="int">
  		select count(*) from hospitals
  	</select>
@@ -20,10 +20,27 @@
 	 	where a.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
  	</select>
  	
+ 	<!-- 김건수 병원회원가입 -->
+ 	<insert id="hs_insert" parameterType="hospital">
+ 	insert into hospitals values(#{id},#{password},#{yadmNm},
+ 	#{addr},#{hphone},#{yki},#{doctors},#{monStart},#{monEnd},#{tueStart},#{tueEnd},#{wedStart},#{wedEnd},#{thuStart},#{thuEnd},
+ 	#{friStart},#{friEnd},#{satStart},#{satEnd},#{sunStart},#{sunEnd},#{joinok},sysdate)
+ 	</insert>
+   
  	<select id="idcheck" parameterType="String" resultType="String">
  		select count(*)
  		from hospitals
  		where id=#{id}
+ 	</select>
+ 	
+ 	<!-- hospital list test용 -->
+ 	<select id="gethoslisttest" resultType = "hospital">
+ 		select * from hospitals
+ 	</select>
+ 	
+ 	<select id = "getdetail" parameterType = "String" resultType = "hospital">
+ 		select * from hospitals
+ 		where id = #{id}
  	</select>
  </mapper>
  

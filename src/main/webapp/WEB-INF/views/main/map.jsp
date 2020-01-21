@@ -317,7 +317,7 @@
        
        <script>
 			$(function(){
-				$("input.day").keyup(function(e) {
+				$("input.day").keyup(function(e) { 
 					if(isNaN($(this).val())){
 						alert("숫자만입력하셈");
 						$(this).val($(this).val().substr(0,$(this).val().length-1));
