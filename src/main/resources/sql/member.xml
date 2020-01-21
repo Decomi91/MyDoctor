@@ -30,4 +30,9 @@
  				order by name) a
  		where a.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
  	</select>
+ 	
+ 	<select id = "select" parameterType = "String" resultType = "member">
+ 		select * from members
+ 		where id = #{id}
+ 	</select>
  </mapper>

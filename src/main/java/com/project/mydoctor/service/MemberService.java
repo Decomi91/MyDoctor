@@ -18,4 +18,6 @@ public interface MemberService {
 
 	String idcheck(String id, String pub);
 
+	Member select(String id);
+
 }

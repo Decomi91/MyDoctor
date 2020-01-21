@@ -40,4 +40,8 @@ public class MemberDAO {
 	public String idcheckhos(String id) {
 		return sqlSession.selectOne("Members.idcheck", id);
 	}
+	
+	public Member select(String id) {
+		return sqlSession.selectOne("Members.select", id);
+	}
 }

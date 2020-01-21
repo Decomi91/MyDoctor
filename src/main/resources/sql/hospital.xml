@@ -32,5 +32,15 @@
  		from hospitals
  		where id=#{id}
  	</select>
+ 	
+ 	<!-- hospital list test용 -->
+ 	<select id="gethoslisttest" resultType = "hospital">
+ 		select * from hospitals
+ 	</select>
+ 	
+ 	<select id = "getdetail" parameterType = "String" resultType = "hospital">
+ 		select * from hospitals
+ 		where id = #{id}
+ 	</select>
  </mapper>
  
