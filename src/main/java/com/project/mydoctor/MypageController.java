@@ -22,7 +22,7 @@ public class MypageController {
 	private MemberService memberService;
 	
 	
-	//»õ·Î ÀÔ·Â¹ŞÀº Á¤º¸·Î °³ÀÎÁ¤º¸ updateÇÕ´Ï´Ù.
+	//ìƒˆë¡œ ì…ë ¥ë°›ì€ ì •ë³´ë¡œ ê°œì¸ì •ë³´ updateí•©ë‹ˆë‹¤.
 			@RequestMapping(value="/updatePass")	
 			public void updatePass(Member member, HttpServletResponse response) throws IOException{
 				int result=memberService.update(member);
@@ -30,18 +30,18 @@ public class MypageController {
 				PrintWriter out=response.getWriter();
 				if(result==1) {
 					out.println("<script>");
-					out.println("alert('Á¤º¸ ¼öÁ¤À» ¿Ï·áÇß½À´Ï´Ù.')");
+					out.println("alert('ì •ë³´ ìˆ˜ì •ì„ ì™„ë£Œí–ˆìŠµë‹ˆë‹¤.')");
 					out.println("location.href='mypage.net");
 					out.println("</script>");
 				}else {
 					out.println("<script>");
-					out.println("alert('Á¤º¸ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù. °°Àº ¹®Á¦°¡ ¹İº¹µÉ °æ¿ì °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇØ ÁÖ¼¼¿ä.')");
+					out.println("alert('ì •ë³´ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ê°™ì€ ë¬¸ì œê°€ ë°˜ë³µë  ê²½ìš° ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•´ ì£¼ì„¸ìš”.')");
 					out.println("history.back()");
 					out.println("</script>");
 					out.close();
 				}
 			}
-	//È¸¿øÅ»Åğ ÀÌÀü ºñ¹Ğ¹øÈ£ ¸Â´ÂÁö È®ÀÎ
+	//íšŒì›íƒˆí‡´ ì´ì „ ë¹„ë°€ë²ˆí˜¸ ë§ëŠ”ì§€ í™•ì¸
 	@RequestMapping(value="/removeaccount.do")
 	public void removeaccount(Member member, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		
@@ -53,27 +53,27 @@ public class MypageController {
 		PrintWriter out=response.getWriter();
 		if(usercheck==false) {
 			out.println("<script>");
-			out.println("alert('ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù');");
+			out.println("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
 		}
 		out.println("<script>");
-		out.println("alert('Å»Åğ µÇ¾ú½À´Ï´Ù.');");
+		out.println("alert('íƒˆí‡´ ë˜ì—ˆìŠµë‹ˆë‹¤.');");
 		out.println("location.href='main'");
 		out.println("</script>");
 		out.close();
 		}
 	
 	
-	//mypage ¸Ş´º¿¡¼­ ³ªÀÇÁ¤º¸ ¼öÁ¤ ´©¸£¸é ºñ¹Ğ¹øÈ£ È®ÀÎÇÏ´Â ÆäÀÌÁö·Î ÀÌµ¿
+	//mypage ë©”ë‰´ì—ì„œ ë‚˜ì˜ì •ë³´ ìˆ˜ì • ëˆ„ë¥´ë©´ ë¹„ë°€ë²ˆí˜¸ í™•ì¸í•˜ëŠ” í˜ì´ì§€ë¡œ ì´ë™
 	@RequestMapping(value="/modifyck.do")
 	public String gomodify() {
 
 		return "mypage/mypage_modify";
 		
 	}
-	//Á¤º¸¼öÁ¤ÇÏ±âÀÌÀü ºñ¹Ğ¹øÈ£ ¸Â´ÂÁö È®ÀÎ
+	//ì •ë³´ìˆ˜ì •í•˜ê¸°ì´ì „ ë¹„ë°€ë²ˆí˜¸ ë§ëŠ”ì§€ í™•ì¸
 	@RequestMapping(value="/modifyckpass.do")
 	public void gomodifyckpass(Member member, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		
@@ -85,7 +85,7 @@ public class MypageController {
 		PrintWriter out=response.getWriter();
 		if(usercheck==false) {
 			out.println("<script>");
-			out.println("alert('ºñ¹Ğ¹øÈ£°¡ ´Ù¸¨´Ï´Ù');");
+			out.println("alert('ë¹„ë°€ë²ˆí˜¸ê°€ ë‹¤ë¦…ë‹ˆë‹¤');");
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
@@ -96,7 +96,7 @@ public class MypageController {
 		out.close();
 		}
 	
-	//°³ÀÎÁ¤º¸ ¼öÁ¤È­¸é¿¡ ÀÌÀü Á¤º¸ ºÒ·¯¿É´Ï´Ù.
+	//ê°œì¸ì •ë³´ ìˆ˜ì •í™”ë©´ì— ì´ì „ ì •ë³´ ë¶ˆëŸ¬ì˜µë‹ˆë‹¤.
 		@RequestMapping(value="/modify.do")
 		public ModelAndView modifydo(ModelAndView mv, HttpSession session) {
 	String id=(String)session.getAttribute("loginid");
@@ -108,7 +108,7 @@ public class MypageController {
 			
 		}
 		
-		//»õ·Î ÀÔ·Â¹ŞÀº Á¤º¸·Î °³ÀÎÁ¤º¸ updateÇÕ´Ï´Ù.
+		//ìƒˆë¡œ ì…ë ¥ë°›ì€ ì •ë³´ë¡œ ê°œì¸ì •ë³´ updateí•©ë‹ˆë‹¤.
 		@RequestMapping(value="/updateProcess.net")	
 		public void updateProcess(Member member, HttpServletResponse response) throws IOException{
 			int result=memberService.update(member);
@@ -116,12 +116,12 @@ public class MypageController {
 			PrintWriter out=response.getWriter();
 			if(result==1) {
 				out.println("<script>");
-				out.println("alert('Á¤º¸ ¼öÁ¤À» ¿Ï·áÇß½À´Ï´Ù.')");
+				out.println("alert('ì •ë³´ ìˆ˜ì •ì„ ì™„ë£Œí–ˆìŠµë‹ˆë‹¤.')");
 				out.println("location.href='mypage.net");
 				out.println("</script>");
 			}else {
 				out.println("<script>");
-				out.println("alert('Á¤º¸ ¼öÁ¤¿¡ ½ÇÆĞÇß½À´Ï´Ù. °°Àº ¹®Á¦°¡ ¹İº¹µÉ °æ¿ì °ü¸®ÀÚ¿¡°Ô ¹®ÀÇÇØ ÁÖ¼¼¿ä.')");
+				out.println("alert('ì •ë³´ ìˆ˜ì •ì— ì‹¤íŒ¨í–ˆìŠµë‹ˆë‹¤. ê°™ì€ ë¬¸ì œê°€ ë°˜ë³µë  ê²½ìš° ê´€ë¦¬ìì—ê²Œ ë¬¸ì˜í•´ ì£¼ì„¸ìš”.')");
 				out.println("history.back()");
 				out.println("</script>");
 				out.close();
