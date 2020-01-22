@@ -50,7 +50,7 @@ public class Member {
 		return birth;
 	}
 	public void setBirth(String birth) {
-		this.birth = birth;
+		this.birth = birth.split(" ")[0];
 	}
 	public byte getGender() {
 		return gender;
