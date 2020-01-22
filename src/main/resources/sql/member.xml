@@ -40,4 +40,11 @@
  	<update id="update" parameterType="member">
 update members set phone=#{phone}, address=#{address}, email=#{email} where id=#{id}
  	</update>
+<!-- jisu_0122 -->
+<update id="updatePass" parameterType="map">
+update members set password=#{password} where id=#{id}
+ 	</update>
+ 	<update id="removeaccount" parameterType="String">
+ 	update members set userkey=0 where id=#{id}
+ 	</update>
  </mapper>

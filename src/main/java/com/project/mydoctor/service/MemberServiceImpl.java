@@ -76,5 +76,31 @@ public int update(Member member) {
 // TODO Auto-generated method stub
 return mDao.update(member);
 }
+////////////////////////////
+@Override
+public Member select(String memberId) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+
+////////////////////jisu_0122//////////////////
+@Override
+public int updatePass(String newPassword, String id) {
+	Map<String,Object> map=new HashMap<String, Object>();
+	map.put("id", id);
+	map.put("password", newPassword);
+	System.out.println("새비밀번호: "+newPassword);
+	int result=mDao.updatePass(map);
+	return result;
 
 }
+
+@Override
+public int removeaccount(String id) {
+	// TODO Auto-generated method stub
+	return mDao.removeaccount(id);
+}
+
+}
+

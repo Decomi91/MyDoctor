@@ -54,18 +54,10 @@
                                                                <label>나머지 주소</label> <input type="text" name="address2" id="address2" class="modifyInput" value="${myinfo.address}"></div>
 															
 															
-															<div class="col-6 col-12-xsmall">
+															<div class="col-12 col-12-xsmall">
 																<label>Email</label> <input type="email" name="email" id="email" class="modifyInput" value="${myinfo.email }">
 															</div>
-															<div class="col-6 col-12-xsmall">
-															<label>&nbsp;</label>
-																<select name="email-domain" id="emailCategory" class="modifyInput" value="${myinfo.email }">
-																	<option value="">이메일주소</option>
-																	<option value="1">naver.com</option>
-																	<option value="2">gmail.com</option>
-																	<option value="3">hanmail.net</option>
-																</select>
-															</div>
+															
 															
 															<div class="col-6 col-12-xsmall">
 															<label>생일</label> <input type="text" name="birth" id="birth" class="modifyInput" value="${myinfo.birth }" readonly>
@@ -89,16 +81,22 @@
 															</div>
 														</div>
 													</form>
-													<form method="post" action="updatePass"  id="myPassword"><h2 class="mod">비밀번호 수정</h2>
+													<form method="post" action="pwmodify.do"  id="myPassword"><h2 class="mod">비밀번호 수정</h2>
 													<div class="row gtr-uniform">
-													<div class="col-4 col-12-xsmall">
-																<label>기존 비밀번호</label> <input type="password" name="password" id="ex_password" class="modifyInput">
-															</div>
-															<div class="col-4 col-12-xsmall">
+													<!--  <div class="col-4 col-12-xsmall">
+																<label>기존 비밀번호</label> <input type="password" name="ex_password" id="ex_password" class="modifyInput">
+															</div>-->
+															<div class="col-6 col-12-xsmall">
 																<label>새 비밀번호</label> <input type="password" name="new_password" id="new_password" class="modifyInput">
 															</div>
-															<div class="col-4 col-12-xsmall">
+															<div class="col-6 col-12-xsmall">
 																<label>비밀번호 확인</label> <input type="password" name="new_pass_ck" id="new_pass_ck" class="modifyInput">
+															</div>
+															<div class="col-4 col-12-xsmall">
+															
+															</div>
+															<div class="col-6 col-12-xsmall">
+															<span id="passckmsg"></span>
 															</div>
 															<div class="col-6 col-12-xsmall modifybtn">
 															<button type="reset" name="modifyReset" id="modifyReset">취소</button>
@@ -129,6 +127,16 @@
 	<script src="resources/js/main.js"></script>
 <script>
 
+$('#new_pass_ck').keyup(function(){
+	var newpass=$('#new_password').val();
+	var passck=$('#new_pass_ck').val();
+	if(!(newpass==passck)){
+		$('#passckmsg').css('color', 'red').html('비밀번호가 일치하지 않습니다.');
+		return false;
+	}else{
+		$('#passckmsg').css('color', 'green').html('비밀번호가 일치 합니다.');
+	}
+})
 </script>
 </body>
 </html>

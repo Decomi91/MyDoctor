@@ -1,3 +1,4 @@
+
 package com.project.mydoctor.dao;
 
 
@@ -62,4 +63,17 @@ public int update(Member member) {
 // TODO Auto-generated method stub
 return  sqlSession.update("Members.update", member);
 }
+///////////////////////jisu_0122//////////////////
+public int updatePass(Map<String, Object> map) {
+	// TODO Auto-generated method stub
+	
+	return  sqlSession.update("Members.updatePass", map);
+	
+	}
+
+public int removeaccount(String id) {
+	// TODO Auto-generated method stub
+	return sqlSession.update("Members.removeaccount", id);
 }
+}
+
