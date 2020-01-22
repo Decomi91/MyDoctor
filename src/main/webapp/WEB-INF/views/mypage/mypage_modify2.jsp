@@ -34,32 +34,32 @@
 					<!-- 마이페이지 메뉴 include -->
 					<jsp:include page="mypage_menu.jsp"></jsp:include>	
 				<div class="mypageContent mypageContent_mod">
-			<form method="post" action="#" id="myInfo"><h2 class="mod">개인정보 수정</h2>
+			<form method="post" action="updateProcess.net" id="myInfo"><h2 class="mod">개인정보 수정</h2>
 														<div class="row gtr-uniform">
 															<div class="col-12 col-12-xsmall">
-																<label>ID </label><input type="text" name="id" id="id" class="modifyInput" placeholder="id" readonly></div>
+																<label>ID </label><input type="text" name="id" id="id" class="modifyInput" value="${myinfo.id }" readonly></div>
                                                                
                                                                 <div class="col-12 col-12-xsmall">
-                                                              <label> 이름</label> <input type="text" name="name" id="name" class="modifyInput" placeholder="name" readonly></div>
+                                                              <label> 이름</label> <input type="text" name="name" id="name" class="modifyInput" value="${myinfo.name }" readonly></div>
                                                                 
                                                                 <div class="col-12 col-12-xsmall">
-                                                                <label>연락처 </label><input type="text" name="phone" id="phone" class="modifyInput"></div>
+                                                                <label>연락처 </label><input type="text" name="phone" id="phone" class="modifyInput" value="${myinfo.phone }"></div>
                                                                 
                                                                 <div class="col-9 col-12-xsmall">
-                                                              <label> 주소</label> <input type="text" name="address1" id="address1" class="modifyInput"></div>
+                                                              <label> 주소</label> <input type="text" name="address" id="address" class="modifyInput" value="${myinfo.address }"></div>
 															 <div class="col-3 col-9-xsmall">
 															 <label>&nbsp;</label>
                                                                <input type="button" id="addrSearch" name="addrSearch" value="주소검색"></div>
 															<div class="col-12 col-9-xsmall">
-                                                               <label>나머지 주소</label> <input type="text" name="address2" id="address2" class="modifyInput"></div>
+                                                               <label>나머지 주소</label> <input type="text" name="address2" id="address2" class="modifyInput" value="${myinfo.address}"></div>
 															
 															
 															<div class="col-6 col-12-xsmall">
-																<label>Email</label> <input type="email" name="email" id="email" class="modifyInput">
+																<label>Email</label> <input type="email" name="email" id="email" class="modifyInput" value="${myinfo.email }">
 															</div>
 															<div class="col-6 col-12-xsmall">
 															<label>&nbsp;</label>
-																<select name="email-category" id="emailCategory" class="modifyInput">
+																<select name="email-domain" id="emailCategory" class="modifyInput" value="${myinfo.email }">
 																	<option value="">이메일주소</option>
 																	<option value="1">naver.com</option>
 																	<option value="2">gmail.com</option>
@@ -68,11 +68,19 @@
 															</div>
 															
 															<div class="col-6 col-12-xsmall">
-															<label>생일</label> <input type="text" name="birth" id="birth" class="modifyInput" placeholder="birthday" readonly>
+															<label>생일</label> <input type="text" name="birth" id="birth" class="modifyInput" value="${myinfo.birth }" readonly>
 															</div>
 															
 															<div class="col-6 col-12-xsmall">
-															<label>성별</label> <input type="text" name="gender" id="gender" class="modifyInput" placeholder="gender" readonly>
+															<label>성별</label> 
+															<c:choose>
+															<c:when test="${myinfo.gender ==1 }"> 
+															<input type="text" name="gender" id="gender" class="modifyInput" value="남성" readonly>
+															</c:when> 
+															<c:when test="${myinfo.gender ==2 }"> 
+															<input type="text" name="gender" id="gender" class="modifyInput" value="여성" readonly>
+															</c:when>
+															</c:choose>
 															</div>
 															<div class="col-6 col-12-xsmall modifybtn">
 															<button type="reset" name="modifyReset" id="modifyReset">취소</button>
@@ -81,10 +89,10 @@
 															</div>
 														</div>
 													</form>
-													<form method="post" action="#"  id="myPassword"><h2 class="mod">비밀번호 수정</h2>
+													<form method="post" action="updatePass"  id="myPassword"><h2 class="mod">비밀번호 수정</h2>
 													<div class="row gtr-uniform">
 													<div class="col-4 col-12-xsmall">
-																<label>기존 비밀번호</label> <input type="password" name="ex_password" id="ex_password" class="modifyInput">
+																<label>기존 비밀번호</label> <input type="password" name="password" id="ex_password" class="modifyInput">
 															</div>
 															<div class="col-4 col-12-xsmall">
 																<label>새 비밀번호</label> <input type="password" name="new_password" id="new_password" class="modifyInput">

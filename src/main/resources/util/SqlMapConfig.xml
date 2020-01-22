@@ -6,11 +6,13 @@
 	<typeAliases>
 		<typeAlias type="com.project.mydoctor.model.Member" alias="member"/>
 		<typeAlias type="com.project.mydoctor.model.Hospital" alias="hospital"/>
+		<typeAlias type="com.project.mydoctor.model.AdminBoard" alias="adminboard"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="sql/member.xml"/>
 		<mapper resource="sql/hospital.xml"/>
+		<mapper resource="sql/adminBoard.xml"/>
 	</mappers>
 </configuration>
 
