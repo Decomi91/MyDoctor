@@ -201,7 +201,7 @@ div.signoutpassck {
 .signoutmsg{font-size: 2em; padding:3%; margin:0%}
 div.passck1, div.passck2{width: 50% !important; display: inline-block; text-align: center; 
 margin:0 !important;height:100%; vertical-align: bottom;}
-div.passck1{ padding:1% !important; background-color:#755656; color: white; 
+div.passck1{ padding:1% !important; background-color:#77A8C7; color: white; 
 }
 .passck2{
  border-top:none !important;border-right:none !important;
@@ -212,30 +212,32 @@ div.passck1{ padding:1% !important; background-color:#755656; color: white;
   height:100%
   }
   
-#passckbox{border-bottom: 2px solid #755656 !important;
+#passckbox{border-bottom: 2px solid #77A8C7 !important;
 margin:0 auto; width:70%; 
 }
 .signoutsubbtn{
 	width: 80% !important;margin: 5% auto;
+	
 }
 .passckbtn_ {
   background: #F7B4B4;
   border-radius: 100px;
-  padding: 10px 60px;
-  color: #fff;
+  padding: 0 !important;
+  color: #fff !important;
   text-decoration: none;
-
+font-family: jua !important; text-align:center !important;
   margin: 0 1%;
-  width:35%;
+  width:35% !important;
   height:5% !important;
- 
+  box-shadow:none;
+ font-size:1em !important;
 }
-.passckbtn_:active {
-  background: #faaeae;
-  color:white;
+.passckbtn_:hover {
+  background: #faaeae !important;
+  color:white !important;
 }
-.passckbtn_ok { background: #D2D2D2; }
-.passckbtn_ok:active { background: #b9b9b9; }
+.passckbtn_ok { background: #D2D2D2 !important;}
+.passckbtn_ok:hover { background: #b9b9b9 !important; }
 .modifyInput{border-top:0 !important; border-right: 0!important; border-left:0 !important;
 border-bottom:2px solid #D2D2D2; border-radius:0 !important}
 .modifybtn{margin:2% auto;}
@@ -247,3 +249,80 @@ padding:4%; width:100% }
 .mod_body{}
 #myInfo, #myPassword{background-color:#f5f6f7;}
 .mypageContent_mod{padding-top:0 !important}
+.accordion {
+ 
+  margin: 3rem auto;
+  width: 100%;
+  font-family: 'Lato', sans-serif !important;
+  background: #f4f4f4;
+}
+.accordion__title {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  padding: 1rem 1.5rem;
+  background: #77A8C7;
+  color: white;
+  cursor: pointer;
+  -webkit-transition: .3s ease;
+          transition: .3s ease;
+          font-family: 'Lato', sans-serif !important;
+}
+.accordion__title:hover {
+  background: #4574A8;
+}
+.accordion__copy {
+  display: none;
+  padding: 1rem 1.5rem 2rem 1.5rem;
+  color: gray;
+  line-height: 1.6;
+  font-size: 14px;
+  font-weight: 500;
+}
+.accordion__copy--open {
+  display: block;
+}
+
+.qnabtn{width: 49%; display:inline-block !important; text-align:center;
+font-size:1.75em !important; margin-top:0 !important; margin-bottom:1em !important;
+color:#7f888f}
+.qnabtn:firstchild{margin-right:1% !important}
+.qnabtn:hover{cursor:pointer;}
+.pagination{text-align:center;}
+
+<!--review쓰는 부분 rating-->
+.right {
+  float: right;
+}
+
+.left {
+  float: left;
+}
+
+.rating .stars {
+  margin-right: 15px;
+}
+
+.rating .stars .star {
+  float: left;
+  padding: 5px 2px;
+  cursor: pointer;
+}
+
+.rating .stars .star:before {
+  font-family: 'FontAwesome';
+  content: '\f005';
+  color: #d0e8f0;
+  font-size: 3em;
+}
+
+.rating .stars .star:hover:before,
+.rating .stars .star.to_rate:before,
+.rating .stars .star.rated:before {
+  color: #80c1d5;
+}
+
+.rating .stars .star.no_to_rate:before {
+  color: #d0e8f0;
+}
+<!---->

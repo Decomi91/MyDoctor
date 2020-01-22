@@ -1,5 +1,9 @@
 package com.project.mydoctor.service;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,7 +32,8 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.isHosId(member);
 	}
 
-	@Override
+	
+	
 	public int getlistCount() {
 		return mDao.getlistcount();
 	}
@@ -46,9 +51,31 @@ public class MemberServiceImpl implements MemberService {
 			return mDao.idcheckpub(id);
 		}
 	}
-	
-	@Override
-	public Member select(String id) {
-		return mDao.select(id);
-	}
+//////////////////////jisu/////////////////
+@Override
+public boolean passck(String id, String password) {
+Map<String,Object> map=new HashMap<String, Object>();
+map.put("id", id);
+map.put("password", password);
+Member result=mDao.passck(map);
+if(result==null)
+return false;
+else 
+return true;
+
 }
+
+@Override
+public Member my_info(String id) {
+// TODO Auto-generated method stub
+return mDao.my_info(id);
+}
+
+@Override
+public int update(Member member) {
+// TODO Auto-generated method stub
+return mDao.update(member);
+}
+
+}
+

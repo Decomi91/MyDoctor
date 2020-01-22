@@ -1,7 +1,10 @@
+
 package com.project.mydoctor.dao;
 
-import java.util.List;
+
 import java.util.Map;
+import java.util.List;
+
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,7 +13,7 @@ import org.springframework.stereotype.Repository;
 import com.project.mydoctor.model.Member;
 
 @Repository
-public class MemberDAO {
+public class MemberDAO { 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	
@@ -26,6 +29,7 @@ public class MemberDAO {
 		return sqlSession.selectOne("Hospitals.isId", member);
 	}
 
+
 	public int getlistcount() {
 		return sqlSession.selectOne("Members.getlistcount");
 	}
@@ -40,22 +44,23 @@ public class MemberDAO {
 
 	public String idcheckhos(String id) {
 		return sqlSession.selectOne("Members.idcheck", id);
-	}
-	
-	public Member select(String id) {
-		return sqlSession.selectOne("Members.select", id);
-	}
-// ***************** Jisu **********************
 
-	public Member passck(Map<String, Object> map) {
-		return sqlSession.selectOne("Members.passck", map);
 	}
+///////////////////jisu///////////////////////////
 
-	public Member my_info(String id) {
-		return sqlSession.selectOne("Members.myinfo", id);
-	}
+public Member passck(Map<String, Object> map) {
+// TODO Auto-generated method stub
+return sqlSession.selectOne("Members.passck",map);
+}
 
-	public int update(Member member) {
-		return sqlSession.update("Members.update", member);
-	}
+
+public Member my_info(String id) {
+// TODO Auto-generated method stub
+return sqlSession.selectOne("Members.myinfo", id);
+}
+
+public int update(Member member) {
+// TODO Auto-generated method stub
+return  sqlSession.update("Members.update", member);
+}
 }
