@@ -9,7 +9,7 @@ public interface MemberService {
 
 	int insertMember(Member member);
 
-	int isId(Member member);
+	int isId(Member member); 
 
 	int isHosId(Member member);
 
