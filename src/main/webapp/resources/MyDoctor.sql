@@ -20,7 +20,7 @@ insert into members values('test', '123', 'testing',
 		01033333333, 'testADDR',
 		'dd@dd.com', '1991-02-11', 1, 1)
 insert into members values('admin', '20000', 'admin', 
-		01032308711, '서울 어딘가',
+		01032308711, '�꽌�슱 �뼱�뵖媛�',
 		'd@naver.com', '1991-02-11', 1, 1)
 		
 select rownum, h.* from hospitals h

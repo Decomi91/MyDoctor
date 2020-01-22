@@ -34,7 +34,7 @@
 					<!-- 마이페이지 메뉴 include -->
 					<jsp:include page="mypage_menu.jsp"></jsp:include>	
 				<div class="mypageContent">
-				<form action="removeaccount.do">
+				<form action="quitprocess.do">
 				<div class="signoutpassck">
 				 
 				<i class="far fa-frown-open"></i><p class="signoutmsg">정말 탈퇴하시겠습니까?</p>
