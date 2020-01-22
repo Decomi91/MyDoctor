@@ -12,7 +12,7 @@ import org.springframework.stereotype.Repository;
 import com.project.mydoctor.model.Member;
 
 @Repository
-public class MemberDAO {
+public class MemberDAO { 
 	@Autowired
 	private SqlSessionTemplate sqlSession;
 	

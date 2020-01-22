@@ -11,7 +11,7 @@
  	
  	<select id="idcheck" parameterType="String" resultType="String">
  		select count(*) from members
- 		where id = #{id}
+ 		where id = #{id} 
  	</select>
  	
  	<select id="isId" parameterType="member" resultType="int">
