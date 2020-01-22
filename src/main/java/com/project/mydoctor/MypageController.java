@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mydoctor.model.Member;
@@ -22,15 +23,18 @@ public class MypageController {
 	private MemberService memberService;
 	
 	
-	//새로 입력받은 정보로 개인정보 update합니다.
-			@RequestMapping(value="/updatePass")	
-			public void updatePass(Member member, HttpServletResponse response) throws IOException{
-				int result=memberService.update(member);
+	//새로 입력받은 비밀번호로 비밀번호 update합니다.
+			@RequestMapping(value="/pwmodify.do")	
+			public void updatePass(@RequestParam("new_password") String newPassword
+					, HttpServletResponse response, HttpSession session) throws IOException{
+				System.out.println(" 신 비번: "+newPassword);			
+				String id=(String)session.getAttribute("loginid");
+				int result=memberService.updatePass(newPassword, id);
 				response.setContentType("text/html; charset=utf-8");
 				PrintWriter out=response.getWriter();
 				if(result==1) {
 					out.println("<script>");
-					out.println("alert('정보 수정을 완료했습니다.')");
+					out.println("alert('비밀번호 수정을 완료했습니다.')");
 					out.println("location.href='mypage.net");
 					out.println("</script>");
 				}else {
@@ -41,12 +45,12 @@ public class MypageController {
 					out.close();
 				}
 			}
-	//회원탈퇴 이전 비밀번호 맞는지 확인
-	@RequestMapping(value="/removeaccount.do")
-	public void removeaccount(Member member, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+	//회원탈퇴 이전 비밀번호 맞는지 확인=>탈퇴진행
+	@RequestMapping(value="/quitprocess.do")
+	public void removeaccount(@RequestParam("password") String password, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		
 		String id=(String)session.getAttribute("loginid");
-		String password=member.getPassword();
+		
 		System.out.println("id="+id+"password="+password);
 		boolean usercheck=memberService.passck(id, password);
 		response.setContentType("text/html; charset=utf-8");
@@ -57,12 +61,23 @@ public class MypageController {
 			out.println("history.back();");
 			out.println("</script>");
 			out.close();
-		}
+		}else {
+		int removed=memberService.removeaccount(id);
+		if(removed==1) {
 		out.println("<script>");
 		out.println("alert('탈퇴 되었습니다.');");
 		out.println("location.href='main'");
 		out.println("</script>");
 		out.close();
+		session.invalidate();
+		}else {
+			out.println("<script>");
+			out.println("alert('회원 탈퇴에 실패했습니다. 같은 문제가 반복될 경우 관리자에게 문의해 주세요.');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
+		}
 		}
 	
 	
@@ -75,10 +90,10 @@ public class MypageController {
 	}
 	//정보수정하기이전 비밀번호 맞는지 확인
 	@RequestMapping(value="/modifyckpass.do")
-	public void gomodifyckpass(Member member, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
+	public void gomodifyckpass(@RequestParam("password") String password, HttpServletRequest request, HttpServletResponse response, HttpSession session) throws Exception {
 		
 		String id=(String)session.getAttribute("loginid");
-		String password=member.getPassword();
+		
 		System.out.println("id="+id+"password="+password);
 		boolean usercheck=memberService.passck(id, password);
 		response.setContentType("text/html; charset=utf-8");
@@ -157,6 +172,12 @@ public class MypageController {
 	public String writeReview() {
 
 		return "writeform/review";
+	}
+	
+	@RequestMapping(value="/detail")
+	public String detailQna() {
+
+		return "details/hospitaldetail";
 	}
 }
  
