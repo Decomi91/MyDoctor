@@ -80,7 +80,7 @@
 				</nav>
 
 
-				<div style="border: 1px black solid">review/Q&A 게시판 영역</div>
+				<div id="boardcontent">review/Q&A 게시판 영역</div>
 			</div>
 		</div>
 	</div>
@@ -104,6 +104,8 @@
 			$('#qnaa').addClass('selectedBoard');
 			$('#reviewli').removeClass('selectedBoard');
 			$('#reviewa').removeClass('selectedBoard');
+			$('#boardcontent').empty();
+			$('#boardcontent').load("qna");
 		})
 	</script>
 </body>

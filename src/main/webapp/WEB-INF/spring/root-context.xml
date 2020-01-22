@@ -14,8 +14,8 @@
 	<bean class="org.mybatis.spring.SqlSessionFactoryBean" id="sqlSessionFactory">
 		<property name="dataSource"><ref bean="dataSource"/></property>
 		<property name="configLocation" value="classpath:util/SqlMapConfig.xml"/>
-	</bean>
-	<!-- 
+	</bean>    
+	<!--  
 		SqlSessionTemplate은 마이바티스 스프링 연동 모듈의 핵심.
 		SqlSessionTemplate은 SqlSession을 구현하고 코드에서 SqlSession을 대체하는 역할을 한다.
 		SqlSessionTemplate은 쓰레드에 안전하고 여러 개의 DAO나 매퍼에서 공유할 수 있고 필요한 시점에 세션을 닫고 커밋하거나 롤백하는 것을 포함한 생명주기를 관리한다.
