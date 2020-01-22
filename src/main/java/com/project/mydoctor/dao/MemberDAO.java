@@ -1,6 +1,7 @@
 package com.project.mydoctor.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,5 +44,18 @@ public class MemberDAO {
 	
 	public Member select(String id) {
 		return sqlSession.selectOne("Members.select", id);
+	}
+// ***************** Jisu **********************
+
+	public Member passck(Map<String, Object> map) {
+		return sqlSession.selectOne("Members.passck", map);
+	}
+
+	public Member my_info(String id) {
+		return sqlSession.selectOne("Members.myinfo", id);
+	}
+
+	public int update(Member member) {
+		return sqlSession.update("Members.update", member);
 	}
 }
