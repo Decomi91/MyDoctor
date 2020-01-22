@@ -32,19 +32,7 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.isHosId(member);
 	}
 
-	@Override
-	public boolean passck(HttpSession id, String password) {
-		Map<String,Object> map=new HashMap<String, Object>();
-		map.put("id", id);
-		map.put("password", password);
-		Member result=mDao.passck(map);
-		if(result==null)
-			return false;
-		else
-			return true;
-		
-	}
-
+	
 	
 	public int getlistCount() {
 		return mDao.getlistcount();
@@ -63,5 +51,30 @@ public class MemberServiceImpl implements MemberService {
 			return mDao.idcheckpub(id);
 		}
 	}
-	
+//////////////////////jisu/////////////////
+@Override
+public boolean passck(String id, String password) {
+Map<String,Object> map=new HashMap<String, Object>();
+map.put("id", id);
+map.put("password", password);
+Member result=mDao.passck(map);
+if(result==null)
+return false;
+else
+return true;
+
+}
+
+@Override
+public Member my_info(String id) {
+// TODO Auto-generated method stub
+return mDao.my_info(id);
+}
+
+@Override
+public int update(Member member) {
+// TODO Auto-generated method stub
+return mDao.update(member);
+}
+
 }

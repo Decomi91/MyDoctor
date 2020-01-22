@@ -29,10 +29,6 @@ public class MemberDAO {
 	}
 
 
-	public Member passck(Map<String, Object> map) {
-		// TODO Auto-generated method stub
-		return sqlSession.selectOne("Members.passck",map);
-
 	public int getlistcount() {
 		return sqlSession.selectOne("Members.getlistcount");
 	}
@@ -49,4 +45,21 @@ public class MemberDAO {
 		return sqlSession.selectOne("Members.idcheck", id);
 
 	}
+///////////////////jisu///////////////////////////
+
+public Member passck(Map<String, Object> map) {
+// TODO Auto-generated method stub
+return sqlSession.selectOne("Members.passck",map);
+}
+
+
+public Member my_info(String id) {
+// TODO Auto-generated method stub
+return sqlSession.selectOne("Members.myinfo", id);
+}
+
+public int update(Member member) {
+// TODO Auto-generated method stub
+return  sqlSession.update("Members.update", member);
+}
 }

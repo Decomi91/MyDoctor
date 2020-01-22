@@ -34,15 +34,17 @@
 					<!-- 마이페이지 메뉴 include -->
 					<jsp:include page="mypage_menu.jsp"></jsp:include>	
 				<div class="mypageContent">
+				<form action="modifyckpass.do">
 				<div class="signoutpassck">
 				 
 				<i class="fas fa-user-lock"></i><p class="signoutmsg">비밀번호를 한번 더 입력해 주세요</p>
 			 <div id="passckbox"><div class="passck1">비밀번호 확인
-			 </div><input type="password" class="passck2"></div>
-			  <div class="signoutsubbtn"><a href="#" class="passckbtn_">취소</a>
-		<a href="modifyck.do" class="passckbtn_ passckbtn_ok">확인</a></div>
-			 
+			 </div><input type="password" class="passck2" name="password"></div>
+			  <div class="signoutsubbtn"><button type="reset" class="passckbtn_">취소</button>
+		<button type="submit" class="passckbtn_ passckbtn_ok">확인</button></div>
+			
 				</div>
+				</form>
 				</div>
 					</div>
 					

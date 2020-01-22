@@ -13,11 +13,17 @@ public interface MemberService {
 
 	int isHosId(Member member);
 
-	boolean passck(HttpSession id, String password);
+	
 	int getlistCount();
 
 	List<Member> getmemList(int pages);
 
 	String idcheck(String id, String pub);
+////////////////////////////////jisu//////////////////////
+boolean passck(String id, String password);
 
+
+Member my_info(String id);
+
+int update(Member member);
 }
