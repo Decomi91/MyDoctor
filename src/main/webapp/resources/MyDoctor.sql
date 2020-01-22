@@ -14,7 +14,7 @@ create table members(
 	birth		date,
 	gender		number(1),
 	userkey		number(1)
-)
+);
 
 insert into members values('test', '123', 'testing', 
 		01033333333, 'testADDR',
@@ -55,8 +55,9 @@ create table hospitals(
 )
 
 insert into hospitals values('testing','123','test',
-			'testaddr',029579599,'ABCD',0900,1700,0900,1700,0900,1700,
-			0900,1700,0900,1700,0900,1700,0900,1700,1);
+			'testaddr',029579599,'ABCD',1,0900,1700,0900,1700,0900,1700,
+			0900,1700,0900,1700,0900,1700,0900,1700,1,sysdate);
+			
 alter table hospitals add(joindate date)
 update hospitals set joindate = sysdate
 create table reservation(
@@ -135,3 +136,5 @@ create table favorites (
 			
 delete members cascade constraints;
 delete reviews
+
+drop table hospitals;

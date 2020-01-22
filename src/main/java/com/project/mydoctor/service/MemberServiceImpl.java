@@ -78,3 +78,4 @@ return mDao.update(member);
 }
 
 }
+

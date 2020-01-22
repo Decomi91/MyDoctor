@@ -24,6 +24,15 @@ public class HospitalDAO {
 	public int hs_insert(Hospital vo) {
 		return sqlSession.insert("Hospitals.hs_insert", vo);
 	}
+
+	public List<Hospital> getHosListTest() {
+		return sqlSession.selectList("Hospitals.gethoslisttest");
+	}
+
+	public Hospital getDetail(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Hospitals.getdetail", id);
+	}
 	
 	
 
