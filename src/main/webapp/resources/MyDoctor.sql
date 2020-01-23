@@ -120,12 +120,14 @@ create table reviews(
   kindness number(2) not null,
   ability number(2) not null,
   price number(2) not null,
+  visited date,
   uploaddate date,
   reply varchar2(3000)
 )
-
+alter table reviews add(visited date)
 insert into reviews values('test', '123', 'testing', 1, 'testSub',
-			'testCont', 5,5,5,sysdate,'ok')
+			'testCont', 5,5,5,sysdate,sysdate,'ok')
+update reviews set visited = sysdate
 
 create table favorites (
   id varchar2(15) references members(id),

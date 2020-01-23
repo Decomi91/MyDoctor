@@ -9,6 +9,7 @@
 		<typeAlias type="com.project.mydoctor.model.AdminBoard" alias="adminboard"/>
 		<typeAlias type="com.project.mydoctor.model.Qna" alias="qna"/>
 		<typeAlias type="com.project.mydoctor.model.Reservation" alias="reservation"/>
+		<typeAlias type="com.project.mydoctor.model.Review" alias="review"/>
 	</typeAliases>
 	
 	<mappers>
@@ -17,14 +18,6 @@
 		<mapper resource="sql/adminBoard.xml"/>
 		<mapper resource="sql/qnaBoard.xml"/>
 		<mapper resource="sql/reservation.xml"/>
+		<mapper resource="sql/review.xml"/>
 	</mappers>
 </configuration>
-
-
-
-
-
-
-
-
-
