@@ -92,7 +92,8 @@ a{text-decoration: none;}
 .qnaV15 .talkList td {
     padding: 10px 0;
     font-size: 13px;
-    
+    text-align: center;
+ 
 }
 .talkList td {
     
@@ -100,7 +101,9 @@ a{text-decoration: none;}
     vertical-align: top;
      
 }
-
+.lt {
+    text-align: left !important;
+}
 td {
     display: table-cell;}
     
@@ -149,6 +152,24 @@ legend {
 }
 #qnaMsg{width:100%; margin:2% 0;}
 .btnArea{text-align:center;}
+.qnaList {
+    padding: 45px 80px;
+    text-align: left;
+}
+tr.talkMore{background-color:#f5f6f7;}
+.qnaList .answer {
+    margin-top: 5%;
+    padding-top: 2%;
+    border-top: 1px solid #ddd;
+}
+.qnaList .title {
+    width: 60px;
+    text-align: left;
+}
+.qnaList .title, .qnaList .account {
+    float: left;
+}
+a.talkShort{color: black !important;}
 </style>
 </head>
 <body>
@@ -156,7 +177,7 @@ legend {
 	<div class="sorting">
 		<h2>Q&amp;A </h2>
 		<div class="option">
-			<a href="" onclick="$('#inquiryForm').show(); return false;" id="inquiryBtn" class="btn btnS2 btnRed">문의하기</a>
+			<a href="" onclick="return false;" id="inquiryBtn" class="btn btnS2 btnRed">문의하기</a>
 		</div>
 	</div>
 	<div id="inquiryForm" class="boardForm tMar05" style="display: block;">
@@ -239,6 +260,74 @@ legend {
 					</div>
 				</td>
 			</tr>
+			<tr>
+			<td><strong>&lt;답변완료&gt;</strong></td>
+			<td class="lt">
+				
+					<a href="javascript:" class="talkShort">설연휴 언제까지 진료하시나요?</a>
+				
+			</td>
+			<td>2019/12/15</td>
+			<td>hy73**</td>
+		</tr>
+		<tr class="talkMore " style="display: table-row;">
+			<td colspan="4">
+				<div class="qnaList">
+					<div class="question">
+						<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문"></strong>
+						<div class="account">
+							
+								<p>설연휴 언제까지 진료하시나요?</p>
+							
+						</div>
+					</div>
+					
+					<div class="answer">
+						<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변"></strong>
+						<div class="account">
+							
+								<p>안녕하세요, 땡땡병원 입니다.<br><br>설 연휴동안은 정상 진료하지만 <br>설 당일은 휴무인점 안내드립니다. <br><br>만족스러운 답변이 되셨는지요?<br>감사합니다.<br></p>
+							
+						</div>
+					</div>
+					
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>&lt;답변중&gt;</strong></td>
+			<td class="lt">
+				
+					<a href="javascript:" class="talkShort">피부과 진료도 보시나요?</a>
+				
+			</td>
+			<td>2019/12/15</td>
+			<td>user1</td>
+		</tr>
+		<tr class="talkMore " style="display: table-row;">
+			<td colspan="4">
+				<div class="qnaList">
+					<div class="question">
+						<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문"></strong>
+						<div class="account">
+							
+								<p>가정의학과라고 나오는데 혹시 피부과 진료도 보시나요?</p>
+							
+						</div>
+					</div>
+					
+					<div class="answer">
+						<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변"></strong>
+						<div class="account">
+							
+								<p>안녕하세요, 땡땡병원 입니다.<br><br>간단한 피부질환 진료를 보긴하지만 상황에 따라 피부과 전문병원의 진료를 권유드릴수도 있는점 안내드립니다. <br><br>만족스러운 답변이 되셨는지요?<br>감사합니다.<br></p>
+							
+						</div>
+					</div>
+					
+				</div>
+			</td>
+		</tr>
 			</tbody>
 		</table>
 		
@@ -248,6 +337,9 @@ legend {
 </div>
 <script>
 $('#inquiryForm').hide();
+$("#inquiryBtn").click(function(){
+	$("#inquiryForm").toggle();
+});
 	// 문의 등록
 	function GotoItemQnA(){
 		var frm = document.qnaform;
@@ -262,22 +354,22 @@ $('#inquiryForm').hide();
 		}
 	}
 
-	// 상품문의 쓰기 취소
-	function cancelItemQnA(inum,itotal) {
-		var frm = document.qnaform;
-		frm.contents.value = "";
-		$("#inquiryForm").hide();
-	}
-
-	// 상품 문의 삭제
-	function delItemQna(iid){
-		if(confirm("상품문의를 삭제 하시겠습니까?")){
-			document.qnaform.id.value = iid;
-			document.qnaform.mode.value = "del";
-			document.qnaform.submit();
+	$(".talkList .talkMore").hide();
+	$(".talkList .talkShort").click(function(){
+		if($(this).parent().parent().next('.talkMore').is(":hidden")){
+			$(".talkList .talkMore").hide();
+			$(this).parent().parent().next('.talkMore').show();
+		} else {
+			$(this).parent().parent().next('.talkMore').hide();
 		}
-	}
 
+		// 클릭 위치가 가려질경우 스크롤 이동
+		if($(window).scrollTop()>$(this).parent().parent().offset().top-47) {
+			$('html, body').animate({scrollTop:$(this).parent().parent().offset().top-47}, 'fast');
+		}
+	});
+	
+	
 </script>
 </body>
 </html>
