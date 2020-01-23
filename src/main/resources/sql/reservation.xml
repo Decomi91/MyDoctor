@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Reservations">
+<!-- 
+	create table reservation(
+	reserveNo		number(10) primary key,
+	id				varchar2(15) references members(id),
+	name			varchar2(15) not null,
+	hosid			varchar2(15) references hospitals(id),
+	hosname			varchar2(15) not null,
+	disease			varchar2(100) not null,
+	reserveTime		date,
+	acceptance		number(1) default 0,
+	moreRes			number(1) default 0
+)
+ -->
+
+	<insert id = "insert" parameterType = "map">
+		<selectKey resultType="int" order="BEFORE" keyProperty="reserveNo">
+	         select nvl(max(reserveNo),0)+1 from reservation
+		</selectKey>
+		insert into reservation(reserveNo, id, name, 
+								hosid, hosname, disease, reserveTime)
+		values(#{reserveNo}, #{id}, #{name}, 
+				#{hosid}, #{hosname}, #{disease}, to_date(#{reserveTime}, 'yyyy-mm-dd hh24:mi:ss'))
+	</insert>
+	
+	<select id = "select" parameterType = "map" resultType = "reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance, moreRes
+						from
+						(select * from reservation order by reserveTime desc))
+		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id = "reserveCount" parameterType = "String" resultType = "map">
+		select (select count(*) from reservation where acceptance = -1) as noaccept,
+				(select count(*) from reservation where acceptance = 0) as waitaccept,
+				(select count(*) from reservation where acceptance = 1) as yesaccept
+		from reservation
+		where id = #{memberId}
+		group by id
+	</select>
+	
+	<select id="getListCount" resultType = "int">
+		select count(*) from reservation
+		where id = #{memberId}
+	</select>
+</mapper>

@@ -5,7 +5,13 @@
 <html>
 <head>
 <meta charset="utf-8">
-<script src="resources/js/jquery-3.0.0.js"></script>
+<meta name="viewport"
+	       content="width=device-width, initial-scale=1, user-scalable=no" />
+     <link href="resources/css/main.css" rel="stylesheet">    
+     <script src="http://code.jquery.com/jquery-3.4.1.js"></script>    
+     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
+	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
+     <script src="resources/js/jquery.min.js"></script>
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
 <title>마이페이지 - 예약(마이페이지 메인)</title>
 <style>

@@ -11,6 +11,563 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<!-- 지도관련 스크립트 -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
+<script type="text/javascript">
+
+$(function() {
+	if (navigator.geolocation) {
+		navigator.geolocation.getCurrentPosition(function(position) {
+
+			var lon = position.coords.longitude, // 경도
+			lat = position.coords.latitude; // 위도						
+			//지도
+			var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+			mapOption = {
+				center : new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
+				level : 4
+			// 지도의 확대 레벨
+			};
+			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
+			var map = new kakao.maps.Map(mapContainer, mapOption);				
+			hs(lon, lat);
+			
+			
+			$("#nearhospital").click(function() {
+				$("#map").empty();
+				$("#div_result").empty();
+			 map = new kakao.maps.Map(mapContainer, mapOption);	
+				hs(lon, lat);
+			});//clcik		
+			
+			
+			
+			function hs(xPos, yPos) {
+				$.ajax({
+							url : "intro_hs",
+							type : "POST",
+							dataType : "json",
+							data : {
+								'xPos' : xPos,
+								'yPos' : yPos
+							},
+							success : function(data) {
+							
+								var item = data.response.body.items.item;
+								
+								var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+								var imageSize = new kakao.maps.Size(24, 35); 
+								var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+								
+							
+								
+								
+								
+								function custonSort(a, b) {
+			                    	  if(Number(a.distance) == Number(b.distance)){ return 0} 
+			                    	  return  Number(a.distance) > Number(b.distance) ? 1 : -1;}
+			                    	item.sort(custonSort);
+								
+								
+							
+								
+								 
+								 var out ="";
+								$.each(item,function(index,items){		
+									var iwContent = '<div style="padding:5px;">'+((index++)+1)+"."+items.yadmNm+'</div>'; 
+								    // 마커를 생성합니다
+								    var marker = new kakao.maps.Marker({
+								        map: map, // 마커를 표시할 지도
+								        position: new kakao.maps.LatLng(items.YPos, items.XPos) , // 마커를 표시할 위치
+								        title :items.yadmNm, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+								        image : markerImage, // 마커 이미지 									
+								    });
+								    
+								    
+								   
+								   
+								   out +="<table>";
+								   out +="<tr>";
+								  /*  out +="<td rowspan ='3' class='table-wrapper'></td>"; */
+								   //out +="<th onclick='location.href=locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</th>";
+								   out +="<th style='width:70%'><a style='color: black;' href='detail.net?ykiho="+items.ykiho+"&yadmNm="+items.yadmNm+"&clCdNm="+items.clCdNm+"&postNo="+items.postNo+"&addr="+items.addr+"&telno="+items.telno+"&hospUrl="+items.hospUrl+"&estbDd="+items.estbDd+"&drTotCnt="+items.drTotCnt+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+"</a></th>";
+								   out +="<td>"+items.clCdNm+"</td>";
+								   out +="</tr>";
+								    
+								   out +="<tr>";
+								   out +="<td colspan='2'>거리 : "+Math.ceil(items.distance)+"M</td>";
+								   out +="</tr>";
+								   out +="</table>";
+								   
+								   $("#div_result").html(out);
+								    //$("#hs_list_tr").append("<li><a href='locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</a></li><hr>");
+								    
+								    
+								    
+								    //마우스
+									var iwContent = '<div style="padding:5px;">'+items.yadmNm+'</div>';
+									
+								    kakao.maps.event.addListener(marker, 'mouseover', function() {									 
+								    	 infowindow.open(map, marker);
+								    });
+
+								    
+								    kakao.maps.event.addListener(marker, 'mouseout', function() {
+								        infowindow.close();
+								    });
+								   
+									
+								
+								    kakao.maps.event.addListener(marker, 'click', function() {
+								    	
+								    	//console.log($("a[id='yadm"+$(this)[0].label+"']"));
+								    	//$("a[id='yadm"+$(this)[0].label+"']").focus();
+								    	$("a[id=yadm"+(index+1)+"]").focus();
+							
+								    });
+									
+
+									//마우스끝
+									
+								    
+								    //고쳐야댐
+									/* var infowindow = new kakao.maps.InfoWindow({
+										//position : iwPosition, 
+											 content : iwContent});
+									
+									infowindow.open(map, marker); 
+								     */
+									 var infowindow = new kakao.maps.InfoWindow({
+									    content : iwContent
+									}); 
+									
+									//마우스함수끝
+								    
+
+								});
+							},error : function(data, err) {
+								alert("err")
+							}
+						});//ajax
+
+			}//hs
+			
+			
+			
+			
+	/* 		function enterKey(index, items,imageSrc,imageSize,markerImage,out){					
+				var iwContent = '<div style="padding:5px;">'+((index++)+1)+"."+items.yadmNm+'</div>'; 
+			    // 마커를 생성합니다
+			    var marker = new kakao.maps.Marker({
+			        map: map, // 마커를 표시할 지도
+			        position: new kakao.maps.LatLng(items.YPos, items.XPos) , // 마커를 표시할 위치
+			        title :items.yadmNm, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+			        image : markerImage, // 마커 이미지 									
+			    });
+   
+			   out +="<table>";
+			   out +="<tr>";
+			  //  out +="<td rowspan ='3' class='table-wrapper'></td>"; 
+			   //out +="<th onclick='location.href=locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</th>";
+			   out +="<th><a style='color: black;' href='detail.net?ykiho="+items.ykiho+"&yadmNm="+items.yadmNm+"&clCdNm="+items.clCdNm+"&postNo="+items.postNo+"&addr="+items.addr+"&telno="+items.telno+"&hospUrl="+items.hospUrl+"&estbDd="+items.estbDd+"&drTotCnt="+items.drTotCnt+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+" (상세정보)</a></th>";
+			   out +="</tr>";
+			    
+			   out +="<tr>";
+			   out +="<td>"+items.clCdNm+"</td>";
+			   out +="</tr>";
+			    
+			   out +="<tr>";
+			   out +="<td>거리 : "+Math.ceil(items.distance)+"M</td>";
+			   out +="</tr>";
+			    
+			   out +="</table>";
+			   
+			   console.log(out);
+			   $("#div_result").html(out);
+			    //$("#hs_list_tr").append("<li><a href='locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</a></li><hr>");
+			    
+			    
+			    
+			    //마우스
+				var iwContent = '<div style="padding:5px;">'+items.yadmNm+'</div>';
+				
+			    kakao.maps.event.addListener(marker, 'mouseover', function() {									 
+			    	 infowindow.open(map, marker);
+			    });
+
+			    
+			    kakao.maps.event.addListener(marker, 'mouseout', function() {
+			        infowindow.close();
+			    });
+			   
+				
+			
+			    kakao.maps.event.addListener(marker, 'click', function() {
+			    	
+			    	//console.log($("a[id='yadm"+$(this)[0].label+"']"));
+			    	//$("a[id='yadm"+$(this)[0].label+"']").focus();
+			    	$("a[id=yadm"+(index+1)+"]").focus();
+		
+			    });
+				
+
+				//마우스끝
+				
+			    
+			    //고쳐야댐
+				// var infowindow = new kakao.maps.InfoWindow({
+					//position : iwPosition, 
+					//	 content : iwContent});
+				
+				infowindow.open(map, marker); 
+			     
+				 var infowindow = new kakao.maps.InfoWindow({
+				    content : iwContent
+				}); 
+				
+				//마우스함수끝
+		
+		}//엔터키함수
+			 */
+			
+			//엔터키이벤트
+			$("#hs_query").keydown(function(key){				
+				if(key.keyCode == 13){
+					//$('#nearhospital').trigger('click');
+					$('#nearhospital').addClass('primary');
+					$('#nearpharmacy').removeClass('primary');
+				$.ajax({
+							url : "hs_query",
+							type : "POST",
+							dataType : "json",
+							data : {
+								'xPos' : lon,
+								'yPos' : lat,
+								'cate' : $("#demo-category option:selected").val(),
+								'query': $("#hs_query").val()
+							},
+							success : function(data) {
+								var total = data.response.body.totalCount;
+								var item = data.response.body.items.item;
+								console.log(item)
+								var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+								var imageSize = new kakao.maps.Size(24, 35); 
+								var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
+						
+								
+								if(total>1){
+									function custonSort(a, b) {
+					            	  	if(Number(a.distance) == Number(b.distance)){ 
+					            		  return 0;
+					            		}
+					            	  return  Number(a.distance) > Number(b.distance) ? 1 : -1;
+					            	}
+					            	item.sort(custonSort);
+					            }
+							
+// 								if(total>1){									
+									$("#map").empty();
+									$("#div_result").empty();
+									var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+								    mapOption = { 
+								        center: new kakao.maps.LatLng(item[0].YPos, item[0].XPos), // 지도의 중심좌표
+								        level: 3 // 지도의 확대 레벨
+								    };
+									map = new kakao.maps.Map(mapContainer, mapOption);
+									var out =""	;
+									
+									$.each(item,function(index,items){	
+																			
+									    // 마커를 생성합니다
+									    var marker = new kakao.maps.Marker({
+											map: map, // 마커를 표시할 지도
+									        position: new kakao.maps.LatLng(items.YPos, items.XPos) , // 마커를 표시할 위치
+									        title :items.yadmNm, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+									        image : markerImage, // 마커 이미지 									
+									    });
+						   
+									   out +="<table>";
+									   out +="<tr>";
+									  /*  out +="<td rowspan ='3' class='table-wrapper'></td>"; */
+									   //out +="<th onclick='location.href=locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</th>";
+									   out +="<th><a style='color: black;' href='detail.net?ykiho="+items.ykiho+"&yadmNm="+items.yadmNm+"&clCdNm="+items.clCdNm+"&postNo="+items.postNo+"&addr="+items.addr+"&telno="+items.telno+"&hospUrl="+items.hospUrl+"&estbDd="+items.estbDd+"&drTotCnt="+items.drTotCnt+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+"</a></th>";
+									   out +="<td>"+items.clCdNm+"</td>";
+									   out +="</tr>";
+									   
+									   out +="<tr>";
+									   out +="<td colspan='2'>거리 : "+Math.ceil(items.distance)+"M</td>";
+									   out +="</tr>";
+									    
+									   out +="</table>";
+									   
+								
+									   $("#div_result").html(out);
+									    //$("#hs_list_tr").append("<li><a href='locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</a></li><hr>");
+	
+									    //마우스
+										var iwContent = '<div style="padding:5px;">'+items.yadmNm+'</div>';								
+									    kakao.maps.event.addListener(marker, 'mouseover', function() {									 
+									    	 infowindow.open(map, marker);
+									    });								    
+									    kakao.maps.event.addListener(marker, 'mouseout', function() {
+									        infowindow.close();
+									    });	
+									    kakao.maps.event.addListener(marker, 'click', function() {
+									    	
+									    	//console.log($("a[id='yadm"+$(this)[0].label+"']"));
+									    	//$("a[id='yadm"+$(this)[0].label+"']").focus();
+									    	$("a[id=yadm"+(index+1)+"]").focus();
+								
+									    });
+										
+	
+										//마우스끝
+										
+									    
+									    //고쳐야댐
+										/* var infowindow = new kakao.maps.InfoWindow({
+											//position : iwPosition, 
+												 content : iwContent});
+										
+										infowindow.open(map, marker); 
+									     */
+										 var infowindow = new kakao.maps.InfoWindow({
+										    content : iwContent
+										 }); 
+									});
+// 								}else if(total==1){	 //검색결과 한개							
+// 								/* 	var out =""	;
+// 								    // 마커를 생성합니다
+// 								    var marker = new kakao.maps.Marker({
+// 								        map: map, // 마커를 표시할 지도
+// 								        position: new kakao.maps.LatLng(item.YPos, item.XPos) , // 마커를 표시할 위치
+// 								        title :item.yadmNm, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+// 								        image : markerImage, // 마커 이미지 									
+// 								    });
+					   
+// 								   out +="<table>";
+// 								   out +="<tr>";
+								  
+// 								   //out +="<td rowspan ='3' class='table-wrapper'></td>"; 
+// 								   //out +="<th onclick='location.href=locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</th>";
+// 								   out +="<th><a style='color: black;' href='detail.net?ykiho="+item.ykiho+"&yadmNm="+item.yadmNm+"&clCdNm="+item.clCdNm+"&postNo="+item.postNo+"&addr="+item.addr+"&telno="+item.telno+"&hospUrl="+item.hospUrl+"&estbDd="+item.estbDd+"&drTotCnt="+item.drTotCnt+"&YPos="+item.YPos+"&XPos="+item.XPos+"' id=yadm"+1+">"+item.yadmNm+" (상세정보)</a></th>";
+// 								   out +="</tr>";
+								    
+// 								   out +="<tr>";
+// 								   out +="<td>"+item.clCdNm+"</td>";
+// 								   out +="</tr>";
+								    
+// 								   out +="<tr>";
+// 								   out +="<td>거리 : "+Math.ceil(item.distance)+"M</td>";
+// 								   out +="</tr>";
+								    
+// 								   out +="</table>";
+								   
+								
+// 								   $("#div_result").html(out);
+// 								    //$("#hs_list_tr").append("<li><a href='locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</a></li><hr>");						    
+								    
+// 								    //마우스
+// 									var iwContent = '<div style="padding:5px;">'+item.yadmNm+'</div>';
+									
+// 								    kakao.maps.event.addListener(marker, 'mouseover', function() {									 
+// 								    	 infowindow.open(map, marker);
+// 								    });
+
+								    
+// 							   		 kakao.maps.event.addListener(marker, 'mouseout', function() {
+// 								        infowindow.close();
+// 								  	  });								   
+// 							  		  kakao.maps.event.addListener(marker, 'click', function() {
+								    	
+// 								    	//console.log($("a[id='yadm"+$(this)[0].label+"']"));
+// 								    	//$("a[id='yadm"+$(this)[0].label+"']").focus();
+// 								    	$("a[id=yadm"+1+"]").focus();
+							
+// 								    });
+									
+
+// 									//마우스끝
+								
+// 									 var infowindow = new kakao.maps.InfoWindow({
+// 									    content : iwContent
+// 									});  */	
+// 									$("#map").empty();
+// 									$("#div_result").empty();																											
+// 									var out="";
+// 									 out +="<table>";
+// 									   out +="<tr>";
+// 									  /*  out +="<td rowspan ='3' class='table-wrapper'></td>"; */
+// 									   //out +="<th onclick='location.href=locationView.do?ykiho="+items.ykiho+"&YPos="+items.YPos+"&XPos="+items.XPos+"' id=yadm"+(index+1)+">"+items.yadmNm+":"+items.addr+":"+items.distance+"</th>";
+// 									   out +="<th><a style='color: black;' href='detail.net?ykiho="+item.ykiho+"&yadmNm="+item.yadmNm+"&clCdNm="+item.clCdNm+"&postNo="+item.postNo+"&addr="+item.addr+"&telno="+item.telno+"&hospUrl="+item.hospUrl+"&estbDd="+item.estbDd+"&drTotCnt="+item.drTotCnt+"&YPos="+item.YPos+"&XPos="+item.XPos+"' id=yadm"+1+">"+item.yadmNm+" (상세정보)</a></th>";
+// 									   out +="</tr>";
+									    
+// 									   out +="<tr>";
+// 									   out +="<td>"+item.clCdNm+"</td>";
+// 									   out +="</tr>";
+									    
+// 									   out +="<tr>";
+// 									   out +="<td>거리 : "+Math.ceil(item.distance)+"M</td>";
+// 									   out +="</tr>";
+									    
+// 									   out +="</table>";									   								
+// 									   $("#div_result").html(out);	
+									   
+// 									var mapContainer = document.getElementById('map'), 
+// 								    mapOption = { 
+// 								        center: new kakao.maps.LatLng(item.YPos, item.XPos), 
+// 								        level: 3 // 지도의 확대 레벨
+// 								    };
+
+// 									var map = new kakao.maps.Map(mapContainer, mapOption);								
+// 									var markerPosition  = new kakao.maps.LatLng(item.YPos, item.XPos); 
+								
+// 									var marker = new kakao.maps.Marker({
+// 									    position: markerPosition
+// 									});
+
+// 									marker.setMap(map);
+
+// 									var iwContent = '<div style="padding:5px;">'+item.yadmNm+'</div>',
+// 									    iwPosition = new kakao.maps.LatLng(item.YPos, item.XPos);
+// 									var infowindow = new kakao.maps.InfoWindow({
+// 									    position : iwPosition, 
+// 									    content : iwContent 
+// 									});
+									  								
+// 									infowindow.open(map, marker); 
+									
+// 								}else{
+									
+// 									$("#map").empty();
+// 									$("#div_result").empty();			
+									
+									
+// 									var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+// 								    mapOption = { 
+// 								        center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
+// 								        level: 3 // 지도의 확대 레벨
+// 								    };
+// 									map = new kakao.maps.Map(mapContainer, mapOption);
+									
+// 									var out="";								
+// 									 out +="<table>";
+// 									   out +="<tr>";
+// 									   out +="<td style='color: red;'>검색된 결과가 없습니다</td>";
+// 									   out +="</tr>";									    									  
+									    
+// 									   out +="</table>";									   								
+// 									   $("#div_result").html(out);
+									
+									
+									
+// 								}
+								
+								/* 이형태는 사용할수는 있는데, 토탈카운터가 잡아논 rownum과 다르므로 X 
+								for(var i =1; i<=data.response.body.totalCount;i++){
+								console.log(data[i]);
+								}
+								 */	
+							},error : function(data, err) {
+								alert("에러발생?")
+							}
+						});//ajax
+
+		
+					
+					
+				}
+				
+				
+			});
+			
+			
+			//약국
+			$("#nearpharmacy").click(function() {
+				$("#map").empty();
+				$("#div_result").empty();
+				
+				// 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
+				var infowindow = new kakao.maps.InfoWindow({zIndex:1});
+				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+				    mapOption = {
+				        center: new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
+				        level: 3 // 지도의 확대 레벨
+				    };  
+
+				// 지도를 생성   
+				var map = new kakao.maps.Map(mapContainer, mapOption); 
+				// 장소 검색 객체생성
+				var ps = new kakao.maps.services.Places(map); 
+				// 카테고리 약국
+				ps.categorySearch('PM9', placesSearchCB, {useMapBounds:true}); 
+
+				//data.place_name 이름
+				//data.address_name 주소
+				//data.place_url 길찾기		
+				var out ="<table><tr><th style='color: red;'>영업중인 약국만 표기됩니다.</th></tr></table>";
+				
+				// 키워드 검색 완료 시 호출되는 콜백함수 입니다
+				function placesSearchCB (data, status, pagination) {
+					
+				    if (status === kakao.maps.services.Status.OK) {
+				        for (var i=0; i<data.length; i++) {
+				            displayMarker(data[i],i);
+				            
+				            out +="<table>";
+							   out +="<tr>";
+							   /* out +="<td rowspan ='3' class='table-wrapper'></td>"; */							 
+							   out +="<th>"+data[i].place_name+"</th>";
+							   out +="<td style='width:70%'><a id = 'place_name"+i+"' href='"+data[i].place_url+"' target='_blank'>상세정보</a></td>";
+							   out +="</tr>";
+							    
+							   out +="<tr>";
+							   out +="<td colspan='2'>"+data[i].address_name+"</td>";
+							   out +="</tr>";
+							    
+							   out +="</table>";
+							   
+							   $("#div_result").html(out);
+				        }       
+				    }
+				}
+
+				// 지도에 마커를 표시하는 함수입니다
+				function displayMarker(place,i) {
+				    // 마커를 생성하고 지도에 표시합니다
+				    var marker = new kakao.maps.Marker({
+				        map: map,
+				        position: new kakao.maps.LatLng(place.y, place.x) 
+				    });
+
+				    // 마커에 클릭이벤트를 등록합니다
+				    kakao.maps.event.addListener(marker, 'click', function() {
+				    	
+				        // 마커를 클릭하면 장소명이 인포윈도우에 표출됩니다
+				        infowindow.setContent('<div style="padding:5px;font-size:12px;">' + place.place_name + '</div>');
+				        infowindow.open(map, marker);
+				        $("a[id=place_name"+i+"]").focus();
+				        
+				        
+				    });
+				}				
+									});//pha
+		
+			
+			
+			
+		});//geo funtion
+
+	} else {
+
+		//var locPosition = new kakao.maps.LatLng(33.450701, 126.570667);
+
+	}
+
+});//onload
+
+</script>
 </head>
 <body class="is-preload">
 <%-- <jsp:include page="header.jsp" /> --%>
@@ -38,8 +595,10 @@
 								<div>
 									<button class="nearhospital koreanfont primary" id="nearhospital">주변 병원</button>
 									<button class="nearpharmacy koreanfont" id="nearpharmacy">주변 약국</button><br>
-									<div>
-										<img src="resources/images/pic10.jpg" alt="" class = "mapsize"/>
+									<!-- 지도 -->
+									<div id="result">						
+										<div id='map' style='width: 100%; height: 350px;'></div>
+										<!-- <img src="resources/images/pic10.jpg" alt="" class = "mapsize"/> -->
 									</div>
 								</div>
 							</td>
@@ -48,33 +607,24 @@
 								<div>
 									<select name="demo-category" id="demo-category" class="categorysel">
 										<option value="">진료과목</option>
-										<option value="1">소아과</option>
-										<option value="2">치과</option>
-										<option value="3">안과</option>
-										<option value="4">정형외과</option>
+										<option value="01">내과</option>
+										<option value="04">외과</option>
+										<option value="05">정형외과</option>
+										<option value="08">성형외과</option>
+										<option value="10">산부인과</option>
+										<option value="11">소아청소년과</option>
+										<option value="12">안과</option>
+										<option value="13">이비인후과</option>
+										<option value="14">피부과</option>
+										<option value="15">비뇨기과</option>
+										<option value="49">치과</option>										
 									</select>
 									<section id="search" class="alt hospitalsearch">
-										<form method="post" action="#">
-											<input type="text" name="query" id="query" placeholder="병원이름 또는 증상을 입력하세요." />
-										</form>
+										<input type="text" name="query" id="hs_query" placeholder="병원이름을 입력하세요." />
 									</section>
 									
 									<!-- 병원 list -->
-									<div style="overflow:auto;" class="mapsize">
-										<c:forEach var = "h" items = "${hoslist }">
-											<table>
-												<tr>
-													<td rowspan = "3" class = "table-wrapper"><img alt="" src="resources/images/pic10.jpg" width = "50px"></td>
-													<th onclick = "location.href='detail.net?id=${h.id}'">${h.yadmNm }</th>
-												</tr>
-												<tr>
-													<td>내과, 가정의학과, 소아과</td>
-												</tr>
-												<tr>
-													<td><i class="fas fa-grin-hearts"></i> ? / 10</td>
-												</tr>
-											</table>
-										</c:forEach>
+									<div style="overflow:auto;" class="mapsize" id="div_result">
 									</div>
 								</div>
 							</td>
@@ -88,143 +638,7 @@
 			</div>
 		</div>
 <!-- Sidebar -->
-				
-		<div id="sidebar">
-			<div class="inner">
-			
-				<!-- Search -->
-				<section id="search" class="alt">
-					<form method="post" action="#">
-						<input type="text" name="query" id="query" placeholder="Search" />
-					</form>
-				</section>
-		
-		
-				<!-- Login & Mypage -->
-				<!-- id값=null인경우_로그인/회원가입 -->
-				<c:if test="${loginid == null }">
-					<nav id="menu">
-						<form action="loginMember" method="post">
-							<header class="major">
-								<h2>Login</h2>
-							</header>
-							
-							<ul style="margin-top : -10%;">
-								<li><input type="radio" id="pub" name="user" value="pub" checked="checked"><label for="pub">일반회원</label> &nbsp;&nbsp;&nbsp;
-									<input type="radio" id="hos" name="user" value="hos"><label for="hos">병원회원</label><br><br></li>
-								<li class="nobordertop">ID<input type="text" id="id" name="id" class="logininput"></li>
-								<li class="nobordertop">PASSWORD<input type="password" id="password" name="password" class="logininput"><br></li>
-								<li class="nobordertop"><button type="submit" class="button primary fit loginbtn">Login</button></li>
-								<li><a href="#" class="privacybtn privacybtnline">ID/비밀번호
-										찾기 </a><a href="joinForm" class="privacybtn">회원가입</a></li>
-							</ul>
-						</form>
-					</nav>
-				</c:if>
-				<!-- id값=null아닌경우_마이페이지 -->
-				<c:if test="${loginid !=null && !(loginid eq 'admin') && chk==1}">
-					<section>
-						<header class="major">
-							<h2>${loginid }님 환영합니다</h2>
-						</header>
-						<div class="box" style="margin-bottom: 1em">
-							<p class="reservationnoti">
-								<i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
-								예약내용이 &nbsp;&nbsp; <a href="#">?</a> 건 있습니다.
-							</p>
-						</div>
-						<ul class="contact">
-							<li class="icon solid fas fa-address-book mypageacess"><a
-								href="#">마이페이지</a></li>
-							<li
-								class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
-								href="#">관심병원</a></li>
-							<li class="icon solid far fa-calendar-alt mypageacess"><a
-								href="#">예약내역</a></li>
-							<li class="icon solid fas fa-clipboard-list mypageacess"><a
-								href="#">진료기록</a></li>
-						</ul>
-						<a href="logout" class="button primary fit koreanfont">로그아웃</a>
-					</section>
-				</c:if>
-				<c:if test="${loginid !=null && !(loginid eq 'admin') && chk==2}">
-					<section>
-						<header class="major">
-							<h2>${loginid }님 환영합니다</h2>
-						</header>
-						<div class="box" style="margin-bottom: 1em">
-							<p class="reservationnoti">
-								<i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
-								예약내용이 &nbsp;&nbsp; <a href="#">?</a> 건 있습니다.
-							</p>
-						</div>
-						<ul class="contact">
-							<li class="icon solid fas fa-address-book mypageacess"><a
-								href="#">마이페이지</a></li>
-							<li
-								class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
-								href="#">여기 뭐써야했지</a></li>
-							<li class="icon solid far fa-calendar-alt mypageacess"><a
-								href="#">예약내역</a></li>
-							<li class="icon solid fas fa-clipboard-list mypageacess"><a
-								href="#">진료기록</a></li>
-						</ul>
-						<a href="logout" class="button primary fit koreanfont">로그아웃</a>
-					</section>
-				</c:if>
-				<c:if test="${loginid == 'admin'}">
-					<section>
-						<header class="major">
-							<h2>관리자 계정</h2>
-						</header>
-						<div class="box" style="margin-bottom: 1em">
-							<p class="reservationnoti">
-								<i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;관리자 요청 게시글이
-								 &nbsp;&nbsp; <a href="#">?</a> 건 있습니다.
-							</p>
-						</div>
-						<ul class="contact">
-							<li
-								class="icon solid far fa-clipboard-list mypageacess"><a
-								href="hospitalcontrol">병원 관리</a></li>
-							<li class="icon solid far fa-clipboard-list mypagelisecond-child mypageacess"><a
-								href="usercontrol">회원 관리</a></li>
-							<li class="icon solid fas fa-folder-open mypageacess"><a
-								href="#">요청 게시판</a></li>
-						</ul>
-						<a href="logout" class="button primary fit koreanfont">로그아웃</a>
-					</section>
-				</c:if>
-				<c:if test="${loginid != 'admin'}">
-					<!-- Section2_Contact -->
-					<section>
-						<header class="major">
-							<h2>Contact</h2>
-			
-						</header>
-						<p>
-							제휴 관련하여 문의 사항이 있는 병원에서는 연락주세요 &nbsp;&nbsp;<a href="hs_signup.do">지금바로 요청,
-								Click Here!</a>
-						</p>
-						<ul class="contact">
-							<li class="icon solid fa-envelope"><a href="#">information@untitled.tld</a></li>
-							<li class="icon solid fa-phone">(000) 000-0000</li>
-							<li class="icon solid fa-home">1234 Somewhere Road #8254<br />
-								Seoul, TN 00000-0000
-							</li>
-						</ul>
-					</section>
-			
-					<!-- Footer -->
-					<footer id="footer">
-						<p class="copyright">
-							&copy; MY DOCTOR. All rights reserved. Demo Images: <a
-								href="https://unsplash.com">Unsplash</a>. Design: <a
-								href="https://html5up.net">HTML5 UP</a>.
-						</p>
-					</footer>
-				</c:if>
-			</div>
+		<jsp:include page="../header/footer.jsp"></jsp:include>
 			
 		</div>
 	</div> 
