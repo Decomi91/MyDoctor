@@ -2,7 +2,7 @@ package com.project.mydoctor.model;
 
 import java.sql.Date;
 
-public class Review {
+public class Review { 
 private String id;
 private String password;
 private String hospital;
