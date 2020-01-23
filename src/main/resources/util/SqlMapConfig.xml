@@ -7,12 +7,16 @@
 		<typeAlias type="com.project.mydoctor.model.Member" alias="member"/>
 		<typeAlias type="com.project.mydoctor.model.Hospital" alias="hospital"/>
 		<typeAlias type="com.project.mydoctor.model.AdminBoard" alias="adminboard"/>
+		<typeAlias type="com.project.mydoctor.model.Qna" alias="qna"/>
+		<typeAlias type="com.project.mydoctor.model.Review" alias="review"/>
 	</typeAliases>
 	
 	<mappers>
 		<mapper resource="sql/member.xml"/>
 		<mapper resource="sql/hospital.xml"/>
 		<mapper resource="sql/adminBoard.xml"/>
+		<mapper resource="sql/qnaBoard.xml"/>
+		<mapper resource="sql/review.xml"/>
 	</mappers>
 </configuration>
 

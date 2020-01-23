@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.project.mydoctor.dao.AdminBoardDAO;
 import com.project.mydoctor.model.AdminBoard;
+import com.project.mydoctor.model.Board;
 
 @Service
 public class BoardServiceImpl implements BoardService {
@@ -22,5 +23,6 @@ public class BoardServiceImpl implements BoardService {
 	public List<AdminBoard> getAdminRequestList(int pages) {
 		return abDAO.getboardlist(pages);
 	}
+
 
 }

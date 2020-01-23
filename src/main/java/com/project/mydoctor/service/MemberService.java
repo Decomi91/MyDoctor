@@ -26,4 +26,13 @@ boolean passck(String id, String password);
 Member my_info(String id);
 
 int update(Member member);
+//////////////////////////////////////////
+Member select(String memberId);
+
+
+
+//////////////////////////////////jisu_0122//////////////
+int updatePass(String newPassword, String id);
+
+int removeaccount(String id);
 }

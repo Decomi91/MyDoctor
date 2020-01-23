@@ -250,8 +250,7 @@ padding:4%; width:100% }
 #myInfo, #myPassword{background-color:#f5f6f7;}
 .mypageContent_mod{padding-top:0 !important}
 .accordion {
- 
-  margin: 3rem auto;
+margin: 3rem auto;
   width: 100%;
   font-family: 'Lato', sans-serif !important;
   background: #f4f4f4;

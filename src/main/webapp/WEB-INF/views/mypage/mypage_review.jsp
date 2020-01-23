@@ -5,7 +5,7 @@
 
 <html>
 <head> 
-<title>My Doctor_Mypage기본틀</title>
+<title>My Doctor_Mypage_내가쓴 후기</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -36,54 +36,53 @@
 					<!-- 내가쓴 후기 시작 -->
 				<div class="mypageContent">
 				<h2 class="mod">내가 쓴 후기</h2>
-				<div class="accordion">
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">병원이름(방문날짜)</h3>
+			
+				<c:if test="${listcount>0 }">
+					<div class="accordion">	
+					<c:forEach var="r" items="${myreviewlist}">
+			<div class="accordion__item">
+    <h3 class="accordion__title js-title">${r.hospital }&nbsp;${r.visited }</h3>
     <div class="accordion__copy accordion__copy--open js-copy">
-   <div><strong>스케일링 하나도 안아픈 병원은 처음이에요.</strong><br>
-    상담원분들도 친절하고 과잉진료도 없어서 매우 만족스러웠습니다.
-    치과 정착 못하고 있었는데 앞으로 치과갈일 있으면 여기만 가려구요.
-    추천합니다.</div>
+   <div><strong>${r.subject }</strong><br>
+  ${r.content }</div>
     <div><hr>
-    <i class="fas fa-share fa-flip-vertical"></i> 후기 감사 드립니다. 진료가 만족스러우셨다니 다행입니다. 앞으로도 편안한 진료와
-    친절한 서비스로 환자분의 불편함을 치료해드리는 땡땡치과 되겠습니다. 편안한 하루 되세요.
+    <i class="fas fa-share fa-flip-vertical"></i> ${r.reply }
     </div>
     </div>
-   
+    </div>
+   </c:forEach>
   </div>
   
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">후기2</h3>
-    <div class="accordion__copy js-copy">By not having the imagination to imagine what the content "might" be, a design consideration is lost. Meaning becomes obfuscated because "it's just text", understandability gets compromised because nobody realized that this</div>
-  </div>
   
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">후기3</h3>
-    <div class="accordion__copy js-copy">By not having the imagination to imagine what the content "might" be, a design consideration is lost. Meaning becomes obfuscated because "it's just text", understandability gets compromised because nobody realized that this</div>
-  </div>
-  
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">후기4</h3>
-    <div class="accordion__copy js-copy">By not having the imagination to imagine what the content "might" be, a design consideration is lost. Meaning becomes obfuscated because "it's just text", understandability gets compromised because nobody realized that this</div>
-  </div>
-  
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">후기5</h3>
-    <div class="accordion__copy js-copy">By not having the imagination to imagine what the content "might" be, a design consideration is lost. Meaning becomes obfuscated because "it's just text", understandability gets compromised because nobody realized that this</div>
-  </div>
-</div>
+
 				
 				
 				<!-- 내가쓴 후기 끝 -->
 				<ul class="pagination">
-														<li><span class="button disabled">Prev</span></li>
-														<li><a href="#" class="page active">1</a></li>
-														<li><a href="#" class="page">2</a></li>
-														<li><a href="#" class="page">3</a></li>
-														<li><a href="#" class="page">4</a></li>
-														<li><a href="#" class="page">5</a></li>
-														<li><a href="#" class="button">Next</a></li>
+				<c:if test="${page<=1}">
+														<li><a href="#" class="button">Prev</a></li></c:if>
+														<c:if test="${page>1}">
+														<li><a href="myreview.net?page=${page-1 }" class="page">Prev</a></li>
+														</c:if>
+														<c:forEach var="a" begin="${startpage }" end="${endpage}">
+														<c:if test="${a==page}">
+														<li><a href="#" class="page">${a}</a></li></c:if>
+														<c:if test="${a!=page}">
+														<li><a href="myreview.net?page=${a }" class="page">${a}</a></li>
+														</c:if>
+														</c:forEach>
+														<c:if test="${page>=maxpage}">
+														<li><a href="#" class="page">Next</a></li></c:if>
+														<c:if test="${page<maxpage}">
+														<li><a href="myreview.net?page=${page+1 }" class="page">Next</a></li>
+														</c:if>
 													</ul>
+													
+													</c:if>
+													
+					<c:if test="${listcount==0 }">	
+					<font size=5>등록된 글이 없습니다.</font>	
+					</c:if>						
 													</div>
 					</div>
 					
@@ -107,9 +106,7 @@
 <script>
 var $title = $('.js-title');
 var copy   = '.js-copy';
-
-
-
+$title.next(copy).hide();
 $title.click(function () {
   $(this).next(copy).slideToggle();
   $(this).parent().siblings().children().next().slideUp();
