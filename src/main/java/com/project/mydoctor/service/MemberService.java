@@ -13,26 +13,22 @@ public interface MemberService {
 
 	int isHosId(Member member);
 
-	
 	int getlistCount();
 
 	List<Member> getmemList(int pages);
 
 	String idcheck(String id, String pub);
-////////////////////////////////jisu//////////////////////
-boolean passck(String id, String password);
-
-
-Member my_info(String id);
-
-int update(Member member);
-//////////////////////////////////////////
-Member select(String memberId);
-
-
-
-//////////////////////////////////jisu_0122//////////////
-int updatePass(String newPassword, String id);
-
-int removeaccount(String id);
+	//////////////////////////////////////////
+	Member select(String memberId);
+	////////////////////////////////jisu//////////////////////
+	boolean passck(String id, String password);
+	
+	Member my_info(String id);
+	
+	int update(Member member);
+	
+	//////////////////////////////////jisu_0122//////////////
+	int updatePass(String newPassword, String id);
+	
+	int removeaccount(String id);
 }

@@ -31,8 +31,6 @@ public class MemberServiceImpl implements MemberService {
 	public int isHosId(Member member) {
 		return mDao.isHosId(member);
 	}
-
-	
 	
 	public int getlistCount() {
 		return mDao.getlistcount();
@@ -51,56 +49,54 @@ public class MemberServiceImpl implements MemberService {
 			return mDao.idcheckpub(id);
 		}
 	}
-//////////////////////jisu/////////////////
-@Override
-public boolean passck(String id, String password) {
-Map<String,Object> map=new HashMap<String, Object>();
-map.put("id", id);
-map.put("password", password);
-Member result=mDao.passck(map);
-if(result==null)
-return false;
-else 
-return true;
-
-}
-
-@Override
-public Member my_info(String id) {
-// TODO Auto-generated method stub
-return mDao.my_info(id);
-}
-
-@Override
-public int update(Member member) {
-// TODO Auto-generated method stub
-return mDao.update(member);
-}
-////////////////////////////
-@Override
-public Member select(String memberId) {
+	//////////////////////jisu/////////////////
+	@Override
+	public boolean passck(String id, String password) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("password", password);
+		Member result=mDao.passck(map);
+		if(result==null)
+			return false;
+		else 
+			return true;
+	}
+	
+	@Override
+	public Member my_info(String id) {
 	// TODO Auto-generated method stub
-	return null;
-}
-
-
-////////////////////jisu_0122//////////////////
-@Override
-public int updatePass(String newPassword, String id) {
-	Map<String,Object> map=new HashMap<String, Object>();
-	map.put("id", id);
-	map.put("password", newPassword);
-	System.out.println("»õºñ¹Ð¹øÈ£: "+newPassword);
-	int result=mDao.updatePass(map);
-	return result;
-
-}
-
-@Override
-public int removeaccount(String id) {
+	return mDao.my_info(id);
+	}
+	
+	@Override
+	public int update(Member member) {
 	// TODO Auto-generated method stub
-	return mDao.removeaccount(id);
-}
+	return mDao.update(member);
+	}
+	////////////////////////////
+	@Override
+	public Member select(String id) {
+		return mDao.select(id);
+	}
+	
+	
+	////////////////////jisu_0122//////////////////
+	@Override
+	public int updatePass(String newPassword, String id) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("id", id);
+		map.put("password", newPassword);
+		System.out.println("ï¿½ï¿½ï¿½ï¿½Ð¹ï¿½È£: "+newPassword);
+		int result=mDao.updatePass(map);
+		return result;
+	
+	}
+	
+	@Override
+	public int removeaccount(String id) {
+		// TODO Auto-generated method stub
+		return mDao.removeaccount(id);
+	}
 
 }
 

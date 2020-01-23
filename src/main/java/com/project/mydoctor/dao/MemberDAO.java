@@ -1,6 +1,4 @@
-
 package com.project.mydoctor.dao;
-
 
 import java.util.Map;
 import java.util.List;
@@ -29,7 +27,6 @@ public class MemberDAO {
 		return sqlSession.selectOne("Hospitals.isId", member);
 	}
 
-
 	public int getlistcount() {
 		return sqlSession.selectOne("Members.getlistcount");
 	}
@@ -39,11 +36,11 @@ public class MemberDAO {
 	}
 
 	public String idcheckpub(String id) {
-		return sqlSession.selectOne("Hospitals.idcheck", id);
+		return sqlSession.selectOne("Members.idcheck", id);
 	}
 
 	public String idcheckhos(String id) {
-		return sqlSession.selectOne("Members.idcheck", id);
+		return sqlSession.selectOne("Hospitals.idcheck", id);
 
 	}
 ///////////////////jisu///////////////////////////
@@ -75,5 +72,10 @@ public int removeaccount(String id) {
 	// TODO Auto-generated method stub
 	return sqlSession.update("Members.removeaccount", id);
 }
+
+	/* 유리씨 */
+	public Member select(String id) {
+		return sqlSession.selectOne("Members.select", id);
+	}
 }
 

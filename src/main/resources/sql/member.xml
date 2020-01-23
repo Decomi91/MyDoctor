@@ -47,4 +47,8 @@ update members set password=#{password} where id=#{id}
  	<update id="removeaccount" parameterType="String">
  	update members set userkey=0 where id=#{id}
  	</update>
+ 	<select id = "select" parameterType = "String" resultType = "member">
+ 		select * from members
+ 		where id = #{id}
+ 	</select>
  </mapper>
