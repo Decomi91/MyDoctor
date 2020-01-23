@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>Insert title here</title>
+<title></title>
 <style>
 table {
     border-collapse: collapse;
@@ -175,7 +175,7 @@ a.talkShort{color: black !important;}
 <body>
 <div class="section qnaV15" id="detail04">
 	<div class="sorting">
-		<h2>Q&amp;A </h2>
+		<h2> Q&amp;A </h2>
 		<div class="option">
 			<a href="" onclick="return false;" id="inquiryBtn" class="btn btnS2 btnRed">문의하기</a>
 		</div>
@@ -186,7 +186,7 @@ a.talkShort{color: black !important;}
 		<input type="hidden" name="hosId" value="병원번호?">
 		
 		<fieldset>
-		<legend>병원 문의 입력 폼</legend>
+		<legend>병원 문의사항 입력 폼</legend>
 			<div class="sorting">
 				<h3><strong>병원문의</strong></h3>
 				<div class="option">

@@ -2,6 +2,7 @@ package com.project.mydoctor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -15,13 +16,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mydoctor.model.Member;
+import com.project.mydoctor.model.Review;
 import com.project.mydoctor.service.MemberService;
+import com.project.mydoctor.service.ReviewService;
 
 @Controller
 public class MypageController {
 	@Autowired
 	private MemberService memberService;
-	
+	@Autowired
+	private ReviewService reviewService;
 	
 	//새로 입력받은 비밀번호로 비밀번호 update합니다.
 			@RequestMapping(value="/pwmodify.do")	
@@ -142,8 +146,29 @@ public class MypageController {
 				out.close();
 			}
 		}
-		
+	//jisu_0123_myreview_내가쓴 후기 불러옵니다.	
 	@RequestMapping(value="/myreview.net")
+	public ModelAndView gomyreview(
+			@RequestParam(value="page", defaultValue="1", required=false) int page,
+			ModelAndView mv, HttpSession session)throws Exception{
+		String id=(String)session.getAttribute("loginid");
+		int limit=5;
+		int listcount=reviewService.getListCount(id);
+		int maxpage=(listcount+limit-1)/limit;
+		int startpage=((page-1)/10)*10+1;
+		int endpage=startpage+5-1;
+	if(endpage>maxpage) endpage=maxpage;
+	List<Review> reviewlist=reviewService.getMyReviewList(page, limit, id);
+	mv.setViewName("mypage/mypage_review");
+	mv.addObject("maxpage",maxpage);
+	mv.addObject("startpage",startpage);
+	mv.addObject("endpage", endpage);
+	mv.addObject("listcount", listcount);
+	mv.addObject("myreviewlist", reviewlist);
+mv.addObject("limit", limit);
+		return mv;
+	}
+	//@RequestMapping(value="/myreview.net")
 	public String gomyreview() {
 
 		return "mypage/mypage_review";
