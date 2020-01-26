@@ -14,4 +14,6 @@ public interface HospitalService {
 	public List<Hospital> getHosListTest();
 
 	public Hospital getDetail(String id);
+
+	public Hospital getDetail2(String yki);
 }

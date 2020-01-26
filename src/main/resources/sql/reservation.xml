@@ -35,7 +35,9 @@
 		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
-	<select id = "reserveCount" parameterType = "String" resultType = "map">
+
+	
+	<!-- <select id = "reserveCount" parameterType = "String" resultType = "map">
 		select 
 				(select count(*) from reservation where acceptance = -2) as cancel,
 				(select count(*) from reservation where acceptance = -1) as noaccept,
@@ -45,9 +47,16 @@
 		from reservation
 		where id = #{memberId}
 		group by id
+	</select> -->
+	
+	<select id = "yesAccept" parameterType = "String" resultType = "int">
+		select (select count(*) from reservation where acceptance = 1) as yesaccept
+		from reservation
+		where id = #{memberId}
+		group by id
 	</select>
 	
-	<select id="getListCount" resultType = "int">
+	<select id="getListCount" parameterType = "String" resultType = "int">
 		select count(*) from reservation
 		where id = #{memberId}
 	</select>
@@ -60,6 +69,28 @@
 	<update id = "cancel" parameterType = "int">
 		update reservation
 		set acceptance = -2
+		where reserveNo = #{reserveNo}
+	</update>
+	
+	
+	<!-- 병원측 -->
+	<select id = "hosGetReserveList" parameterType = "map" resultType = "reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance, moreRes
+						from
+						(select * from reservation order by reserveTime desc, reserveNo asc))
+		where hosId = #{hosId} and acceptance = 0
+			and rnum &gt;= #{start} and rnum &lt;= #{end}	
+	</select>
+	
+	<select id="hosGetListCount" parameterType = "String" resultType = "int">
+		select count(*) from reservation
+		where hosId = #{hosId}
+	</select>
+	
+	<update id = "reserveOk" parameterType = "int">
+		update reservation
+		set acceptance = 1
 		where reserveNo = #{reserveNo}
 	</update>
 </mapper>

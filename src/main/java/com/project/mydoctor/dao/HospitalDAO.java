@@ -33,6 +33,10 @@ public class HospitalDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Hospitals.getdetail", id);
 	}
+
+	public Hospital getDetail2(String yki) {
+		return sqlSession.selectOne("Hospitals.getdetail2", yki);
+	}
 	
 	
 

@@ -20,11 +20,19 @@ public class MypageDAO {
 		return sqlSession.selectList("Reservations.select", map);
 	}
 
-	public List<Map<String, Integer>> reserveCount(String memberId) {
-		return sqlSession.selectList("Reservations.reserveCount", memberId);
+	public int yesAccept(String memberId) {
+		return sqlSession.selectOne("Reservations.yesAccept", memberId);
 	}
 
 	public int getListCount(String memberId) {
 		return sqlSession.selectOne("Reservations.getListCount", memberId);
+	}
+
+	public List<Reservation> hosGetReserveList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Reservations.hosGetReserveList", map);
+	}
+
+	public int hosGetListCount(String hosId) {
+		return sqlSession.selectOne("Reservations.hosGetListCount", hosId);
 	}
 }

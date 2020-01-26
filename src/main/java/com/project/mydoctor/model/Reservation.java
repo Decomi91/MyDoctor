@@ -1,7 +1,5 @@
 package com.project.mydoctor.model;
 
-import java.sql.Date;
-
 public class Reservation {
 	private int reserveNo;
 	private String id;	// 환자 아이디
@@ -9,7 +7,7 @@ public class Reservation {
 	private String hosid;
 	private String hosname;
 	private String disease;
-	private Date reserveTime;
+	private String reserveTime;
 	private int acceptance;	// 거절할 경우 -1, 대기중일 경우 0, 승낙할 경우 1, 진료완료 2
 	private int moreRes; // 추가 예약 없을 경우 0, 있을 경우 1
 
@@ -61,11 +59,11 @@ public class Reservation {
 		this.disease = disease;
 	}
 
-	public Date getReserveTime() {
+	public String getReserveTime() {
 		return reserveTime;
 	}
 
-	public void setReserveTime(Date reserveTime) {
+	public void setReserveTime(String reserveTime) {
 		this.reserveTime = reserveTime;
 	}
 
