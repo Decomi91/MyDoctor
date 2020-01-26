@@ -9,7 +9,7 @@ public interface MypageService {
 
 	List<Reservation> select(String memberId, int page, int limit);
 
-	List<Map<String, Integer>> reserveCount(String loginId);
+	int reserveCount(String loginId);
 
 	int getListCount(String memberId);
 

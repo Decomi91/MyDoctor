@@ -30,7 +30,7 @@ public class MypageServiceImpl implements MypageService {
 	}
 
 	@Override
-	public List<Map<String, Integer>> reserveCount(String memberId) {
+	public int reserveCount(String memberId) {
 		return mDAO.reserveCount(memberId);
 	}
 

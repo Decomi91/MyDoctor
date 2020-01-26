@@ -215,7 +215,7 @@ public class MypageController {
 		}
 
 		List<Reservation> rv = mypageService.select(memberId, page, limit);
-		List<Map<String, Integer>> rvCount = mypageService.reserveCount(memberId);
+		int rvCount = mypageService.reserveCount(memberId);
 
 		mv.setViewName("mypage/reservation");
 		mv.addObject("rv", rv);
@@ -253,7 +253,7 @@ public class MypageController {
 		}
 		
 		List<Reservation> rv = mypageService.select(memberId, page, limit);
-		List<Map<String, Integer>> rvCount = mypageService.reserveCount(memberId);
+		int rvCount = mypageService.reserveCount(memberId);
 		
 		mv.setViewName("mypage/mypage");
 		mv.addObject("rv", rv);

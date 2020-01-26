@@ -87,14 +87,8 @@ public class MemberController {
 			if(member.getId().equals("admin")) {
 				mv.setViewName("redirect:/hospitalcontrol");
 			}else {
-				List<Map<String, Integer>> rvCount = mypageService.reserveCount(member.getId());
-				Map<String, Integer> map = rvCount.get(0);
-				System.out.println(map.keySet());
-				Object yesaccept = map.get("YESACCEPT");
-				System.out.println(yesaccept);
-				
 				mv.setViewName("redirect:/main");
-				session.setAttribute("yesaccept", yesaccept);
+				session.setAttribute("yesaccept", mypageService.reserveCount(member.getId()));
 			}
 		}else {
 			PrintWriter out = response.getWriter();

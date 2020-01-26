@@ -35,16 +35,10 @@
 		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
-	<select id = "reserveCount" parameterType = "String" resultType = "map">
-		select 
-				(select count(*) from reservation where acceptance = -2) as cancel,
-				(select count(*) from reservation where acceptance = -1) as noaccept,
-				(select count(*) from reservation where acceptance = 0) as waitaccept,
-				(select count(*) from reservation where acceptance = 1) as yesaccept,
-				(select count(*) from reservation where acceptance = 2) as finish
+	<select id = "reserveCount" parameterType = "String" resultType = "int">
+		select count(*)
 		from reservation
 		where id = #{memberId}
-		group by id
 	</select>
 	
 	<select id="getListCount" resultType = "int">

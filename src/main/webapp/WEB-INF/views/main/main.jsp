@@ -35,7 +35,7 @@ $(function() {
 			// 지도의 확대 레벨
 			};
 			// 지도를 표시할 div와  지도 옵션으로  지도를 생성합니다
-			var map = new kakao.maps.Map(mapContainer, mapOption);				
+			var map = new kakao.maps.Map(mapContainer, mapOption);
 			hs(lon, lat);
 			
 			
@@ -64,19 +64,14 @@ $(function() {
 								var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
 								var imageSize = new kakao.maps.Size(24, 35); 
 								var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-								
 							
-								
-								
-								
 								function custonSort(a, b) {
-			                    	  if(Number(a.distance) == Number(b.distance)){ return 0} 
-			                    	  return  Number(a.distance) > Number(b.distance) ? 1 : -1;}
-			                    	item.sort(custonSort);
-								
-								
-							
-								
+									if(Number(a.distance) == Number(b.distance)){ 
+										return 0
+									} 
+			                    	return  Number(a.distance) > Number(b.distance) ? 1 : -1;
+			                    }
+		                    	item.sort(custonSort);
 								 
 								 var out ="";
 								$.each(item,function(index,items){		
