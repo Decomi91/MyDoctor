@@ -5,6 +5,8 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -24,6 +26,7 @@ import com.project.mydoctor.model.Hospital;
 import com.project.mydoctor.model.Member;
 import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
+import com.project.mydoctor.service.MypageService;
 
 @Controller
 public class MemberController {
@@ -33,13 +36,18 @@ public class MemberController {
 	@Autowired
 	private HospitalService hospitalService;
 	
+	@Autowired
+	private MypageService mypageService;
+	
 	@GetMapping(value="/joinForm")
 	public ModelAndView joinForm(ModelAndView mv) {
 		mv.setViewName("member/joinForm");
 		return mv;
 	}
+	
 	@PostMapping(value="/join")
-	public ModelAndView joinProcess(Member member, ModelAndView mv, HttpServletResponse response, HttpSession session) throws Exception {
+	public ModelAndView joinProcess(Member member, ModelAndView mv, HttpServletResponse response, HttpSession session) 
+			throws Exception {
 		int result = memberService.insertMember(member);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -58,10 +66,12 @@ public class MemberController {
 	}
 	
 	@PostMapping(value="/loginMember")
-	public ModelAndView loginMember(Member member, String user, ModelAndView mv, HttpSession session, HttpServletResponse response) throws Exception {
+	public ModelAndView loginMember(Member member, String user, ModelAndView mv, 
+			HttpSession session, HttpServletResponse response) throws Exception {
 		int result = 0;
 		int chk = 0;
 		response.setContentType("text/html;charset=utf-8");
+		
 		if(user.equals("pub")) {
 			result = memberService.isId(member);
 			chk=1;
@@ -69,13 +79,22 @@ public class MemberController {
 			result = memberService.isHosId(member);
 			chk=2;
 		}
+		
 		if(result == 1) {
 			session.setAttribute("loginid", member.getId());
 			session.setAttribute("chk", chk);
+			
 			if(member.getId().equals("admin")) {
 				mv.setViewName("redirect:/hospitalcontrol");
 			}else {
+				List<Map<String, Integer>> rvCount = mypageService.reserveCount(member.getId());
+				Map<String, Integer> map = rvCount.get(0);
+				System.out.println(map.keySet());
+				Object yesaccept = map.get("YESACCEPT");
+				System.out.println(yesaccept);
+				
 				mv.setViewName("redirect:/main");
+				session.setAttribute("yesaccept", yesaccept);
 			}
 		}else {
 			PrintWriter out = response.getWriter();

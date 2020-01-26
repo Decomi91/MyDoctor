@@ -1,62 +1,94 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>마이페이지 - 진료기록</title>
-<style>
-#chart {
-	border-collapse: collapse;
-	width: 80%;
-	text-align: center;
-}
-</style>
+<title>마이페이지 - 진료 기록</title>
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="resources/css/main.css" />
+<link rel="stylesheet" href="resources/css/menuStyles.css" />
+
 </head>
-<body>
-	<div>
-		<div>
-			<img src = "resources/image/pp.jpg" width = "40px">
-			<span>병원 예약 내용이 ?건 있습니다.</span>
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo"><strong>My Doctor</strong> by
+						team.5</a>
+
+				</header>
+
+				<!-- Banner: body -->
+				<section id="banner">
+					<div class="content">
+						<jsp:include page="mypage_menu.jsp"></jsp:include>
+						<div class="mypageContent">
+
+							<!-- Reservation -->
+							<div>
+								<nav>
+									<span class="noLink">Chart</span>
+								</nav>
+
+								<div class="table-wrapper">
+									<table class="mypagetable charttable">
+										<thead>
+											<tr>
+												<th width=30%>내원 시간</th>
+												<th width=25%>병원</th>
+												<th width=25%>진료기록</th>
+											</tr>
+										</thead>
+
+										<tbody>
+											<tr>
+												<td>2010.01.10 16:00</td>
+												<td>안보여 안과</td>
+												<td><a href="#">진료 기록 확인&nbsp;<i
+														class="fas fa-angle-right"></i></a></td>
+											</tr>
+
+											<tr>
+												<td>2010.01.05 10:20</td>
+												<td>토마토 치과</td>
+												<td><a href="#">진료 기록 확인&nbsp;<i
+														class="fas fa-angle-right"></i></a></td>
+											</tr>
+										</tbody>
+									</table>
+								</div>
+							</div>
+							<!-- Reservation end -->
+						</div>
+					</div>
+				</section>
+
+
+
+			</div>
 		</div>
-		<div>
-			<div><button onclick = "location.href = 'reserve.net'">예약 확인</button></div>
-			<div><button onclick = "location.href = 'record.net'">진료 기록</button></div>
-			<div><button>관심병원</button></div>
-			<div><button>나의 정보 수정</button></div>
-			<div><button>내가 쓴 후기</button></div>
-			<div><button>문의 / 요청</button></div>
-			<div><button>회원 탈퇴</button></div>
-		</div>
+
+		<jsp:include page="../header/footer.jsp"></jsp:include>
+
 	</div>
-	
-	<!-- Chart -->
-	<div>
-		<h1>Chart</h1>
-		<table id = chart border = 1>
-			<thead>
-				<tr>
-					<th>내원 시간</th>
-					<th>병원명</th>
-					<th>진료 기록</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<tr>
-					<td>2010.01.10 16:00</td>
-					<td>안보여안과</td>
-					<td><button onClick = "location.href = 'chart.net'">확인</button></td>
-				</tr>
-				
-				<tr>
-					<td>2010.01.05 10:20</td>
-					<td>땡땡병원</td>
-					<td><button onClick = "location.href = 'chart.net'">확인</button></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<!-- Chart end -->
+
+	<!-- Scripts -->
+	<script src="resources/js/jquery.min.js"></script>
+	<script src="resources/js/browser.min.js"></script>
+	<script src="resources/js/breakpoints.min.js"></script>
+	<script src="resources/js/util.js"></script>
+	<script src="resources/js/main.js"></script>
+	<script>
+		
+	</script>
 </body>
 </html>

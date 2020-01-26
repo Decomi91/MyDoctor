@@ -17,4 +17,14 @@ public class ReserveServiceImpl implements ReserveService {
 	public int insert(Map<String, Object> map) {
 		return rDAO.insert(map);
 	}
+	
+	@Override
+	public Reservation getReserveDetail(int reserveNo) {
+		return rDAO.getReserveDetail(reserveNo);
+	}
+
+	@Override
+	public int cancel(int reserveNo) {
+		return rDAO.cancel(reserveNo);
+	}
 }

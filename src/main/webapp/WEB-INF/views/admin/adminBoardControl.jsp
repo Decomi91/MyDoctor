@@ -107,61 +107,8 @@
 					</section>
 				</div>
 			</div>
-			<!-- Sidebar -->
-				
-		<div id="sidebar">
-			<div class="inner">
-			
-				<!-- Search -->
-				<section id="search" class="alt">
-					<form method="post" action="#">
-						<input type="text" name="query" id="query" placeholder="Search" />
-					</form>
-				</section>
-		
-		
-				<!-- Login & Mypage -->
-				<!-- id 값이 admin이 아닐 경우 -->
-				<c:if test="${loginid != 'admin'}">
-					<script>
-						location.replace('main');
-					</script>
-				</c:if>
-				<c:if test="${loginid == 'admin'}">
-					<section>
-						<header class="major">
-							<h2>관리자 계정</h2>
-						</header>
-						<div class="box" style="margin-bottom: 1em">
-							<p class="reservationnoti">
-								<i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;관리자 요청 게시글이
-								 &nbsp;&nbsp; <a href="#">?</a> 건 있습니다.
-							</p>
-						</div>
-						<ul class="contact">
-							<li
-								class="icon solid far fa-clipboard-list mypageacess"><a
-								href="hospitalcontrol">병원 관리</a></li>
-							<li class="icon solid far fa-clipboard-list mypagelisecond-child mypageacess"><a
-								href="usercontrol">회원 관리</a></li>
-							<li class="icon solid fas fa-folder-open mypageacess"><a
-								href="requestToAdmin">요청 게시판</a></li>
-						</ul>
-						<a href="logout" class="button primary fit koreanfont">로그아웃</a>
-					</section>
-				</c:if>
-			
-				<!-- Footer -->
-				<footer id="footer">
-					<p class="copyright">
-						&copy; MY DOCTOR. All rights reserved. Demo Images: <a
-							href="https://unsplash.com">Unsplash</a>. Design: <a
-							href="https://html5up.net">HTML5 UP</a>.
-					</p>
-				</footer>
-			</div>
-			
-		</div>
+			<!-- Sidebar -->	
+			<jsp:include page="../header/footer.jsp"></jsp:include>
 		</div>
 		
 		<script src="resources/js/jquery.min.js"></script>

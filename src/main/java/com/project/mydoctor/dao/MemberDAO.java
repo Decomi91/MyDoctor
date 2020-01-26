@@ -43,35 +43,29 @@ public class MemberDAO {
 		return sqlSession.selectOne("Hospitals.idcheck", id);
 
 	}
-///////////////////jisu///////////////////////////
-
-public Member passck(Map<String, Object> map) {
-// TODO Auto-generated method stub
-return sqlSession.selectOne("Members.passck",map);
-}
-
-
-public Member my_info(String id) {
-// TODO Auto-generated method stub
-return sqlSession.selectOne("Members.myinfo", id);
-}
-
-public int update(Member member) {
-// TODO Auto-generated method stub
-return  sqlSession.update("Members.update", member);
-}
-///////////////////////jisu_0122//////////////////
-public int updatePass(Map<String, Object> map) {
-	// TODO Auto-generated method stub
+	///////////////////jisu///////////////////////////
 	
-	return  sqlSession.update("Members.updatePass", map);
+	public Member passck(Map<String, Object> map) {
+		return sqlSession.selectOne("Members.passck",map);
+	}
 	
+	
+	public Member my_info(String id) {
+		return sqlSession.selectOne("Members.myinfo", id);
+	}
+	
+	public int update(Member member) {
+		return  sqlSession.update("Members.update", member);
+	}
+	
+	///////////////////////jisu_0122//////////////////
+	public int updatePass(Map<String, Object> map) {
+		return  sqlSession.update("Members.updatePass", map);
 	}
 
-public int removeaccount(String id) {
-	// TODO Auto-generated method stub
-	return sqlSession.update("Members.removeaccount", id);
-}
+	public int removeaccount(String id) {
+		return sqlSession.update("Members.removeaccount", id);
+	}
 
 	/* 유리씨 */
 	public Member select(String id) {

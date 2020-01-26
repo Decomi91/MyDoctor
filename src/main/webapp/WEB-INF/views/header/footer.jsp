@@ -1,5 +1,5 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!-- Sidebar -->
 
@@ -16,7 +16,7 @@
       
       
             <!-- Login & Mypage -->
-            <!-- id��=null�ΰ��_�α���/ȸ������ -->
+            <!-- id값=null인경우_로그인/회원가입 -->
             <c:if test="${loginid == null }">
                <nav id="menu">
                   <form action="loginMember" method="post">
@@ -25,89 +25,92 @@
                      </header>
                      
                      <ul style="margin-top : -10%;">
-                        <li><input type="radio" id="pub" name="user" value="pub" checked="checked"><label for="pub">�Ϲ�ȸ��</label> &nbsp;&nbsp;&nbsp;
-                           <input type="radio" id="hos" name="user" value="hos"><label for="hos">����ȸ��</label><br><br></li>
+                        <li><input type="radio" id="pub" name="user" value="pub" checked="checked"><label for="pub">일반회원</label> &nbsp;&nbsp;&nbsp;
+                           <input type="radio" id="hos" name="user" value="hos"><label for="hos">병원회원</label><br><br></li>
                         <li class="nobordertop">ID<input type="text" id="id" name="id" class="logininput"></li>
                         <li class="nobordertop">PASSWORD<input type="password" id="password" name="password" class="logininput"><br></li>
                         <li class="nobordertop"><button type="submit" class="button primary fit loginbtn">Login</button></li>
-                        <li><a href="#" class="privacybtn privacybtnline">ID/��й�ȣ
-                              ã�� </a><a href="joinForm" class="privacybtn">ȸ������</a></li>
+                        <li><a href="#" class="privacybtn privacybtnline">ID/비밀번호
+                              찾기 </a><a href="joinForm" class="privacybtn">회원가입</a></li>
                      </ul>
                   </form>
                </nav>
             </c:if>
-            <!-- id��=null�ƴѰ��_���������� -->
+            <!-- id값=null아닌경우_마이페이지 -->
+            <!-- 일반회원으로 로그인했을 경우 -->
             <c:if test="${loginid !=null && !(loginid eq 'admin') && chk==1}">
                <section>
                   <header class="major">
-                     <h2>${loginid }�� ȯ���մϴ�</h2>
+                     <h2>${loginid }님 환영합니다</h2>
                   </header>
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
-                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;����
-                        ���೻���� &nbsp;&nbsp; <a href="#">?</a> �� �ֽ��ϴ�.
+                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
+								예약내용이 &nbsp;&nbsp; <a href="myreserve.net">${yesaccept }</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">
                      <li class="icon solid fas fa-address-book mypageacess"><a
-                        href="mypage.net">����������</a></li>
+                        href="mypage.net">마이페이지</a></li>
                      <li
                         class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
-                        href="#">���ɺ���</a></li>
+                        href="#">관심병원</a></li>
                      <li class="icon solid far fa-calendar-alt mypageacess"><a
-                        href="myreserve.net">���೻��</a></li>
+                        href="myreserve.net">예약내역</a></li>
                      <li class="icon solid fas fa-clipboard-list mypageacess"><a
-                        href="#">������</a></li>
+                        href="#">진료기록</a></li>
                   </ul>
-                  <a href="logout" class="button primary fit koreanfont">�α׾ƿ�</a>
+                  <a href="logout" class="button primary fit koreanfont">로그아웃</a>
                </section>
             </c:if>
+            <!-- 병원id로 로그인했을 경우 -->
             <c:if test="${loginid !=null && !(loginid eq 'admin') && chk==2}">
                <section>
                   <header class="major">
-                     <h2>${loginid }�� ȯ���մϴ�</h2>
+                     <h2>${loginid }님 환영합니다</h2>
                   </header>
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
-                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;����
-                        ���೻���� &nbsp;&nbsp; <a href="#">?</a> �� �ֽ��ϴ�.
+                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
+                        예약내용이 &nbsp;&nbsp; <a href="#">?</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">
                      <li class="icon solid fas fa-address-book mypageacess"><a
-                        href="#">����������</a></li>
+                        href="#">마이페이지</a></li>
                      <li
                         class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
-                        href="#">���� ���������</a></li>
+                        href="#">여기 뭐써야했지</a></li>
                      <li class="icon solid far fa-calendar-alt mypageacess"><a
-                        href="#">���೻��</a></li>
+                        href="#">예약내역</a></li>
                      <li class="icon solid fas fa-clipboard-list mypageacess"><a
-                        href="#">������</a></li>
+                        href="#">진료기록</a></li>
                   </ul>
-                  <a href="logout" class="button primary fit koreanfont">�α׾ƿ�</a>
+                  <a href="logout" class="button primary fit koreanfont">로그아웃</a>
                </section>
             </c:if>
+            <!-- 관리자일 경우 -->
             <c:if test="${loginid == 'admin'}">
                <section>
                   <header class="major">
-                     <h2>������ ����</h2>
+                     <h2>관리자 계정</h2>
                   </header>
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
-                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;������ ��û �Խñ���
-                         &nbsp;&nbsp; <a href="#">?</a> �� �ֽ��ϴ�.
+                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;관리자 요청 게시글이
+                         &nbsp;&nbsp; <a href="#">?</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">
                      <li
                         class="icon solid far fa-clipboard-list mypageacess"><a
-                        href="hospitalcontrol">���� ����</a></li>
+                        href="hospitalcontrol">병원 관리</a></li>
                      <li class="icon solid far fa-clipboard-list mypagelisecond-child mypageacess"><a
-                        href="usercontrol">ȸ�� ����</a></li>
+                        href="usercontrol">회원 관리</a></li>
                      <li class="icon solid fas fa-folder-open mypageacess"><a
-                        href="#">��û �Խ���</a></li>
+                        href="#">요청 게시판</a></li>
                   </ul>
-                  <a href="logout" class="button primary fit koreanfont">�α׾ƿ�</a>
+                  <a href="logout" class="button primary fit koreanfont">로그아웃</a>
                </section>
             </c:if>
             <c:if test="${loginid != 'admin'}">
@@ -118,7 +121,7 @@
          
                   </header>
                   <p>
-                     ���� �����Ͽ� ���� ������ �ִ� ���������� �����ּ��� &nbsp;&nbsp;<a href="hs_signup.do">���ݹٷ� ��û,
+                     제휴 관련하여 문의 사항이 있는 병원에서는 연락주세요 &nbsp;&nbsp;<a href="hs_signup.do">지금바로 요청,
                         Click Here!</a>
                   </p>
                   <ul class="contact">

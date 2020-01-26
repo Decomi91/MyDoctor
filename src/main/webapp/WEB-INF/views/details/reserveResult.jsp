@@ -45,8 +45,9 @@
 						</div>
 
 						<div id = "reserveForm">
-							~님 예약이 완료되었습니다.<br>
-							예약 정보는 마이페이지 → 예약현황 에서 확인하실 수 있습니다.
+							<font color = "black">${loginid }님</font><br>
+							<font color = "black">${hosname }&nbsp; ${reserveDate }</font>에 예약이 완료되었습니다.<br>
+							예약 승인 정보는 <font color = "black">마이페이지 → 예약현황</font> 에서 확인하실 수 있습니다.
 						</div>
 					</div>
 				</section>

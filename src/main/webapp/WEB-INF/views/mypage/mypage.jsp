@@ -1,159 +1,209 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-    
-<!DOCTYPE html>
+	pageEncoding="utf-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<!DOCTYPE HTML>
+
 <html>
 <head>
-<meta charset="utf-8">
+<title>My Doctor - 마이페이지</title>
+<meta charset="utf-8" />
 <meta name="viewport"
-	       content="width=device-width, initial-scale=1, user-scalable=no" />
-     <link href="resources/css/main.css" rel="stylesheet">    
-     <script src="http://code.jquery.com/jquery-3.4.1.js"></script>    
-     <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
-     <script src="resources/js/jquery.min.js"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.8.2/css/all.min.css" />
-<title>마이페이지 - 예약(마이페이지 메인)</title>
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="resources/css/main.css" />
+<link rel="stylesheet" href="resources/css/menuStyles.css" />
+<link rel="stylesheet" href="resources/css/paging.css" />
+
 <style>
-.navbar {
-	margin: 10px;
-	width: 40%;
-	font-size: 30px;
-}
-
-#reservation {
-	border-collapse: collapse;
-	width: 80%;
-	text-align: center;
-}
-
-#bookmark {
-	width: 80%;
-}
-
 </style>
-<script>
-	function cancel(){
-		var check = confirm("예약을 취소하시겠습니까?");
-		
-		if(check == true){
-			location.href = "cancel.do";
-		}else{
-			history.back();
-		}
-	}
-</script>
 </head>
-<body>
-	<div>
-		<div>
-			<img src = "resources/image/pp.jpg" width = "40px">
-			<span>병원 예약 내용이 ?건 있습니다.</span>
+<body class="is-preload">
+
+	<!-- Wrapper -->
+	<div id="wrapper">
+
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+
+				<!-- Header -->
+				<header id="header">
+					<a href="index.html" class="logo"><strong>My Doctor</strong> by
+						team.5</a>
+
+				</header>
+
+				<!-- Banner: body -->
+				<section id="banner">
+					<div class="content">
+						<jsp:include page="mypage_menu.jsp"></jsp:include>
+						<div class="mypageContent">
+
+							<!-- Reservation -->
+							<div id="reservationDIV">
+								<nav id="boardMenu">
+									<ul>
+										<li id="reviewli"><a class="menuLink" href="#"
+											id="reviewa"> Reservation </a></li>
+										<li id="qnali"><a class="menuLink" href="#" id="qnaa">Chart
+										</a></li>
+									</ul>
+								</nav>
+
+								<div class="table-wrapper">
+									<table class="reservetable mypagetable">
+										<thead>
+											<tr>
+												<th width=30%>예약 시간</th>
+												<th width=25%>병원</th>
+												<th width=25%>진행 상황</th>
+												<th></th>
+											</tr>
+										</thead>
+
+										<tbody>
+										
+											<!-- 예약 내역이 있는 경우 -->
+											<c:if test="${listcount > 0}">
+												<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
+												<c:forEach var = "rv" items = "${rv }">
+													<tr>
+														<td>${rv.reserveTime }</td>
+														<td>${rv.hosname }</td>
+														<c:if test = "${rv.acceptance == -1 || rv.acceptance == -2}">
+															<td><span class="hoscancel reservebox">취소된 예약</span></td>
+															<td></td>
+														</c:if>
+														<c:if test = "${rv.acceptance == 0}">
+															<td><span class="hoswaiting reservebox">승인 대기중</span></td>
+															<td>
+																<a href = "cancel.do?reserveNo=${rv.reserveNo }">예약 취소&nbsp;<i class="fas fa-angle-right"></i></a>
+															</td>
+														</c:if>
+														<c:if test = "${rv.acceptance == 1}">
+															<td><span class="hossoon reservebox">방문 예정</span></td>
+															<td></td>
+														</c:if>
+														<c:if test = "${rv.acceptance == 2}">
+															<td><span class="hosfinish reservebox">진료 완료</span></td>
+															<td>
+																<a href="reviewwrite.do?reserveNo=${rv.reserveNo }">후기 작성&nbsp;<i class="fas fa-angle-right"></i></a>
+															</td>
+														</c:if>
+												</c:forEach>
+											</c:if>
+											<c:if test="${listcount == 0}">
+												<tr>
+													<td colspan = "4">등록된 글이 없습니다.</td>
+												</tr>
+											</c:if>
+										</tbody>
+									</table>
+									
+									<div class="center-block">
+										<div class="row">
+											<div class="col">
+												<ul class="pagination">
+													<c:if test="${page<=1}">
+														<li class="page-item">
+														<a class="page-link"  href="#">이전&nbsp;</a>
+														</li>
+													</c:if>
+													<c:if test="${page > 1}">
+														<li class="page-item">
+															<a href="mypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
+														</li>
+													</c:if>
+													
+													<c:forEach var="a" begin="${startpage}" end="${endpage}">
+														<c:if test="${a==page}">
+															<li class="page-item">
+																<a class="page-link" href="#">${a}</a>
+															</li>
+														</c:if>
+														<c:if test="${a != page}">
+															<li class="page-item">
+																<a href="mypage.net?page=${a }" class="page-link">${a}</a>
+															</li>
+														</c:if>
+													</c:forEach>
+													
+													<c:if test="${page>=maxpage}">
+														<li class="page-item">
+															<a class="page-link" href="#">&nbsp;다음</a>
+														</li>
+													</c:if>
+													<c:if test="${page<maxpage}">
+														<li class="page-item">
+															<a href="mypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
+														</li>
+													</c:if>
+												</ul>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+							<!-- Reservation end -->
+
+
+							<!-- 관심 병원 -->
+							<div>
+								<nav>
+									<span class="noLink">관심 병원</span>
+								</nav>
+
+								<div class="bookmarkOut">
+									<!-- 반복될 목록 -->
+									<div>
+										<div class = "aaa">
+											<a href = "detail.net"></a>
+											<div class = bookmarkHos>덕산병원</div>
+											<div>
+												<span class = "bookmarkScore"><i class="fas fa-grin-hearts"></i> ? / 10</span>
+												<span>(13)</span>
+												· 내과/이비인후과
+											</div>
+											<div>
+												<span>서울시 구로구 오류1동 18-51</span>
+											</div>
+											<div>
+												<span>02-1234-1234</span>
+											</div>
+										</div>
+										
+											<div class = "ttt">
+												<i class="fas fa-heart bookmarkIcon"></i><br>
+												<span class = "bookmarkSpan">찜 취소</span>
+											</div>
+											<div class = "ttt">
+												<a href = "#">
+													<i class="fas fa-globe-americas bookmarkIcon"></i><br>
+													<span class = "bookmarkSpan">웹사이트</span>
+												</a>
+											</div>
+									</div>
+								</div>
+							</div>
+							<!-- 관심 병원 end -->
+							
+						</div>
+					</div>
+				</section>
+
+
+
+			</div>
 		</div>
-		<div>
-			<div><button onclick = "location.href = 'reserve.net'">예약 확인</button></div>
-			<div><button onclick = "location.href = 'chart.net'">진료 기록</button></div>
-			<div><button>관심병원</button></div>
-			<div><button>나의 정보 수정</button></div>
-			<div><button>내가 쓴 후기</button></div>
-			<div><button>문의 / 요청</button></div>
-			<div><button>회원 탈퇴</button></div>
-		</div>
+
+		<jsp:include page="../header/footer.jsp"></jsp:include>
+
 	</div>
-	
-	<!-- Reservation -->
-	<div>
-		<div>
-			<button class = "navbar">Reservation</button>
-			<button class = "navbar">Chart</button>
-		</div>
-		
-		<table id = reservation border = 1>
-			<thead>
-				<tr>
-					<th>예약 시간</th>
-					<th>병원</th>
-					<th>진행 상황</th>
-				</tr>
-			</thead>
-			
-			<tbody>
-				<!-- 순서를 최신순으로 할지? -->
-				<tr>
-					<td>2010.01.01 16:00</td>
-					<td>땡땡병원</td>
-					<td>승인 대기중<button onClick = "cancel()">예약취소</button></td>
-				</tr>
-				<tr>
-					<td>2010.01.02 13:00</td>
-					<td>땡땡병원</td>
-					<td>취소된 예약</td>
-				</tr>
-				<tr>
-					<td>2010.01.03 17:00</td>
-					<td>123병원</td>
-					<td>방문 예정</td>
-				</tr>
-				<tr>
-					<td>2010.01.05 16:00</td>
-					<td>가가병원</td>
-					<td><button onclick = "location.href = 'reviewwrite.do'">후기 작성</button></td>
-				</tr>
-			</tbody>
-		</table>
-	</div>
-	<!-- Reservation end -->
-	
-	<!-- 관심 병원 -->
-	<div>
-		<div>
-			<i class="fas fa-hand-holding-heart">관심병원</i>
-		</div>
-		
-		<table id = "bookmark" >
-			<tr>
-				<td rowspan = 4><img src = "resources/image/hospital.jpg" width = "60px"></td>
-			</tr>
-			<tr>
-				<td>가나다병원</td>
-				<td rowspan = 4><i class="fas fa-heart" onclick = "location.href = 'bookmark.net'"></i></td>				
-			</tr>
-			<tr>
-				<td>내과, 가정의학과, 소아과</td>
-			</tr>
-			<tr>
-				<td><i class="fas fa-smile"></i> ? / 10</td>
-			</tr>
-			
-			<tr>
-				<td rowspan = 4><img src = "resources/image/hospital.jpg" width = "60px"></td>
-			</tr>
-			<tr>
-				<td>땡땡병원</td>
-				<td rowspan = 4><i class="fas fa-heart" onclick = "location.href = 'bookmark.net'"></i></td>
-			</tr>
-			<tr>
-				<td>피부과, 내과</td>
-			</tr>
-			<tr>
-				<td><i class="fas fa-smile"></i> ? / 10</td>
-			</tr>
-			
-			<tr>
-				<td rowspan = 4><img src = "resources/image/hospital.jpg" width = "60px"></td>
-			</tr>
-			<tr>
-				<td>ABC병원</td>
-				<td rowspan = 4><i class="fas fa-heart" onclick = "location.href = 'bookmark.net'"></i></td>
-			</tr>
-			<tr>
-				<td>치과</td>
-			</tr>
-			<tr>
-				<td><i class="fas fa-smile"></i> ? / 10</td>
-			</tr>
-		</table>
-	</div>
-	<!-- 관심 병원 end -->
+
+	<!-- Scripts -->
+	<script src="resources/js/jquery.min.js"></script>
+	<script src="resources/js/browser.min.js"></script>
+	<script src="resources/js/breakpoints.min.js"></script>
+	<script src="resources/js/util.js"></script>
+	<script src="resources/js/main.js"></script>
 </body>
 </html>

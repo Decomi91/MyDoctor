@@ -177,6 +177,11 @@ public class MypageController {
 		mv.addObject("limit", limit);
 		return mv;
 	}
+	//@RequestMapping(value="/myreview.net")
+	public String gomyreview() {
+
+		return "mypage/mypage_review";
+	}
 	@RequestMapping(value="/quit.do")
 	public String goquit_ck() {
 
@@ -187,10 +192,42 @@ public class MypageController {
 
 		return "mypage/mypage_req";
 	}
-	@RequestMapping(value="/myreserve.net")
-	public String gomyreserve() {
+	@RequestMapping(value = "/myreserve.net")
+	public ModelAndView gomyreserve(HttpSession session, ModelAndView mv,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) throws Exception {
 
-		return "mypage/reservation";
+		String memberId = session.getAttribute("loginid").toString();
+		int limit = 5; // 한 page에 5개의 글
+
+		// 총 예약수
+		int listcount = mypageService.getListCount(memberId);
+		System.out.println("listcount(총 예약수) : " + listcount);
+
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+
+		System.out.println("총 페이지 수 = " + maxpage);
+		System.out.println("endpage : " + endpage);
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+
+		List<Reservation> rv = mypageService.select(memberId, page, limit);
+		List<Map<String, Integer>> rvCount = mypageService.reserveCount(memberId);
+
+		mv.setViewName("mypage/reservation");
+		mv.addObject("rv", rv);
+		mv.addObject("rvCount", rvCount);
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("limit", limit);
+
+		return mv;
 	}
 	@RequestMapping(value="/mypage.net")
 	public ModelAndView gomypage(HttpSession session, ModelAndView mv,
@@ -202,11 +239,14 @@ public class MypageController {
 		
 		// 총 예약수
 		int listcount = mypageService.getListCount(memberId);
+		System.out.println("listcount(총 예약수) : " + listcount);
 		
 		int maxpage = (listcount + limit - 1)/limit;
-		System.out.println("총 페이지 수 = " + maxpage);
 		int startpage = ((page-1)/10) * 10 + 1;
 		int endpage = startpage + 10 - 1;
+		
+		System.out.println("총 페이지 수 = " + maxpage);
+		System.out.println("endpage : " + endpage);
 		
 		if(endpage > maxpage) {
 		endpage = maxpage;

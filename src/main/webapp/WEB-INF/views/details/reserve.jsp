@@ -47,7 +47,8 @@
 						</div>
 
 						<div id = "reserveForm">
-							<form name = "reserForm" action = "reserve.do" method = "get"> 
+							<form name = "reserForm" action = "reserveProcess.net" method = "get">
+							<input type = "hidden" name = "hosid" value = "${hospital.id }"> 
 								<table id = "reserveTable">
 									<tr>
 										<td>이름</td>
@@ -70,7 +71,7 @@
 										</td>
 									<tr>
 										<td>병원명</td>
-										<td colspan = 2>
+										<td colspan = 4>
 											<input type = "text" name = "hosname" class = "textReadonly" value = "${hospital.yadmNm }" readOnly>
 										</td>
 									</tr>
@@ -142,8 +143,6 @@
 					return false;
 				}
 				
-				console.log($("#hour").val());
-				
 				if($("#hour").val() == "none"){
 					alert("예약할 시를 입력하세요.");
 					$("#hour").focus();
@@ -165,6 +164,27 @@
 					$(this).val($(this).val().substring(0, 100));
 				}
 			});	// textarea keyup end
+			
+			if($("input[name='gender']") == 0){
+				$("input[name='gender']").val("남");
+			}else{
+				$("input[name='gender']").val("여");
+			}
+			
+			function phoneFormat(num){
+				var formatNum = "";
+				
+				if(num.length == 11){
+					formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+				}else if(num.length == 10){
+					formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+				}
+				
+				return formatNum;
+			}
+			
+			var phone = $("input[name='phone']").val();
+			$("input[name='phone']").val(phoneFormat(phone));
 		});
 	</script>
 </body>

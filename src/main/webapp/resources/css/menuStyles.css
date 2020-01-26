@@ -290,7 +290,7 @@ color:#7f888f}
 .qnabtn:hover{cursor:pointer;}
 .pagination{text-align:center;}
 
-<!--review¾²´Â ºÎºÐ rating-->
+<!--reviewï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ rating-->
 .right {
   float: right;
 }
@@ -326,3 +326,122 @@ color:#7f888f}
   color: #d0e8f0;
 }
 <!---->
+/* ì¶”ê°€ */
+.bookmarkHos {
+	color: #222;
+	font-size: 20px;
+	padding-top: 2px;
+	padding-bottom: 1px;
+	line-height: 1.3;
+	margin-bottom: -1px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.bookmarkScore {
+	color: #e7711b;
+}
+
+.bookmarkOut {
+	border: 1px solid grey;
+	border-radius: 3px;
+	width: 80%;
+	margin: 0 auto;
+	padding: 10px;
+	height: 800px;
+}
+
+.aaa {
+	float: left;
+}
+
+.ttt {
+	float: right;
+	width: 15%
+}
+
+.bookmarkIcon {
+	padding: 15px
+}
+
+.bookmarkSpan {
+	padding: 15px
+}
+
+/* ì¶”ê°€ */
+#reservationDIV {
+	margin-bottom: 50px
+}
+
+.mypagetable {
+	width: 94%;
+	margin: 0 auto;
+	text-align: center;
+}
+
+.mypagetable th {
+	text-align: center;
+}
+
+.reservetable td:nth-child(4n) a {
+	color: black;
+	font-size: 12px;
+	text-align: left;
+}
+
+.reservebox {
+	color: white;
+	width: 103px;
+	display: inline-block;
+	padding: 2px
+}
+
+.hossoon {
+	background: #062ec1f7;
+}
+
+.hoswaiting {
+	background: #1bb112bd
+}
+
+.hosfinish {
+	background: #7d7d76d9
+}
+
+.hoscancel {
+	background: #cc0000db
+}
+
+.charttable td:nth-child(3n) a {
+	color: black;
+	font-size: 12px;
+	text-align: left;
+}
+
+.noLink {
+	display: inline-block;
+	width: 100%;
+	line-height: 3em;
+	vertical-align: middle;
+	font-size: 15px;
+	font-weight: bold;
+	font-family: "Trebuchet MS", Dotum, Arial;
+	color: #f56a6a;
+	text-align: center;
+	border-bottom: 2px solid #f56a6a;
+	margin: 0 0 2em 0;
+}
+
+/* mypage_cancel.jsp  */
+#cancelDIV {
+	width: 80%;
+	margin: 0 auto;
+	margin-top: 30px;
+	text-align: center;
+}
+
+#cancelPW {
+	width: 50%;
+	display: inline-block;
+}

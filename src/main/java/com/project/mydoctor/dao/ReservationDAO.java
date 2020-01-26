@@ -17,4 +17,12 @@ public class ReservationDAO {
 		return sqlSession.insert("Reservations.insert", map);
 	}
 
+	public Reservation getReserveDetail(int reserveNo) {
+		return sqlSession.selectOne("Reservations.getReserveDetail", reserveNo);
+	}
+
+	public int cancel(int reserveNo) {
+		return sqlSession.update("Reservations.cancel", reserveNo);
+	}
+
 }

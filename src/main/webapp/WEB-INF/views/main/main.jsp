@@ -4,13 +4,18 @@
 <!DOCTYPE HTML>
 
 <html>
-<head>
-<title>My Doctor</title>
-<meta charset="utf-8" />
-<meta name="viewport"
-	content="width=device-width, initial-scale=1, user-scalable=no" />
-<link rel="stylesheet" href="resources/css/main.css" />
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+	<head>
+		<title>My Doctor</title>
+		<meta charset="utf-8" />
+		<meta name="viewport"
+			content="width=device-width, initial-scale=1, user-scalable=no" />
+		<link rel="stylesheet" href="resources/css/main.css" />
+		<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+		<script src="resources/js/jquery.min.js"></script>
+		<script src="resources/js/browser.min.js"></script>
+		<script src="resources/js/breakpoints.min.js"></script>
+		<script src="resources/js/util.js"></script>
+		<script src="resources/js/main.js"></script>
 <!-- 지도관련 스크립트 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
@@ -640,8 +645,7 @@ $(function() {
 <!-- Sidebar -->
 		<jsp:include page="../header/footer.jsp"></jsp:include>
 			
-		</div>
-	</div> 
+		</div> 
 
 	<!-- Scripts -->
 	

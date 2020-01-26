@@ -3276,7 +3276,7 @@ input[type=button]:focus {
 	color: white !important;
 }
 
-/* ¿¹¾àÆû css */
+/* css */
 #reserveBar {
 	padding: 0px 0px 50px 0px
 }
@@ -3293,6 +3293,7 @@ input[type=button]:focus {
 	padding: 20px 0px;
 	width: 80%;
 	margin: 0 auto;
+	text-align: center;
 }
 
 #reserveTable {
@@ -3339,3 +3340,4 @@ input[type=button]:focus {
 	margin: 0 auto;
 	margin-top: 20px;
 }
+#boardcontent{width:100%; padding:5%}
