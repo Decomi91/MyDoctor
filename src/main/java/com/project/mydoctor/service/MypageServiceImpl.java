@@ -31,6 +31,11 @@ public class MypageServiceImpl implements MypageService {
 	@Override
 	public int yesAccept(String memberId) {
 		return mDAO.yesAccept(memberId);
+  }
+  
+  @Override
+	public int reserveCount(String memberId) {
+		return mDAO.reserveCount(memberId);
 	}
 
 	@Override

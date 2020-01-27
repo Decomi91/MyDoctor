@@ -22,6 +22,9 @@ public class MypageDAO {
 
 	public int yesAccept(String memberId) {
 		return sqlSession.selectOne("Reservations.yesAccept", memberId);
+  
+	public int reserveCount(String memberId) {
+		return sqlSession.selectOne("Reservations.reserveCount", memberId);
 	}
 
 	public int getListCount(String memberId) {
