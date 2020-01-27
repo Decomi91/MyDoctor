@@ -22,4 +22,20 @@ public class AdminBoardDAO {
 		return sqlSession.selectList("AdminBoards.getboardlist", pages);
 	}
 
+	public AdminBoard getAdminRequestDeatil(int boardnum) {
+		return sqlSession.selectOne("AdminBoards.getdetail", boardnum);
+	}
+
+	public Object getAdminRequestNoCheckListcount() {
+		return sqlSession.selectOne("AdminBoards.getnochecklistcount");
+	}
+
+	public void setChecking1(int boardnum) {
+		sqlSession.update("AdminBoards.setchecking", boardnum);
+	}
+
+	public int setAdminRequestReply(AdminBoard board) {
+		return sqlSession.update("AdminBoards.setreply", board);
+	}
+
 }

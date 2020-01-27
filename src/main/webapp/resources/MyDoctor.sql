@@ -15,14 +15,13 @@ create table members(
 	gender		number(1),
 	userkey		number(1)
 );
-
+select * from members;
 insert into members values('test', '123', 'testing', 
 		01033333333, 'testADDR',
 		'dd@dd.com', '1991-02-11', 1, 1)
 insert into members values('admin', '20000', 'admin', 
-		01032308711, '�꽌�슱 �뼱�뵖媛�',
-		'd@naver.com', '1991-02-11', 1, 1);
-		
+		01032308711, '멤버',
+		'd@naver.com', '1991-02-11', 1, 1)
 		
 select rownum, h.* from hospitals h
 select a.*
@@ -36,7 +35,6 @@ create table hospitals(
 	addr		varchar2(100) not null,
 	hphone		number(12) not null,
 	yki			varchar2(100) not null,
-	doctors		number(3),
 	monStart	number(4),
 	monEnd		number(4),
 	tueStart	number(4),
@@ -52,15 +50,18 @@ create table hospitals(
 	sunStart	number(4) default 0,
 	sunEnd		number(4) default 0,
 	joinok		number(1) default 0,
+	doctors		number(3),
 	joindate	date
 )
-
+select * from hospitals
 insert into hospitals values('testing','123','test',
 			'testaddr',029579599,'ABCD',1,0900,1700,0900,1700,0900,1700,
-			0900,1700,0900,1700,0900,1700,0900,1700,1,sysdate);
+			0900,1700,0900,1700,0900,1700,0900,1700,1,1,sysdate);
+		
 			
 drop table hospitals
 select * from hospitals
+
 alter table hospitals add(joindate date)
 update hospitals set joindate = sysdate
 
@@ -75,6 +76,8 @@ create table reservation(
 	acceptance		number(1) default 0,
 	moreRes			number(1)
 )
+
+select * from reservation
 
 insert into reservation
 values(2, 'test', 'testing', 'testing', 'hospital', 'kk', sysdate, '1', '1');
@@ -102,6 +105,7 @@ select * from reservation;
 
 drop table reservation;
 
+
 create table treatment(
 	treatNo			number(10) primary key,
 	reserveNo		number(10) references reservation(reserveNo),
@@ -119,13 +123,21 @@ create table treatment(
 
 create table adminBoard(
   id varchar2(15) references members(id),
-  password varchar2(15) not null,
   boardNum number(10) primary key,
   subject varchar2(100) not null,
   content varchar2(4000) not null,
   checking number(1) not null default 0,
-  reply varchar2(3000)
+  reply varchar2(3000),
+  reqDate date
 )
+
+alter table adminBoard add(reqDate date)
+alter table adminBoard drop(password)
+
+insert into adminBoard values('test', 
+	(select nvl(max(boardNum),0)+1 from adminBoard),
+	'테스트 제목입니다', '테스트 내용입니다', 0, '',sysdate)
+select * from adminboard
 
 create table boards (
   writeId varchar2(15),

@@ -22,6 +22,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mydoctor.model.Hospital;
 import com.project.mydoctor.model.Member;
+import com.project.mydoctor.service.BoardService;
 import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
@@ -36,8 +37,11 @@ public class MemberController {
 
 	@Autowired
 	private MypageService mypageService;
-
-	@GetMapping(value = "/joinForm")
+	
+	@Autowired
+	private BoardService boardService;
+	
+	@GetMapping(value="/joinForm")
 	public ModelAndView joinForm(ModelAndView mv) {
 		mv.setViewName("member/joinForm");
 		return mv;
@@ -53,6 +57,8 @@ public class MemberController {
 		if (result == 1) {
 			out.print("<script>alert('가입을 축하드립니다');</script>");
 			session.setAttribute("loginid", member.getId());
+			session.setAttribute("yesaccept",0);
+			session.setAttribute("chk", 1);
 			mv.setViewName("redirect:/main");
 		} else {
 			out.print("<script>alert('가입에 실패했습니다.\n입력한 사항을 다시 확인하세요.'); history.go(-1)</script>");
@@ -84,15 +90,11 @@ public class MemberController {
 
 			if (member.getId().equals("admin")) {
 				mv.setViewName("redirect:/hospitalcontrol");
-			} else {
-				if (chk == 2) {
-					mv.setViewName("redirect:/main");
-				} else {
-					int yesaccept = mypageService.yesAccept(member.getId());
-
-					mv.setViewName("redirect:/main");
-					session.setAttribute("yesaccept", yesaccept);
-				}
+				session.setAttribute("accepctReq", hospitalService.getSignRequestCount());
+				session.setAttribute("adminReq", boardService.getAdminRequestNoCheckListCount());
+			}else {
+				mv.setViewName("redirect:/main");
+				session.setAttribute("yesaccept", mypageService.reserveCount(member.getId()));
 			}
 		} else {
 			PrintWriter out = response.getWriter();
@@ -117,8 +119,7 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "hs_signup.do")
 	public String hs_signup() {
-
-		return "member/hs_signup";
+		return "member/hs_signup";		
 	}
 
 	/**

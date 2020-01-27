@@ -29,9 +29,29 @@ public class HospitalDAO {
 		return sqlSession.selectList("Hospitals.gethoslisttest");
 	}
 
-	public Hospital getDetail(String id) {
+	public Hospital getDetail(String yki) {
 		// TODO Auto-generated method stub
-		return sqlSession.selectOne("Hospitals.getdetail", id);
+		return sqlSession.selectOne("Hospitals.getdetail", yki);
+	}
+
+	public int getSignRequestCount() {
+		return sqlSession.selectOne("Hospitals.getsignlistcount");
+	}
+
+	public List<Hospital> getSignRequestList(int page) {
+		return sqlSession.selectList("Hospitals.getsignlist",page);
+	}
+
+	public Hospital getDetailforId(String hosid) {
+		return sqlSession.selectOne("Hospitals.getdetailforid", hosid);
+	}
+
+	public int setJoinOkay(String hosid) {
+		return sqlSession.update("Hospitals.setjoinokay",hosid);
+	}
+
+	public int widthdraw(String hosid) {
+		return sqlSession.update("Hospitals.widthdraw", hosid);
 	}
 
 	public Hospital getDetail2(String yki) {

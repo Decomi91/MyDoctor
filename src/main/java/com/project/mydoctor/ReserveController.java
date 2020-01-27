@@ -70,7 +70,7 @@ public class ReserveController {
 
 		String memberId = session.getAttribute("loginid").toString();
 		Member member = memberservice.select(memberId);
-		Hospital hospital = hospitalservice.getDetail(hosid);
+		Hospital hospital = hospitalservice.getDetailforId(hosid);
 //		
 //		String formatDate = reserveDate + Integer.toString(hour) + ":" + Integer.toString(minute);
 //		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

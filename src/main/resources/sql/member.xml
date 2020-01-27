@@ -16,7 +16,7 @@
  	
  	<select id="isId" parameterType="member" resultType="int">
  		select count(*) from members
- 		where id = #{id} and password = #{password}
+ 		where id = #{id} and password = #{password} and userkey = 1
  	</select>
 	
  	<select id="getlistcount" resultType="int">
