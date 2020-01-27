@@ -5,7 +5,7 @@
  <mapper namespace="Hospitals">
  	<select id="isId" parameterType="hospital" resultType="int">
  		select count(*) from hospitals
- 		where id = #{id} and password = #{password}
+ 		where id = #{id} and password = #{password} and joinok = 1
  	</select>
  	 
  	<select id="getlistcount" resultType="int">
@@ -16,15 +16,15 @@
  		select a.*
 	 	from (select rownum r, h.*
 	 		from hospitals h
-	 		order by yadmNm) a
+	 		order by h.yadmNm) a
 	 	where a.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
  	</select>
  	
  	<!-- 김건수 병원회원가입 -->
  	<insert id="hs_insert" parameterType="hospital">
  	insert into hospitals values(#{id},#{password},#{yadmNm},
- 	#{addr},#{hphone},#{yki},#{doctors},#{monStart},#{monEnd},#{tueStart},#{tueEnd},#{wedStart},#{wedEnd},#{thuStart},#{thuEnd},
- 	#{friStart},#{friEnd},#{satStart},#{satEnd},#{sunStart},#{sunEnd},#{joinok},sysdate)
+ 	#{addr},#{hphone},#{yki},#{monStart},#{monEnd},#{tueStart},#{tueEnd},#{wedStart},#{wedEnd},#{thuStart},#{thuEnd},
+ 	#{friStart},#{friEnd},#{satStart},#{satEnd},#{sunStart},#{sunEnd},#{joinok},#{doctors},sysdate)
  	</insert>
    
  	<select id="idcheck" parameterType="String" resultType="String">
@@ -40,7 +40,39 @@
  	
  	<select id = "getdetail" parameterType = "String" resultType = "hospital">
  		select * from hospitals
+ 		where yki = #{yki}
+ 	</select>
+ 	
+ 	<select id="getsignlistcount" resultType="int">
+ 		select count(*)
+ 		from hospitals
+ 		where joinok = 0
+ 	</select>
+ 	
+ 	<select id="getsignlist" resultType="hospital" parameterType="int">
+ 		select a.*
+	 	from (select rownum r, h.*
+	 		from hospitals h
+	 		where h.joinok = 0
+	 		order by h.yadmNm) a
+	 	where a.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
+ 	</select>
+ 	
+ 	<select id = "getdetailforid" parameterType = "String" resultType = "hospital">
+ 		select * from hospitals
  		where id = #{id}
  	</select>
+ 	
+ 	<select id="setjoinokay" parameterType="String">
+ 		update hospitals
+ 		set joinok = 1
+ 		where id = #{id}
+ 	</select>
+ 	
+ 	<update id="widthdraw" parameterType="String">
+ 		update hospitals
+ 		set joinok = -1
+ 		where id = #{id}
+ 	</update>
  </mapper>
  

@@ -23,4 +23,24 @@ public class BoardServiceImpl implements BoardService {
 		return abDAO.getboardlist(pages);
 	}
 
+	@Override
+	public AdminBoard getAdminRequestDetail(int boardnum) {
+		AdminBoard board = abDAO.getAdminRequestDeatil(boardnum);
+		if(board.getChecking()==0) {
+			abDAO.setChecking1(board.getBoardNum());
+			board.setChecking(1);
+		}
+		return abDAO.getAdminRequestDeatil(boardnum);
+	}
+
+	@Override
+	public Object getAdminRequestNoCheckListCount() {
+		return abDAO.getAdminRequestNoCheckListcount();
+	}
+
+	@Override
+	public int setAdminRequestReply(AdminBoard board) {
+		return abDAO.setAdminRequestReply(board);
+	}
+
 }

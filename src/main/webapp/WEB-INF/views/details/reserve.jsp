@@ -101,7 +101,7 @@
 									</tr>
 								</table>
 								
-								<textarea maxLength = "100" id = "reserveText" placeHolder = "증상을 입력하세요."></textarea>
+								<textarea maxLength = "100" name="disease" id = "reserveText" placeHolder = "증상을 입력하세요."></textarea>
 								<div id = textareaCounter>0 / 100</div>
 								
 								<div id = "reserveBtnDIV">
@@ -173,7 +173,7 @@
 			
 			function phoneFormat(num){
 				var formatNum = "";
-				
+				num = '0' + num;
 				if(num.length == 11){
 					formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
 				}else if(num.length == 10){

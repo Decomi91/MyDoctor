@@ -34,8 +34,33 @@ public class HospitalServiceImpl implements HospitalService {
 	}
 
 	@Override
-	public Hospital getDetail(String id) {
+	public Hospital getDetail(String yki) {
 		// TODO Auto-generated method stub
-		return hDAO.getDetail(id);
+		return hDAO.getDetail(yki);
+	}
+
+	@Override
+	public int getSignRequestCount() {
+		return hDAO.getSignRequestCount();
+	}
+
+	@Override
+	public List<Hospital> getSignRequestList(int page) {
+		return hDAO.getSignRequestList(page);
+	}
+
+	@Override
+	public Hospital getDetailforId(String hosid) {
+		return hDAO.getDetailforId(hosid);
+	}
+
+	@Override
+	public int setJoinOkay(String hosid) {
+		return hDAO.setJoinOkay(hosid);
+	}
+
+	@Override
+	public int widthdraw(String hosid) {
+		return hDAO.widthdraw(hosid);
 	}
 }
