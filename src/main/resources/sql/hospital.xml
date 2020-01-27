@@ -74,5 +74,11 @@
  		set joinok = -1
  		where id = #{id}
  	</update>
+
+ 	<!-- yuri -->
+ 	<select id = "getdetail2" parameterType = "String" resultType = "hospital">
+ 		select * from hospitals
+ 		where yki = #{yki}
+ 	</select>
  </mapper>
  

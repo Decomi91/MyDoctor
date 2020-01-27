@@ -38,13 +38,8 @@
 
 							<!-- Reservation -->
 							<div id="reservationDIV">
-								<nav id="boardMenu">
-									<ul>
-										<li id="reviewli"><a class="menuLink" href="#"
-											id="reviewa"> Reservation </a></li>
-										<li id="qnali"><a class="menuLink" href="#" id="qnaa">Chart
-										</a></li>
-									</ul>
+								<nav>
+									<span class="noLink">Reservation</span>
 								</nav>
 
 								<div class="table-wrapper">

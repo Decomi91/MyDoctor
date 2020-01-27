@@ -53,6 +53,10 @@ public class HospitalDAO {
 	public int widthdraw(String hosid) {
 		return sqlSession.update("Hospitals.widthdraw", hosid);
 	}
+
+	public Hospital getDetail2(String yki) {
+		return sqlSession.selectOne("Hospitals.getdetail2", yki);
+	}
 	
 	
 

@@ -63,4 +63,9 @@ public class HospitalServiceImpl implements HospitalService {
 	public int widthdraw(String hosid) {
 		return hDAO.widthdraw(hosid);
 	}
+
+	@Override
+	public Hospital getDetail2(String yki) {
+		return hDAO.getDetail2(yki);
+	}
 }

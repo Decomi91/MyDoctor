@@ -77,7 +77,7 @@
                   </div>
                   <ul class="contact">
                      <li class="icon solid fas fa-address-book mypageacess"><a
-                        href="#">마이페이지</a></li>
+                        href="hosmypage.net">마이페이지</a></li>
                      <li
                         class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
                         href="#">여기 뭐써야했지</a></li>
