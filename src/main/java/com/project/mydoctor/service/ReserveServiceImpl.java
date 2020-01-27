@@ -27,4 +27,9 @@ public class ReserveServiceImpl implements ReserveService {
 	public int cancel(int reserveNo) {
 		return rDAO.cancel(reserveNo);
 	}
+
+	@Override
+	public int reserveOk(int reserveNo) {
+		return rDAO.reserveOk(reserveNo);
+	}
 }

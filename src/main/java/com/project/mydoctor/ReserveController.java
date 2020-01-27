@@ -37,11 +37,11 @@ public class ReserveController {
 
 	// 상세 페이지 -> 예약 페이지
 	@RequestMapping(value = "/reserve.net") // id = 병원아이디
-	public ModelAndView reserveForm(HttpSession session, ModelAndView mv, String id) {
+	public ModelAndView reserveForm(HttpSession session, ModelAndView mv, String yki) {
 		String memberId = session.getAttribute("loginid").toString();
 		System.out.println("멤버 아이디 : " + memberId);
 
-		Hospital hospital = hospitalservice.getDetail(id);
+		Hospital hospital = hospitalservice.getDetail2(yki);
 		Member member = memberservice.select(memberId);
 
 		Date date = new Date();

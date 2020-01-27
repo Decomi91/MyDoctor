@@ -11,5 +11,7 @@ public interface ReserveService {
 	Reservation getReserveDetail(int reserveNo);
 
 	int cancel(int reserveNo);
+
+	int reserveOk(int reserveNo);
 	
 }

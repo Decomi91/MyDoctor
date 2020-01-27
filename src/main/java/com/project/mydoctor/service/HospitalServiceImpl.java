@@ -38,4 +38,9 @@ public class HospitalServiceImpl implements HospitalService {
 		// TODO Auto-generated method stub
 		return hDAO.getDetail(id);
 	}
+
+	@Override
+	public Hospital getDetail2(String yki) {
+		return hDAO.getDetail2(yki);
+	}
 }

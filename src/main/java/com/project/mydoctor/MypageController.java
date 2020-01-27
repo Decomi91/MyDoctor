@@ -3,7 +3,6 @@ package com.project.mydoctor;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -192,6 +191,8 @@ public class MypageController {
 
 		return "mypage/mypage_req";
 	}
+	
+	// 예약현황 탭
 	@RequestMapping(value = "/myreserve.net")
 	public ModelAndView gomyreserve(HttpSession session, ModelAndView mv,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page) throws Exception {
@@ -215,11 +216,9 @@ public class MypageController {
 		}
 
 		List<Reservation> rv = mypageService.select(memberId, page, limit);
-		int rvCount = mypageService.reserveCount(memberId);
 
 		mv.setViewName("mypage/reservation");
 		mv.addObject("rv", rv);
-		mv.addObject("rvCount", rvCount);
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
 		mv.addObject("startpage", startpage);
@@ -229,6 +228,8 @@ public class MypageController {
 
 		return mv;
 	}
+	
+	// 마이페이지 메인
 	@RequestMapping(value="/mypage.net")
 	public ModelAndView gomypage(HttpSession session, ModelAndView mv,
 			@RequestParam(value = "page", defaultValue = "1", required = false) int page
@@ -253,11 +254,9 @@ public class MypageController {
 		}
 		
 		List<Reservation> rv = mypageService.select(memberId, page, limit);
-		int rvCount = mypageService.reserveCount(memberId);
 		
 		mv.setViewName("mypage/mypage");
 		mv.addObject("rv", rv);
-		mv.addObject("rvCount", rvCount);
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
 		mv.addObject("startpage", startpage);
