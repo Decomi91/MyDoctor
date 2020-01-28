@@ -153,10 +153,15 @@ public class MapController {
 //		System.out.println(vo.getYkiho());
 		vo = detail(vo);
 		Work_hs work_hs= new Work_hs();
-		
-		
+		/*
+		 		1. 요양기호로 병원 검색됨 -> 기존 자료 사용
+		 		2. 병원 없을 경우
+		 			1) 월~일이 있을경우 + 점심
+		 				1- 토일 중에 기록이 있으면 다 표시
+		 				2- 기록이 없으면 그부분만제거(ex. 월~금)
+		 			2) 월~일 없을 경우 -> 자료없음
+		 */
 		work_hs = work(vo.getYkiho());
-//		System.out.println(work_hs);
 		
 		model.addAttribute("vo", vo);
 		model.addAttribute("work", work_hs);

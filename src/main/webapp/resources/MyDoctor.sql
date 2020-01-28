@@ -28,98 +28,6 @@ select a.*
 	 	from (select rownum r, h.*
 	 		from hospitals h
 	 		order by yadmNm) a
-create table hospitals(
-	id			varchar2(15) primary key,
-	password	varchar2(15) not null,
-	yadmNm		varchar2(50) not null,
-	addr		varchar2(100) not null,
-	hphone		number(12) not null,
-	yki			varchar2(100) not null,
-	monStart	number(4),
-	monEnd		number(4),
-	tueStart	number(4),
-	tueEnd		number(4),
-	wedStart	number(4),
-	wedEnd		number(4),
-	thuStart	number(4),
-	thuEnd		number(4),
-	friStart	number(4),
-	friEnd		number(4),
-	satStart	number(4) default 0,
-	satEnd		number(4) default 0,
-	sunStart	number(4) default 0,
-	sunEnd		number(4) default 0,
-	joinok		number(1) default 0,
-	doctors		number(3),
-	joindate	date
-)
-select * from hospitals
-insert into hospitals values('testing','123','test',
-			'testaddr',029579599,'ABCD',1,0900,1700,0900,1700,0900,1700,
-			0900,1700,0900,1700,0900,1700,0900,1700,1,1,sysdate);
-		
-			
-drop table hospitals
-select * from hospitals
-
-alter table hospitals add(joindate date)
-update hospitals set joindate = sysdate
-
-create table reservation(
-	reserveNo		number(10) primary key,
-	id				varchar2(15) references members(id),
-	name			varchar2(15) not null,
-	hosid			varchar2(15) references hospitals(id),
-	hosname			varchar2(15) not null,
-	disease			varchar2(100) not null,
-	reserveTime		date,
-	acceptance		number(1) default 0,
-	moreRes			number(1)
-)
-
-select * from reservation
-
-insert into reservation
-values(2, 'test', 'testing', 'testing', 'hospital', 'kk', sysdate, '1', '1');
-
-insert into reservation
-values(3, 'test', 'testing', 'testing', '토마토치과', 'kk', sysdate, '0', '1');
-insert into reservation
-values(4, 'test', 'testing', 'testing', '밝은이안과', 'kk', sysdate, '-1', '1');
-insert into reservation
-values(5, 'test', 'testing', 'testing', '땡땡병원', 'kk', sysdate, '0', '1');
-
-insert into reservation
-values(8, 'test', 'testing', 'testing', '가나다병원', 'kk', sysdate, '0', '1');
-insert into reservation
-values(6, 'test', 'testing', 'testing', '123병원', 'kk', sysdate, '0', '1');
-insert into reservation
-values(7, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '1', '1');
-insert into reservation
-values(9, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '2', '1');
-
-insert into reservation
-values(10, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '0', '1');
-
-select * from reservation;
-
-drop table reservation;
-
-
-create table treatment(
-	treatNo			number(10) primary key,
-	reserveNo		number(10) references reservation(reserveNo),
-	id				varchar2(15) references members(id),
-	name			varchar2(15) not null,
-	hosid			varchar2(15) references hospitals(id),
-	hosname			varchar2(15) not null,
-	disease			varchar2(100) not null,
-	prescription	varchar2(1000) not null,
-	reserveTime		date,
-	treatTime		date
-)
-
-
 
 create table adminBoard(
   id varchar2(15) references members(id),
@@ -170,13 +78,8 @@ alter table reviews add(visited date)
 insert into reviews values('test', '123', 'testing', 1, 'testSub',
 			'testCont', 5,5,5,sysdate,sysdate,'ok')
 update reviews set visited = sysdate
+select * from reviews;
 
-create table favorites (
-  id varchar2(15) references members(id),
-  hosid varchar2(15) references hospitals(id),
-  hosname varchar2(50)
-)
-			
 			
 delete members cascade constraints;
 delete reviews

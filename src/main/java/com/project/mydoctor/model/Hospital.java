@@ -28,6 +28,8 @@ public class Hospital {
 	private int satEnd;
 	private int sunStart;
 	private int sunEnd;
+	private int lunchStart;
+	private int lunchEnd;
 	private byte joinok;
 	private String joindate;
 	
@@ -158,6 +160,18 @@ public class Hospital {
 	public void setSunEnd(int sunEnd) {
 		this.sunEnd = sunEnd;
 	}
+	public int getLunchStart() {
+		return lunchStart;
+	}
+	public void setLunchStart(int lunchStart) {
+		this.lunchStart = lunchStart;
+	}
+	public int getLunchEnd() {
+		return lunchEnd;
+	}
+	public void setLunchEnd(int lunchEnd) {
+		this.lunchEnd = lunchEnd;
+	}
 	public byte getJoinok() {
 		return joinok;
 	}
@@ -170,6 +184,7 @@ public class Hospital {
 	public void setJoindate(String joindate) {
 		this.joindate = joindate.split(" ")[0];
 	}
+	
 	@Override
 	public String toString() {
 		return "Hospital [id=" + id + ", password=" + password + ", yadmNm=" + yadmNm + ", addr=" + addr + ", hphone="
@@ -177,11 +192,8 @@ public class Hospital {
 				+ ", tueStart=" + tueStart + ", tueEnd=" + tueEnd + ", wedStart=" + wedStart + ", wedEnd=" + wedEnd
 				+ ", thuStart=" + thuStart + ", thuEnd=" + thuEnd + ", friStart=" + friStart + ", friEnd=" + friEnd
 				+ ", satStart=" + satStart + ", satEnd=" + satEnd + ", sunStart=" + sunStart + ", sunEnd=" + sunEnd
-				+ ", joinok=" + joinok + ", joindate=" + joindate + "]";
+				+ ", lunchStart=" + lunchStart + ", lunchEnd=" + lunchEnd + ", joinok=" + joinok + ", joindate=" + joindate + "]";
 	}
-	
-	
-	
 	
 	
 }

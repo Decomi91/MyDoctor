@@ -24,7 +24,7 @@
  	<insert id="hs_insert" parameterType="hospital">
  	insert into hospitals values(#{id},#{password},#{yadmNm},
  	#{addr},#{hphone},#{yki},#{monStart},#{monEnd},#{tueStart},#{tueEnd},#{wedStart},#{wedEnd},#{thuStart},#{thuEnd},
- 	#{friStart},#{friEnd},#{satStart},#{satEnd},#{sunStart},#{sunEnd},#{joinok},#{doctors},sysdate)
+ 	#{friStart},#{friEnd},#{satStart},#{satEnd},#{sunStart},#{sunEnd},#{lunchStart},#{lunchEnd},#{joinok},#{doctors},sysdate)
  	</insert>
    
  	<select id="idcheck" parameterType="String" resultType="String">
