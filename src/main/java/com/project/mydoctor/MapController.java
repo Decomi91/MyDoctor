@@ -10,7 +10,6 @@ import java.net.URLEncoder;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONArray;
@@ -18,15 +17,16 @@ import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
 import com.project.mydoctor.model.HdetailVO;
+import com.project.mydoctor.model.Hospital;
 import com.project.mydoctor.model.Work_hs;
-
-import jdk.nashorn.internal.ir.RuntimeNode.Request;
+import com.project.mydoctor.service.HospitalService;
 
 
 /**
@@ -36,6 +36,9 @@ import jdk.nashorn.internal.ir.RuntimeNode.Request;
  */
 @Controller
 public class MapController {
+	
+	@Autowired
+	private HospitalService hospitalService;
 	
 	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	private static final String radius = "3000";
@@ -103,7 +106,7 @@ public class MapController {
 		parameter = parameter + addr;
 		parameter = parameter + "&xPos=" + xPos;
 		parameter = parameter + "&yPos=" + yPos;
-		parameter = parameter + "&radius=" + 10000;
+		parameter = parameter + "&radius=" + 5000;
 		parameter = parameter + "&_type=json";
 		if(query!="")
 		parameter = parameter + "&yadmNm="+URLEncoder.encode(query, "UTF-8");
@@ -151,8 +154,9 @@ public class MapController {
 	@RequestMapping(value = "detail.net", method = RequestMethod.GET)
 	public String locationView(HdetailVO vo, Model model) throws Exception {
 //		System.out.println(vo.getYkiho());
-		vo = detail(vo);
-		Work_hs work_hs= new Work_hs();
+		
+		
+		
 		/*
 		 		1. 요양기호로 병원 검색됨 -> 기존 자료 사용
 		 		2. 병원 없을 경우
@@ -161,10 +165,26 @@ public class MapController {
 		 				2- 기록이 없으면 그부분만제거(ex. 월~금)
 		 			2) 월~일 없을 경우 -> 자료없음
 		 */
-		work_hs = work(vo.getYkiho());
+		Hospital result = new Hospital();
+		Work_hs work_hs= new Work_hs();
+		
+		result = hospitalService.getDetail(vo.getYkiho());
+		System.out.println("db검증:     "+result);
+		if(result!=null) {
+			model.addAttribute("work", result);
+			System.out.println("DB에 있을경우");
+			System.out.println(result);
+		}else {
+			work_hs = work(vo.getYkiho());
+			model.addAttribute("work", work_hs);
+			System.out.println("DB에 없을경우");
+			System.out.println(work_hs);
+		}
+		
+		vo = detail(vo);	
 		
 		model.addAttribute("vo", vo);
-		model.addAttribute("work", work_hs);
+	
 		return "details/hospitaldetail";
 
 	}
@@ -284,6 +304,21 @@ public class MapController {
 				 work_hs.setLunchWeek((String)item.get("lunchWeek"));
 				 work_hs.setRcvSat((String)item.get("rcvSat"));
 				 work_hs.setRcvWeek((String)item.get("rcvWeek"));
+				 work_hs.setTrmtMonStart(item.get("trmtMonStart"));
+				 work_hs.setTrmtMonEnd(item.get("trmtMonEnd"));
+				 work_hs.setTrmtTueStart(item.get("trmtTueStart"));
+				 work_hs.setTrmtTueEnd(item.get("trmtTueEnd"));
+				 work_hs.setTrmtWedStart(item.get("trmtWedStart"));
+				 work_hs.setTrmtWedEnd(item.get("trmtWedEnd"));
+				 work_hs.setTrmtThuStart(item.get("trmtThuStart"));
+				 work_hs.setTrmtThuEnd(item.get("trmtThuEnd"));
+				 work_hs.setTrmtFriStart(item.get("trmtFriStart"));
+				 work_hs.setTrmtFriEnd(item.get("trmtFriEnd"));
+				 work_hs.setTrmtSatStart(item.get("trmtSatStart"));
+				 work_hs.setTrmtSatEnd(item.get("trmtSatEnd"));
+				 work_hs.setTrmtSunStart(item.get("trmtSunStart"));
+				 work_hs.setTrmtSunEnd(item.get("trmtSunEnd"));
+				 
 				 
 				 
 				 
@@ -307,7 +342,8 @@ public class MapController {
 	 * @throws Exception
 	 * 
 	 */
-	private static String readUrl(String urlString) throws Exception {	
+	private static String readUrl(String urlString) throws Exception {
+		System.out.println(urlString);
 		
 		BufferedReader reader = null;
 		try {
