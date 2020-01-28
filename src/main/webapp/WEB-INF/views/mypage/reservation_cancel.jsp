@@ -23,7 +23,7 @@
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>My Doctor</strong> by
+					<a href="main	" class="logo"><strong>My Doctor</strong> by
 						team.5</a>
 
 				</header>
