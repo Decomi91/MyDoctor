@@ -62,4 +62,61 @@ HashMap<String, Object> map = new HashMap<String, Object>();
 		return mDAO.hosGetListCount(hosId);
 	}
 
+	@Override
+	public int hosGetTodayListCount(String hosId) {
+		return mDAO.hosGetTodayListCount(hosId);
+	}
+
+	@Override
+	public List<Reservation> hosGetTodayReserveList(String hosId, int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		
+		map.put("hosId", hosId);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		
+		return mDAO.hosGetTodayReserveList(map);
+	}
+
+	@Override
+	public int hosGetDiagListCount(String hosId) {
+		return mDAO.hosGetDiagListCount(hosId);
+	}
+
+	@Override
+	public List<Reservation> hosGetDiagReserveList(String hosId, int page, int limit) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		
+		map.put("hosId", hosId);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		
+		return mDAO.hosGetDiagList(map);
+	}
+
+	@Override
+	public int hosGetAllReserveListCount(String hosId) {
+		return mDAO.hosGetAllReserveListCount(hosId);
+	}
+
+	@Override
+	public List<Reservation> hosGetAllReserveList(String hosId, int page, int limit) {
+HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		
+		map.put("hosId", hosId);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		
+		return mDAO.hosGetAllReserveList(map);
+	}
+
 }

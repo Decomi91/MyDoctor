@@ -38,17 +38,17 @@
  	</select> 
  	<!-- 김건수 즐겨찾기 두번째 -->
  	<select id="fa_re" resultType="String">
- 	select count(*) from favorites where id=#{id} and hosid=#{hosid}
+ 	select count(*) from bookmarks where id=#{id} and hosid=#{hosid}
  	</select>
  	
  	<!-- 김건수 즐겨찾기 추가 -->
  	<insert id="fa_insert">
- 	insert into favorites values(#{id},#{hosid},#{hosname})
+ 	insert into bookmarks values(#{id},#{hosid},#{hosname})
  	</insert>
  	
  	<!-- 김건수 즐겨찾기 삭제 -->
  	<delete id="fa_delete">
- 	delete from favorites where id=#{id} and hosid=#{hosid}
+ 	delete from bookmarks where id=#{id} and hosid=#{hosid}
  	</delete>
    
  	<select id="idcheck" parameterType="String" resultType="String">
@@ -64,7 +64,7 @@
  	
  	<select id = "getdetail" parameterType = "String" resultType = "hospital">
  		select * from hospitals
- 		where yki = #{yki} and joinokay = 1
+ 		where yki = #{yki} and joinok = 1
  	</select>
    
  	<select id="getsignlistcount" resultType="int">

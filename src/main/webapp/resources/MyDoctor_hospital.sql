@@ -32,9 +32,10 @@ insert into hospitals values('testing','123','test',
 			0900,1700,0900,1700,0900,1700,0900,1700,1,1,sysdate);
 		
 
-create table favorites (
+create table bookmarks (
   id varchar2(15) references members(id),
   hosid varchar2(15) references hospitals(id),
   hosname varchar2(50)
 )
-select * from favorites				
+select * from bookmarks
+drop table favorite
