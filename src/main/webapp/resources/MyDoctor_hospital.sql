@@ -28,13 +28,13 @@ create table hospitals(
 drop table hospitals cascade constraints
 select * from hospitals
 insert into hospitals values('testing','123','test',
-			'testaddr',029579599,'ABCD',1,0900,1700,0900,1700,0900,1700,
-			0900,1700,0900,1700,0900,1700,0900,1700,1,1,sysdate);
+			'testaddr',029579599,'ABCD',0900,1700,0900,1700,0900,1700,
+			0900,1700,0900,1700,0900,1700,0900,1700,1300, 1400, 1,1,sysdate);
 		
 
-create table favorites (
+create table bookmarks (
   id varchar2(15) references members(id),
   hosid varchar2(15) references hospitals(id),
   hosname varchar2(50)
 )
-select * from favorites				
+select * from bookmarks				

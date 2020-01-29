@@ -39,12 +39,12 @@
 							<h1 class="koreanfont hospitalnamesize" style="font-size: 3em;">
 							 <c:if test="${chk==1 and hs_empty eq '1'}">
 							 	<c:if test="${count eq '1' }">
-								<i class="icon far fa-heart solid"
+								<i class="icon far fa-heart solid detailIcon"
 									style="float: right; color: #f56a6a; margin-right: 5%"
 									id="fav_hos"></i>
 									</c:if>
-									<c:if test="${empty count  }">
-								<i class="icon far fa-heart"
+								<c:if test="${empty count  }">
+								<i class="icon far fa-heart detailIcon"
 									style="float: right; color: #f56a6a; margin-right: 5%"
 									id="fav_hos"></i>
 									</c:if>

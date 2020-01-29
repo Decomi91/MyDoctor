@@ -1,354 +1,488 @@
 @import url(http://fonts.googleapis.com/css?family=Lato:300,400,700);
-@import url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700");
+
+@import
+	url("https://fonts.googleapis.com/css?family=Open+Sans:400,600,400italic,600italic|Roboto+Slab:400,700")
+	;
+
 @import url('https://fonts.googleapis.com/css?family=Jua:400');
+
 @import url('https://fonts.googleapis.com/css?family=Gamja+Flower:400');
-@import url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script:400');
+
+@import
+	url('https://fonts.googleapis.com/css?family=Nanum+Pen+Script:400');
+
 @import url('https://fonts.googleapis.com/css?family=Do+Hyeon:400');
+
 @import url('https://fonts.googleapis.com/css?family=Nanum+Gothic:400');
+
 @import url('https://fonts.googleapis.com/css?family=Sunflower:500');
 /* Starter CSS for Flyout Menu */
-#cssmenu,
-#cssmenu ul,
-#cssmenu ul li,
-#cssmenu ul ul {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
+#cssmenu, #cssmenu ul, #cssmenu ul li, #cssmenu ul ul {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
 }
+
 #cssmenu ul {
-  position: relative;
-  z-index: 597;
-  float: left;
+	position: relative;
+	z-index: 597;
+	float: left;
 }
+
 #cssmenu ul li {
-  float: left;
-  min-height: 1px;
-  line-height: 1em;
-  vertical-align: middle;
+	float: left;
+	min-height: 1px;
+	line-height: 1em;
+	vertical-align: middle;
 }
-#cssmenu ul li.hover,
-#cssmenu ul li:hover {
-  position: relative;
-  z-index: 599;
-  cursor: default;
+
+#cssmenu ul li.hover, #cssmenu ul li:hover {
+	position: relative;
+	z-index: 599;
+	cursor: default;
 }
+
 #cssmenu ul ul {
-  margin-top: 1px;
-  visibility: hidden;
-  position:relative;
-  
-  left: 99%;
-  z-index: 598;
-  width: 100%;
+	margin-top: 1px;
+	visibility: hidden;
+	position: relative;
+	left: 99%;
+	z-index: 598;
+	width: 100%;
 }
+
 #cssmenu ul ul li {
-  float: none;
+	float: none;
 }
+
 #cssmenu ul ul ul {
-  top: 1px;
-  left: 99%;
+	top: 1px;
+	left: 99%;
 }
-#cssmenu ul li:hover > ul {
-  visibility: visible;
+
+#cssmenu ul li:hover>ul {
+	visibility: visible;
 }
+
 #cssmenu ul li {
-  float: none;
+	float: none;
 }
+
 #cssmenu ul ul li {
-  font-weight: normal;
+	font-weight: normal;
 }
 /* Custom CSS Styles */
 #cssmenu {
-  font-family: 'Lato', sans-serif;
-  font-size: 100%;
-  width: 100%;
-  
-}
-#cssmenu ul a,
-#cssmenu ul a:link,
-#cssmenu ul a:visited {
-  display: block;
-  color: #848889;
-  text-decoration: none;
-  font-weight: 300;
-}
-#cssmenu > ul {
-  float: none;
-}
-#cssmenu ul {
-  background: #fff;
-}
-#cssmenu > ul > li {
-  border-left: 3px solid #d7d8da;
-  padding:0;
-}
-#cssmenu > ul > li > a {
-  padding: 10px 0px 10px 20px;
-}
-#cssmenu > ul > li:hover {
-  border-left: 3px solid #f56a6a;
-}
-#cssmenu ul li:hover > a {
-  color: #f56a6a;
-}
-#cssmenu > ul > li:hover {
-  background: #FFDDD9;
-}
-/* Sub Menu */
-#cssmenu ul ul a:link,
-#cssmenu ul ul a:visited {
-  font-weight: 400;
-  font-size: 14px;
-}
-#cssmenu ul ul {
-  width: 180px;
-  background: none;
-  border-left: 20px solid transparent;
-}
-#cssmenu ul ul a {
-  padding: 8px 0;
-  border-bottom: 1px solid #eeeeee;
-}
-#cssmenu ul ul li {
-  padding: 0 20px;
-  background: #fff;
-}
-#cssmenu ul ul li:last-child {
-  border-bottom: 3px solid #d7d8da;
-  padding-bottom: 10px;
-}
-#cssmenu ul ul li:first-child {
-  padding-top: 10px;
-}
-#cssmenu ul ul li:last-child > a {
-  border-bottom: none;
-}
-#cssmenu ul ul li:first-child:after {
-  content: '';
-  display: block;
-  width: 0;
-  height: 0;
-  position: absolute;
-  left: -20px;
-  top: 13px;
-  border-left: 10px solid transparent;
-  border-right: 10px solid #fff;
-  border-bottom: 10px solid transparent;
-  border-top: 10px solid transparent;
-}
-.mypageMenu{
-	
-	border-top: 0 !important;
-	padding-top:0 !important;
-	margin-top:2%;
+	font-family: 'Lato', sans-serif;
+	font-size: 100%;
+	width: 100%;
 }
 
-.mypageHeader{
-	text-align:center;
-	width: 100%;
-	
+#cssmenu ul a, #cssmenu ul a:link, #cssmenu ul a:visited {
+	display: block;
+	color: #848889;
+	text-decoration: none;
+	font-weight: 300;
+}
+
+#cssmenu>ul {
+	float: none;
+}
+
+#cssmenu ul {
+	background: #fff;
+}
+
+#cssmenu>ul>li {
+	border-left: 3px solid #d7d8da;
+	padding: 0;
+}
+
+#cssmenu>ul>li>a {
+	padding: 10px 0px 10px 20px;
+}
+
+#cssmenu>ul>li:hover {
+	border-left: 3px solid #f56a6a;
+}
+
+#cssmenu ul li:hover>a {
+	color: #f56a6a;
+}
+
+#cssmenu>ul>li:hover {
+	background: #FFDDD9;
+}
+/* Sub Menu */
+#cssmenu ul ul a:link, #cssmenu ul ul a:visited {
+	font-weight: 400;
+	font-size: 14px;
+}
+
+#cssmenu ul ul {
+	width: 180px;
+	background: none;
+	border-left: 20px solid transparent;
+}
+
+#cssmenu ul ul a {
+	padding: 8px 0;
+	border-bottom: 1px solid #eeeeee;
+}
+
+#cssmenu ul ul li {
+	padding: 0 20px;
+	background: #fff;
+}
+
+#cssmenu ul ul li:last-child {
+	border-bottom: 3px solid #d7d8da;
+	padding-bottom: 10px;
+}
+
+#cssmenu ul ul li:first-child {
+	padding-top: 10px;
+}
+
+#cssmenu ul ul li:last-child>a {
+	border-bottom: none;
+}
+
+#cssmenu ul ul li:first-child:after {
+	content: '';
+	display: block;
+	width: 0;
+	height: 0;
+	position: absolute;
+	left: -20px;
+	top: 13px;
+	border-left: 10px solid transparent;
+	border-right: 10px solid #fff;
+	border-bottom: 10px solid transparent;
+	border-top: 10px solid transparent;
+}
+
+.mypageMenu {
 	border-top: 0 !important;
-	padding-top:0 !important;
-	margin-top:0;
-	}
-#mypageHeaderdiv ul, #mypageHeaderdiv li, #mypageHeaderdiv ul a{
-	 list-style: none;
-  margin: 0;
-  padding: 0;
-  border: 0;
-   font-family: "Roboto Slab", serif;
-   font-weight: 800;
-  font-size: 110%;
-  width: 100%;
-  color: #848889;
-  padding:0.5em 0;
+	padding-top: 0 !important;
+	margin-top: 2%;
 }
-#mypageHeaderdiv ul>li:nth-child(3){
-	font-family:'Lato', sans-serif;
+
+.mypageHeader {
+	text-align: center;
+	width: 100%;
+	border-top: 0 !important;
+	padding-top: 0 !important;
+	margin-top: 0;
+}
+
+#mypageHeaderdiv ul, #mypageHeaderdiv li, #mypageHeaderdiv ul a {
+	list-style: none;
+	margin: 0;
+	padding: 0;
+	border: 0;
+	font-family: "Roboto Slab", serif;
+	font-weight: 800;
+	font-size: 110%;
+	width: 100%;
+	color: #848889;
+	padding: 0.5em 0;
+}
+
+#mypageHeaderdiv ul>li:nth-child(3) {
+	font-family: 'Lato', sans-serif;
 	font-size: 90%;
-	font-weight:400;
-	text-align:center;
+	font-weight: 400;
+	text-align: center;
 }
-.mypageBell{padding:5%}
-.mypageSection{
-	width:25%;
+
+.mypageBell {
+	padding: 5%
+}
+
+.mypageSection {
+	width: 25%;
 	border-top: 2px solid #faaeae;
 	border-bottom: 2px solid #faaeae;
 	height: 100%;
-	padding:2%;
-	float:left;
-	background-color:#f5f6f7
-	}
-	
-.mypageFooter{border-bottom:5px solid #f56a6a }
-.mypageContent{	
-border-top:0 !important;
-float:left;	
-padding:3%;
+	padding: 2%;
+	float: left;
+	background-color: #f5f6f7
 }
+
+.mypageFooter {
+	border-bottom: 5px solid #f56a6a
+}
+
+.mypageContent {
+	border-top: 0 !important;
+	float: left;
+	padding: 3%;
+}
+
 div.signoutpassck {
-  border:1px solid #f5f6f7;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-  text-align: center;
-  border-radius: 0.375em;
-  padding:5%;
-  line-height:2em;
+	border: 1px solid #f5f6f7;
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0
+		rgba(0, 0, 0, 0.19);
+	text-align: center;
+	border-radius: 0.375em;
+	padding: 5%;
+	line-height: 2em;
 }
-.fa-frown-open, .fa-user-lock{font-size:5em;}
-.mypageContent{position:relative; margin: 0; width:75%; height: 80% }
-.sectionDisplay, .mypageContent{display:inline-block !important; }
-.signoutmsg{font-size: 2em; padding:3%; margin:0%}
-div.passck1, div.passck2{width: 50% !important; display: inline-block; text-align: center; 
-margin:0 !important;height:100%; vertical-align: bottom;}
-div.passck1{ padding:1% !important; background-color:#77A8C7; color: white; 
+
+.fa-frown-open, .fa-user-lock {
+	font-size: 5em;
 }
-.passck2{
- border-top:none !important;border-right:none !important;
-  border-left:none !important; 
-  border-radius: 0 !important;
-  border-bottom: 0 !important;
-  margin:0 !important; display:inline-block !important; width: 50% !important;
-  height:100%
-  }
-  
-#passckbox{border-bottom: 2px solid #77A8C7 !important;
-margin:0 auto; width:70%; 
+
+.mypageContent {
+	position: relative;
+	margin: 0;
+	width: 75%;
+	height: 80%
 }
-.signoutsubbtn{
-	width: 80% !important;margin: 5% auto;
+
+.sectionDisplay, .mypageContent {
+	display: inline-block !important;
+}
+
+.signoutmsg {
+	font-size: 2em;
+	padding: 3%;
+	margin: 0%
+}
+
+div.passck1, div.passck2 {
+	width: 50% !important;
+	display: inline-block;
+	text-align: center;
+	margin: 0 !important;
+	height: 100%;
+	vertical-align: bottom;
+}
+
+div.passck1 {
+	padding: 1% !important;
+	background-color: #77A8C7;
+	color: white;
+}
+
+.passck2 {
+	border-top: none !important;
+	border-right: none !important;
+	border-left: none !important;
+	border-radius: 0 !important;
+	border-bottom: 0 !important;
+	margin: 0 !important;
+	display: inline-block !important;
+	width: 50% !important;
+	height: 100%
+}
+
+#passckbox {
+	border-bottom: 2px solid #77A8C7 !important;
+	margin: 0 auto;
+	width: 70%;
+}
+
+.signoutsubbtn {
+	width: 80% !important;
+	margin: 5% auto;
+}
+
+.passckbtn_ {
+	background: #F7B4B4;
+	border-radius: 100px;
+	padding: 0 !important;
+	color: #fff !important;
+	text-decoration: none;
+	font-family: jua !important;
+	text-align: center !important;
+	margin: 0 1%;
+	width: 35% !important;
+	height: 5% !important;
+	box-shadow: none;
+	font-size: 1em !important;
+}
+
+.passckbtn_:hover {
+	background: #faaeae !important;
+	color: white !important;
+}
+
+.passckbtn_ok {
+	background: #D2D2D2 !important;
+}
+
+.passckbtn_ok:hover {
+	background: #b9b9b9 !important;
+}
+
+.modifyInput {
+	border-top: 0 !important;
+	border-right: 0 !important;
+	border-left: 0 !important;
+	border-bottom: 2px solid #D2D2D2;
+	border-radius: 0 !important
+}
+
+.modifybtn {
+	margin: 2% auto;
+}
+
+button[name=modifySubmit], button[name=modifyReset] {
+	width: 48%
+}
+
+#myInfo {
+	border-bottom: 2px solid #faaeae;
+	border-top: 2px solid #faaeae;
+	padding: 4%;
+	width: 100%
+}
+
+#myPassword {
+	border-bottom: 2px solid #faaeae;
+	border-top: 2px solid #faaeae;
+	margin-top: 5%;
+	padding: 4%;
+}
+
+.mod {
+	border-bottom: 5px double rgba(132, 136, 137, 0.5);
+	padding-bottom: 2%;
+	font-family: sunflower;
+}
+
+.mod_body {
 	
 }
-.passckbtn_ {
-  background: #F7B4B4;
-  border-radius: 100px;
-  padding: 0 !important;
-  color: #fff !important;
-  text-decoration: none;
-font-family: jua !important; text-align:center !important;
-  margin: 0 1%;
-  width:35% !important;
-  height:5% !important;
-  box-shadow:none;
- font-size:1em !important;
+
+#myInfo, #myPassword {
+	background-color: #f5f6f7;
 }
-.passckbtn_:hover {
-  background: #faaeae !important;
-  color:white !important;
+
+.mypageContent_mod {
+	padding-top: 0 !important
 }
-.passckbtn_ok { background: #D2D2D2 !important;}
-.passckbtn_ok:hover { background: #b9b9b9 !important; }
-.modifyInput{border-top:0 !important; border-right: 0!important; border-left:0 !important;
-border-bottom:2px solid #D2D2D2; border-radius:0 !important}
-.modifybtn{margin:2% auto;}
-button[name=modifySubmit], button[name=modifyReset]{width:48%}
-#myInfo{border-bottom:2px solid #faaeae;  border-top: 2px solid #faaeae;
-padding:4%; width:100% }
-#myPassword{border-bottom: 2px solid #faaeae; border-top: 2px solid #faaeae; margin-top:5%; padding:4%;}
-.mod{border-bottom: 5px double rgba(132, 136, 137,0.5); padding-bottom: 2%; font-family:sunflower;}
-.mod_body{}
-#myInfo, #myPassword{background-color:#f5f6f7;}
-.mypageContent_mod{padding-top:0 !important}
+
 .accordion {
- 
-  margin: 3rem auto;
-  width: 100%;
-  font-family: 'Lato', sans-serif !important;
-  background: #f4f4f4;
+	margin: 3rem auto;
+	width: 100%;
+	font-family: 'Lato', sans-serif !important;
+	background: #f4f4f4;
 }
+
 .accordion__title {
-  font-size: 0.7rem;
-  text-transform: uppercase;
-  letter-spacing: 2px;
-  padding: 1rem 1.5rem;
-  background: #77A8C7;
-  color: white;
-  cursor: pointer;
-  -webkit-transition: .3s ease;
-          transition: .3s ease;
-          font-family: 'Lato', sans-serif !important;
+	font-size: 0.7rem;
+	text-transform: uppercase;
+	letter-spacing: 2px;
+	padding: 1rem 1.5rem;
+	background: #77A8C7;
+	color: white;
+	cursor: pointer;
+	-webkit-transition: .3s ease;
+	transition: .3s ease;
+	font-family: 'Lato', sans-serif !important;
 }
+
 .accordion__title:hover {
-  background: #4574A8;
+	background: #4574A8;
 }
+
 .accordion__copy {
-  display: none;
-  padding: 1rem 1.5rem 2rem 1.5rem;
-  color: gray;
-  line-height: 1.6;
-  font-size: 14px;
-  font-weight: 500;
+	display: none;
+	padding: 1rem 1.5rem 2rem 1.5rem;
+	color: gray;
+	line-height: 1.6;
+	font-size: 14px;
+	font-weight: 500;
 }
+
 .accordion__copy--open {
-  display: block;
+	display: block;
 }
 
-.qnabtn{width: 49%; display:inline-block !important; text-align:center;
-font-size:1.75em !important; margin-top:0 !important; margin-bottom:1em !important;
-color:#7f888f}
-.qnabtn:firstchild{margin-right:1% !important}
-.qnabtn:hover{cursor:pointer;}
-.pagination{text-align:center;}
+.qnabtn {
+	width: 49%;
+	display: inline-block !important;
+	text-align: center;
+	font-size: 1.75em !important;
+	margin-top: 0 !important;
+	margin-bottom: 1em !important;
+	color: #7f888f
+}
 
-<!--review���� �κ� rating-->
-.right {
-  float: right;
+.qnabtn:firstchild {
+	margin-right: 1% !important
+}
+
+.qnabtn:hover {
+	cursor: pointer;
+}
+
+.pagination {
+	text-align: center;
+}
+
+<!--
+review���� �κ� rating-->.right {
+	float: right;
 }
 
 .left {
-  float: left;
+	float: left;
 }
 
 .rating .stars {
-  margin-right: 15px;
+	margin-right: 15px;
 }
 
 .rating .stars .star {
-  float: left;
-  padding: 5px 2px;
-  cursor: pointer;
+	float: left;
+	padding: 5px 2px;
+	cursor: pointer;
 }
 
 .rating .stars .star:before {
-  font-family: 'FontAwesome';
-  content: '\f005';
-  color: #d0e8f0;
-  font-size: 3em;
+	font-family: 'FontAwesome';
+	content: '\f005';
+	color: #d0e8f0;
+	font-size: 3em;
 }
 
-.rating .stars .star:hover:before,
-.rating .stars .star.to_rate:before,
-.rating .stars .star.rated:before {
-  color: #80c1d5;
+.rating .stars .star:hover:before, .rating .stars .star.to_rate:before,
+	.rating .stars .star.rated:before {
+	color: #80c1d5;
 }
 
 .rating .stars .star.no_to_rate:before {
-  color: #d0e8f0;
+	color: #d0e8f0;
 }
 
 <!--
 --> /* bookmark css yuri */
+.bookmarkHosname:hover{cursor : pointer}
 .bookmarkRepeat {
 	width: 75%;
 	margin: 0 auto;
-	margin-bottom :10px;
+	margin-bottom: 10px;
 }
 
 .bookmarkHosname {
 	background: #77A8C7;
-	padding: 3px 15px;
-	
+	padding: 3px 10px;
 }
 
 .HosnameA {
 	color: white;
 	font-size: 20px;
-	font-weight : 600;
+	font-weight: 600;
 }
 
 .bookmarkHosInfo {
 	padding: 5px 15px;
-	background : #f5f6f7;
+	background: #f5f6f7;
 }
 
 .infoSpan {
@@ -356,10 +490,34 @@ color:#7f888f}
 	margin-bottom: 3px;
 }
 
+.bookReserve {
+	background: #f7b4b4;
+	box-shadow: inset 0 0 0 2px white;
+	color: white !important;
+	font-size: 0.95em;
+	font-weight: 550;
+	height: 2.3em;
+	letter-spacing: 0.1em;
+	line-height: 2.3em;
+	padding: 0 1em;
+	position: relative;
+	top: 1.5px;
+	float: right;
+}
+
+.bookReserve:hover {
+	color: #f7b4b4 !important;
+}
+
 .bookmarkIcon {
 	color: #f7b4b4;
-	float: right;
-	padding: 2px;
+	padding-right: 2px;
+	position: relative;
+	top: 1.5px;
+}
+
+.bookmarkIcon:hover{
+	color:#edcece
 }
 
 /* reservation yuri */
@@ -419,7 +577,7 @@ color:#7f888f}
 	vertical-align: middle;
 	font-size: 22px;
 	font-weight: bold;
-	    font-family: sunflower;
+	font-family: sunflower;
 	color: #f56a6a;
 	text-align: center;
 	border-bottom: 2px solid #f56a6a;

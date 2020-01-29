@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.mydoctor.model.Bookmark;
+import com.project.mydoctor.model.Hospital;
 
 @Repository
 public class BookmarkDAO {
@@ -26,8 +27,8 @@ public class BookmarkDAO {
 		return sqlSession.selectOne("Bookmarks.isBookmark", map);
 	}
 
-	public List<Bookmark> getBookmarkList(String memberId) {
-		return sqlSession.selectList("Bookmarks.getBookmarkList", memberId);
+	public List<Hospital> getBookmarkList(Map<String, Object> map) {
+		return sqlSession.selectList("Bookmarks.getBookmarkList", map);
 	}
 
 	public int getListCount(String memberId) {

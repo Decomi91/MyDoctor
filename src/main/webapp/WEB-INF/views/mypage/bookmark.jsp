@@ -1,17 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-
+	<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+	
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="utf-8">
-<title>마이페이지 - 예약 현황</title>
+<title>마이페이지 - 진료 기록</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
 <link rel="stylesheet" href="resources/css/menuStyles.css" />
 <link rel="stylesheet" href="resources/css/paging.css" />
+
 
 </head>
 <body class="is-preload">
@@ -36,61 +37,42 @@
 						<jsp:include page="mypage_menu.jsp"></jsp:include>
 						<div class="mypageContent">
 
-							<!-- Reservation -->
-							<div id="reservationDIV">
+							<!-- 관심 병원 -->
+							<div>
 								<nav>
-									<span class="noLink">Reservation</span>
+									<span class="noLink">관심 병원</span>
 								</nav>
-
-								<div class="table-wrapper">
-									<table class="reservetable mypagetable">
-										<thead>
-											<tr>
-												<th width=30%>예약 시간</th>
-												<th width=25%>병원</th>
-												<th width=25%>진행 상황</th>
-												<th></th>
-											</tr>
-										</thead>
-
-										<tbody>
-										
-											<!-- 예약 내역이 있는 경우 -->
-											<c:if test="${listcount > 0}">
-												<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
-												<c:forEach var = "rv" items = "${rv }">
-													<tr>
-														<td>${rv.reserveTime }</td>
-														<td>${rv.hosname }</td>
-														<c:if test = "${rv.acceptance == -1 || rv.acceptance == -2}">
-															<td><span class="hoscancel reservebox">취소된 예약</span></td>
-															<td></td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 0}">
-															<td><span class="hoswaiting reservebox">승인 대기중</span></td>
-															<td>
-																<a href = "cancel.do?reserveNo=${rv.reserveNo }">예약 취소&nbsp;<i class="fas fa-angle-right"></i></a>
-															</td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 1}">
-															<td><span class="hossoon reservebox">방문 예정</span></td>
-															<td></td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 2}">
-															<td><span class="hosfinish reservebox">진료 완료</span></td>
-															<td>
-																<a href="reviewwrite.do?reserveNo=${rv.reserveNo }">후기 작성&nbsp;<i class="fas fa-angle-right"></i></a>
-															</td>
-														</c:if>
-												</c:forEach>
-											</c:if>
-											<c:if test="${listcount == 0}">
-												<tr>
-													<td colspan = "4">등록된 글이 없습니다.</td>
-												</tr>
-											</c:if>
-										</tbody>
-									</table>
+								
+								<div class = "table-wrapper">
+									
+									<c:if test="${listcount > 0}">
+										<c:forEach var = "bm" items = "${bm }">
+											<div class = "bookmarkRepeat">
+												<div class = "bookmarkHosname">
+													<span class = "bookmarkIcon">
+														<i class="icon far fa-heart solid bookmarkIcon fa-2x fav_hos" 
+															onClick = "location.href='bookmarkcancel.do?ykiho=${bm.yki}'"></i>
+													</span>
+													<span class = "HosnameA">
+													${bm.yadmNm }
+													</span>
+													<a href="reserve.net?yki=${bm.yki }"
+														class="button koreanfont bookReserve">예약하기</a>
+												</div>
+												<div class = "bookmarkHosInfo" style = "display : none">
+													<span class = "infoSpan">${bm.addr }</span>
+													<span class = "infoSpan infoHphone">${bm.hphone }</span>
+													<span>
+														<i class="fas fa-grin-hearts"></i> ? / 10
+													</span>
+													<span>(13)</span>
+												</div>
+											</div>
+										</c:forEach>
+									</c:if>
+									<c:if test="${listcount == 0 }">
+									등록된 관심병원이 없습니다.
+									</c:if>
 									
 									<div class="center-block">
 										<div class="row">
@@ -136,7 +118,8 @@
 									</div>
 								</div>
 							</div>
-							<!-- Reservation end -->
+							<!-- 관심 병원 end -->
+							
 						</div>
 					</div>
 				</section>
@@ -157,7 +140,52 @@
 	<script src="resources/js/util.js"></script>
 	<script src="resources/js/main.js"></script>
 	<script>
-		
+		$(function(){
+			$(".bookmarkHosname").each(function(index, item){
+				$(this).click(function(){
+					var submenu = $(this).next(".bookmarkHosInfo");
+
+					// submenu 가 화면상에 보일때는 위로 보드랍게 접고 아니면 아래로 보드랍게 펼치기
+					if( submenu.is(":visible") ){
+						submenu.slideUp();
+					}else{
+						submenu.slideDown();
+					}
+				});
+			});
+			// menu class 중에 두번째 있는 menu 의 하위에 있는 a태그에 클릭 이벤트를 발생시킨다.
+			$(".bookmarkHosname:eq(0)").click();
+			
+			
+			function phoneFormat(num){
+				var formatNum = "";
+				
+				if(num.length != 8)
+					num = '0' + num;
+				
+				if(num.length == 11){
+					formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
+				}else if(num.length == 10){
+					formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+				}else if(num.length==8){
+			        formatNum = num.replace(/(\d{4})(\d{4})/, '$1-$2');
+			    }else{
+			        if(num.indexOf('02')==0){
+			           formatNum = num.replace(/(\d{2})(\d{4})(\d{4})/, '$1-$2-$3');
+			        }else{
+			           formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, '$1-$2-$3');
+			        }
+			    }
+				return formatNum;
+			}
+			
+			$(".infoHphone").each(function(index, item){
+				var phone = $(this).text();
+				console.log(phone);
+				$(this).text(phoneFormat(phone));
+			});
+			
+		})
 	</script>
 </body>
 </html>
