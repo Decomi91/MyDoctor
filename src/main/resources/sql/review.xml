@@ -7,7 +7,7 @@
  select count(*) from reviews where id=#{id}
  </select>
  <select id="list" parameterType="java.util.Map" resultType="review">
- select * from(select rownum rnum, r.* from(select * from reviews order by visited desc ) r)
+ select * from(select rownum rnum, r.* from(select * from reviews where id=#{id} order by visited desc ) r)
  where rnum &gt;=#{start} and rnum &lt;=#{end}
  </select>
  </mapper>

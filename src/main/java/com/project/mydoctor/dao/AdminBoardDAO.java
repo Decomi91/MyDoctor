@@ -1,5 +1,6 @@
 package com.project.mydoctor.dao;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -36,6 +37,16 @@ public class AdminBoardDAO {
 
 	public int setAdminRequestReply(AdminBoard board) {
 		return sqlSession.update("AdminBoards.setreply", board);
+	}
+
+	public int getListCount(String id) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("AdminBoards.reqlistcount", id);
+	}
+
+	public List<AdminBoard> getMyReqList(HashMap<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectList("AdminBoards.reqlist", map);
 	}
 
 }

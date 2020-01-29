@@ -16,4 +16,8 @@ public interface BoardService {
 
 	int setAdminRequestReply(AdminBoard board);
 
+	int getreqListCount(String id);
+
+	List<AdminBoard> getMyReqList(int page, int limit, String id);
+
 }

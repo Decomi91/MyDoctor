@@ -36,4 +36,11 @@
  		set checking = 2, reply = #{reply}
  		where boardNum = #{boardNum}
  	</update>
+ 	<select id="reqlistcount" resultType="int" parameterType="String">
+ select count(*) from adminBoard where id=#{id}
+ </select>
+ <select id="reqlist" parameterType="java.util.Map" resultType="adminboard">
+ select * from(select rownum rnum, r.* from(select * from adminBoard where id=#{id} order by reqDate desc ) r)
+ where rnum &gt;=#{start} and rnum &lt;=#{end}
+ </select>
  </mapper>
