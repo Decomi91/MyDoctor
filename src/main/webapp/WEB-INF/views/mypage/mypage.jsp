@@ -40,13 +40,8 @@
 
 							<!-- Reservation -->
 							<div id="reservationDIV">
-								<nav id="boardMenu">
-									<ul>
-										<li id="reviewli"><a class="menuLink" href="#"
-											id="reviewa"> Reservation </a></li>
-										<li id="qnali"><a class="menuLink" href="#" id="qnaa">Chart
-										</a></li>
-									</ul>
+								<nav>
+									<span class="noLink">Reservation</span>
 								</nav>
 
 								<div class="table-wrapper">
@@ -146,42 +141,7 @@
 							<!-- Reservation end -->
 
 
-							<!-- 관심 병원 -->
-							<div>
-								<nav>
-									<span class="noLink">관심 병원</span>
-								</nav>
-								
-								<div class = "table-wrapper">
-									
-									<c:if test="${bookmarkcount > 0}">
-										<c:forEach var = "bm" items = "${bm }">
-											<div class = "bookmarkRepeat">
-												<div class = "bookmarkHosname">
-													<a href = "detail.net" class = "HosnameA">
-													${bm.hosname }
-													</a>
-													<font color = "white">· 내과 / 이비인후과</font>
-													<span class = "bookmarkIcon">
-														<i class="fas fa-heart bookmarkIcon fa-2x"></i>
-													</span>
-												</div>
-												<div class = "bookmarkHosInfo">
-													<span class = "infoSpan">${bm.hospital.addr }</span>
-													<span class = "infoSpan">${bm.hospital.hphone }</span>
-													<span>
-														<i class="fas fa-grin-hearts"></i> ? / 10
-													</span>
-													<span>(13)</span>
-												</div>
-											</div>
-										</c:forEach>
-									</c:if>
-									
-									
-								</div>
-							</div>
-							<!-- 관심 병원 end -->
+							
 							
 						</div>
 					</div>

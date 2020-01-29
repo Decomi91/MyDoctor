@@ -117,9 +117,8 @@ public class HosMypageController {
 		return mv;
 	}
 	
-	@GetMapping(value="/reserveX")
-	public ModelAndView reserveX(ModelAndView mv, int page, int reserveNo, HttpServletResponse response,
-			HttpSession session) throws Exception {
+	@GetMapping(value="/reserveX.net")
+	public ModelAndView reserveX(ModelAndView mv, int page, int reserveNo, HttpServletResponse response) throws Exception {
 		int result = reserveService.cancel(reserveNo);
 		
 		if(result == 1) {

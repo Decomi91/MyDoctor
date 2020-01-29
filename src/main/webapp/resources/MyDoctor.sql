@@ -34,7 +34,7 @@ create table adminBoard(
   boardNum number(10) primary key,
   subject varchar2(100) not null,
   content varchar2(4000) not null,
-  checking number(1) not null default 0,
+  checking number(1) default 0 not null ,
   reply varchar2(3000),
   reqDate date
 )

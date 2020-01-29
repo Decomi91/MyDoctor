@@ -18,15 +18,14 @@
 		where id = #{id} and hosid = #{hosid}
 	</select>
 	
-
-	<select id = "getBookmarkList" parameterType = "String" resultType = "bookmark">
-	<!-- 	select h.yadmNm, h.addr, h.hphone 
-		from bookmarks b
-		inner join hospitals h
-		on b.hosid = h.id
-		where b.id = #{memberId} -->
-		select * from hospitals
-		where id = (select hosid from bookmarks where id = #{memberId})
+	<select id = "getBookmarkList" parameterType = "map" resultType = "hospital">
+			select * from (select rownum rnum, b.*
+				  from ( select * from hospitals
+		                 where id in (select hosid from bookmarks 
+					                  where id = #{memberId})
+		                 order by yadmNm) b
+		                 )
+		 where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<select id = "getListCount" parameterType = "String" resultType = "int">
