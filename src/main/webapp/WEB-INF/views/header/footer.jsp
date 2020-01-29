@@ -71,8 +71,8 @@
                   </header>
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
-                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
-                        예약내용이 &nbsp;&nbsp; <a href="#">?</a> 건 있습니다.
+                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;오늘 병원
+                        예약이 &nbsp;&nbsp; <a href="hosmypage.net">${accepted }</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">

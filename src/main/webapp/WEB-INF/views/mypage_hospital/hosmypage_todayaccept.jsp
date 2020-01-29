@@ -39,20 +39,20 @@
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">Reservation</span>
+									<span class="noLink">Today Reservation</span>
 								</nav>
 
 								<div class="table-wrapper">
-								<form action = "reserveOk.net">
+								<form action = "diagnosis.net" method="post">
 									<table class="reservetable mypagetable">
 										<thead>
 											<tr>
-												<th width=12.5%>예약 번호</th>
-												<th width=25%>예약 시간</th>
+												<th width=17.5%>예약 번호</th>
+												<th width=22.5%>예약 시간</th>
 												<th width=20%>환자 정보</th>
 												<th width=20%>처리 상태</th>
 												<th width=10%>취소</th>
-												<th width=12.5%>
+												<th width=10%>
 													<input type = "checkbox" name = "reserveAll" id = "reserveAll">
 													<label for = "reserveAll"></label>
 												</th>
@@ -100,7 +100,7 @@
 											<tr>
 												<td colspan = "5"></td>
 												<td>
-													<input type = "submit" id = "reserveOkbtn" value = "승인">
+													<input type = "submit" id = "reserveOkbtn" value = "진료함">
 												</td>
 											</tr>
 										</tfoot>
@@ -118,7 +118,7 @@
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="hosmypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="hosmypage_today.net?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -130,7 +130,7 @@
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="hosmypage.net?page=${a }" class="page-link">${a}</a>
+																<a href="hosmypage_today.net?page=${a }" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -142,7 +142,7 @@
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="hosmypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="hosmypage_today.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>

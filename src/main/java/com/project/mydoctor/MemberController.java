@@ -5,6 +5,7 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -101,7 +102,10 @@ public class MemberController {
 				if(chk==1) {
 					session.setAttribute("yesaccept", mypageService.reserveCount(member.getId()));
 				}else {
-					session.setAttribute("reserve", reserveService.getReserves(member.getId()));
+					List<Integer> mypageList = reserveService.getReserves(member.getId());
+					session.setAttribute("accepted", mypageList.get(0));
+					session.setAttribute("wait", mypageList.get(1));
+					session.setAttribute("canceled", mypageList.get(2));
 				}
 			}
 		} else {

@@ -1,5 +1,6 @@
 package com.project.mydoctor.service;
 
+import java.util.List;
 import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +35,12 @@ public class ReserveServiceImpl implements ReserveService {
 	}
 
 	@Override
-	public Map<String, Integer> getReserves(String id) {
+	public List<Integer> getReserves(String id) {
 		return rDAO.getReserves(id);
+	}
+
+	@Override
+	public int diagnosisOk(int reserveNo) {
+		return rDAO.diagnosisOk(reserveNo);
 	}
 }

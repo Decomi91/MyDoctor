@@ -39,4 +39,28 @@ public class MypageDAO {
 	public int hosGetListCount(String hosId) {
 		return sqlSession.selectOne("Reservations.hosGetListCount", hosId);
 	}
+
+	public int hosGetTodayListCount(String hosId) {
+		return sqlSession.selectOne("Reservations.hosGetTodayListCount", hosId);
+	}
+
+	public List<Reservation> hosGetTodayReserveList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Reservations.hosGetTodayReserveList", map);
+	}
+
+	public int hosGetDiagListCount(String hosId) {
+		return sqlSession.selectOne("Reservations.hosGetDiagListCount", hosId);
+	}
+
+	public List<Reservation> hosGetDiagList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Reservations.hosGetDiagList", map);
+	}
+
+	public int hosGetAllReserveListCount(String hosId) {
+		return sqlSession.selectOne("Reservations.hosGetAllReserveListCount", hosId);
+	}
+
+	public List<Reservation> hosGetAllReserveList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Reservations.hosGetAllReserveList", map);
+	}
 }

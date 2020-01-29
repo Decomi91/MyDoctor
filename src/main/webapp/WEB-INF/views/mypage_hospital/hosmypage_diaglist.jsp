@@ -39,23 +39,18 @@
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">Reservation</span>
+									<span class="noLink">Diagnosis List</span>
 								</nav>
 
 								<div class="table-wrapper">
-								<form action = "reserveOk.net">
+								<form action = "diagnosis.net" method="post">
 									<table class="reservetable mypagetable">
 										<thead>
 											<tr>
-												<th width=12.5%>예약 번호</th>
-												<th width=25%>예약 시간</th>
-												<th width=20%>환자 정보</th>
+												<th width=15%>예약 번호</th>
+												<th width=35%>진료 시간</th>
+												<th width=30%>환자 정보</th>
 												<th width=20%>처리 상태</th>
-												<th width=10%>취소</th>
-												<th width=12.5%>
-													<input type = "checkbox" name = "reserveAll" id = "reserveAll">
-													<label for = "reserveAll"></label>
-												</th>
 											</tr>
 										</thead>
 
@@ -74,19 +69,11 @@
 														<td>${rv.name }</td>
 														<td>
 															<c:choose>
+																<c:when test="${rv.acceptance==2 }">진료완료</c:when>
 																<c:when test="${rv.acceptance==1 }">승인됨</c:when>
 																<c:when test="${rv.acceptance==0 }">승인대기</c:when>
 																<c:when test="${rv.acceptance==-1 }">취소</c:when>
 															</c:choose>
-														</td>
-														<td>
-															<a href = "reserveX.net?reserveNo=${rv.reserveNo }&page=${page}">
-																<i class="fas fa-window-close reserveX" style = "color:red"></i>
-															</a>		
-														</td>
-														<td>
-															<input type = "checkbox" name = "reserveOk" id = "${rv.reserveNo }" class = "reserveOk" value = "${rv.reserveNo }">
-															<label for = "${rv.reserveNo }"></label>
 														</td>
 												</c:forEach>
 											</c:if>
@@ -97,12 +84,7 @@
 											</c:if>
 										</tbody>
 										<tfoot>
-											<tr>
-												<td colspan = "5"></td>
-												<td>
-													<input type = "submit" id = "reserveOkbtn" value = "승인">
-												</td>
-											</tr>
+											<tr></tr>
 										</tfoot>
 									</table>
 									</form>
@@ -118,7 +100,7 @@
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="hosmypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="diagnosisList.net?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -130,7 +112,7 @@
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="hosmypage.net?page=${a }" class="page-link">${a}</a>
+																<a href="diagnosisList.net?page=${a }" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -142,7 +124,7 @@
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="hosmypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="diagnosisList.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>
@@ -175,21 +157,5 @@
 	<script src="resources/js/breakpoints.min.js"></script>
 	<script src="resources/js/util.js"></script>
 	<script src="resources/js/main.js"></script>
-	<script>
-		$(function(){
-			$("#reserveAll").click(function(){
-				if($(this).prop("checked") == true)
-					$(".reserveOk").prop("checked", true);
-				else
-					$(".reserveOk").prop("checked", false);
-			});
-			
-			$(".reserveOk").click(function(){
-				if($(this).prop("checked") == false && $("#reserveAll").prop("checked") == true){
-					$("#reserveAll").prop("checked", false);
-				}
-			});
-		})
-	</script>
 </body>
 </html>

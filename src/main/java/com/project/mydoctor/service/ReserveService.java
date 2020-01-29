@@ -1,5 +1,6 @@
 package com.project.mydoctor.service;
 
+import java.util.List;
 import java.util.Map;
 
 import com.project.mydoctor.model.Reservation;
@@ -14,6 +15,8 @@ public interface ReserveService {
 
 	int reserveOk(int reserveNo);
 
-	Map<String, Integer> getReserves(String id);
+	List<Integer> getReserves(String id);
+
+	int diagnosisOk(int reserveNo);
 
 }

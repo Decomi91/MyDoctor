@@ -8,8 +8,7 @@ create table reservation(
 	hosname			varchar2(15) not null,
 	disease			varchar2(100) not null,
 	reserveTime		date,
-	acceptance		number(1) default 0,
-	moreRes			number(1)
+	acceptance		number(1) default 0
 )
 
 insert into reservation
@@ -60,3 +59,15 @@ create table treatment(
 )
 select * from treatment
 
+
+select count(*)
+from reservation 
+where hosid = 'gong1' and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance=1
+union all
+select count(*)
+from reservation 
+where hosid = 'gong1' and acceptance=0
+union all
+		select count(*)
+		from reservation 
+		where hosid = 'gong1' and acceptance<0
