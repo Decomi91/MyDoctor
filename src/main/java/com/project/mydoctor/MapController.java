@@ -201,7 +201,7 @@ public class MapController {
 	 * @API밀집부분
 	 */
 	@RequestMapping(value = "detail.net", method = RequestMethod.GET)
-	public String locationView(HdetailVO vo, Model model,HttpSession session) throws Exception {
+                 	public String locationView(HdetailVO vo, Model model,HttpSession session) throws Exception {
 		/*
 		 		1. 요양기호로 병원 검색됨 -> 기존 자료 사용
 		 		2. 병원 없을 경우

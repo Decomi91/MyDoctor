@@ -73,7 +73,7 @@
 											<td colspan = 3>${rv.disease }</td>
 										</tr>
 									</table>
-									<button id = "reserveDetailbtn">확인</button>
+									<button id = "reserveDetailbtn" onClick="history.back();">확인</button>
 								</div>
 								
 							</div>

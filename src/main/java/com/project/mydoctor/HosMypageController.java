@@ -120,7 +120,7 @@ public class HosMypageController {
 		return mv;
 	}
 	
-	@GetMapping(value="/reserveX")
+	@GetMapping(value="/reserveX.net")
 	public ModelAndView reserveX(ModelAndView mv, int page, int reserveNo, HttpServletResponse response) throws Exception {
 		int result = reserveService.cancel(reserveNo);
 		
