@@ -10,7 +10,7 @@ public class Hospital {
 	private String password; //비밀번호
 	private String yadmNm; //병원명
 	private String addr; //주소
-	private int hphone; //전화번호
+	private long hphone; //전화번호
 	private String yki; //요양기호
 	//근무시간
 	private int doctors;
@@ -28,6 +28,8 @@ public class Hospital {
 	private int satEnd;
 	private int sunStart;
 	private int sunEnd;
+	private int lunchStart;
+	private int lunchEnd;
 	private byte joinok;
 	private String joindate;
 	
@@ -55,10 +57,11 @@ public class Hospital {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public int getHphone() {
+
+	public long getHphone() {
 		return hphone;
 	}
-	public void setHphone(int hphone) {
+	public void setHphone(long hphone) {
 		this.hphone = hphone;
 	}
 	public String getYki() {
@@ -158,6 +161,18 @@ public class Hospital {
 	public void setSunEnd(int sunEnd) {
 		this.sunEnd = sunEnd;
 	}
+	public int getLunchStart() {
+		return lunchStart;
+	}
+	public void setLunchStart(int lunchStart) {
+		this.lunchStart = lunchStart;
+	}
+	public int getLunchEnd() {
+		return lunchEnd;
+	}
+	public void setLunchEnd(int lunchEnd) {
+		this.lunchEnd = lunchEnd;
+	}
 	public byte getJoinok() {
 		return joinok;
 	}
@@ -177,11 +192,11 @@ public class Hospital {
 				+ ", tueStart=" + tueStart + ", tueEnd=" + tueEnd + ", wedStart=" + wedStart + ", wedEnd=" + wedEnd
 				+ ", thuStart=" + thuStart + ", thuEnd=" + thuEnd + ", friStart=" + friStart + ", friEnd=" + friEnd
 				+ ", satStart=" + satStart + ", satEnd=" + satEnd + ", sunStart=" + sunStart + ", sunEnd=" + sunEnd
-				+ ", joinok=" + joinok + ", joindate=" + joindate + "]";
+				+ ", lunchStart=" + lunchStart + ", lunchEnd=" + lunchEnd + ", joinok=" + joinok + ", joindate="
+				+ joindate + "]";
 	}
 	
-	
-	
+
 	
 	
 }

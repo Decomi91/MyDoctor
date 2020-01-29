@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"  
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="Bookmarks">
+	<insert id = "insert" parameterType = "map">
+		insert into bookmarks
+		values(#{id}, #{hosid}, #{hosname})
+	</insert>
+	
+	<delete id = "delete" parameterType = "map">
+		delete from bookmarks
+		where id = #{id} and hosid = #{hosid}
+	</delete>
+	
+	<select id = "isBookmark" parameterType = "map" resultType = "bookmark">
+		select * from bookmarks
+		where id = #{id} and hosid = #{hosid}
+	</select>
+	
+
+	<select id = "getBookmarkList" parameterType = "String" resultType = "bookmark">
+	<!-- 	select h.yadmNm, h.addr, h.hphone 
+		from bookmarks b
+		inner join hospitals h
+		on b.hosid = h.id
+		where b.id = #{memberId} -->
+		select * from hospitals
+		where id = (select hosid from bookmarks where id = #{memberId})
+	</select>
+	
+	<select id = "getListCount" parameterType = "String" resultType = "int">
+		select count(*) from bookmarks
+		where id = #{memberId}
+	</select>
+</mapper>

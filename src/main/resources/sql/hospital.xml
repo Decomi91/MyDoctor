@@ -24,8 +24,32 @@
  	<insert id="hs_insert" parameterType="hospital">
  	insert into hospitals values(#{id},#{password},#{yadmNm},
  	#{addr},#{hphone},#{yki},#{monStart},#{monEnd},#{tueStart},#{tueEnd},#{wedStart},#{wedEnd},#{thuStart},#{thuEnd},
- 	#{friStart},#{friEnd},#{satStart},#{satEnd},#{sunStart},#{sunEnd},#{joinok},#{doctors},sysdate)
+ 	#{friStart},#{friEnd},#{satStart},#{satEnd},#{sunStart},#{sunEnd},#{lunchStart},#{lunchEnd},#{joinok},#{doctors},sysdate)
  	</insert>
+ 	
+ 	<!-- 김건수 1인경우 확인 detail쪽이였던거같음 0값 아니였던거같음-->
+ 	<select id="select_yki" parameterType="String" resultType="hospital">
+ 	select id,yadmNm from hospitals where 
+ 	yki=#{yki} and joinok=0
+ 	</select>
+ 	<!-- 김건수 즐겨찾기 처음 -->
+	<select id="fa_sel" parameterType="String" resultType="String">
+ 	select id from hospitals where yki=#{yki}
+ 	</select> 
+ 	<!-- 김건수 즐겨찾기 두번째 -->
+ 	<select id="fa_re" resultType="String">
+ 	select count(*) from favorites where id=#{id} and hosid=#{hosid}
+ 	</select>
+ 	
+ 	<!-- 김건수 즐겨찾기 추가 -->
+ 	<insert id="fa_insert">
+ 	insert into favorites values(#{id},#{hosid},#{hosname})
+ 	</insert>
+ 	
+ 	<!-- 김건수 즐겨찾기 삭제 -->
+ 	<delete id="fa_delete">
+ 	delete from favorites where id=#{id} and hosid=#{hosid}
+ 	</delete>
    
  	<select id="idcheck" parameterType="String" resultType="String">
  		select count(*)
@@ -40,9 +64,9 @@
  	
  	<select id = "getdetail" parameterType = "String" resultType = "hospital">
  		select * from hospitals
- 		where yki = #{yki}
+ 		where yki = #{yki} and joinokay = 1
  	</select>
- 	
+   
  	<select id="getsignlistcount" resultType="int">
  		select count(*)
  		from hospitals
@@ -63,22 +87,16 @@
  		where id = #{id}
  	</select>
  	
- 	<select id="setjoinokay" parameterType="String">
+ 	<update id="setjoinokay" parameterType="String">
  		update hospitals
  		set joinok = 1
  		where id = #{id}
- 	</select>
+ 	</update>
  	
  	<update id="widthdraw" parameterType="String">
  		update hospitals
  		set joinok = -1
  		where id = #{id}
  	</update>
-
- 	<!-- yuri -->
- 	<select id = "getdetail2" parameterType = "String" resultType = "hospital">
- 		select * from hospitals
- 		where yki = #{yki}
- 	</select>
  </mapper>
  

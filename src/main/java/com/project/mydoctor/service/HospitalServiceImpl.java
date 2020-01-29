@@ -1,6 +1,7 @@
 package com.project.mydoctor.service;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -35,7 +36,6 @@ public class HospitalServiceImpl implements HospitalService {
 
 	@Override
 	public Hospital getDetail(String yki) {
-		// TODO Auto-generated method stub
 		return hDAO.getDetail(yki);
 	}
 
@@ -64,8 +64,39 @@ public class HospitalServiceImpl implements HospitalService {
 		return hDAO.widthdraw(hosid);
 	}
 
-	@Override
+  @Override
 	public Hospital getDetail2(String yki) {
 		return hDAO.getDetail2(yki);
 	}
+
+	@Override
+	public Hospital getFavorites(String yki) {
+		// TODO Auto-generated method stub
+		return hDAO.getFavorites(yki);
+	}
+
+	@Override
+	public int Fa_insert(Map<String, String> fa) {
+		// TODO Auto-generated method stub
+		return hDAO.fa_insert(fa);
+	}
+
+	@Override
+	public int Fa_delete(Map<String, String> fa) {
+		// TODO Auto-generated method stub
+		return hDAO.fa_delete(fa);
+	}
+
+	@Override
+	public String getFavorite_sel(String fa_hos) {
+		// TODO Auto-generated method stub
+		return hDAO.getFavorite_sel(fa_hos);
+	}
+
+	@Override
+	public String getFavorite_re(Map<String, String> fa) {
+		// TODO Auto-generated method stub
+		return hDAO.getFavorite_re(fa);
+	}
+
 }
