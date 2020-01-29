@@ -53,7 +53,7 @@ public class MypageController {
 	private MypageService mypageService;
   
   @Autowired
-	private BookmarkService bookmarkSerivce;
+	private BookmarkService bookmarkService;
   
 	@Autowired
 	private BoardService boardService; //관리자에게 쓰는 요청사항

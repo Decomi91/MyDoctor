@@ -44,7 +44,7 @@ public class HosMypageController {
 
 		// 총 예약수
 		int listcount = mypageService.hosGetListCount(hosId);
-
+		System.out.println("listcount = " + listcount);
 		int maxpage = (listcount + limit - 1) / limit;
 		int startpage = ((page - 1) / 10) * 10 + 1;
 		int endpage = startpage + 10 - 1;
@@ -118,7 +118,7 @@ public class HosMypageController {
 	}
 	
 	@GetMapping(value="/reserveX.net")
-	public ModelAndView reserveX(ModelAndView mv, int page, int reserveNo, HttpServletResponse response) throws Exception {
+	public ModelAndView reserveX(ModelAndView mv, int page, int reserveNo, HttpServletResponse response, HttpSession session) throws Exception {
 		int result = reserveService.cancel(reserveNo);
 		
 		if(result == 1) {
