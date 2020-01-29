@@ -30,7 +30,6 @@ public class HospitalDAO {
 	}
 
 	public Hospital getDetail(String yki) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Hospitals.getdetail", yki);
 	}
 
@@ -54,10 +53,6 @@ public class HospitalDAO {
 		return sqlSession.update("Hospitals.widthdraw", hosid);
 	}
 
-	public Hospital getDetail2(String yki) {
-		return sqlSession.selectOne("Hospitals.getdetail2", yki);
-	}
-	
 	
 
 }

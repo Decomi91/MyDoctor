@@ -10,6 +10,7 @@
 		<typeAlias type="com.project.mydoctor.model.Qna" alias="qna"/>
 		<typeAlias type="com.project.mydoctor.model.Reservation" alias="reservation"/>
 		<typeAlias type="com.project.mydoctor.model.Review" alias="review"/>
+		<typeAlias type="com.project.mydoctor.model.Bookmark" alias="bookmark"/>
 	</typeAliases>
 	
 	<mappers>
@@ -19,5 +20,6 @@
 		<mapper resource="sql/qnaBoard.xml"/>
 		<mapper resource="sql/reservation.xml"/>
 		<mapper resource="sql/review.xml"/>
+		<mapper resource="sql/bookmark.xml"/>
 	</mappers>
 </configuration>

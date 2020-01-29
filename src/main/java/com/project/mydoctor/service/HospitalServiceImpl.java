@@ -35,7 +35,6 @@ public class HospitalServiceImpl implements HospitalService {
 
 	@Override
 	public Hospital getDetail(String yki) {
-		// TODO Auto-generated method stub
 		return hDAO.getDetail(yki);
 	}
 
@@ -64,8 +63,4 @@ public class HospitalServiceImpl implements HospitalService {
 		return hDAO.widthdraw(hosid);
 	}
 
-	@Override
-	public Hospital getDetail2(String yki) {
-		return hDAO.getDetail2(yki);
-	}
 }

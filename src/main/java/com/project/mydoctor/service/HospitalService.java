@@ -25,5 +25,4 @@ public interface HospitalService {
   
 	public Hospital getDetail(String id);
 
-	public Hospital getDetail2(String yki);
 }

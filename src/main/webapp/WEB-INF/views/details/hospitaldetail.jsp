@@ -37,9 +37,17 @@
                   </div>
                   <header>
                      <h1 class="koreanfont hospitalnamesize">
-                        <i class="icon far fa-heart"
+                     	<c:if test="${check==1 }">
+                     		 <i class="icon far fa-heart solid"
                            style="float: right; color: #f56a6a; margin-right: 5%"
-                           id="fav_hos"></i>${vo.yadmNm }
+                           id="fav_hos"></i>
+                     	</c:if>
+                     	<c:if test="${check!=1 }">
+                     		<i class="icon far fa-heart"
+                           style="float: right; color: #f56a6a; margin-right: 5%"
+                           id="fav_hos"></i>
+                     	</c:if>
+                        ${vo.yadmNm }
                      </h1>
                      <p
                         style="font-size: 12pt; font-family: Open Sans, sans-serif; color: #7f888f; margin-top: 2%">(${vo.clCdNm})${vo.dgsbjtCdNm}</p>
@@ -147,14 +155,6 @@
 		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 		infowindow.open(map, marker); 
 		
-		
-		$("#fav_hos").click(function() {
-		    if ($(this).hasClass('solid')) {
-		       $(this).removeClass('solid');
-		    } else {
-		       $(this).addClass('solid');
-		    }
-		 })
 		 $('#reviewli').click(function() {
 		    $(this).addClass('selectedBoard');
 		    $('#reviewa').addClass('selectedBoard');
@@ -169,6 +169,50 @@
 		    $('#boardcontent').empty();
 		      $('#boardcontent').load("qna");
 		 })
+		 
+		 // bookmark yuri
+		 $(function(){
+			function getUrlParams() {
+				var params = {};
+				window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+				return params;
+				}
+			
+			oParams = getUrlParams();
+			ykiho = oParams.ykiho;
+			console.log("ykiho = " + ykiho);
+			
+			 
+			$("#fav_hos").click(function() {
+				if ($(this).hasClass('solid')) {
+					chk = -1;
+				} else {	// 선택됨
+					chk = 1;
+				}
+				
+				console.log(chk);
+				
+				$.ajax({
+					url : "bookmark.net",
+					data : {"ykiho" : ykiho,
+							"chk" : chk},
+					dataType : "json",
+					success : function(resp){
+						if(resp == 1){
+							$("#fav_hos").addClass('solid');
+							alert("관심병원에 등록되었습니다.");
+						}else if(resp == -1){
+							$("#fav_hos").removeClass('solid');
+							alert("관심병원이 해제되었습니다.");
+						}
+					},	// success end
+					error : function(resp){
+						alert("죄송합니다. 잠시 후 다시 시도해주세요.");
+						return false;
+					}	// error end
+				});	// ajax end
+			 });	// #fav_hos click end
+		 })	
 	</script>
    
 </body>
