@@ -6,7 +6,7 @@
 <!DOCTYPE html>
 <html>
 <head>
- 
+
 
 <style type="text/css">
 body {
@@ -198,7 +198,8 @@ input:focus {
 		</div>
 
 		<div class="d-flex justify-content-center h-100">
-			<form class="needs-validation" action="hs_signup.do" method="post" id="form1">
+			<form class="needs-validation" action="hs_signup.do" method="post"
+				id="form1">
 				<div class="card">
 					<div class="card-header">
 						<h2 class="text-center text-light">Sign Up</h2>
@@ -237,17 +238,20 @@ input:focus {
 								<span class="input-group-text"><i
 									class='fas fa-user-graduate ml-2' style='font-size: 22px'></i></span>
 								<input type="text" class="form-control" placeholder="아이디"
-									id="id" name="id" required pattern="^([A-Za-z0-9_]){5,10}$" title="대소문자숫자 5~10글자">
+									id="id" name="id" required pattern="^([A-Za-z0-9_]){5,10}$"
+									title="대소문자숫자 5~10글자">
 							</div>
 						</div>
-						<p id="id_check" style="color: white; font: bold; text-align: center;">
-						
+						<p id="id_check"
+							style="color: white; font: bold; text-align: center;">
 						<div class="input-group form-group">
 							<div class="input-group-prepend">
 								<span class="input-group-text"><i class='fa fa-key ml-2'
 									style='font-size: 20px'></i></span> <input type="password"
 									class="form-control" placeholder="Password" id="password"
-									name="password" required pattern="^([A-Za-z0-9!><?/:+~@#$%^&*()]){5,15}$"  maxlength="15" title="5~15대소문자 숫자 !><?/:+~@#$%^&*()특수기호">
+									name="password" required
+									pattern="^([A-Za-z0-9!><?/:+~@#$%^&*()]){5,15}$" maxlength="15"
+									title="5~15대소문자 숫자 !><?/:+~@#$%^&*()특수기호">
 							</div>
 						</div>
 
@@ -256,13 +260,18 @@ input:focus {
 								<span class="input-group-text"><i class='fa fa-key ml-2'
 									style='font-size: 20px'></i></span> <input type="password"
 									class="form-control" placeholder="Password" id="repassword"
-									required pattern="^([A-Za-z0-9!><?/:+~@#$%^&*()]){5,15}$" maxlength="15" title="5~15대소문자 숫자 !><?/:+~@#$%^&*()특수기호">
+									required pattern="^([A-Za-z0-9!><?/:+~@#$%^&*()]){5,15}$"
+									maxlength="15" title="5~15대소문자 숫자 !><?/:+~@#$%^&*()특수기호">
 							</div>
 						</div>
-						
-						<p id="alert-success" style="color: white; font: bold; text-align: center;">비밀번호가 일치합니다.</p>
-						<p id="alert-danger" style="color: white; font: bold; text-align: center;">비밀번호가 일치하지 않습니다.</p>
-						
+
+						<p id="alert-success"
+							style="color: white; font: bold; text-align: center;">비밀번호가
+							일치합니다.</p>
+						<p id="alert-danger"
+							style="color: white; font: bold; text-align: center;">비밀번호가
+							일치하지 않습니다.</p>
+
 						<input id="yki" name="yki" type="hidden">
 
 						<div class="input-group form-group">
@@ -280,34 +289,53 @@ input:focus {
 						<!-- 진료시간 -->
 						<!-- required -->
 						<input id="monStart" name="monStart" placeholder="월 시작시간 (기호 :생략)"
-							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
-							style="color: white;">~</span> <input id="monEnd" name="monEnd"
-							placeholder="월 종료시간 (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"><input
-							id="tueStart" name="tueStart" placeholder="화 시작시간 (기호 :생략)"
-							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
-							style="color: white;">~</span> <input id="tueEnd" name="tueEnd"
-							placeholder="화 종료시간 (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100">
-						<input id="wedStart" name="wedStart" placeholder="수 시작시간 (기호 :생략)"
-							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
-							style="color: white;">~</span> <input id="wedEnd" name="wedEnd"
-							placeholder="수 종료시간 (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100">
-						<input id="thuStart" name="thuStart" placeholder="목 시작시간 (기호 :생략)"
-							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
-							style="color: white;">~</span> <input id="thuEnd" name="thuEnd"
-							placeholder="목 종료시간  (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"><input
-							id="friStart" name="friStart" placeholder="금 시작시간  (기호 :생략)"
-							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
-							style="color: white;">~</span> <input id="friEnd" name="friEnd"
-							placeholder="금 종료시간  (기호 :생략)" class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"><input
-							id="satStart" name="satStart" placeholder="토 시작시간 (휴무 00 표기)"
-							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span
-							style="color: white;">~</span> <input id="satEnd" name="satEnd"
-							placeholder="토 종료시간 (휴무 00 표기)" class="day" required
-							maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"><input id="sunStart" name="sunStart"
-							placeholder="일 시작시간 (휴무 00 표기)" class="day" required
-							maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100"> <span style="color: white;">~</span> <input
-							id="sunEnd" name="sunEnd" placeholder="일 종료시간 (휴무 00 표기)"
-							class="day" required maxlength="4" pattern="[0-9]{4}" title="ex)11:00 -> 1100">
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <span style="color: white;">~</span>
+						<input id="monEnd" name="monEnd" placeholder="월 종료시간 (기호 :생략)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"><input id="tueStart"
+							name="tueStart" placeholder="화 시작시간 (기호 :생략)" class="day"
+							required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <span style="color: white;">~</span>
+						<input id="tueEnd" name="tueEnd" placeholder="화 종료시간 (기호 :생략)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <input id="wedStart"
+							name="wedStart" placeholder="수 시작시간 (기호 :생략)" class="day"
+							required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <span style="color: white;">~</span>
+						<input id="wedEnd" name="wedEnd" placeholder="수 종료시간 (기호 :생략)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <input id="thuStart"
+							name="thuStart" placeholder="목 시작시간 (기호 :생략)" class="day"
+							required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <span style="color: white;">~</span>
+						<input id="thuEnd" name="thuEnd" placeholder="목 종료시간  (기호 :생략)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"><input id="friStart"
+							name="friStart" placeholder="금 시작시간  (기호 :생략)" class="day"
+							required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <span style="color: white;">~</span>
+						<input id="friEnd" name="friEnd" placeholder="금 종료시간  (기호 :생략)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"><input id="satStart"
+							name="satStart" placeholder="토 시작시간 (휴무 00 표기)" class="day"
+							required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <span style="color: white;">~</span>
+						<input id="satEnd" name="satEnd" placeholder="토 종료시간 (휴무 00 표기)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"><input id="sunStart"
+							name="sunStart" placeholder="일 시작시간 (휴무 00 표기)" class="day"
+							required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100"> <span style="color: white;">~</span>
+						<input id="sunEnd" name="sunEnd" placeholder="일 종료시간 (휴무 00 표기)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100">
+						<input id="lunchStart" name="lunchStart" placeholder="점심 종료시간 (기호 :생략)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100">
+						<input id="lunchEnd" name="lunchEnd" placeholder="점심 종료시간 (기호 :생략)"
+							class="day" required maxlength="4" pattern="[0-9]{4}"
+							title="ex)11:00 -> 1100">
 
 					</div>
 					<div class="card-footer p-2">
@@ -825,8 +853,8 @@ input:focus {
 	                    success: function(data) {
 	                    	//var hidden =data.response.body.items.item;
 	                    	//noTrmtHoli
-	                    	console.log(data.response)
-	                    	console.log(data.response.body.items.item.noTrmtHoli);
+	                    	//console.log(data.response)
+	                    	//console.log(data.response.body.items.item.noTrmtHoli);
 	                    	
 	                    	//$("#h_id").val(data.response.body.items.item.noTrmtHoli);
 	                    	$("#monStart").val(data.response.body.items.item.trmtMonStart);
@@ -871,8 +899,10 @@ input:focus {
           //폼서브밋 하이픈삭제
 			$("#form1").submit(function() {
 				var hphone = $("#hphone").val();
-    	   		 hphone =hphone.replace(/-/g,"");    	   		 
-    	   	$("#hphone").val(hphone);
+    	   		 hphone =hphone.replace(/-/g,"");
+    	   		
+    	   		 hphone = hphone.trim();
+    	   	$("#hphone").val(hphone);  	   		
 				return true;
       	  	}); 
           

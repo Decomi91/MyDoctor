@@ -9,10 +9,12 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.mydoctor.model.Hospital;
 import com.project.mydoctor.model.Member;
 import com.project.mydoctor.model.Reservation;
 import com.project.mydoctor.service.MemberService;
@@ -118,10 +120,19 @@ public class HosMypageController {
 		return mv;
 	}
 	
-	@RequestMapping(value = "reserveX.net")
-	public void reserveX(int reserveNo, HttpServletResponse response) throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
+	@GetMapping(value="/reserveX")
+	public ModelAndView reserveX(ModelAndView mv, int page, int reserveNo, HttpServletResponse response) throws Exception {
+		int result = reserveService.cancel(reserveNo);
 		
+		if(result == 1) {
+			mv.addObject("page", page);
+			mv.setViewName("redirect:/hosmypage.net");
+		}else {
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('취소시 이상 발생'); history.back();</script>");
+			out.close();
+			return null;
+		}
+		return mv;
 	}
 }

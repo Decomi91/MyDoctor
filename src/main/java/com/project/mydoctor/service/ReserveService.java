@@ -13,5 +13,7 @@ public interface ReserveService {
 	int cancel(int reserveNo);
 
 	int reserveOk(int reserveNo);
-	
+
+	Map<String, Integer> getReserves(String id);
+
 }

@@ -7,6 +7,8 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLEncoder;
+
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -25,12 +27,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.mydoctor.model.Bookmark;
 import com.project.mydoctor.model.HdetailVO;
 import com.project.mydoctor.model.Hospital;
 import com.project.mydoctor.model.Work_hs;
+
 import com.project.mydoctor.service.BookmarkService;
 import com.project.mydoctor.service.HospitalService;
 
@@ -41,7 +46,6 @@ import com.project.mydoctor.service.HospitalService;
  */
 @Controller
 public class MapController {
-
 	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	private static final String radius = "3000";
 
@@ -50,7 +54,45 @@ public class MapController {
 
 	@Autowired
 	private BookmarkService bookmarkService;
-
+	
+	@ResponseBody
+	@RequestMapping(value = "favorites_add.net",method = RequestMethod.POST)
+	public int favorites_add(HttpSession session,String yki){
+			String member =(String)session.getAttribute("loginid");						
+			Hospital result = hospitalService.getFavorites(yki);
+			//System.out.println(result.getId());
+			//System.out.println(result.getYadmNm());
+			Map<String, String> fa= new HashMap<String, String>();
+			fa.put("id", member);
+			fa.put("hosid", result.getId());
+			fa.put("hosname", result.getYadmNm());
+			
+			int insert = hospitalService.Fa_insert(fa);
+			System.out.println(insert);
+			
+		return insert;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "favorites_del.net",method = RequestMethod.POST)
+	public int favorites_del(HttpSession session,String yki){
+			String member =(String)session.getAttribute("loginid");						
+			Hospital result = hospitalService.getFavorites(yki);
+			System.out.println(result.getId());
+			System.out.println(result.getYadmNm());
+			Map<String, String> fa= new HashMap<String, String>();
+			fa.put("id", member);
+			fa.put("hosid", result.getId());
+			fa.put("hosname", result.getYadmNm());
+			
+			int insert = hospitalService.Fa_delete(fa);
+			System.out.println(insert);
+			
+		return insert;
+		
+		
+	}
+	
 	/**
 	 * @param req 좌표
 	 * @param res
@@ -114,7 +156,7 @@ public class MapController {
 		parameter = parameter + addr;
 		parameter = parameter + "&xPos=" + xPos;
 		parameter = parameter + "&yPos=" + yPos;
-		parameter = parameter + "&radius=" + 10000;
+		parameter = parameter + "&radius=" + 100000;
 		parameter = parameter + "&_type=json";
 		if (query != "")
 			parameter = parameter + "&yadmNm=" + URLEncoder.encode(query, "UTF-8");
@@ -151,41 +193,65 @@ public class MapController {
 	}
 
 	/**
+	 * @author 김건수
 	 * @상세페이지
 	 * @param ykiho 암호 키
 	 * @param model HdetailVO
-	 * @return locationView
-	 * 
+	 * @return locationView 
+	 * @API밀집부분
 	 */
 	@RequestMapping(value = "detail.net", method = RequestMethod.GET)
-	public String locationView(HdetailVO vo, Model model, @RequestParam("ykiho") String ykiho, HttpSession session)
-			throws Exception {
-//		System.out.println(vo.getYkiho());
-		vo = detail(vo);
-		Work_hs work_hs = new Work_hs();
-
-		work_hs = work(vo.getYkiho());
-//		System.out.println(work_hs);
-
-		model.addAttribute("vo", vo);
-		model.addAttribute("work", work_hs);
-
-		/* yuri */
-		Hospital hospital = hospitalService.getDetail(ykiho);
-		if (hospital != null) {
-			Map<String, Object> map = new HashMap<String, Object>();
-			map.put("id", session.getAttribute("loginid").toString());
-			map.put("hosid", hospital.getId());
-
-			Bookmark bookmark = bookmarkService.isBookmark(map);
-			if (bookmark != null) {
-				model.addAttribute("check", 1);
-			} else {
-				model.addAttribute("check", 0);
+	public String locationView(HdetailVO vo, Model model,HttpSession session) throws Exception {
+		/*
+		 		1. 요양기호로 병원 검색됨 -> 기존 자료 사용
+		 		2. 병원 없을 경우
+		 			1) 월~일이 있을경우 + 점심
+		 				1- 토일 중에 기록이 있으면 다 표시
+		 				2- 기록이 없으면 그부분만제거(ex. 월~금)
+		 			2) 월~일 없을 경우 -> 자료없음
+		 */
+		Integer check =(Integer)session.getAttribute("chk");
+		
+		if(check!=null) {			
+			String member =(String)session.getAttribute("loginid");
+			String fa_hos = vo.getYkiho();
+			String favorite = hospitalService.getFavorite_sel(fa_hos);
+			
+			if(favorite!=null) {
+			Map<String, String> fa = new HashMap<String, String>();
+			fa.put("id", member);
+			fa.put("hosid",favorite);
+			String count = hospitalService.getFavorite_re(fa);
+			if(count.equals("1")) {				
+				System.out.println("카운트: "+count);
+				model.addAttribute("count", count);
+				}
 			}
-		}
-		return "details/hospitaldetail";
+				
 
+		}
+		
+		Hospital result = new Hospital();
+		Work_hs work_hs= work(vo.getYkiho());		
+		result = hospitalService.getDetail(vo.getYkiho());//요양키넣어서 관리자승인받은거로 고쳐야함
+		
+		
+		String hs_empty="";
+		if(result!=null) {
+			hs_empty ="1";
+			model.addAttribute("work", result);
+			model.addAttribute("hs_empty", hs_empty);			
+		}else if(work_hs!=null){
+			hs_empty ="2";			
+			model.addAttribute("work", work_hs);
+			model.addAttribute("hs_empty", hs_empty);
+			System.out.println("API확인용");
+			
+		}
+		
+		vo = detail(vo);			
+		model.addAttribute("vo", vo);	
+		return "details/hospitaldetail";
 	}
 
 	/**
@@ -286,18 +352,30 @@ public class MapController {
 			int a = 4;
 			if (total >= a) {
 //				 System.out.println("실행됨");
-				JSONObject items = (JSONObject) body.get("items");
-				JSONObject item = (JSONObject) items.get("item");
+				 JSONObject items = (JSONObject) body.get("items");
+				 JSONObject item = (JSONObject) items.get("item");	
+				 
+				 work_hs.setNoTrmtSun((String)item.get("noTrmtSun"));
+				 work_hs.setNoTrmtHoli((String)item.get("noTrmtHoli"));
+				 work_hs.setLunchWeek((String)item.get("lunchWeek"));
+				 work_hs.setRcvSat((String)item.get("rcvSat"));
+				 work_hs.setRcvWeek((String)item.get("rcvWeek"));
+				 work_hs.setTrmtMonStart(item.get("trmtMonStart"));
+				 work_hs.setTrmtMonEnd(item.get("trmtMonEnd"));
+				 work_hs.setTrmtTueStart(item.get("trmtTueStart"));
+				 work_hs.setTrmtTueEnd(item.get("trmtTueEnd"));
+				 work_hs.setTrmtWedStart(item.get("trmtWedStart"));
+				 work_hs.setTrmtWedEnd(item.get("trmtWedEnd"));
+				 work_hs.setTrmtThuStart(item.get("trmtThuStart"));
+				 work_hs.setTrmtThuEnd(item.get("trmtThuEnd"));
+				 work_hs.setTrmtFriStart(item.get("trmtFriStart"));
+				 work_hs.setTrmtFriEnd(item.get("trmtFriEnd"));
+				 work_hs.setTrmtSatStart(item.get("trmtSatStart"));
+				 work_hs.setTrmtSatEnd(item.get("trmtSatEnd"));
+				 work_hs.setTrmtSunStart(item.get("trmtSunStart"));
+				 work_hs.setTrmtSunEnd(item.get("trmtSunEnd"));
 
-				work_hs.setNoTrmtSun((String) item.get("noTrmtSun"));
-				work_hs.setNoTrmtHoli((String) item.get("noTrmtHoli"));
-				work_hs.setLunchWeek((String) item.get("lunchWeek"));
-				work_hs.setRcvSat((String) item.get("rcvSat"));
-				work_hs.setRcvWeek((String) item.get("rcvWeek"));
-
-//				 System.out.println("4개이상일때만");
-
-				return work_hs;
+        return work_hs;
 			}
 
 		} catch (Exception e) {
@@ -315,7 +393,6 @@ public class MapController {
 	 * 
 	 */
 	private static String readUrl(String urlString) throws Exception {
-
 		BufferedReader reader = null;
 		try {
 			URL url = new URL(urlString);

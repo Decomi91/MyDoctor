@@ -12,7 +12,7 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
 </head>
-<body class="is-preload">
+<body class="is-preload" >
 
 	<!-- Wrapper -->
 	<div id="wrapper">
@@ -23,7 +23,7 @@
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>My Doctor</strong> by
+					<a href="main" class="logo"><strong>My Doctor</strong> by
 						team.5</a>
 
 				</header>
@@ -34,13 +34,13 @@
 
 						<div id = "reserveBar">
 							<div class = "reserveIcon">
-								<i class="fas fa-hourglass-half fa-4x"></i>
-								<span style = "position: relative; bottom: 11px;">예약 신청</span>
+								<a href="reserve.net?yki=${yki }"><i class="fas fa-hourglass-half fa-4x"></i>
+								<span style = "position: relative; bottom: 11px;">추가 예약</span></a>
 							</div>
 
 							<div class = "reserveIcon">
-								<i class="fas fa-check-circle fa-4x" style = "color : #f56a6a;"></i>
-								<span style = "color : #f56a6a; font-weight : bold; position: relative; bottom: 11px;">예약 확인</span>
+								<a href="myreserve.net"><i class="fas fa-check-circle fa-4x" style = "color : #f56a6a;"></i>
+								<span style = "color : #f56a6a; font-weight : bold; position: relative; bottom: 11px;">예약 확인</span></a>
 							</div>
 						</div>
 

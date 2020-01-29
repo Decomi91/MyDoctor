@@ -1,6 +1,7 @@
 package com.project.mydoctor.dao;
 
 import java.util.List;
+import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -52,7 +53,27 @@ public class HospitalDAO {
 	public int widthdraw(String hosid) {
 		return sqlSession.update("Hospitals.widthdraw", hosid);
 	}
-
+	public Hospital getDetail2(String yki) {
+		return sqlSession.selectOne("Hospitals.getdetail", yki);
+	}
 	
-
+	public Hospital getFavorites(String yki) {
+		return sqlSession.selectOne("Hospitals.select_yki", yki);
+	}
+	
+	public String getFavorite_sel(String fa_hos) {
+		return sqlSession.selectOne("Hospitals.fa_sel",fa_hos);
+	}
+	
+	public String getFavorite_re(Map<String, String> fa) {
+		return sqlSession.selectOne("Hospitals.fa_re", fa);
+	}
+	
+	public int fa_insert(Map<String, String> fa) {
+		return sqlSession.insert("Hospitals.fa_insert",fa);
+	}
+	
+	public int fa_delete(Map<String, String> fa) {
+		return sqlSession.delete("Hospitals.fa_delete",fa);
+	}
 }

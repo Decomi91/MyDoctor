@@ -32,4 +32,9 @@ public class ReserveServiceImpl implements ReserveService {
 	public int reserveOk(int reserveNo) {
 		return rDAO.reserveOk(reserveNo);
 	}
+
+	@Override
+	public Map<String, Integer> getReserves(String id) {
+		return rDAO.getReserves(id);
+	}
 }

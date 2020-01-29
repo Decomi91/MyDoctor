@@ -26,6 +26,7 @@ import com.project.mydoctor.service.BoardService;
 import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
+import com.project.mydoctor.service.ReserveService;
 
 @Controller
 public class MemberController {
@@ -40,6 +41,9 @@ public class MemberController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ReserveService reserveService;
 	
 	@GetMapping(value="/joinForm")
 	public ModelAndView joinForm(ModelAndView mv) {
@@ -94,7 +98,11 @@ public class MemberController {
 				session.setAttribute("adminReq", boardService.getAdminRequestNoCheckListCount());
 			}else {
 				mv.setViewName("redirect:/main");
-				session.setAttribute("yesaccept", mypageService.reserveCount(member.getId()));
+				if(chk==1) {
+					session.setAttribute("yesaccept", mypageService.reserveCount(member.getId()));
+				}else {
+					session.setAttribute("reserve", reserveService.getReserves(member.getId()));
+				}
 			}
 		} else {
 			PrintWriter out = response.getWriter();
@@ -134,7 +142,7 @@ public class MemberController {
 		req.setCharacterEncoding("utf-8");
 		res.setContentType("text/html;charset=utf-8");
 		String ServiceKey = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?pageNo=1&numOfRows=100&_type=json&ServiceKey=G9rzPM3G3d1FVN%2F8ZyPSkwQ7B0IICxPX3Sks%2FrUY2wLu94BsUzYPUHzcNhSwJj%2FIjuLsoBMYMJ7JcX4thVA7Lg%3D%3D&yadmNm="
-				+ searchText;
+				+ searchText;		
 		PrintWriter out = res.getWriter();
 		URL url = new URL(ServiceKey);
 		InputStream in = url.openStream();
@@ -183,7 +191,7 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "hs_signup.do", method = RequestMethod.POST)
 	public void signup(HttpServletRequest req, HttpServletResponse res, Hospital vo) throws Exception {
-
+		
 		int result = hospitalService.hs_insert(vo);
 		res.setContentType("text/html;charset=utf-8");
 		PrintWriter out = res.getWriter();

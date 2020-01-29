@@ -47,10 +47,11 @@
 									<table class="reservetable mypagetable">
 										<thead>
 											<tr>
-												<th width=15%>예약 번호</th>
-												<th width=40%>예약 시간</th>
+												<th width=12.5%>예약 번호</th>
+												<th width=25%>예약 시간</th>
 												<th width=20%>환자 정보</th>
-												<th width=12.5%>취소</th>
+												<th width=20%>처리 상태</th>
+												<th width=10%>취소</th>
 												<th width=12.5%>
 													<input type = "checkbox" name = "reserveAll" id = "reserveAll">
 													<label for = "reserveAll"></label>
@@ -65,13 +66,21 @@
 												<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
 												<c:forEach var = "rv" items = "${rv }">
 													<tr>
-														<td>${rv.reserveNo }</td>
+														<td>${num }</td>
+														<c:set var="num" value="${num-1 }"></c:set>
 														<td>
 															<a href = "reserveDetail.net?reserveNo=${rv.reserveNo }" id = "reserveTimeA">${rv.reserveTime }</a>
 														</td>
 														<td>${rv.name }</td>
 														<td>
-															<a href = "reserveX.net?reserveNo=${rv.reserveNo }">
+															<c:choose>
+																<c:when test="${rv.acceptance==1 }">승인됨</c:when>
+																<c:when test="${rv.acceptance==0 }">승인대기</c:when>
+																<c:when test="${rv.acceptance==-1 }">취소</c:when>
+															</c:choose>
+														</td>
+														<td>
+															<a href = "reserveX.net?reserveNo=${rv.reserveNo }&page=${page}">
 																<i class="fas fa-window-close reserveX" style = "color:red"></i>
 															</a>		
 														</td>
@@ -89,7 +98,7 @@
 										</tbody>
 										<tfoot>
 											<tr>
-												<td colspan = "4"></td>
+												<td colspan = "5"></td>
 												<td>
 													<input type = "submit" id = "reserveOkbtn" value = "승인">
 												</td>
@@ -109,7 +118,7 @@
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="mypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="hosmypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -121,7 +130,7 @@
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="mypage.net?page=${a }" class="page-link">${a}</a>
+																<a href="hosmypage.net?page=${a }" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -133,7 +142,7 @@
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="mypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="hosmypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>
