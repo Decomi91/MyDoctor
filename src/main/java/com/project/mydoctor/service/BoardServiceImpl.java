@@ -1,5 +1,6 @@
 package com.project.mydoctor.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -41,6 +42,25 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int setAdminRequestReply(AdminBoard board) {
 		return abDAO.setAdminRequestReply(board);
+	}
+
+	@Override
+	public int getreqListCount(String id) {
+		// TODO Auto-generated method stub
+		int listcount=abDAO.getListCount(id);
+		return listcount;
+	}
+
+	@Override
+	public List<AdminBoard> getMyReqList(int page, int limit, String id) {
+		// TODO Auto-generated method stub
+		HashMap<String, Object> map=new HashMap<String,Object>();
+		int startrow=(page-1)*limit+1;
+		int endrow=startrow+limit-1;
+		map.put("start", startrow);
+		map.put("end", endrow);
+		map.put("id", id);
+		return abDAO.getMyReqList(map);
 	}
 
 }

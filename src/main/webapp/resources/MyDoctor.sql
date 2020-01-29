@@ -130,7 +130,8 @@ create table adminBoard(
   reply varchar2(3000),
   reqDate date
 )
-
+insert into adminboard values('test', 8, '문의test_sub', '문의 test_con', 0, '문의 답변', sysdate)
+insert into adminboard values('test', 9, '문의test_sub2', '문의 test_con2', 0, '문의 답변', sysdate)
 alter table adminBoard add(reqDate date)
 alter table adminBoard drop(password)
 
@@ -144,7 +145,7 @@ create table boards (
   password varchar2(15) not null,
   boardsTarget varchar2(15) references hospitals(id),
   boardNum number primary key,
-  secret number(1) not null default 1,
+  secret number(1) default 1 not null ,
   head varchar2(30) not null,
   subject varchar2(100) not null,
   content varchar2(4000) not null,
@@ -152,6 +153,21 @@ create table boards (
   reply varchar2(3000)
 )
 
+drop table boards
+insert into boards values('test', '123', 'testing', 1, 1,'문의', 'testSub',
+			'testCont',sysdate,'ok')
+			insert all 
+			into boards values('test', '123', 'testing', 2, 1,'문의', 'testSub',
+			'testCont',sysdate,'ok')
+			into boards values('test', '123', 'testing', 3, 1,'문의', 'testSub',
+			'testCont',sysdate,'ok')
+			into boards values('test', '123', 'testing', 4, 1,'문의', 'testSub',
+			'testCont',sysdate,'ok')
+			into boards values('test', '123', 'testing', 5, 1,'문의', 'testSub',
+			'testCont',sysdate,'ok')
+			into boards values('test', '123', 'testing', 6, 1,'문의', 'testSub',
+			'testCont',sysdate,'ok')
+			select * from dual;
 create table reviews(
   id varchar2(15) references members(id),
   password varchar2(15) not null,
@@ -169,8 +185,13 @@ create table reviews(
 alter table reviews add(visited date)
 insert into reviews values('test', '123', 'testing', 1, 'testSub',
 			'testCont', 5,5,5,sysdate,sysdate,'ok')
+			insert into reviews values('test2', '123', 'testing', 7, 'testSub',
+			'testCont', 5,5,5,sysdate,sysdate,'ok')
 update reviews set visited = sysdate
-
+select * from(select rownum rnum, r.* from(select * from reviews where id='test' order by visited desc ) r)
+ where rnum>=5 and rnum<=10;
+ select * from reviews;
+ 
 create table favorites (
   id varchar2(15) references members(id),
   hosid varchar2(15) references hospitals(id),

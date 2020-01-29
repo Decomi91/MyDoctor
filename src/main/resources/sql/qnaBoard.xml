@@ -3,14 +3,14 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="Qna">
- <insert id="insertqna" parameterType="qna">
- <selectKey resultType="int" order="BEFORE" 
- keyProperty="boardNum">
- select nvl(max(boardnum),0)+1 from boards
- </selectKey>
- insert into boards(writeId, password, boardTarget, boardNum, secret, head, subject,
- content, uploaddate, reply) values (#{writeId}, #{password}, #{boardTarget}, #{boardNum}, #{secret}, #{head}, #{subject},
- #{content}, sysdate, #{reply})
- </insert>
+
  
+ <!-- jisu_0128_내가쓴 문의(병원) -->
+  <select id="qnalistcount" resultType="int" parameterType="String">
+ select count(*) from boards where writeid=#{id}
+ </select>
+ <select id="qnalist" parameterType="java.util.Map" resultType="qna">
+ select * from(select rownum rnum, r.* from(select * from boards where writeid=#{id} order by uploaddate desc ) r)
+ where rnum &gt;=#{start} and rnum &lt;=#{end}
+ </select>
  </mapper>
