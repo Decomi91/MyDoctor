@@ -18,5 +18,17 @@ public interface MypageService {
 
 	int hosGetListCount(String hosId);
 
+	int hosGetTodayListCount(String hosId);
+
+	List<Reservation> hosGetTodayReserveList(String hosId, int page, int limit);
+
+	int hosGetDiagListCount(String hosId);
+
+	List<Reservation> hosGetDiagReserveList(String hosId, int page, int limit);
+
+	int hosGetAllReserveListCount(String hosId);
+
+	List<Reservation> hosGetAllReserveList(String hosId, int page, int limit);
+
 	
 }

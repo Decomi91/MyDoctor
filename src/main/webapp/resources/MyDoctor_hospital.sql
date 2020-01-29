@@ -37,4 +37,6 @@ create table bookmarks (
   hosid varchar2(15) references hospitals(id),
   hosname varchar2(50)
 )
-select * from bookmarks				
+select * from bookmarks
+drop table favorite
+

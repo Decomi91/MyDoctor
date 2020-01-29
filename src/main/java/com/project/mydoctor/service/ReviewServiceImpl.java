@@ -6,13 +6,16 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.project.mydoctor.dao.QnaDAO;
 import com.project.mydoctor.dao.ReviewDAO;
+import com.project.mydoctor.model.Qna;
 import com.project.mydoctor.model.Review;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
 @Autowired
 private ReviewDAO rdao;
+
 	
 	@Override
 	public int getListCount(String id) {
@@ -31,5 +34,6 @@ private ReviewDAO rdao;
 		map.put("id", id);
 		return rdao.getMyReviewList(map);
 	}
+
 
 }

@@ -2,7 +2,11 @@ package com.project.mydoctor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+
 import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.Iterator;
+
 import java.util.List;
 import java.util.Map;
 
@@ -14,16 +18,24 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.mydoctor.model.AdminBoard;
+import com.project.mydoctor.model.Bookmark;
 import com.project.mydoctor.model.Hospital;
+
 import com.project.mydoctor.model.Member;
+import com.project.mydoctor.model.Qna;
 import com.project.mydoctor.model.Reservation;
 import com.project.mydoctor.model.Review;
+import com.project.mydoctor.service.BoardService;
 import com.project.mydoctor.service.BookmarkService;
 import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
+import com.project.mydoctor.service.QnaService;
+import com.project.mydoctor.service.ReserveService;
 import com.project.mydoctor.service.ReviewService;
 
 @Controller
@@ -36,17 +48,23 @@ public class MypageController {
 	@Autowired
 	private ReviewService reviewService;
 	@Autowired
-	private MypageService mypageService;
+	private QnaService qnaService;//병원에게 쓰는 qna
 	@Autowired
-	private BookmarkService bookmarkService;
+	private MypageService mypageService;
+  
+  @Autowired
+	private BookmarkService bookmarkSerivce;
+  
+	@Autowired
+	private BoardService boardService; //관리자에게 쓰는 요청사항
+	//새로 입력받은 비밀번호로 비밀번호 update합니다.
+	@RequestMapping(value="/pwmodify.do")	
+	public void updatePass(@RequestParam("new_password") String newPassword, HttpServletResponse response, 
+    HttpSession session) throws IOException{
+		System.out.println(" 신 비번: "+newPassword);			
+		String id=(String)session.getAttribute("loginid");
+		int result=memberService.updatePass(newPassword, id);
 
-	// 새로 입력받은 비밀번호로 비밀번호 update합니다.
-	@RequestMapping(value = "/pwmodify.do")
-	public void updatePass(@RequestParam("new_password") String newPassword, HttpServletResponse response,
-			HttpSession session) throws IOException {
-		System.out.println(" 신 비번: " + newPassword);
-		String id = (String) session.getAttribute("loginid");
-		int result = memberService.updatePass(newPassword, id);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (result == 1) {
@@ -185,23 +203,58 @@ public class MypageController {
 		mv.addObject("limit", limit);
 		return mv;
 	}
-
-	// @RequestMapping(value="/myreview.net")
-	public String gomyreview() {
-
-		return "mypage/mypage_review";
-	}
-
-	@RequestMapping(value = "/quit.do")
+	
+	@RequestMapping(value="/quit.do")
 	public String goquit_ck() {
-
 		return "mypage/mypage_signout";
 	}
-
-	@RequestMapping(value = "/myqna.net")
-	public String gomyqna() {
-
-		return "mypage/mypage_req";
+  
+	//jisu 0128_내가쓴 문의(병원) 불러옵니다.
+	@RequestMapping(value="/myqna.net")
+	public ModelAndView gomyqna(
+			@RequestParam(value="page", defaultValue="1", required=false) int page,
+			ModelAndView mv, HttpSession session)throws Exception{
+			String id=(String)session.getAttribute("loginid");
+			int limit=5;
+			int qnalistcount=qnaService.getqnaListCount(id);
+			int maxpage=(qnalistcount+limit-1)/limit;
+			int startpage=((page-1)/10)*10+1;
+			int endpage=startpage+5-1;
+		if(endpage>maxpage) endpage=maxpage;
+		List<Qna> myqnalist=qnaService.getMyQnaList(page, limit, id);
+		mv.setViewName("mypage/mypage_req");
+		mv.addObject("maxpage",maxpage);
+		mv.addObject("startpage",startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("qnalistcount", qnalistcount);
+		mv.addObject("myqnalist", myqnalist);
+		mv.addObject("limit", limit);
+		return mv;
+	}
+  
+	//jisu 0128_내가쓴 요청(관리자에게) 불러옵니다.
+	@ResponseBody
+	@RequestMapping(value="/myReqToA")
+	public Object gomyReqToA(
+			@RequestParam(value="page", defaultValue="1", required=false) int page,
+			HttpSession session)throws Exception{
+			String id=(String)session.getAttribute("loginid");
+			int limit=5;
+			int reqlistcount=boardService.getreqListCount(id);
+			int maxpage=(reqlistcount+limit-1)/limit;
+			int startpage=((page-1)/10)*10+1;
+			int endpage=startpage+5-1;
+		if(endpage>maxpage) endpage=maxpage;
+		List<AdminBoard> myreqlist=boardService.getMyReqList(page, limit, id);
+		Map<String, Object> mv =new HashMap<String, Object>();
+		
+		mv.put("maxpage",maxpage);
+		mv.put("startpage",startpage);
+		mv.put("endpage", endpage);
+		mv.put("reqlistcount", reqlistcount);
+		mv.put("myreqlist", myreqlist);
+		mv.put("limit", limit);
+		return mv;
 	}
 
 	/*

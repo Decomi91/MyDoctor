@@ -4,16 +4,17 @@
 <!DOCTYPE HTML>
 
 <html>
-<head> 
+<head>
 <title>My Doctor_Mypage문의/요청</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
 <link rel="stylesheet" href="resources/css/menuStyles.css" />
+
 </head>
 <body class="is-preload">
- 
+
 	<!-- Wrapper -->
 	<div id="wrapper">
 
@@ -31,71 +32,78 @@
 				<!-- Banner: body -->
 				<section id="banner">
 					<div class="content">
-					<!-- 마이페이지 메뉴 include -->
-					<jsp:include page="mypage_menu.jsp"></jsp:include>	
-					<!-- 내가쓴 후기 시작 -->
-				<div class="mypageContent">
-				<label class="mod qnabtn tohos"><input type="radio" name="reqselbtn" value="1" checked="checked">문의 내역</label>
-				<label class="mod qnabtn toadmin"><input type="radio" name="reqselbtn" value="2">요청 내역</label> 
-				
-				
-				<div class="accordion">
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">병원이름(질문날짜)</h3>
-    <div class="accordion__copy accordion__copy--open js-copy">
-   <div><strong>스케일링할때도 마취하나요?</strong><br>
-   쫄보예요. 안아팠음 좋겠어요. 혹시 스케일링할때도 마취가능한가요?</div>
-    <div><hr>
-    <i class="fas fa-share fa-flip-vertical"></i> 문의 답변드립니다.
-    주사를 통해 국소마취가 가능하긴 합니다만 내원하시어 상담 후 결정하실것을 추천드립니다.
-    </div>
-    </div>
-   
-  </div>
-  
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">후기2</h3>
-    <div class="accordion__copy js-copy">By not having the imagination to imagine what the content "might" be, a design consideration is lost. Meaning becomes obfuscated because "it's just text", understandability gets compromised because nobody realized that this</div>
-  </div>
-  
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">후기3</h3>
-    <div class="accordion__copy js-copy">By not having the imagination to imagine what the content "might" be, a design consideration is lost. Meaning becomes obfuscated because "it's just text", understandability gets compromised because nobody realized that this</div>
-  </div>
-  
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">후기4</h3>
-    <div class="accordion__copy js-copy">By not having the imagination to imagine what the content "might" be, a design consideration is lost. Meaning becomes obfuscated because "it's just text", understandability gets compromised because nobody realized that this</div>
-  </div>
-  
-  <div class="accordion__item">
-    <h3 class="accordion__title js-title">후기5</h3>
-    <div class="accordion__copy js-copy">By not having the imagination to imagine what the content "might" be, a design consideration is lost. Meaning becomes obfuscated because "it's just text", understandability gets compromised because nobody realized that this</div>
-  </div>
-</div>
-				
-				
-				<!-- 내가쓴 후기 끝 -->
-				<ul class="pagination">
-														<li><span class="button disabled">Prev</span></li>
-														<li><a href="#" class="page active">1</a></li>
-														<li><a href="#" class="page">2</a></li>
-														<li><a href="#" class="page">3</a></li>
-														<li><a href="#" class="page">4</a></li>
-														<li><a href="#" class="page">5</a></li>
-														<li><a href="#" class="button">Next</a></li>
-													</ul>
-													</div>
+						<!-- 마이페이지 메뉴 include -->
+						<jsp:include page="mypage_menu.jsp"></jsp:include>
+						<!-- 내가쓴 후기 시작 -->
+						<div class="mypageContent">
+							<label class="mod qnabtn tohos"><input type="radio"
+								name="reqselbtn" value="1" checked="checked" id="reqtoH">문의 내역</label> <label
+								class="mod qnabtn toadmin"><input type="radio"
+								name="reqselbtn" value="2" id="reqtoA">요청 내역</label>
+
+
+							<c:if test="${qnalistcount>0 }">
+								<div class="accordion">
+									<c:forEach var="r" items="${myqnalist}">
+										<div class="accordion__item">
+											<h3 class="accordion__title js-title">${r.boardsTarget }&nbsp;&#40;${r.uploaddate }&#41;</h3>
+											<div class="accordion__copy accordion__copy--hide js-copy">
+												<div>
+													<strong>${r.subject }</strong><br> ${r.content }
+												</div>
+												<div>
+													<hr>
+													<i class="fas fa-share fa-flip-vertical"></i> ${r.reply }
+												</div>
+											</div>
+										</div>
+									</c:forEach>
+								</div>
+
+
+
+
+
+								<!-- 내가쓴 후기 끝 -->
+								<ul class="pagination">
+									<c:if test="${page<=1}">
+										<li><a href="#" class="button">Prev</a></li>
+									</c:if>
+									<c:if test="${page>1}">
+										<li><a href="myqna.net?page=${page-1 }" class="page">Prev</a></li>
+									</c:if>
+									<c:forEach var="a" begin="${startpage }" end="${endpage}">
+										<c:if test="${a==page}">
+											<li><a href="#" class="page">${a}</a></li>
+										</c:if>
+										<c:if test="${a!=page}">
+											<li><a href="myqna.net?page=${a }" class="page">${a}</a></li>
+										</c:if>
+									</c:forEach>
+									<c:if test="${page>=maxpage}">
+										<li><a href="#" class="page">Next</a></li>
+									</c:if>
+									<c:if test="${page<maxpage}">
+										<li><a href="myqna.net?page=${page+1 }" class="page">Next</a></li>
+									</c:if>
+								</ul>
+
+							</c:if>
+							<c:if test="${qnalistcount==0 }">
+								<font size=5>등록된 글이 없습니다.</font>
+							</c:if>
+							
+						</div>
 					</div>
-					
-					</section>
- 
+
+				</section>
+
 
 
 			</div>
 		</div>
 
-	<jsp:include page="../header/footer.jsp"></jsp:include>
+		<jsp:include page="../header/footer.jsp"></jsp:include>
 
 	</div>
 
@@ -105,26 +113,7 @@
 	<script src="resources/js/breakpoints.min.js"></script>
 	<script src="resources/js/util.js"></script>
 	<script src="resources/js/main.js"></script>
-<script>
-var $title = $('.js-title');
-var copy   = '.js-copy';
-
-
-
-$title.click(function () {
-  $(this).next(copy).slideToggle();
-  $(this).parent().siblings().children().next().slideUp();
-  return false;
-
-});
-
-$('input[type=radio]:checked').parent().css('color','#f56a6a');
-$('input[type=radio]').change(function(){
-	console.log($('input[type=radio]:checked').val());
-	$('input[type=radio]:checked').parent().css('color','#f56a6a');
-	$('input[type=radio]:not(:checked)').parent().css('color','#7f888f');
-})
-
-</script>
+	<script src="resources/js/req.js"></script>
+	<script src="resources/js/reqboardtoggle.js"></script>
 </body>
 </html>

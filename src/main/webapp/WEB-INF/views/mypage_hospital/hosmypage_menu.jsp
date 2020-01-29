@@ -13,15 +13,15 @@
 					<td>대기중인 예약</td>
 				</tr>
 				<tr>
-					<td>?</td>
-					<td>?</td>
+					<td><a href="hosmypage_today.net">${accepted }</a></td>
+					<td><a href="hosmypage.net">${wait }</a></td>
 				</tr>
 				<tr>
-					<td>취소된 예약</td>
+					<td>오늘 취소된 예약</td>
 					<td>문의글</td>
 				</tr>
 				<tr>
-					<td>?</td>
+					<td>${canceled}</td>
 					<td>?</td>
 				</tr>
 			</table>
@@ -32,7 +32,8 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='hosmypage.net'><span>예약 확인</span></a></li>
-				<li><a href='#'><span>진료 기록</span></a></li>
+				<li><a href='diagnosisList.net'><span>진료 기록</span></a></li>
+				<li><a href='reserveAll.net'><span>전체 기록</span></a></li>
 				<li><a href='#'><span>게시판 관리</span></a></li>
 				<li><a href='#'><span>병원 정보 수정</span></a></li>
 				<li class='last'><a href='#'><span>회원탈퇴</span></a></li>

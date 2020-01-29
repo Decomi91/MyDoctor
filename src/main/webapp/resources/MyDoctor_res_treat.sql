@@ -44,3 +44,15 @@ from (select hosid, acceptance
 		where hosid = 'gong1' and to_Char(sysdate,'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
 
 
+
+select count(*)
+from reservation 
+where hosid = 'gong1' and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance=1
+union all
+select count(*)
+from reservation 
+where hosid = 'gong1' and acceptance=0
+union all
+		select count(*)
+		from reservation 
+		where hosid = 'gong1' and acceptance<0
