@@ -38,20 +38,5 @@ public class HomeController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/detail.net")
-	public ModelAndView detail(String id, ModelAndView mv) {
-		Hospital hospital = hospitalservice.getDetail(id);
-		
-		if(hospital == null) {
-			System.out.println("상세보기 실패");
-			mv.addObject("message", "상세보기 실패입니다.");
-		}else {
-			System.out.println("상세보기 성공");
-			mv.setViewName("details/hospitaldetail");
-			mv.addObject("hospital", hospital);
-		}
-		
-		return mv;
-	}
 
 }

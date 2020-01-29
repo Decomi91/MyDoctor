@@ -64,9 +64,9 @@
  	
  	<select id = "getdetail" parameterType = "String" resultType = "hospital">
  		select * from hospitals
- 		where yki = #{yki}
+ 		where yki = #{yki} and joinokay = 1
  	</select>
- 	
+   
  	<select id="getsignlistcount" resultType="int">
  		select count(*)
  		from hospitals

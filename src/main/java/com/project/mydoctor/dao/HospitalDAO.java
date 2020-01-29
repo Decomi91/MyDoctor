@@ -31,7 +31,6 @@ public class HospitalDAO {
 	}
 
 	public Hospital getDetail(String yki) {
-		// TODO Auto-generated method stub
 		return sqlSession.selectOne("Hospitals.getdetail", yki);
 	}
 
@@ -54,7 +53,6 @@ public class HospitalDAO {
 	public int widthdraw(String hosid) {
 		return sqlSession.update("Hospitals.widthdraw", hosid);
 	}
-
 	public Hospital getDetail2(String yki) {
 		return sqlSession.selectOne("Hospitals.getdetail", yki);
 	}
@@ -78,6 +76,4 @@ public class HospitalDAO {
 	public int fa_delete(Map<String, String> fa) {
 		return sqlSession.delete("Hospitals.fa_delete",fa);
 	}
-	
-
 }

@@ -56,76 +56,7 @@
 						</header>
 
 						<div class="table-wrapper" style="width: 50%">
-						<%-- 	<table>
-                        <thead>
-                           <tr>
-                              <th></th>
-                              <th>진료시간</th>
-
-                           </tr>
-                        </thead>
-                        <tbody>
-                        <!-- DB데이터 -->
-                        <c:choose>                        
-                        <c:when test="${hs_empty eq 1 }">
-                           <tr>
-                              <td>월요일</td>
-                              <td>${work.monStart}  ~ ${work.monEnd}</td>
-                           </tr>
-                           <tr>
-                              <td>화요일</td>
-                              <td>${work.tueStart}  ~ ${work.tueEnd}</td>
-                           </tr>
-                           <tr>
-                              <td>수요일</td>
-                              <td>${work.wedStart}  ~ ${work.wedEnd}</td>
-                           </tr>
-                           <tr>
-                              <td>목요일</td>
-                              <td>${work.thuStart}  ~ ${work.thuEnd}</td>
-                           </tr>
-                           <tr>
-                              <td>금요일</td>
-                              <td>${work.friStart}  ~ ${work.friEnd}</td>
-                           </tr>
-                           <tr>
-                              <td>토요일</td>
-                              <td>${work.satStart}  ~ ${work.satEnd}</td>
-                           </tr>
-                           <tr>
-                              <td>일요일</td>
-                              <td>${work.sunStart}  ~ ${work.sunEnd}</td>
-                           </tr>
-                           <tr style="color: #f56a6a">
-                              <td>점심시간</td>
-                              <td>${work.lunchStart } ~ ${work.lunchEnd }</td>
-                           </tr>
-                           </c:when>
-                           <c:when test="${hs_empty eq 2 }">
-                           <tr>
-                              <td>평일</td>
-                              <td>${work.trmtMonStart} ~ ${work.trmtMonEnd}</td>
-                           </tr>
-                           <tr>
-                              <td>여기가 데이터가 없을경우</td>
-                              <td>09:00 ~ 18:00</td>
-                           </tr>
-                           <tr style="color: #f56a6a">
-                              <td>점심시간</td>
-                              <td>13:00 ~ 14:00</td>
-                           </tr>
-                           </c:when>                          
-                           <c:otherwise>  
-                           <!-- 데이터아예 없을경우 -->                       
-                           <tr>
-                              <td colspan="2">검색된 데이터가 없습니다</td>                             
-                           </tr>
-                           </c:otherwise>                           
-                           </c:choose>
-                           
-                        </tbody>
-                        
-                     </table> --%>
+						
                      <a
 								href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}"
 								class="button large reservationbtn koreanfont"
@@ -325,14 +256,6 @@
 		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 		infowindow.open(map, marker); 
 		
-		
-		$("#fav_hos").click(function() {
-		    if ($(this).hasClass('solid')) {
-		       $(this).removeClass('solid');
-		    } else {
-		       $(this).addClass('solid');
-		    }
-		 })
 		 $('#reviewli').click(function() {
 		    $(this).addClass('selectedBoard');
 		    $('#reviewa').addClass('selectedBoard');
@@ -347,50 +270,52 @@
 		    $('#boardcontent').empty();
 		    $('#boardcontent').load("qna");
 		 })
-		 /* 즐겨찾기 */
-		$("#fav_hos").click(function(){
-			var heart = $("#fav_hos").attr('class');
-			console.log(heart);
-			if(heart=='icon far fa-heart solid'){
-				console.log("icon far fa-heart solid일때임");
-				 $.ajax({
-                     url : "favorites_add.net",
-                     type : "POST",
-                     //dataType : "json",
-                     data : {
-                        'yki' : '${vo.ykiho}'
-                     },beforeSend:function(){                         
-                     
-                      },complete:function(){
-                        
-                      },success : function(data){                     
-                      alert("즐겨찾기에 추가되었습니다");				                  
-                     },error : function(data, err) {
-                        alert("err")
-                     }
-                  });//ajax
-		}else{
-			 $.ajax({
-                 url : "favorites_del.net",
-                 type : "POST",
-                 //dataType : "json",
-                 data : {
-                    'yki' : '${vo.ykiho}'
-                 },beforeSend:function(){                         
-                 
-                  },complete:function(){
-                    
-                  },success : function(data){                     
-                  alert("즐겨찾기에 삭제되었습니다");				                  
-                 },error : function(data, err) {
-                    alert("err")
-                 }
-              });//ajax
+
+		 
+		 // bookmark yuri
+		 $(function(){
+			function getUrlParams() {
+				var params = {};
+				window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+				return params;
+				}
 			
-		}
+			oParams = getUrlParams();
+			ykiho = oParams.ykiho;
+			console.log("ykiho = " + ykiho);
 			
-		})
-		
+			 
+			$("#fav_hos").click(function() {
+				if ($(this).hasClass('solid')) {
+					chk = -1;
+				} else {	// 선택됨
+					chk = 1;
+				}
+				
+				console.log(chk);
+				
+				$.ajax({
+					url : "bookmark.net",
+					data : {"ykiho" : ykiho,
+							"chk" : chk},
+					dataType : "json",
+					success : function(resp){
+						if(resp == 1){
+							$("#fav_hos").addClass('solid');
+							alert("관심병원에 등록되었습니다.");
+						}else if(resp == -1){
+							$("#fav_hos").removeClass('solid');
+							alert("관심병원이 해제되었습니다.");
+						}
+					},	// success end
+					error : function(resp){
+						alert("죄송합니다. 잠시 후 다시 시도해주세요.");
+						return false;
+					}	// error end
+				});	// ajax end
+			 });	// #fav_hos click end
+		 })	
+
 	</script>
    
 </body>

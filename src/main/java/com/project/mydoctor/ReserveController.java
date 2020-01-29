@@ -43,7 +43,7 @@ public class ReserveController {
 		String memberId = session.getAttribute("loginid").toString();
 		System.out.println("멤버 아이디 : " + memberId);
 
-		Hospital hospital = hospitalservice.getDetail2(yki);
+		Hospital hospital = hospitalservice.getDetail(yki);
 		Member member = memberservice.select(memberId);
 
 		Date date = new Date();

@@ -80,7 +80,18 @@ insert into reviews values('test', '123', 'testing', 1, 'testSub',
 update reviews set visited = sysdate
 select * from reviews;
 
-			
+create table bookmarks (
+  id varchar2(15) references members(id),
+  hosid varchar2(15) references hospitals(id),
+  hosname varchar2(50)
+)
+
+select * from hospitals
+		where id = (select hosid from bookmarks where id = 'test')
+
+select * from bookmarks;
+drop table bookmarks;
+
 delete members cascade constraints;
 delete reviews
 
