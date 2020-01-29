@@ -7,9 +7,13 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.json.simple.JSONArray;
@@ -22,6 +26,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.project.mydoctor.model.HdetailVO;
 import com.project.mydoctor.model.Hospital;
@@ -42,6 +47,44 @@ public class MapController {
 	
 	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
 	private static final String radius = "3000";
+	
+	@ResponseBody
+	@RequestMapping(value = "favorites_add.net",method = RequestMethod.POST)
+	public int favorites_add(HttpSession session,String yki){
+			String member =(String)session.getAttribute("loginid");						
+			Hospital result = hospitalService.getFavorites(yki);
+			//System.out.println(result.getId());
+			//System.out.println(result.getYadmNm());
+			Map<String, String> fa= new HashMap<String, String>();
+			fa.put("id", member);
+			fa.put("hosid", result.getId());
+			fa.put("hosname", result.getYadmNm());
+			
+			int insert = hospitalService.Fa_insert(fa);
+			System.out.println(insert);
+			
+		return insert;
+	}
+	
+	@ResponseBody
+	@RequestMapping(value = "favorites_del.net",method = RequestMethod.POST)
+	public int favorites_del(HttpSession session,String yki){
+			String member =(String)session.getAttribute("loginid");						
+			Hospital result = hospitalService.getFavorites(yki);
+			System.out.println(result.getId());
+			System.out.println(result.getYadmNm());
+			Map<String, String> fa= new HashMap<String, String>();
+			fa.put("id", member);
+			fa.put("hosid", result.getId());
+			fa.put("hosname", result.getYadmNm());
+			
+			int insert = hospitalService.Fa_delete(fa);
+			System.out.println(insert);
+			
+		return insert;
+		
+		
+	}
 	
 	/**
 	 * @param req 좌표
@@ -106,7 +149,7 @@ public class MapController {
 		parameter = parameter + addr;
 		parameter = parameter + "&xPos=" + xPos;
 		parameter = parameter + "&yPos=" + yPos;
-		parameter = parameter + "&radius=" + 5000;
+		parameter = parameter + "&radius=" + 100000;
 		parameter = parameter + "&_type=json";
 		if(query!="")
 		parameter = parameter + "&yadmNm="+URLEncoder.encode(query, "UTF-8");
@@ -145,18 +188,16 @@ public class MapController {
 	
 	
 	/**
+	 * @author 김건수
 	 * @상세페이지
 	 * @param ykiho 암호 키
 	 * @param model HdetailVO
-	 * @return locationView
-	 * 
+	 * @return locationView 
+	 * @API밀집부분
 	 */
 	@RequestMapping(value = "detail.net", method = RequestMethod.GET)
-	public String locationView(HdetailVO vo, Model model) throws Exception {
-//		System.out.println(vo.getYkiho());
-		
-		
-		
+	public String locationView(HdetailVO vo, Model model,HttpSession session) throws Exception {
+//		System.out.println(vo.getYkiho());	
 		/*
 		 		1. 요양기호로 병원 검색됨 -> 기존 자료 사용
 		 		2. 병원 없을 경우
@@ -165,26 +206,47 @@ public class MapController {
 		 				2- 기록이 없으면 그부분만제거(ex. 월~금)
 		 			2) 월~일 없을 경우 -> 자료없음
 		 */
-		Hospital result = new Hospital();
-		Work_hs work_hs= new Work_hs();
+		Integer check =(Integer)session.getAttribute("chk");
 		
-		result = hospitalService.getDetail(vo.getYkiho());
-		System.out.println("db검증:     "+result);
-		if(result!=null) {
-			model.addAttribute("work", result);
-			System.out.println("DB에 있을경우");
-			System.out.println(result);
-		}else {
-			work_hs = work(vo.getYkiho());
-			model.addAttribute("work", work_hs);
-			System.out.println("DB에 없을경우");
-			System.out.println(work_hs);
+		if(check!=null) {			
+			String member =(String)session.getAttribute("loginid");
+			String fa_hos = vo.getYkiho();
+			String favorite = hospitalService.getFavorite_sel(fa_hos);
+			
+			if(favorite!=null) {
+			Map<String, String> fa = new HashMap<String, String>();
+			fa.put("id", member);
+			fa.put("hosid",favorite);
+			String count = hospitalService.getFavorite_re(fa);
+			if(count.equals("1")) {				
+				System.out.println("카운트: "+count);
+				model.addAttribute("count", count);
+				}
+			}
+				
+
 		}
 		
-		vo = detail(vo);	
+		Hospital result = new Hospital();
+		Work_hs work_hs= work(vo.getYkiho());		
+		result = hospitalService.getDetail(vo.getYkiho());//요양키넣어서 관리자승인받은거로 고쳐야함
 		
-		model.addAttribute("vo", vo);
-	
+		
+		String hs_empty="";
+		if(result!=null) {
+			hs_empty ="1";
+			model.addAttribute("work", result);
+			model.addAttribute("hs_empty", hs_empty);			
+		}else if(work_hs!=null){
+			hs_empty ="2";			
+			model.addAttribute("work", work_hs);
+			model.addAttribute("hs_empty", hs_empty);
+			System.out.println("API확인용");
+			
+		}
+		
+		vo = detail(vo);			
+		model.addAttribute("vo", vo);	
 		return "details/hospitaldetail";
 
 	}
@@ -343,7 +405,7 @@ public class MapController {
 	 * 
 	 */
 	private static String readUrl(String urlString) throws Exception {
-		System.out.println(urlString);
+		
 		
 		BufferedReader reader = null;
 		try {

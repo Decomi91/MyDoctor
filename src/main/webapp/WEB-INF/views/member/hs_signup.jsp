@@ -330,7 +330,7 @@ input:focus {
 						<input id="sunEnd" name="sunEnd" placeholder="일 종료시간 (휴무 00 표기)"
 							class="day" required maxlength="4" pattern="[0-9]{4}"
 							title="ex)11:00 -> 1100">
-						<input id="lunchEnd" name="lunchStart" placeholder="점심 종료시간 (기호 :생략)"
+						<input id="lunchStart" name="lunchStart" placeholder="점심 종료시간 (기호 :생략)"
 							class="day" required maxlength="4" pattern="[0-9]{4}"
 							title="ex)11:00 -> 1100">
 						<input id="lunchEnd" name="lunchEnd" placeholder="점심 종료시간 (기호 :생략)"
@@ -853,8 +853,8 @@ input:focus {
 	                    success: function(data) {
 	                    	//var hidden =data.response.body.items.item;
 	                    	//noTrmtHoli
-	                    	console.log(data.response)
-	                    	console.log(data.response.body.items.item.noTrmtHoli);
+	                    	//console.log(data.response)
+	                    	//console.log(data.response.body.items.item.noTrmtHoli);
 	                    	
 	                    	//$("#h_id").val(data.response.body.items.item.noTrmtHoli);
 	                    	$("#monStart").val(data.response.body.items.item.trmtMonStart);
@@ -899,8 +899,10 @@ input:focus {
           //폼서브밋 하이픈삭제
 			$("#form1").submit(function() {
 				var hphone = $("#hphone").val();
-    	   		 hphone =hphone.replace(/-/g,"");    	   		 
-    	   	$("#hphone").val(hphone);
+    	   		 hphone =hphone.replace(/-/g,"");
+    	   		
+    	   		 hphone = hphone.trim();
+    	   	$("#hphone").val(hphone);  	   		
 				return true;
       	  	}); 
           

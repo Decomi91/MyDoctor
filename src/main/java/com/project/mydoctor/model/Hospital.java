@@ -10,7 +10,7 @@ public class Hospital {
 	private String password; //비밀번호
 	private String yadmNm; //병원명
 	private String addr; //주소
-	private int hphone; //전화번호
+	private long hphone; //전화번호
 	private String yki; //요양기호
 	//근무시간
 	private int doctors;
@@ -57,10 +57,11 @@ public class Hospital {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	public int getHphone() {
+
+	public long getHphone() {
 		return hphone;
 	}
-	public void setHphone(int hphone) {
+	public void setHphone(long hphone) {
 		this.hphone = hphone;
 	}
 	public String getYki() {
@@ -184,7 +185,6 @@ public class Hospital {
 	public void setJoindate(String joindate) {
 		this.joindate = joindate.split(" ")[0];
 	}
-	
 	@Override
 	public String toString() {
 		return "Hospital [id=" + id + ", password=" + password + ", yadmNm=" + yadmNm + ", addr=" + addr + ", hphone="
@@ -192,8 +192,11 @@ public class Hospital {
 				+ ", tueStart=" + tueStart + ", tueEnd=" + tueEnd + ", wedStart=" + wedStart + ", wedEnd=" + wedEnd
 				+ ", thuStart=" + thuStart + ", thuEnd=" + thuEnd + ", friStart=" + friStart + ", friEnd=" + friEnd
 				+ ", satStart=" + satStart + ", satEnd=" + satEnd + ", sunStart=" + sunStart + ", sunEnd=" + sunEnd
-				+ ", lunchStart=" + lunchStart + ", lunchEnd=" + lunchEnd + ", joinok=" + joinok + ", joindate=" + joindate + "]";
+				+ ", lunchStart=" + lunchStart + ", lunchEnd=" + lunchEnd + ", joinok=" + joinok + ", joindate="
+				+ joindate + "]";
 	}
+	
+
 	
 	
 }
