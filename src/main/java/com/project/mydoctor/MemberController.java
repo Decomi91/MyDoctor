@@ -26,6 +26,7 @@ import com.project.mydoctor.service.BoardService;
 import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
+import com.project.mydoctor.service.ReserveService;
 
 @Controller
 public class MemberController {
@@ -40,6 +41,9 @@ public class MemberController {
 	
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private ReserveService reserveService;
 	
 	@GetMapping(value="/joinForm")
 	public ModelAndView joinForm(ModelAndView mv) {
@@ -94,7 +98,11 @@ public class MemberController {
 				session.setAttribute("adminReq", boardService.getAdminRequestNoCheckListCount());
 			}else {
 				mv.setViewName("redirect:/main");
-				session.setAttribute("yesaccept", mypageService.reserveCount(member.getId()));
+				if(chk==1) {
+					session.setAttribute("yesaccept", mypageService.reserveCount(member.getId()));
+				}else {
+					session.setAttribute("reserve", reserveService.getReserves(member.getId()));
+				}
 			}
 		} else {
 			PrintWriter out = response.getWriter();

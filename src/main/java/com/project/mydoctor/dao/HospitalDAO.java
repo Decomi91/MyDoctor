@@ -55,7 +55,7 @@ public class HospitalDAO {
 	}
 
 	public Hospital getDetail2(String yki) {
-		return sqlSession.selectOne("Hospitals.getdetail2", yki);
+		return sqlSession.selectOne("Hospitals.getdetail", yki);
 	}
 	
 	

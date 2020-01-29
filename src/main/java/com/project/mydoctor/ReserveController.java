@@ -12,6 +12,8 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -58,7 +60,7 @@ public class ReserveController {
 	}
 
 	// 예약 페이지 -> 예약 완료 페이지
-	@RequestMapping(value = "/reserveProcess.net")
+	@PostMapping(value = "/reserveProcess.net")
 	public ModelAndView reserveProcess(HttpSession session, @RequestParam(value = "hosid") String hosid,
 			@RequestParam(value = "reserveDate") String reserveDate, @RequestParam(value = "hour") int hour,
 			@RequestParam(value = "minute") int minute, @RequestParam(value = "disease") String disease,
@@ -71,15 +73,9 @@ public class ReserveController {
 		String memberId = session.getAttribute("loginid").toString();
 		Member member = memberservice.select(memberId);
 		Hospital hospital = hospitalservice.getDetailforId(hosid);
-//		
-//		String formatDate = reserveDate + Integer.toString(hour) + ":" + Integer.toString(minute);
-//		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-//		Date date = transFormat.parse(formatDate);
-//		
 
 		String date = reserveDate + "\t" + Integer.toString(hour) + ":" + Integer.toString(minute);
-		System.out.println(date);
-
+		
 		Map<String, Object> map = new HashMap<String, Object>();
 		map.put("id", memberId);
 		map.put("name", member.getName());
@@ -87,21 +83,29 @@ public class ReserveController {
 		map.put("hosname", hospital.getYadmNm());
 		map.put("disease", disease);
 		map.put("reserveTime", date);
-
 		result = reserveservice.insert(map);
-
+		
 		if (result == 1) {
-			mv.setViewName("details/reserveResult");
-			mv.addObject("loginid", memberId);
 			mv.addObject("hosname", hospital.getYadmNm());
 			mv.addObject("reserveDate", date);
+			mv.addObject("yki", hospital.getYki());
+			mv.setViewName("redirect:/reserveRes");
 		} else {
 			out.println("<script>");
-			out.println("alert('예약에 실패했습니다.');");
+			out.println("alert('예약에 실패했습니다.'); history.back();");
 			out.println("</script>");
 			out.close();
 			return null;
 		}
+		
+		return mv;
+	}
+	@GetMapping(value="/reserveRes")
+	public ModelAndView reserveRes(ModelAndView mv, String hosname, String reserveDate, String yki) {
+		mv.addObject("hosname", hosname);
+		mv.addObject("reserveDate", reserveDate);
+		mv.addObject("yki", yki);
+		mv.setViewName("details/reserveResult");
 		return mv;
 	}
 	

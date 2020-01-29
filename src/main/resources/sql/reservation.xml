@@ -85,4 +85,13 @@
 		set acceptance = 1
 		where reserveNo = #{reserveNo}
 	</update>
+	
+	<select id="getreserves" parameterType="String" resultType="Map">
+		select count(case when acceptance=1 then 1 else null end) as accepted,
+				count(case when acceptance=0 then 1 else null end) as waited,
+				count(case when acceptance&lt;0 then 1 else null end) as cancel
+		from (select hosid, acceptance 
+				from reservation
+				where hosid = #{hosid} and to_Char(reserveTime,'yyyymmdd') = to_Char(sysdate, 'yyyymmdd'))
+	</select>
 </mapper>

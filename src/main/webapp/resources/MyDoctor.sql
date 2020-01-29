@@ -59,7 +59,7 @@ create table boards (
   uploaddate date,
   reply varchar2(3000)
 )
-
+select * from boards
 create table reviews(
   id varchar2(15) references members(id),
   password varchar2(15) not null,

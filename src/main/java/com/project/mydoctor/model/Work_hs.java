@@ -6,7 +6,6 @@ package com.project.mydoctor.model;
  *
  */
 public class Work_hs {
-
 	private String noTrmtSun;// 일요일
 	private String noTrmtHoli;// 공휴일
 	private String lunchWeek;// 런치타임

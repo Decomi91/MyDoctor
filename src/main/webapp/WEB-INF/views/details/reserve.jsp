@@ -47,7 +47,7 @@
 						</div>
 
 						<div id = "reserveForm">
-							<form name = "reserForm" action = "reserveProcess.net" method = "get">
+							<form name = "reserForm" action = "reserveProcess.net" method = "post">
 							<input type = "hidden" name = "hosid" value = "${hospital.id }"> 
 								<table id = "reserveTable">
 									<tr>

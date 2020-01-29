@@ -285,8 +285,6 @@ public class MapController {
 				 work_hs.setRcvSat((String)item.get("rcvSat"));
 				 work_hs.setRcvWeek((String)item.get("rcvWeek"));
 				 
-				 
-				 
 //				 System.out.println("4개이상일때만");
 				 
 				 return work_hs; 

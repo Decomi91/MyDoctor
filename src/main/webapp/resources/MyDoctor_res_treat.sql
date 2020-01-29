@@ -37,6 +37,15 @@ values(10, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '0', '1'
 select * from reservation;
 drop table reservation;
 
+select count(case when acceptance=1 then 1 else null end), 
+count(case when acceptance=0 then 1 else null end), 
+count(case when acceptance=-1 then 1 else null end)
+from (select hosid, acceptance 
+		from reservation
+		where hosid = 'gong1' and to_Char(sysdate,'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
+
+
+
 create table treatment(
 	treatNo			number(10) primary key,
 	reserveNo		number(10) references reservation(reserveNo),

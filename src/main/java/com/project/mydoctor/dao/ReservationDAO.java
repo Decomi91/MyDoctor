@@ -29,4 +29,8 @@ public class ReservationDAO {
 		return sqlSession.update("Reservations.reserveOk", reserveNo);
 	}
 
+	public Map<String, Integer> getReserves(String id) {
+		return sqlSession.selectOne("Reservations.getreserves", id);
+	}
+
 }
