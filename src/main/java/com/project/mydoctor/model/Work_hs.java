@@ -172,7 +172,7 @@ public class Work_hs {
 		if (trmtSatStart != null) {
 			this.trmtSatStart = trmtSatStart;
 		} else {
-			this.trmtSatStart = "N";
+			this.trmtSatStart = 0;
 		}
 	}
 
@@ -184,7 +184,7 @@ public class Work_hs {
 		if (trmtSatEnd != null) {
 			this.trmtSatEnd = trmtSatEnd;
 		} else {
-			this.trmtSatEnd = "N";
+			this.trmtSatEnd = 0;
 		}
 	}
 
@@ -196,7 +196,7 @@ public class Work_hs {
 		if (trmtSunStart != null) {
 			this.trmtSunStart = trmtSunStart;
 		} else {
-			this.trmtSunStart = "N";
+			this.trmtSunStart = 0;
 		}
 	}
 
@@ -208,7 +208,7 @@ public class Work_hs {
 		if(trmtSunEnd!=null) {
 		this.trmtSunEnd = trmtSunEnd;
 		}else {
-			this.trmtSunEnd = "N";
+			this.trmtSunEnd = 0;
 		}
 	}
 

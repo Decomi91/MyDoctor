@@ -290,8 +290,14 @@ $(function() {
                         'yPos' : lat,
                         'cate' : $("#demo-category option:selected").val(),
                         'query': $("#hs_query").val()
-                     },
-                     success : function(data) {
+                    	 },beforeSend:function(){
+                    	 $("#div_result").empty();
+                         $('#roding').addClass('roding');
+                         $("#nearpharmacy").prop("disabled", true);
+                       },complete:function(){
+                          $('#roding').removeClass('roding');
+                          $("#nearpharmacy").prop("disabled", false);
+                       },success : function(data) {
                         var total = data.response.body.totalCount;
                         var item = data.response.body.items.item;
                         //console.log(item)

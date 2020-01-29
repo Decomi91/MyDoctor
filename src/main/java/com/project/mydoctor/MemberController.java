@@ -142,7 +142,7 @@ public class MemberController {
 		req.setCharacterEncoding("utf-8");
 		res.setContentType("text/html;charset=utf-8");
 		String ServiceKey = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?pageNo=1&numOfRows=100&_type=json&ServiceKey=G9rzPM3G3d1FVN%2F8ZyPSkwQ7B0IICxPX3Sks%2FrUY2wLu94BsUzYPUHzcNhSwJj%2FIjuLsoBMYMJ7JcX4thVA7Lg%3D%3D&yadmNm="
-				+ searchText;
+				+ searchText;		
 		PrintWriter out = res.getWriter();
 		URL url = new URL(ServiceKey);
 		InputStream in = url.openStream();
@@ -191,7 +191,7 @@ public class MemberController {
 	 */
 	@RequestMapping(value = "hs_signup.do", method = RequestMethod.POST)
 	public void signup(HttpServletRequest req, HttpServletResponse res, Hospital vo) throws Exception {
-
+		
 		int result = hospitalService.hs_insert(vo);
 		res.setContentType("text/html;charset=utf-8");
 		PrintWriter out = res.getWriter();

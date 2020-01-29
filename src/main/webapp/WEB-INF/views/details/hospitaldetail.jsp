@@ -1,52 +1,62 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-   pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE HTML>
-
 <html>
 <head>
 <title>My Doctor - 병원상세</title>
 <meta charset="utf-8" />
 <meta name="viewport"
-   content="width=device-width, initial-scale=1, user-scalable=no" />
+	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body class="is-preload">
-   <!-- Wrapper -->
-   <div id="wrapper">
+	<!-- Wrapper -->
+	<div id="wrapper">
 
-      <!-- Main -->
-      <div id="main">
-         <div class="inner">
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
 
-            <!-- Header -->
-            <header id="header">
-               <a href="main" class="logo"><strong>My Doctor</strong> by
-                  team.5</a>
+				<!-- Header -->
+				<header id="header">
+					<a href="main" class="logo"><strong>My Doctor</strong> by
+						team.5</a>
 
-            </header>
+				</header>
 
-            <!-- Banner: body -->
-            <section id="banner">
-               <div class="content">
+				<!-- Banner: body -->
+				<section id="banner">
+					<div class="content">
 
-                  <div class="image left" style="height: 100%; margin-left: 5%">
-                     <!-- <img src="resources/images/pic10.jpg" alt="" /> -->
-                    <div id="map" style="width:100%;height:350px;"></div>
-                  </div>
-                  <header>
-                     <h1 class="koreanfont hospitalnamesize">
-                        <i class="icon far fa-heart"
-                           style="float: right; color: #f56a6a; margin-right: 5%"
-                           id="fav_hos"></i>${vo.yadmNm }
-                     </h1>
-                     <p
-                        style="font-size: 12pt; font-family: Open Sans, sans-serif; color: #7f888f; margin-top: 2%">(${vo.clCdNm})${vo.dgsbjtCdNm}</p>
+						<div class="image left" style="height: 100%; margin-left: 5%">
+							<!-- <img src="resources/images/pic10.jpg" alt="" /> -->
+							<div id="map" style="width: 100%; height: 350px;"></div>
+						</div>
+						<header>
+							<h1 class="koreanfont hospitalnamesize" style="font-size: 3em;">
+							 <c:if test="${chk==1 and hs_empty eq '1'}">
+							 	<c:if test="${count eq '1' }">
+								<i class="icon far fa-heart solid"
+									style="float: right; color: #f56a6a; margin-right: 5%"
+									id="fav_hos"></i>
+									</c:if>
+									<c:if test="${empty count  }">
+								<i class="icon far fa-heart"
+									style="float: right; color: #f56a6a; margin-right: 5%"
+									id="fav_hos"></i>
+									</c:if>
+									</c:if>${vo.yadmNm }
+							</h1>
+							<p
+								style="font-size: 12pt; font-family: Open Sans, sans-serif; color: #7f888f; margin-top: 2%">(${vo.clCdNm})${vo.dgsbjtCdNm}</p>
 
-                  </header>
-                  <div class="table-wrapper" style="width: 50%">
-                     <table>
+						</header>
+
+						<div class="table-wrapper" style="width: 50%">
+						<%-- 	<table>
                         <thead>
                            <tr>
                               <th></th>
@@ -55,45 +65,212 @@
                            </tr>
                         </thead>
                         <tbody>
+                        <!-- DB데이터 -->
+                        <c:choose>                        
+                        <c:when test="${hs_empty eq 1 }">
                            <tr>
-                              <td>평일</td>
-                              <td>09:00 ~ 18:00</td>
-
+                              <td>월요일</td>
+                              <td>${work.monStart}  ~ ${work.monEnd}</td>
                            </tr>
                            <tr>
-                              <td>주말</td>
+                              <td>화요일</td>
+                              <td>${work.tueStart}  ~ ${work.tueEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>수요일</td>
+                              <td>${work.wedStart}  ~ ${work.wedEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>목요일</td>
+                              <td>${work.thuStart}  ~ ${work.thuEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>금요일</td>
+                              <td>${work.friStart}  ~ ${work.friEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>토요일</td>
+                              <td>${work.satStart}  ~ ${work.satEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>일요일</td>
+                              <td>${work.sunStart}  ~ ${work.sunEnd}</td>
+                           </tr>
+                           <tr style="color: #f56a6a">
+                              <td>점심시간</td>
+                              <td>${work.lunchStart } ~ ${work.lunchEnd }</td>
+                           </tr>
+                           </c:when>
+                           <c:when test="${hs_empty eq 2 }">
+                           <tr>
+                              <td>평일</td>
+                              <td>${work.trmtMonStart} ~ ${work.trmtMonEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>여기가 데이터가 없을경우</td>
                               <td>09:00 ~ 18:00</td>
-
                            </tr>
                            <tr style="color: #f56a6a">
                               <td>점심시간</td>
                               <td>13:00 ~ 14:00</td>
-
                            </tr>
+                           </c:when>                          
+                           <c:otherwise>  
+                           <!-- 데이터아예 없을경우 -->                       
+                           <tr>
+                              <td colspan="2">검색된 데이터가 없습니다</td>                             
+                           </tr>
+                           </c:otherwise>                           
+                           </c:choose>
+                           
                         </tbody>
-                     </table>
-                     <a href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}" class="button large reservationbtn koreanfont"
-                        style="float: right; margin-top: 3%;" target="_blank">길찾기</a>
+                        
+                     </table> --%>
+                     <a
+								href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}"
+								class="button large reservationbtn koreanfont"
+								style="float: right; margin-top: 3%;" target="_blank">길찾기</a>
                      <c:if test="${chk==1 }">
-                        <a href="reserve.net?yki=${vo.ykiho }" class="button large reservationbtn koreanfont"
-                           style="float: right; margin-top: 3%;" id="res_hos">예약하기</a>
+                        <a href="reserve.net?yki=${vo.ykiho }"
+									class="button large reservationbtn koreanfont"
+									style="float: right; margin-top: 3%;" id="res_hos">예약하기</a>
                      </c:if>
                      <div>
-                        <i class="fas fa-phone-alt"></i>${vo.telno }<br><c:if test="${vo.hospUrl!='undefined'}"><a href="${vo.hospUrl}" target="_blank">사이트
-                           방문하기</a></c:if> 
+                        <i class="fas fa-phone-alt"></i>${vo.telno }<br>
+								<c:if test="${vo.hospUrl!='undefined'}">
+									<a href="${vo.hospUrl}" target="_blank">사이트 방문하기</a>
+								</c:if> 
                           
                      </div>
 
 
                   </div>
+                  
 
                </div>
+               
+               
             </section>
+
+            
+            <div class="table-wrapper" style="width: 70%">
+							<table>
+                        <thead>
+                           <tr>
+                              <th></th>
+                              <th>진료시간</th>
+
+                           </tr>
+                        </thead>
+                        <tbody>
+                        <!-- DB데이터 -->
+                        <c:choose>                        
+                        <c:when test="${hs_empty eq 1 }">
+                           <tr>
+                              <td>월요일</td>
+                              <td>0${work.monStart}  ~ ${work.monEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>화요일</td>
+                              <td>0${work.tueStart}  ~ ${work.tueEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>수요일</td>
+                              <td>0${work.wedStart}  ~ ${work.wedEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>목요일</td>
+                              <td>0${work.thuStart}  ~ ${work.thuEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>금요일</td>
+                              <td>0${work.friStart}  ~ ${work.friEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>토요일</td>
+                              <c:choose>
+                              <c:when test="${work.satStart eq 0}"><td style="color: red">휴진</td></c:when>
+                              <c:otherwise><td>${work.satStart}  ~ ${work.satEnd}</td></c:otherwise>
+                              </c:choose>
+                           </tr>
+                           <tr>
+                          	  <td>일요일</td>
+                           	  <c:choose>
+                              <c:when test="${work.sunStart eq 0}"><td style="color: red">휴진</td></c:when>
+                              <c:otherwise><td>${work.sunStart}  ~ ${work.sunEnd}</td></c:otherwise>
+                              </c:choose>
+                           </tr>
+                           <tr style="color: #f56a6a">
+                              <td>점심시간</td>
+                              <c:choose>
+                              <c:when test="${work.lunchStart eq 0}"><td style="color: red">점심시간 없음</td></c:when>
+                              <c:otherwise><td>${work.lunchStart } ~ ${work.lunchEnd }</td></c:otherwise>
+                              </c:choose>                             
+                           </tr>
+                           </c:when>
+                           <c:when test="${hs_empty eq 2 }">
+                          <tr>
+                              <td>월요일</td>
+                              <td>${work.trmtMonStart}  ~ ${work.trmtMonEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>화요일</td>
+                              <td>${work.trmtTueStart}  ~ ${work.trmtTueEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>수요일</td>
+                              <td>${work.trmtWedStart}  ~ ${work.trmtWedEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>목요일</td>
+                              <td>${work.trmtThuStart}  ~ ${work.trmtThuEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>금요일</td>
+                              <td>${work.trmtFriStart}  ~ ${work.trmtFriEnd}</td>
+                           </tr>
+                           <tr>
+                              <td>토요일</td>
+                              <c:choose>
+                              <c:when test="${work.trmtSatStart eq 0}"><td style="color: red">휴진</td></c:when>
+                              <c:otherwise><td>${work.trmtSatStart}  ~ ${work.trmtSatEnd}</td></c:otherwise>
+                              </c:choose>
+                           </tr>
+                           <tr>
+                          	  <td>일요일</td>
+                           	  <c:choose>
+                              <c:when test="${work.trmtSunStart eq 0}"><td style="color: red">휴진</td></c:when>
+                              <c:otherwise><td>${work.trmtSunStart}  ~ ${work.trmtSunEnd}</td></c:otherwise>
+                              </c:choose>
+                           </tr>
+                           <tr style="color: #f56a6a">
+                           <td>점심시간</td>
+                              <c:choose>
+                              <c:when test="${fn:contains(work.lunchWeek,'없음')}"><td style="color: red">점심시간 없음</td></c:when>
+                              <c:otherwise><td>PM ${work.lunchWeek }</td></c:otherwise>
+                              </c:choose>                             
+                           </tr>
+                           </c:when>                          
+                           <c:otherwise>  
+                           <!-- 데이터아예 없을경우 -->                       
+                           <tr>
+                              <td colspan="2">검색된 데이터가 없습니다</td>                             
+                           </tr>
+                           </c:otherwise>                           
+                           </c:choose>
+                           
+                        </tbody>
+                        
+                     </table>
+                     </div>
+            
             <nav id="boardMenu">
                <ul>
-                  <li id="reviewli"><a class="menuLink" href="#" id="reviewa">
+                  <li id="reviewli"><a class="menuLink" href="#"
+							id="reviewa">
                         후기 </a></li>
-                  <li id="qnali"><a class="menuLink" href="#" id="qnaa"> 문의
+                  <li id="qnali"><a class="menuLink" href="#"
+							id="qnaa"> 문의
                   </a></li>
 
                </ul>
@@ -108,7 +285,8 @@
    </div>
 
       <!-- 맵 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b"></script>
+    <script type="text/javascript"
+		src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b"></script>
    <!-- Scripts -->
    <script src="resources/js/jquery.min.js"></script>
    <script src="resources/js/browser.min.js"></script>
@@ -167,8 +345,52 @@
 		    $('#reviewli').removeClass('selectedBoard');
 		    $('#reviewa').removeClass('selectedBoard');
 		    $('#boardcontent').empty();
-		      $('#boardcontent').load("qna");
+		    $('#boardcontent').load("qna");
 		 })
+		 /* 즐겨찾기 */
+		$("#fav_hos").click(function(){
+			var heart = $("#fav_hos").attr('class');
+			console.log(heart);
+			if(heart=='icon far fa-heart solid'){
+				console.log("icon far fa-heart solid일때임");
+				 $.ajax({
+                     url : "favorites_add.net",
+                     type : "POST",
+                     //dataType : "json",
+                     data : {
+                        'yki' : '${vo.ykiho}'
+                     },beforeSend:function(){                         
+                     
+                      },complete:function(){
+                        
+                      },success : function(data){                     
+                      alert("즐겨찾기에 추가되었습니다");				                  
+                     },error : function(data, err) {
+                        alert("err")
+                     }
+                  });//ajax
+		}else{
+			 $.ajax({
+                 url : "favorites_del.net",
+                 type : "POST",
+                 //dataType : "json",
+                 data : {
+                    'yki' : '${vo.ykiho}'
+                 },beforeSend:function(){                         
+                 
+                  },complete:function(){
+                    
+                  },success : function(data){                     
+                  alert("즐겨찾기에 삭제되었습니다");				                  
+                 },error : function(data, err) {
+                    alert("err")
+                 }
+              });//ajax
+			
+		}
+			
+		})
+		
 	</script>
    
 </body>
