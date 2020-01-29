@@ -32,7 +32,7 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th colspan = "4">병원 정보 리스트</th>
+										<th colspan = "4">병원 가입 신청 리스트</th>
 										<th><font size="3">병원의 수 : ${listcount }</font></th>
 									</tr>
 								</thead>
@@ -44,18 +44,17 @@
 										<th width="20%">등록일</th>
 										<th width="15%">관리</th>
 									</tr>
-<%-- 									<c:set var="num" value="${listcount-(page-1)*10 }"/> --%>
-									<c:forEach var="list" items="${boardlist }">
+									<c:set var="num" value="${listcount-(page-1)*10 }"/>
+									<c:forEach var="list" items="${hoslist }">
 										<tr>
-											<td>${list.boardNum }
-<%-- 												<c:out value="${num }"/> --%>
-<%-- 												<c:set var="num" value="${num-1 }"/> --%>
+											<td>
+												<c:out value="${num }"/>
+												<c:set var="num" value="${num-1 }"/>
 											</td>
 											<td>${list.id }</td>
-											<td>${list.subject }</td>
-											<td><c:if test="${list.checking==1 }">처리완료 </c:if>
-												<c:if test="${list.checking==0 }">승인대기 </c:if></td>
-											<td><a class="btn btn-primary" href="adminBoardDetail?boardnum=${list.boardNum}">관리</a></td>
+											<td>${list.yadmNm }</td>
+											<td>${list.joindate }</td>
+											<td><a class="btn btn-primary" href="hospitalSignDetail?id=${list.id}">확인</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -71,7 +70,7 @@
 											</c:if>
 											<c:if test="${page > 1}">
 												<li class="page-item">
-													<a href="requestToAdmin?page=${page-1 }" class="page-link">이전</a>&nbsp;
+													<a href="hospitalSignlist?page=${page-1 }" class="page-link">이전</a>&nbsp;
 												</li>								
 											</c:if>
 											
@@ -80,7 +79,7 @@
 													<li class="page-item"><a href="#" class="page-link gray">${i }</a></li>
 												</c:if>
 												<c:if test="${i!=page }">
-													<li class="page-item"><a href="requestToAdmin?page=${i }" class="page-link">${i }</a></li>
+													<li class="page-item"><a href="hospitalSignlist?page=${i }" class="page-link">${i }</a></li>
 												</c:if>
 											</c:forEach>
 											
@@ -91,7 +90,7 @@
 											</c:if>
 											<c:if test="${page != endpage}">
 												<li class="page-item">
-													<a href="requestToAdmin?page=${page+1 }" class="page-link">&nbsp;다음</a>
+													<a href="hospitalSignlist?page=${page+1 }" class="page-link">&nbsp;다음</a>
 												</li>								
 											</c:if>								
 										</ul>
@@ -102,12 +101,12 @@
 								
 						</c:if>
 						<c:if test="${listcount == 0 }">
-							<font size=5>등록된 글이 없습니다.</font>
+							<font size=5>가입 신청한 병원이 없습니다.</font>
 						</c:if><br>
 					</section>
 				</div>
 			</div>
-			<!-- Sidebar -->	
+			<!-- Sidebar -->
 			<jsp:include page="../header/footer.jsp"></jsp:include>
 		</div>
 		

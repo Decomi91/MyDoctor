@@ -13,7 +13,16 @@ public interface HospitalService {
 	
 	public List<Hospital> getHosListTest();
 
+	public int getSignRequestCount();
+
+	public List<Hospital> getSignRequestList(int pages);
+
+	public Hospital getDetailforId(String hosid);
+
+	public int setJoinOkay(String hosid);
+
+	public int widthdraw(String hosid);
+  
 	public Hospital getDetail(String id);
 
-	public Hospital getDetail2(String yki);
 }

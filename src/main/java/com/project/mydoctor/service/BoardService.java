@@ -10,4 +10,10 @@ public interface BoardService {
 
 	List<AdminBoard> getAdminRequestList(int pages);
 
+	AdminBoard getAdminRequestDetail(int boardnum);
+
+	Object getAdminRequestNoCheckListCount();
+
+	int setAdminRequestReply(AdminBoard board);
+
 }

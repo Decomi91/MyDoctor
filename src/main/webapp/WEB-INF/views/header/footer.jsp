@@ -97,19 +97,23 @@
                   </header>
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
-                        <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;관리자 요청 게시글이
-                         &nbsp;&nbsp; <a href="#">?</a> 건 있습니다.
+						<i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;관리자 요청 게시글이
+							&nbsp;&nbsp; <a href="requestToAdmin">${adminReq }</a> 건 있습니다.
+						<i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원 가입 요청이
+							&nbsp;&nbsp; <a href="hospitalSignlist">${accepctReq }</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">
-                     <li
-                        class="icon solid far fa-clipboard-list mypageacess"><a
+                    <li class="icon solid far fa-clipboard-list mypageacess"><a
                         href="hospitalcontrol">병원 관리</a></li>
-                     <li class="icon solid far fa-clipboard-list mypagelisecond-child mypageacess"><a
-                        href="usercontrol">회원 관리</a></li>
-                     <li class="icon solid fas fa-folder-open mypageacess"><a
-                        href="#">요청 게시판</a></li>
+                    <li class="icon solid far fa-clipboard-list mypagelisecond-child mypageacess"><a
+                        href="usercontrol">회원 관리</a></li> 
+                    <li class="icon solid far fa-clipboard-list mypageacess"><a
+                        href="hospitalSignlist">병원 신청 목록</a></li>
+                    <li class="icon solid fas fa-folder-open mypageacess"><a
+                        href="requestToAdmin">요청 게시판</a></li>
                   </ul>
+                  <br>
                   <a href="logout" class="button primary fit koreanfont">로그아웃</a>
                </section>
             </c:if>

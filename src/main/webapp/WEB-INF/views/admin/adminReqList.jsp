@@ -32,36 +32,29 @@
 							<table class="table table-striped">
 								<thead>
 									<tr>
-										<th colspan = "4">유저 정보 리스트</th>
-										<th colspan = "2"><font size="3">유저의 수 : ${listcount }</font></th>
+										<th colspan = "4">병원 정보 리스트</th>
+										<th colspan = "2"><font size="3">병원의 수 : ${listcount }</font></th>
 									</tr>
 								</thead>
 								<tbody>
 									<tr>
 										<th width="10%">번호</th>
-										<th width="30%">ID</th>
-										<th width="20%">이름</th>
-										<th width="20%">생일</th>
+										<th width="15%">ID</th>
+										<th width="35%">제목</th>
+										<th width="20%">등록일</th>
 										<th width="10%">상태</th>
 										<th width="10%">관리</th>
 									</tr>
-									<c:set var="num" value="${listcount-(page-1)*10 }"/>
-									<c:forEach var="list" items="${memlist }">
+									<c:forEach var="list" items="${boardlist }">
 										<tr>
-											<td>
-												<c:out value="${num }"/>
-												<c:set var="num" value="${num-1 }"/>
-											</td>
+											<td>${list.boardNum }</td>
 											<td>${list.id }</td>
-											<td>${list.name }</td>
-											<td>${list.birth }</td>
-											<td>
-												<c:choose>
-													<c:when test="${list.userkey==1 }">가입됨</c:when>
-													<c:otherwise>탈퇴</c:otherwise>
-												</c:choose>
-											</td>
-											<td><a class="btn btn-primary" href="memberDetail?id=${list.id}">관리</a></td>
+											<td>${list.subject }</td>
+											<td>${list.reqDate }</td>
+											<td><c:if test="${list.checking==2 }">처리완료 </c:if>
+												<c:if test="${list.checking==1 }">확인완료 </c:if>
+												<c:if test="${list.checking==0 }">승인대기 </c:if></td>
+											<td><a class="btn btn-primary" href="adminReqDetail?boardnum=${list.boardNum}">확인</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
@@ -77,7 +70,7 @@
 											</c:if>
 											<c:if test="${page > 1}">
 												<li class="page-item">
-													<a href="usercontrol?page=${page-1 }" class="page-link">이전</a>&nbsp;
+													<a href="requestToAdmin?page=${page-1 }" class="page-link">이전</a>&nbsp;
 												</li>								
 											</c:if>
 											
@@ -86,7 +79,7 @@
 													<li class="page-item"><a href="#" class="page-link gray">${i }</a></li>
 												</c:if>
 												<c:if test="${i!=page }">
-													<li class="page-item"><a href="usercontrol?page=${i }" class="page-link">${i }</a></li>
+													<li class="page-item"><a href="requestToAdmin?page=${i }" class="page-link">${i }</a></li>
 												</c:if>
 											</c:forEach>
 											
@@ -97,7 +90,7 @@
 											</c:if>
 											<c:if test="${page != endpage}">
 												<li class="page-item">
-													<a href="usercontrol?page=${page+1 }" class="page-link">&nbsp;다음</a>
+													<a href="requestToAdmin?page=${page+1 }" class="page-link">&nbsp;다음</a>
 												</li>								
 											</c:if>								
 										</ul>
@@ -113,8 +106,7 @@
 					</section>
 				</div>
 			</div>
-			<!-- Sidebar -->
-				
+			<!-- Sidebar -->	
 			<jsp:include page="../header/footer.jsp"></jsp:include>
 		</div>
 		

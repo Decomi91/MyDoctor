@@ -151,37 +151,34 @@
 								<nav>
 									<span class="noLink">관심 병원</span>
 								</nav>
-
-								<div class="bookmarkOut">
-									<!-- 반복될 목록 -->
-									<div>
-										<div class = "aaa">
-											<a href = "detail.net"></a>
-											<div class = bookmarkHos>덕산병원</div>
-											<div>
-												<span class = "bookmarkScore"><i class="fas fa-grin-hearts"></i> ? / 10</span>
-												<span>(13)</span>
-												· 내과/이비인후과
+								
+								<div class = "table-wrapper">
+									
+									<c:if test="${bookmarkcount > 0}">
+										<c:forEach var = "bm" items = "${bm }">
+											<div class = "bookmarkRepeat">
+												<div class = "bookmarkHosname">
+													<a href = "detail.net" class = "HosnameA">
+													${bm.hosname }
+													</a>
+													<font color = "white">· 내과 / 이비인후과</font>
+													<span class = "bookmarkIcon">
+														<i class="fas fa-heart bookmarkIcon fa-2x"></i>
+													</span>
+												</div>
+												<div class = "bookmarkHosInfo">
+													<span class = "infoSpan">${bm.hospital.addr }</span>
+													<span class = "infoSpan">${bm.hospital.hphone }</span>
+													<span>
+														<i class="fas fa-grin-hearts"></i> ? / 10
+													</span>
+													<span>(13)</span>
+												</div>
 											</div>
-											<div>
-												<span>서울시 구로구 오류1동 18-51</span>
-											</div>
-											<div>
-												<span>02-1234-1234</span>
-											</div>
-										</div>
-										
-											<div class = "ttt">
-												<i class="fas fa-heart bookmarkIcon"></i><br>
-												<span class = "bookmarkSpan">찜 취소</span>
-											</div>
-											<div class = "ttt">
-												<a href = "#">
-													<i class="fas fa-globe-americas bookmarkIcon"></i><br>
-													<span class = "bookmarkSpan">웹사이트</span>
-												</a>
-											</div>
-									</div>
+										</c:forEach>
+									</c:if>
+									
+									
 								</div>
 							</div>
 							<!-- 관심 병원 end -->

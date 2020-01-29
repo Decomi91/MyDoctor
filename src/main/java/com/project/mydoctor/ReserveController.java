@@ -41,7 +41,7 @@ public class ReserveController {
 		String memberId = session.getAttribute("loginid").toString();
 		System.out.println("멤버 아이디 : " + memberId);
 
-		Hospital hospital = hospitalservice.getDetail2(yki);
+		Hospital hospital = hospitalservice.getDetail(yki);
 		Member member = memberservice.select(memberId);
 
 		Date date = new Date();
@@ -70,7 +70,7 @@ public class ReserveController {
 
 		String memberId = session.getAttribute("loginid").toString();
 		Member member = memberservice.select(memberId);
-		Hospital hospital = hospitalservice.getDetail(hosid);
+		Hospital hospital = hospitalservice.getDetailforId(hosid);
 //		
 //		String formatDate = reserveDate + Integer.toString(hour) + ":" + Integer.toString(minute);
 //		SimpleDateFormat transFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");

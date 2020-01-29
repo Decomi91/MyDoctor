@@ -37,9 +37,17 @@
                   </div>
                   <header>
                      <h1 class="koreanfont hospitalnamesize">
-                        <i class="icon far fa-heart"
+                     	<c:if test="${check==1 }">
+                     		 <i class="icon far fa-heart solid"
                            style="float: right; color: #f56a6a; margin-right: 5%"
-                           id="fav_hos"></i>${vo.yadmNm }
+                           id="fav_hos"></i>
+                     	</c:if>
+                     	<c:if test="${check!=1 }">
+                     		<i class="icon far fa-heart"
+                           style="float: right; color: #f56a6a; margin-right: 5%"
+                           id="fav_hos"></i>
+                     	</c:if>
+                        ${vo.yadmNm }
                      </h1>
                      <p
                         style="font-size: 12pt; font-family: Open Sans, sans-serif; color: #7f888f; margin-top: 2%">(${vo.clCdNm})${vo.dgsbjtCdNm}</p>
@@ -116,63 +124,96 @@
    <script src="resources/js/util.js"></script>
    <script src="resources/js/main.js"></script>
    <script>
-     
-      
-
-var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
-    mapOption = { 
-        center: new kakao.maps.LatLng('${vo.YPos}','${vo.XPos}'), // 지도의 중심좌표
-        level: 3 // 지도의 확대 레벨
-    };
-
-var map = new kakao.maps.Map(mapContainer, mapOption);
-
-// 마커가 표시될 위치입니다 
-var markerPosition  = new kakao.maps.LatLng('${vo.YPos}','${vo.XPos}'); 
-
-// 마커를 생성합니다
-var marker = new kakao.maps.Marker({
-    position: markerPosition
-});
-
-// 마커가 지도 위에 표시되도록 설정합니다
-marker.setMap(map);
-
-var iwContent = '<div style="padding:5px; text-align:center">${vo.yadmNm} <br><a href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
-    iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
-
-// 인포윈도우를 생성합니다
-var infowindow = new kakao.maps.InfoWindow({
-    position : iwPosition, 
-    content : iwContent 
-});
-  
-// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
-infowindow.open(map, marker); 
-
-
-$("#fav_hos").click(function() {
-    if ($(this).hasClass('solid')) {
-       $(this).removeClass('solid');
-    } else {
-       $(this).addClass('solid');
-    }
- })
- $('#reviewli').click(function() {
-    $(this).addClass('selectedBoard');
-    $('#reviewa').addClass('selectedBoard');
-    $('#qnali').removeClass('selectedBoard');
-    $('#qnaa').removeClass('selectedBoard');
- })
- $('#qnali').click(function() {
-    $(this).addClass('selectedBoard');
-    $('#qnaa').addClass('selectedBoard');
-    $('#reviewli').removeClass('selectedBoard');
-    $('#reviewa').removeClass('selectedBoard');
-    $('#boardcontent').empty();
-      $('#boardcontent').load("qna");
- })
-</script>
+		var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+		    mapOption = { 
+		        center: new kakao.maps.LatLng('${vo.YPos}','${vo.XPos}'), // 지도의 중심좌표
+		        level: 3 // 지도의 확대 레벨
+		    };
+		
+		var map = new kakao.maps.Map(mapContainer, mapOption);
+		
+		// 마커가 표시될 위치입니다 
+		var markerPosition  = new kakao.maps.LatLng('${vo.YPos}','${vo.XPos}'); 
+		
+		// 마커를 생성합니다
+		var marker = new kakao.maps.Marker({
+		    position: markerPosition
+		});
+		
+		// 마커가 지도 위에 표시되도록 설정합니다
+		marker.setMap(map);
+		
+		var iwContent = '<div style="padding:5px; text-align:center">${vo.yadmNm} <br><a href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}" style="color:blue" target="_blank">길찾기</a></div>', // 인포윈도우에 표출될 내용으로 HTML 문자열이나 document element가 가능합니다
+		    iwPosition = new kakao.maps.LatLng(33.450701, 126.570667); //인포윈도우 표시 위치입니다
+		
+		// 인포윈도우를 생성합니다
+		var infowindow = new kakao.maps.InfoWindow({
+		    position : iwPosition, 
+		    content : iwContent 
+		});
+		  
+		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
+		infowindow.open(map, marker); 
+		
+		 $('#reviewli').click(function() {
+		    $(this).addClass('selectedBoard');
+		    $('#reviewa').addClass('selectedBoard');
+		    $('#qnali').removeClass('selectedBoard');
+		    $('#qnaa').removeClass('selectedBoard');
+		 })
+		 $('#qnali').click(function() {
+		    $(this).addClass('selectedBoard');
+		    $('#qnaa').addClass('selectedBoard');
+		    $('#reviewli').removeClass('selectedBoard');
+		    $('#reviewa').removeClass('selectedBoard');
+		    $('#boardcontent').empty();
+		      $('#boardcontent').load("qna");
+		 })
+		 
+		 // bookmark yuri
+		 $(function(){
+			function getUrlParams() {
+				var params = {};
+				window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
+				return params;
+				}
+			
+			oParams = getUrlParams();
+			ykiho = oParams.ykiho;
+			console.log("ykiho = " + ykiho);
+			
+			 
+			$("#fav_hos").click(function() {
+				if ($(this).hasClass('solid')) {
+					chk = -1;
+				} else {	// 선택됨
+					chk = 1;
+				}
+				
+				console.log(chk);
+				
+				$.ajax({
+					url : "bookmark.net",
+					data : {"ykiho" : ykiho,
+							"chk" : chk},
+					dataType : "json",
+					success : function(resp){
+						if(resp == 1){
+							$("#fav_hos").addClass('solid');
+							alert("관심병원에 등록되었습니다.");
+						}else if(resp == -1){
+							$("#fav_hos").removeClass('solid');
+							alert("관심병원이 해제되었습니다.");
+						}
+					},	// success end
+					error : function(resp){
+						alert("죄송합니다. 잠시 후 다시 시도해주세요.");
+						return false;
+					}	// error end
+				});	// ajax end
+			 });	// #fav_hos click end
+		 })	
+	</script>
    
 </body>
 </html>

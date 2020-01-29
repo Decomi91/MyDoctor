@@ -7,11 +7,33 @@
  		select count(*) from adminBoard
  	</select>
  	
- 	<select id="getboardlist" parameterType="int" resultType="member">
+ 	<select id="getboardlist" parameterType="int" resultType="adminboard">
  		select b.*
  		from (select rownum r, a.*
  				from adminBoard a
  				order by boardnum desc) b
  		where b.r between ( ( (#{page}-1)*10)+#{page}) and (#{page}*10)	
  	</select>
+ 	
+ 	<select id="getdetail" parameterType="int" resultType="adminboard">
+ 		select * from adminboard
+ 		where boardnum = #{boardnum}
+ 	</select>
+ 	
+ 	<select id="getnochecklistcount" resultType="int">
+ 		select count(*) from adminBoard
+ 		where checking = 0 or checking = 1
+ 	</select>
+ 	
+ 	<update id="setchecking" parameterType="int">
+ 		update adminBoard
+ 		set checking = 1
+ 		where boardNum = #{boardNum}
+ 	</update>
+ 	
+ 	<update id="setreply" parameterType="adminboard">
+ 		update adminBoard
+ 		set checking = 2, reply = #{reply}
+ 		where boardNum = #{boardNum}
+ 	</update>
  </mapper>

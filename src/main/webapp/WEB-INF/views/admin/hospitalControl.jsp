@@ -33,7 +33,7 @@
 								<thead>
 									<tr>
 										<th colspan = "4">병원 정보 리스트</th>
-										<th><font size="3">병원의 수 : ${listcount }</font></th>
+										<th colspan = "2"><font size="3">병원의 수 : ${listcount }</font></th>
 									</tr>
 								</thead>
 								<tbody>
@@ -41,8 +41,9 @@
 										<th width="10%">번호</th>
 										<th width="25%">병원ID</th>
 										<th width="30%">병원명</th>
-										<th width="20%">등록일</th>
-										<th width="15%">관리</th>
+										<th width="15%">등록일</th>
+										<th width="10%">상태</th>
+										<th width="10%">관리</th>
 									</tr>
 									<c:set var="num" value="${listcount-(page-1)*10 }"/>
 									<c:forEach var="list" items="${hoslist }">
@@ -54,7 +55,10 @@
 											<td>${list.id }</td>
 											<td>${list.yadmNm }</td>
 											<td>${list.joindate }</td>
-											<td><a class="btn btn-primary" href="hospitalDetail?yki=${list.yki}">관리</a></td>
+											<td><c:if test="${list.joinok==1 }">등록됨</c:if>
+												<c:if test="${list.joinok==0 }">등록대기</c:if>
+												<c:if test="${list.joinok==-1 }">탈퇴</c:if></td>
+											<td><a class="btn btn-primary" href="hospitalDetail?hosid=${list.id}">관리</a></td>
 										</tr>
 									</c:forEach>
 								</tbody>
