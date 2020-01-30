@@ -4,13 +4,34 @@
  
  <mapper namespace="Qna">
 
- 
- <!-- jisu_0128_내가쓴 문의(병원) -->
-  <select id="qnalistcount" resultType="int" parameterType="String">
- select count(*) from boards where writeid=#{id}
- </select>
- <select id="qnalist" parameterType="java.util.Map" resultType="qna">
- select * from(select rownum rnum, r.* from(select * from boards where writeid=#{id} order by uploaddate desc ) r)
- where rnum &gt;=#{start} and rnum &lt;=#{end}
- </select>
+	 
+	 <!-- jisu_0128_내가쓴 문의(병원) -->
+	  <select id="qnalistcount" resultType="int" parameterType="String">
+	 select count(*) from boards where writeid=#{id}
+	 </select>
+	 <select id="qnalist" parameterType="java.util.Map" resultType="qna">
+	 select * from(select rownum rnum, r.* from(select * from boards where writeid=#{id} order by uploaddate desc ) r)
+	 where rnum &gt;=#{start} and rnum &lt;=#{end}
+	 </select>
+	 
+	 <!-- yuri board -->
+	 <insert id = "insert" parameterType = "qna">
+	 	<selectKey resultType="int" order="BEFORE" keyProperty="boardNum">
+	         select nvl(max(boardNum),0)+1 from boards
+		</selectKey>
+	 	insert into boards
+	 	values(#{writeId}, #{boardsTarget}, #{boardNum}, #{secret}, #{head}, 
+	 			#{subject}, #{content}, sysdate, #{reply})
+	 </insert>
+	 
+	 <select id = "getCount" parameterType = "String" resultType = "int">
+	 	select count(*) from boards
+	 	where boardsTarget = #{hosId}
+	 </select>
+	 
+	 <select id = "getQnaList" parameterType = "map" resultType = "qna">
+	 	select * from (select rownum rnum, b.*
+	 					from (select * from boards order by uploaddate desc)b)
+	 	where boardsTarget = #{hosId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+	 </select>
  </mapper>
