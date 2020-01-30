@@ -27,5 +27,9 @@
 				<li class='last'><a href='quit.do'><span>회원탈퇴</span></a></li>
 			</ul>
 		</div>
+		<div class="writeReqToADiv ">
+		<a class="writeReqToA" data-toggle="modal" href="writeReqToA"><i class="far fa-paper-plane"></i>&nbsp;관리자에게 문의하기</a>
+		</div>
+
 	</div>
 </div>
