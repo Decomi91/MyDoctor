@@ -99,4 +99,11 @@ public class HospitalServiceImpl implements HospitalService {
 		return hDAO.getFavorite_re(fa);
 	}
 
+	@Override
+	public String getHosId(String ykiho) {
+		return hDAO.getHosId(ykiho);
+	}
+
+	
+
 }

@@ -79,7 +79,7 @@
 	
 	<select id="hosGetListCount" parameterType = "String" resultType = "int">
 		select count(*) from reservation
-		where hosId = #{hosId}
+		where hosId = #{hosId} and acceptance = 0
 	</select>
 	
 	<update id = "reserveOk" parameterType = "int">
@@ -116,7 +116,7 @@
 	
 	<select id = "hosGetTodayReserveList" parameterType = "map" resultType = "reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation 
 						where hosId = #{hosId} and acceptance = 1 and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD')
@@ -132,7 +132,7 @@
 	
 	<select id="hosGetDiagList" parameterType="map" resultType="reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation 
 						where hosId = #{hosId} and acceptance = 2
@@ -148,7 +148,7 @@
 	
 	<select id="hosGetAllReserveList" parameterType="map" resultType="reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation 
 						where hosId = #{hosId}

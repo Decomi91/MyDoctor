@@ -37,4 +37,7 @@ public interface HospitalService {
 	public int Fa_insert(Map<String, String> fa);
 	
 	public int Fa_delete(Map<String, String> fa);
+
+	public String getHosId(String ykiho);
+
 }

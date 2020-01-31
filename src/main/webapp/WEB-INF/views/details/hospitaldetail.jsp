@@ -10,6 +10,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
+<link rel="stylesheet" href="resources/css/paging.css" />
+
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body class="is-preload">
@@ -259,13 +261,10 @@
 		    $('#reviewli').removeClass('selectedBoard');
 		    $('#reviewa').removeClass('selectedBoard');
 		    $('#boardcontent').empty();
-		    $('#boardcontent').load("qna");
+		    $('#boardcontent').load("qna", {"ykiho" : ykiho});
 		 })
 
-		 
-		 // bookmark yuri
-		 $(function(){
-			function getUrlParams() {
+		 	function getUrlParams() {
 				var params = {};
 				window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
 				return params;
@@ -275,7 +274,9 @@
 			ykiho = oParams.ykiho;
 			console.log("ykiho = " + ykiho);
 			
-			 
+		 // bookmark yuri
+		 $(function(){
+		
 			$("#fav_hos").click(function() {
 				if ($(this).hasClass('solid')) {
 					chk = -1;

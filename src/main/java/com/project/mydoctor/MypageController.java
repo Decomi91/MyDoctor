@@ -2,11 +2,7 @@ package com.project.mydoctor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-
 import java.util.HashMap;
-import java.util.ArrayList;
-import java.util.Iterator;
-
 import java.util.List;
 import java.util.Map;
 
@@ -22,9 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mydoctor.model.AdminBoard;
-import com.project.mydoctor.model.Bookmark;
 import com.project.mydoctor.model.Hospital;
-
 import com.project.mydoctor.model.Member;
 import com.project.mydoctor.model.Qna;
 import com.project.mydoctor.model.Reservation;
@@ -35,7 +29,6 @@ import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
 import com.project.mydoctor.service.QnaService;
-import com.project.mydoctor.service.ReserveService;
 import com.project.mydoctor.service.ReviewService;
 
 @Controller
@@ -53,7 +46,7 @@ public class MypageController {
 	private MypageService mypageService;
   
   @Autowired
-	private BookmarkService bookmarkSerivce;
+	private BookmarkService bookmarkService;
   
 	@Autowired
 	private BoardService boardService; //관리자에게 쓰는 요청사항

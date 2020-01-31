@@ -50,7 +50,6 @@ select * from adminboard
 
 create table boards (
   writeId varchar2(15),
-  password varchar2(15) not null,
   boardsTarget varchar2(15) references hospitals(id),
   boardNum number primary key,
   secret number(1) default 1 not null ,
@@ -77,6 +76,10 @@ insert into boards values('test', '123', 'testing', 1, 1,'문의', 'testSub',
 			'testCont',sysdate,'ok')
 			select * from dual;
 select * from boards
+select count(*) from boards
+	 	where boardsTarget = 'nowbi'
+	 	
+	 	
 create table reviews(
   id varchar2(15) references members(id),
   password varchar2(15) not null,
