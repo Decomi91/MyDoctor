@@ -39,7 +39,7 @@
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">Today Reservation</span>
+									<span class="noLink">All Reservation</span>
 								</nav>
 
 								<div class="table-wrapper">

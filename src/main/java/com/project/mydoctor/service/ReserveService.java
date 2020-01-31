@@ -19,4 +19,6 @@ public interface ReserveService {
 
 	int diagnosisOk(int reserveNo);
 
+	int hoscancel(int reserveNo);
+
 }

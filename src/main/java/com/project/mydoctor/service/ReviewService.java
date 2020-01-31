@@ -16,4 +16,6 @@ public interface ReviewService {
 	int getHosListCount(String hosId);
 
 	List<Review> getHosReviewList(int page, int limit, String hosId);
+
+	Review getDetail(int reviewNum, String attribute);
 }
