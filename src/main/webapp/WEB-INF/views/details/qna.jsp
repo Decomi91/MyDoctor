@@ -232,12 +232,12 @@ a.talkShort{color: black !important;}
 				<col width="140"> <col width=""> <col width="90"> <col width="120">
 			</colgroup>
 			<thead>
-			<tr>
-				<th scope="col">답변여부</th>
-				<th scope="col">답변내용</th>
-				<th scope="col">작성일자</th>
-				<th scope="col">작성자</th>
-			</tr>
+				<tr>
+					<th scope="col">답변여부</th>
+					<th scope="col">답변내용</th>
+					<th scope="col">작성일자</th>
+					<th scope="col">작성자</th>
+				</tr>
 			</thead>
 			<tbody>
 		
@@ -365,7 +365,7 @@ a.talkShort{color: black !important;}
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="qna?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="qna?page=${page-1}&ykiho=${ykiho}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -389,7 +389,7 @@ a.talkShort{color: black !important;}
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="qna?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="qna?page=${page+1}&ykiho=${ykiho}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>
@@ -444,6 +444,10 @@ a.talkShort{color: black !important;}
 		}
 	});
 	
+	$.ajax({
+		url : "bookmark.net"
+		
+	})
 	
 </script>
 </body>

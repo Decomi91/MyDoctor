@@ -82,11 +82,9 @@ public class QnaController {
 		
 		System.out.println("ykiho = " + ykiho);
 		String hosId = hospitalService.getHosId(ykiho);
-		System.out.println("hosId = " + hosId);
 		
 		int limit = 5; // 한 page에 5개의 글
 		int listcount = qnaService.getCount(hosId);
-		System.out.println("qna listcount = " + listcount);
 		
 		int maxpage = (listcount + limit - 1) / limit;
 		int startpage = ((page - 1) / 10) * 10 + 1;
@@ -99,6 +97,7 @@ public class QnaController {
 		List<Qna> qna = qnaService.getQnaList(hosId, page, limit);
 
 		mv.setViewName("details/qna");
+		mv.addObject("ykiho", ykiho);
 		mv.addObject("qna", qna);
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);
