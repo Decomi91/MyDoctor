@@ -596,3 +596,11 @@ reviewï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ rating-->.right {
 	width: 50%;
 	display: inline-block;
 }
+
+/* ¸¶ÀÌÆäÀÌÁö ¸Þ´º_°ü¸®ÀÚ¿¡°Ô ¿äÃ»ÇÏ±â */
+.writeReqToADiv{width:100%; text-align:center; }
+.writeReqToA{padding-top:10% !important; 
+display: inline-block;border-bottom: 1px solid;
+font-size:90%; color:rgb(255, 162, 162)}
+.divreqtoA{text-align:left !important;}
+.divreqtoA>h2{font-family: jua !important;}

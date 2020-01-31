@@ -43,7 +43,8 @@ from (select hosid, acceptance
 		from reservation
 		where hosid = 'gong1' and to_Char(sysdate,'yyyymmdd') = to_char(sysdate, 'yyyymmdd'))
 
-
+select * from reservation
+where hosId = 'gong1' and acceptance = 1 and reserveTime >= sysdate
 
 select count(*)
 from reservation 

@@ -33,6 +33,28 @@ public class QnaDAO {
 	public List<Qna> getQnaList(HashMap<String, Object> map) {
 		return sqlSession.selectList("Qna.getQnaList", map);
 	}
-	
+
+	public int hosGetBoardCount(String hosId) {
+		return sqlSession.selectOne("Qna.hosGetBoardCount", hosId);
+	}
+
+	public List<Qna> hosGetBoardList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Qna.hosGetBoardList", map);
+	}
+	public int setReply(Qna qna) {
+		return sqlSession.update("Qna.setreply", qna);
+	}
+	public Qna getDetail(int boardNum) {
+		return sqlSession.selectOne("Qna.getdetail", boardNum);
+	}
+	public int getNoReplyQnaCount(String id) {
+		return sqlSession.selectOne("Qna.getnoreplyqnacount", id);
+	}
+	public List<Qna> hosGetNoReplyBoardList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Qna.hosGetNoReplyBoardList", map);
+	}
+	public int delBoard(int boardNum) {
+		return sqlSession.delete("Qna.delBoard", boardNum);
+	}
 
 }

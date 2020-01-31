@@ -72,7 +72,7 @@ public class Qna {
 	}
 
 	public void setUploaddate(String uploaddate) {
-		this.uploaddate = uploaddate;
+		this.uploaddate = uploaddate.split(" ")[0];
 	}
 
 	public String getReply() {

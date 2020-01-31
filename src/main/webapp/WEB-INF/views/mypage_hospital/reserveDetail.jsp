@@ -73,7 +73,7 @@
 											<td colspan = 3>${rv.disease }</td>
 										</tr>
 									</table>
-									<button id = "reserveDetailbtn" onClick="history.back();">확인</button>
+									<button id = "reserveDetailbtn" onclick="javascript:history.back();">확인</button>
 								</div>
 								
 							</div>
@@ -92,15 +92,6 @@
 	<script src="resources/js/util.js"></script>
 	<script src="resources/js/main.js"></script>
 	<script>
-		$("#nearpharmacy").click(function() {
-			$("#nearhospital").removeClass('primary');
-			$("#nearpharmacy").addClass('primary');
-		})
-		$("#nearhospital").click(function() {
-			$("#nearpharmacy").removeClass('primary');
-			$("#nearhospital").addClass('primary');
-		})
-		
 		$(function(){
 			if($("#reservegender").val() == 0){
 				$("#reservegender").text("남");

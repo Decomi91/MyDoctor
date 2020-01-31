@@ -16,10 +16,15 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.project.mydoctor.model.Member;
+import com.project.mydoctor.model.Qna;
 import com.project.mydoctor.model.Reservation;
+import com.project.mydoctor.model.Review;
+import com.project.mydoctor.model.Score;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
+import com.project.mydoctor.service.QnaService;
 import com.project.mydoctor.service.ReserveService;
+import com.project.mydoctor.service.ReviewService;
 
 @Controller
 
@@ -34,6 +39,12 @@ public class HosMypageController {
 	@Autowired
 	private MemberService memberService;
 
+	@Autowired
+	private QnaService qnaService;
+	
+	@Autowired
+	private ReviewService reviewService;
+	
 	// 병원 마이페이지 메인
 	@RequestMapping(value = "/hosmypage.net")
 	public ModelAndView gomypage(HttpSession session, ModelAndView mv,
@@ -90,6 +101,7 @@ public class HosMypageController {
 				List<Integer> mypageList = reserveService.getReserves((String)session.getAttribute("loginid"));
 				session.setAttribute("accepted", mypageList.get(0));
 				session.setAttribute("wait", mypageList.get(1));
+				session.setAttribute("canceled", mypageList.get(2));
 				
 				out.println("<script>");
 				out.println("alert('선택한 예약이 모두 승인되었습니다.');");
@@ -123,8 +135,11 @@ public class HosMypageController {
 		
 		if(result == 1) {
 			mv.addObject("page", page);
-			session.setAttribute("wait", (int)session.getAttribute("wait")-1);
-			session.setAttribute("canceled", (int)session.getAttribute("canceled")+1);
+			List<Integer> mypageList = reserveService.getReserves((String)session.getAttribute("loginid"));
+			session.setAttribute("accepted", mypageList.get(0));
+			session.setAttribute("wait", mypageList.get(1));
+			session.setAttribute("canceled", mypageList.get(2));
+			
 			mv.setViewName("redirect:/hosmypage.net");
 		}else {
 			PrintWriter out = response.getWriter();
@@ -158,6 +173,7 @@ public class HosMypageController {
 				List<Integer> mypageList = reserveService.getReserves((String)session.getAttribute("loginid"));
 				session.setAttribute("accepted", mypageList.get(0));
 				session.setAttribute("wait", mypageList.get(1));
+				session.setAttribute("canceled", mypageList.get(2));
 				
 				out.println("<script>");
 				out.println("alert('선택한 예약이 모두 진료되었습니다.');");
@@ -258,6 +274,138 @@ public class HosMypageController {
 		List<Reservation> rv = mypageService.hosGetAllReserveList(hosId, page, limit);
 
 		mv.setViewName("mypage_hospital/hosmypage_reservelist");
+		mv.addObject("rv", rv);
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("limit", limit);
+
+		return mv;
+	}
+	
+	@GetMapping(value ="hosmyboard.net")
+	public ModelAndView hosmyboard(HttpSession session, ModelAndView mv,
+			@RequestParam(value = "noreply", defaultValue = "0", required = false) String noreply,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) throws Exception {
+
+		String hosId = session.getAttribute("loginid").toString();
+		int limit = 10; // 한 page에 10개의 글
+
+		// 총 예약수
+		int listcount =0;
+		if(noreply.equals("0")) {
+			listcount = qnaService.hosGetBoardCount(hosId);
+		}else {
+			listcount = qnaService.getNoReplyQnaCount(hosId);
+		}
+
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+		List<Qna> rv = null;
+		if(noreply.equals("0")) {
+			rv = qnaService.hosGetBoardList(hosId, page, limit);
+		}else {
+			rv = qnaService.hosGetBoardList(hosId, page, limit, noreply);
+		}
+		mv.setViewName("mypage_hospital/hosmypage_board");
+		mv.addObject("rv", rv);
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("limit", limit);
+
+		return mv;
+	}
+	
+	@GetMapping(value="qnaDetail.net")
+	public ModelAndView qnaDetail(int boardNum, ModelAndView mv, HttpServletResponse response) throws Exception{
+		Qna qna = qnaService.getQna(boardNum);
+		if(qna != null) {
+			mv.addObject("qna", qna);
+			mv.setViewName("mypage_hospital/qnaDetail");
+		}else {
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('로딩시 이상 발생'); history.back();</script>");
+			out.close();
+			return null;
+		}
+		
+		return mv;
+	}
+	
+	@PostMapping(value="replyInput")
+	public ModelAndView reply(Qna qna, ModelAndView mv, HttpServletResponse response, HttpSession session) throws Exception{
+		Qna board = qnaService.getQna(qna.getBoardNum());
+		int result = qnaService.setReply(qna);
+		if(result == 1) {
+			mv.setViewName("redirect:/qnaDetail.net?boardNum="+qna.getBoardNum());
+			if(board.getReply() == null) {
+				session.setAttribute("qnawait", qnaService.getNoReplyQnaCount((String)session.getAttribute("loginid")));
+			}else if(qna.getReply() == null || qna.getReply().equals("")) {
+				session.setAttribute("qnawait", qnaService.getNoReplyQnaCount((String)session.getAttribute("loginid")));
+			}
+		}else {
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('답변 입력시 이상 발생'); history.back();</script>");
+			out.close();
+			return null;
+		}
+		
+		return mv;
+	}
+	
+	@PostMapping(value="qnaDelete")
+	public ModelAndView qnaDelete(int boardNum, ModelAndView mv, HttpSession session, HttpServletResponse response) throws Exception {
+		Qna board = qnaService.getQna(boardNum);
+		int result = qnaService.delBoard(boardNum);
+		if(result == 1) {
+			mv.setViewName("redirect:/hosmyboard.net");
+			if(board.getReply() == null || board.getReply().equals("")) {
+				session.setAttribute("qnawait", qnaService.getNoReplyQnaCount((String)session.getAttribute("loginid")));
+			}
+		}else {
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('삭제시 이상 발생'); history.back();</script>");
+			out.close();
+			return null;
+		}
+		
+		return mv;
+	}
+	
+	@GetMapping(value="hosmyreview.net")
+	public ModelAndView hosmyreview(HttpSession session, ModelAndView mv,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) throws Exception {
+
+		String hosId = session.getAttribute("loginid").toString();
+		int limit = 10; // 한 page에 10개의 글
+
+		// 총 예약수
+		int listcount = reviewService.getHosListCount(hosId);
+
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+		List<Review> rv = reviewService.getHosReviewList(page, limit, hosId);
+		Score score = reviewService.getScore(hosId);
+		System.out.println(score);
+		System.out.println(score.getKindness());
+		
+		mv.setViewName("mypage_hospital/hosmypage_review");
+		mv.addObject("score", score);
 		mv.addObject("rv", rv);
 		mv.addObject("page", page);
 		mv.addObject("maxpage", maxpage);

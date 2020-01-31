@@ -27,6 +27,7 @@ import com.project.mydoctor.service.BoardService;
 import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
+import com.project.mydoctor.service.QnaService;
 import com.project.mydoctor.service.ReserveService;
 
 @Controller
@@ -45,6 +46,9 @@ public class MemberController {
 	
 	@Autowired
 	private ReserveService reserveService;
+	
+	@Autowired
+	private QnaService qnaService;
 	
 	@GetMapping(value="/joinForm")
 	public ModelAndView joinForm(ModelAndView mv) {
@@ -106,6 +110,7 @@ public class MemberController {
 					session.setAttribute("accepted", mypageList.get(0));
 					session.setAttribute("wait", mypageList.get(1));
 					session.setAttribute("canceled", mypageList.get(2));
+					session.setAttribute("qnawait", qnaService.getNoReplyQnaCount(member.getId()));
 				}
 			}
 		} else {

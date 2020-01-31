@@ -3,17 +3,6 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="Qna">
-
-	 
-	 <!-- jisu_0128_내가쓴 문의(병원) -->
-	  <select id="qnalistcount" resultType="int" parameterType="String">
-	 select count(*) from boards where writeid=#{id}
-	 </select>
-	 <select id="qnalist" parameterType="java.util.Map" resultType="qna">
-	 select * from(select rownum rnum, r.* from(select * from boards where writeid=#{id} order by uploaddate desc ) r)
-	 where rnum &gt;=#{start} and rnum &lt;=#{end}
-	 </select>
-	 
 	 <!-- yuri board -->
 	 <insert id = "insert" parameterType = "qna">
 	 	<selectKey resultType="int" order="BEFORE" keyProperty="boardNum">
@@ -34,4 +23,57 @@
 	 					from (select * from boards order by uploaddate desc)b)
 	 	where boardsTarget = #{hosId} and rnum &gt;= #{start} and rnum &lt;= #{end}
 	 </select>
+ 
+ <!-- jisu_0128_내가쓴 문의(병원) -->
+	 <select id="qnalistcount" resultType="int" parameterType="String">
+	 	select count(*) from boards where writeid=#{id}
+	 </select>
+	 <select id="qnalist" parameterType="java.util.Map" resultType="qna">
+		 select * from(select rownum rnum, r.* from(select * from boards where writeid=#{id} order by uploaddate desc ) r)
+		 where rnum &gt;=#{start} and rnum &lt;=#{end}
+	 </select>
+ 	<select id="hosGetBoardCount" parameterType="String" resultType="int">
+ 		select count(*)
+ 		from boards
+ 		where boardsTarget = #{boardsTarget}
+ 	</select>
+ 	<select id="hosGetBoardList" parameterType="map" resultType="qna">
+ 		select * 
+ 		from(select rownum rnum, r.* 
+ 			 from(select * 
+ 			 	  from boards 
+ 			 	  where boardsTarget=#{hosId} 
+ 			 	  order by uploaddate desc ) r)
+		 where rnum &gt;=#{start} and rnum &lt;=#{end}
+ 	</select>
+ 	
+ 	<update id="setreply" parameterType="qna">
+ 		update boards
+ 		set reply = #{reply}
+ 		where boardNum = #{boardNum}
+ 	</update>
+ 	
+ 	<select id="getdetail" parameterType="int" resultType="qna">
+ 		select *
+ 		from boards
+ 		where boardNum = #{boardNum}
+ 	</select>
+ 	<select id="getnoreplyqnacount" parameterType="String" resultType="int">
+ 		select count(*)
+ 		from boards
+ 		where boardsTarget = #{id} and reply is null
+ 	</select>
+ 	<select id="hosGetNoReplyBoardList" parameterType="map" resultType="qna">
+ 		select * 
+ 		from(select rownum rnum, r.* 
+ 			 from(select * 
+ 			 	  from boards 
+ 			 	  where boardsTarget=#{hosId} and reply is null 
+ 			 	  order by uploaddate desc ) r)
+		 where rnum &gt;=#{start} and rnum &lt;=#{end}
+ 	</select>
+ 	<delete id="delBoard" parameterType="int">
+ 		delete boards
+ 		where boardNum = #{boardNum}
+ 	</delete>
  </mapper>
