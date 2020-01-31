@@ -3,7 +3,26 @@
  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
  
  <mapper namespace="Qna">
-
+	 <!-- yuri board -->
+	 <insert id = "insert" parameterType = "qna">
+	 	<selectKey resultType="int" order="BEFORE" keyProperty="boardNum">
+	         select nvl(max(boardNum),0)+1 from boards
+		</selectKey>
+	 	insert into boards
+	 	values(#{writeId}, #{boardsTarget}, #{boardNum}, #{secret}, #{head}, 
+	 			#{subject}, #{content}, sysdate, #{reply})
+	 </insert>
+	 
+	 <select id = "getCount" parameterType = "String" resultType = "int">
+	 	select count(*) from boards
+	 	where boardsTarget = #{hosId}
+	 </select>
+	 
+	 <select id = "getQnaList" parameterType = "map" resultType = "qna">
+	 	select * from (select rownum rnum, b.*
+	 					from (select * from boards order by uploaddate desc)b)
+	 	where boardsTarget = #{hosId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+	 </select>
  
  <!-- jisu_0128_내가쓴 문의(병원) -->
 	 <select id="qnalistcount" resultType="int" parameterType="String">

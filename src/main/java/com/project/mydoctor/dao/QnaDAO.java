@@ -8,7 +8,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.mydoctor.model.Qna;
-import com.project.mydoctor.model.Review;
 @Repository
 public class QnaDAO {
 	@Autowired
@@ -25,7 +24,15 @@ public class QnaDAO {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Qna.qnalist", map);
 	}
-
+	public int insert(Qna qna) {
+		return sqlSession.insert("Qna.insert", qna);
+	}
+	public int getCount(String hosId) {
+		return sqlSession.selectOne("Qna.getCount", hosId);
+	}
+	public List<Qna> getQnaList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Qna.getQnaList", map);
+	}
 
 	public int hosGetBoardCount(String hosId) {
 		return sqlSession.selectOne("Qna.hosGetBoardCount", hosId);

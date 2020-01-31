@@ -3,7 +3,6 @@ package com.project.mydoctor.service;
 import java.util.List;
 
 import com.project.mydoctor.model.Qna;
-import com.project.mydoctor.model.Review;
 
 public interface QnaService {
 
@@ -13,6 +12,11 @@ public interface QnaService {
 
 	List<Qna> getMyQnaList(int page, int limit, String id);
 
+	int insert(Qna qna);
+
+	int getCount(String hosId);
+
+	List<Qna> getQnaList(String hosId, int page, int limit);
 
 	int hosGetBoardCount(String hosId);
 
@@ -27,5 +31,4 @@ public interface QnaService {
 	List<Qna> hosGetBoardList(String hosId, int page, int limit, String noreply);
 
 	int delBoard(int boardNum);
-
 }

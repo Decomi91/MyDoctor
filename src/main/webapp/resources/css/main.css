@@ -3294,6 +3294,7 @@ input[type=button]:focus {
 	width: 80%;
 	margin: 0 auto;
 	text-align: center;
+	background:#f5f6f7;
 }
 
 #reserveTable {
