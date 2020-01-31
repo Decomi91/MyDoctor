@@ -73,14 +73,14 @@
 						reserveTime, acceptance
 						from
 						(select * from reservation 
-						 where hosId = #{hosId} and acceptance = 1 and reserveTime &gt;= sysdate
+						 where hosId = #{hosId} and acceptance = 0 and reserveTime &gt;= sysdate
 						 order by reserveTime desc, reserveNo asc))
 		where rnum &gt;= #{start} and rnum &lt;= #{end}	
 	</select>
 	
 	<select id="hosGetListCount" parameterType = "String" resultType = "int">
 		select count(*) from reservation
-		where hosId = #{hosId} and acceptance = 1 and reserveTime &gt;= sysdate
+		where hosId = #{hosId} and acceptance = 0 and reserveTime &gt;= sysdate
 	</select>
 	
 	<update id = "reserveOk" parameterType = "int">
@@ -92,7 +92,7 @@
 	<select id="getreserves" parameterType="String" resultType="int">
 		select count(*)
 		from reservation 
-		where hosid = #{hosid} and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance=1
+		where hosid = #{hosid} and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance between 0 and 1
 		union all
 		select count(*)
 		from reservation 
@@ -112,15 +112,15 @@
 	<select id="hosGetTodayListCount" parameterType="String" resultType="int">
 		select count(*)
 		from reservation
-		where hosid=#{hosid} and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance=1
+		where hosid=#{hosid} and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance between 0 and 1
 	</select>
 	
 	<select id = "hosGetTodayReserveList" parameterType = "map" resultType = "reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation 
-						where hosId = #{hosId} and acceptance = 1 and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD')
+						where hosId = #{hosId} and acceptance between 0 and 1 and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD')
 						order by reserveTime desc, reserveNo asc))
 		where rnum &gt;= #{start} and rnum &lt;= #{end}	
 	</select>
@@ -133,7 +133,7 @@
 	
 	<select id="hosGetDiagList" parameterType="map" resultType="reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation 
 						where hosId = #{hosId} and acceptance = 2
@@ -149,7 +149,7 @@
 	
 	<select id="hosGetAllReserveList" parameterType="map" resultType="reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation 
 						where hosId = #{hosId}

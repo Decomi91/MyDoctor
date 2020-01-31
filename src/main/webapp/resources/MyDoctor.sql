@@ -81,6 +81,10 @@ insert into boards values('test', 'gong1', 3, 1,'문의', 'testSub',
 			'testCont',sysdate,'ok')
 			select * from dual;
 select * from boards
+select count(*) from boards
+	 	where boardsTarget = 'nowbi'
+	 	
+	 	
 create table reviews(
   id varchar2(15) references members(id),
   hospital varchar2(15) references hospitals(id),

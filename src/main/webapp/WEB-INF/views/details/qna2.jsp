@@ -241,60 +241,119 @@ a.talkShort{color: black !important;}
 			</thead>
 			<tbody>
 		
-			<c:if test="${listcount > 0}">
-				<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
-				<c:forEach var = "qna" items = "${qna }">
-					<tr class="secretV17">
+			
+			<tr class="secretV17">
+				<td><strong>&lt;답변완료&gt;</strong></td>
+				<td class="lt">
 					
-						<c:if test="${qna.reply == null}">
-							<td><strong>&lt;답변중&gt;</strong></td>
-						</c:if>
-						<c:if test = "${qna.reply != null }">
-							<td><strong>&lt;답변완료&gt;</strong></td>
-						</c:if>
+						비밀글 입니다.
+					
+				</td>
+				<td>2020/01/22</td>
+				<td>sdubu**</td>
+			</tr>
+			
+			<tr class="talkMore secretV17" style="display: none;">
+				<td colspan="4">
+					<div class="qnaList">
+						<div class="question">
+							<strong class="title">
+								<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문"></strong>
+							<div class="account">
+								
+									비밀글 입니다.
+								
+							</div>
+						</div>
 						
-						<c:if test = "${qna.secret == 0 }">
-							<td class="lt">
-								비밀글 입니다.
-							</td>
-							<td>${qna.uploaddate }</td>
-						<td>${qna.writeId }</td>	<!-- 뒤에 몇글자 **처리 -->
-						</c:if>
-						<!-- 비밀글이 아닐경우 -->
-						<c:if test = "${qna.secret == 1 }">
-							<td class="lt">
-								<a href="javascript:" class="talkShort">${qna.subject }</a>
-							</td>
-							<td>${qna.uploaddate }</td>
-							<td>${qna.writeId }</td>	<!-- 뒤에 몇글자 **처리 -->
-							<tr class="talkMore " style="display: table-row;">
-								<td colspan="4">
-									<div class="qnaList">
-										<div class="question">
-											<strong class="title">
-												<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문">
-											</strong>
-											<div class="account">
-												<p>${qna.content }</p>
-											</div>
-										</div>
-											
-										<div class="answer">
-											<strong class="title">
-												<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변">
-											</strong>
-											<div class="account">
-												<p>안녕하세요, 땡땡병원 입니다.<br><br>설 연휴동안은 정상 진료하지만 <br>설 당일은 휴무인점 안내드립니다. <br><br>만족스러운 답변이 되셨는지요?<br>감사합니다.<br></p>
-											</div>
-										</div>
-									</div>
-								</td>
-							</tr>
-						</c:if>
+						<div class="answer">
+							<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변"></strong>
+							<div class="account">
+							
+									<p>비밀글 입니다.</p>
+								
+							</div>
+						</div>
 						
-					</tr>
-				</c:forEach>
-			</c:if>
+					</div>
+				</td>
+			</tr>
+			
+			
+			
+			
+			<tr>
+				<td><strong>&lt;답변완료&gt;</strong></td>
+				<td class="lt">
+				
+					<a href="javascript:" class="talkShort">설연휴 언제까지 진료하시나요?</a>
+				
+				</td>
+				<td>2019/12/15</td>
+				<td>hy73**</td>
+			</tr>
+			
+			
+			
+			
+		<tr class="talkMore " style="display: table-row;">
+			<td colspan="4">
+				<div class="qnaList">
+					<div class="question">
+						<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문"></strong>
+						<div class="account">
+							
+								<p>설연휴 언제까지 진료하시나요?</p>
+							
+						</div>
+					</div>
+					
+					<div class="answer">
+						<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변"></strong>
+						<div class="account">
+							
+								<p>안녕하세요, 땡땡병원 입니다.<br><br>설 연휴동안은 정상 진료하지만 <br>설 당일은 휴무인점 안내드립니다. <br><br>만족스러운 답변이 되셨는지요?<br>감사합니다.<br></p>
+							
+						</div>
+					</div>
+					
+				</div>
+			</td>
+		</tr>
+		<tr>
+			<td><strong>&lt;답변중&gt;</strong></td>
+			<td class="lt">
+				
+					<a href="javascript:" class="talkShort">피부과 진료도 보시나요?</a>
+				
+			</td>
+			<td>2019/12/15</td>
+			<td>user1</td>
+		</tr>
+		<tr class="talkMore " style="display: table-row;">
+			<td colspan="4">
+				<div class="qnaList">
+					<div class="question">
+						<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문"></strong>
+						<div class="account">
+							
+								<p>가정의학과라고 나오는데 혹시 피부과 진료도 보시나요?</p>
+							
+						</div>
+					</div>
+					
+					<div class="answer">
+						<strong class="title"><img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변"></strong>
+						<div class="account">
+							
+								<p>안녕하세요, 땡땡병원 입니다.<br><br>간단한 피부질환 진료를 보긴하지만 상황에 따라 피부과 전문병원의 진료를 권유드릴수도 있는점 안내드립니다. <br><br>만족스러운 답변이 되셨는지요?<br>감사합니다.<br></p>
+							
+						</div>
+					</div>
+					
+				</div>
+			</td>
+		</tr>
 			</tbody>
 		</table>
 		
@@ -312,7 +371,7 @@ a.talkShort{color: black !important;}
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="qna?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="mypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -324,7 +383,7 @@ a.talkShort{color: black !important;}
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="qna?page=${a }" class="page-link">${a}</a>
+																<a href="mypage.net?page=${a }" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -336,7 +395,7 @@ a.talkShort{color: black !important;}
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="qna?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="mypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>
@@ -371,8 +430,6 @@ a.talkShort{color: black !important;}
 		
 	if($("#qnaSecret").is(":checked") == true){
 		$("input[name='secret']").val("0");
-	}else{
-		$("input[name='secret']").val("1");
 	}
 
 	});

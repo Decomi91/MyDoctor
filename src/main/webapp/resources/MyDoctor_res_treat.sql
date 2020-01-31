@@ -5,7 +5,7 @@ create table reservation(
 	id				varchar2(15) references members(id),
 	name			varchar2(15) not null,
 	hosid			varchar2(15) references hospitals(id),
-	hosname			varchar2(15) not null,
+	hosname			varchar2(100) not null,
 	disease			varchar2(100) not null,
 	reserveTime		date,
 	acceptance		number(1) default 0

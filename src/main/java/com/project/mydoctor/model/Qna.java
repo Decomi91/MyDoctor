@@ -2,14 +2,14 @@ package com.project.mydoctor.model;
 
 public class Qna {
 	private String writeId;
-	private String boardsTarget;
+	private String boardsTarget;	// hosId
 	private int boardNum;
-	private int secret;
-	private String head;
+	private int secret;	// 일반글 - 1, 비밀글 - 0
+	private String head;	// 병원 - 공지, 환자 - 문의글
 	private String subject;
 	private String content;
 	private String uploaddate;
-	private String reply;
+	private String reply;	// ""(빈값)이면 답변중
 
 	public String getWriteId() {
 		return writeId;
