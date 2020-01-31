@@ -54,5 +54,13 @@ private ReviewDAO rdao;
 		return rdao.getHosReviewList(map);
 	}
 
+	@Override
+	public Review getDetail(int reviewNum, String hospital) {
+		Review rev = new Review();
+		rev.setReviewNum(reviewNum);
+		rev.setHospital(hospital);
+		return rdao.getDetail(rev);
+	}
+
 
 }

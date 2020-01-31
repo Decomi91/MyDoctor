@@ -46,7 +46,7 @@
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
                         <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
-								예약내용이 &nbsp;&nbsp; <a href="myreserve.net">${yesaccept }</a> 건 있습니다.
+								예약내용이 &nbsp;&nbsp; <a href="mypage.net">${yesaccept }</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">

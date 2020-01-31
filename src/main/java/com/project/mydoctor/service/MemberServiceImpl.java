@@ -79,23 +79,26 @@ public class MemberServiceImpl implements MemberService {
 		return mDao.select(id);
 	}
 	
-	
 	////////////////////jisu_0122//////////////////
 	@Override
 	public int updatePass(String newPassword, String id) {
 		Map<String,Object> map=new HashMap<String, Object>();
 		map.put("id", id);
 		map.put("password", newPassword);
-		System.out.println("����й�ȣ: "+newPassword);
+		System.out.println("새 패스워드: "+newPassword);
 		int result=mDao.updatePass(map);
-		return result;
 	
+		return result;
 	}
 	
 	@Override
 	public int removeaccount(String id) {
-		// TODO Auto-generated method stub
 		return mDao.removeaccount(id);
+	}
+
+	@Override
+	public int removehosaccount(Member mem) {
+		return mDao.removehosaccount(mem);
 	}
 
 }

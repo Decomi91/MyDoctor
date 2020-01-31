@@ -40,7 +40,7 @@
 				<li><a href='hosmyboard.net'><span>게시판 관리</span></a></li>
 				<li><a href='hosmyreview.net'><span>후기 확인</span></a></li>
 				<li><a href='#'><span>병원 정보 수정</span></a></li>
-				<li class='last'><a href='#'><span>회원탈퇴</span></a></li>
+				<li class='last'><a href='hossignout.net'><span>회원탈퇴</span></a></li>
 			</ul>
 		</div>
 	</div>
