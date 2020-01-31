@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.mydoctor.dao.MypageDAO;
+import com.project.mydoctor.model.Qna;
 import com.project.mydoctor.model.Reservation;
 
 @Service
@@ -107,7 +108,7 @@ HashMap<String, Object> map = new HashMap<String, Object>();
 
 	@Override
 	public List<Reservation> hosGetAllReserveList(String hosId, int page, int limit) {
-HashMap<String, Object> map = new HashMap<String, Object>();
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		
 		int startrow = (page-1) * limit + 1;
 		int endrow = startrow + limit - 1;

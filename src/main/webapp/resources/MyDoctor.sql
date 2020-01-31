@@ -51,7 +51,6 @@ select * from adminboard
 
 create table boards (
   writeId varchar2(15),
-  password varchar2(15) not null,
   boardsTarget varchar2(15) references hospitals(id),
   boardNum number primary key,
   secret number(1) default 1 not null ,
@@ -61,10 +60,14 @@ create table boards (
   uploaddate date,
   reply varchar2(3000)
 )
-
+select * from members
 drop table boards
-insert into boards values('test', '123', 'testing', 1, 1,'문의', 'testSub',
+insert into boards values('test', 'gong1', 1, 1,'문의', 'testSub',
 			'testCont',sysdate,'ok')
+insert into boards values('test', 'gong1', 2, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 3, 1,'문의', 'testSub',
+'testCont','2019-12-31','')
 			insert all 
 			into boards values('test', '123', 'testing', 2, 1,'문의', 'testSub',
 			'testCont',sysdate,'ok')
@@ -80,7 +83,6 @@ insert into boards values('test', '123', 'testing', 1, 1,'문의', 'testSub',
 select * from boards
 create table reviews(
   id varchar2(15) references members(id),
-  password varchar2(15) not null,
   hospital varchar2(15) references hospitals(id),
   reviewNum number(10) primary key,
   subject varchar2(100) not null,
@@ -92,11 +94,15 @@ create table reviews(
   uploaddate date,
   reply varchar2(3000)
 )
+select avg(kindness), avg(ability), avg(price) 
+	 	from reviews
+	 	where hospital = 'gong1'
+drop table reviews
 alter table reviews add(visited date)
-insert into reviews values('test', '123', 'testing', 1, 'testSub',
-			'testCont', 5,5,5,sysdate,sysdate,'ok')
-			insert into reviews values('test2', '123', 'testing', 7, 'testSub',
-			'testCont', 5,5,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 1, 'testSub',
+	'testCont', 5,5,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 2, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
 update reviews set visited = sysdate
 select * from(select rownum rnum, r.* from(select * from reviews where id='test' order by visited desc ) r)
  where rnum>=5 and rnum<=10;
