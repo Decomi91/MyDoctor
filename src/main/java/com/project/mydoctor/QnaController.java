@@ -55,6 +55,7 @@ public class QnaController {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 
+		System.out.println("secret = " + qna.getSecret());
 		qna.setWriteId((String) session.getAttribute("loginid"));
 		String hosId = hospitalService.getHosId(ykiho);
 		qna.setBoardsTarget(hosId);
@@ -105,7 +106,8 @@ public class QnaController {
 		mv.addObject("endpage", endpage);
 		mv.addObject("listcount", listcount);
 		mv.addObject("limit", limit);
-
+		mv.addObject("ykiho", ykiho);
+		
 		return mv;
 	}
 }

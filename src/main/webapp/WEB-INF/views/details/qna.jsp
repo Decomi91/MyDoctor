@@ -89,8 +89,8 @@ a{text-decoration: none;}
 }
 .qnaV15 .talkList tr.secretV17 .lt {
     padding-left: 18px;
-    background: url(http://fiximage.10x10.co.kr/web2017/common/ico_lock.png) 0 40% no-repeat;
-}
+/*     background: url(http://fiximage.10x10.co.kr/web2017/common/ico_lock.png) 0 40% no-repeat;
+ */}
 .qnaV15 .talkList td {
     padding: 10px 0;
     font-size: 13px;
@@ -155,7 +155,7 @@ legend {
 #qnaMsg{width:100%; margin:2% 0;}
 .btnArea{text-align:center;}
 .qnaList {
-    padding: 45px 80px;
+    padding: 15px 80px;
     text-align: left;
 }
 tr.talkMore{background-color:#f5f6f7;}
@@ -185,7 +185,7 @@ a.talkShort{color: black !important;}
 	
 	<!-- 글쓰기 폼 start -->
 	<div id="inquiryForm" class="boardForm tMar05" style="display: block;">
-		<form name="qnaform" method="post" action="qnaWrite.net">
+		<form id = "qnaform" name="qnaform" method="post" action="qnaWrite.net">
 			<input type="hidden" name="ykiho" value = "">
 			<input type = "hidden" name = "secret" value = "1">
 			<input type = "hidden" name = "head" value = "문의글">
@@ -245,51 +245,104 @@ a.talkShort{color: black !important;}
 				<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
 				<c:forEach var = "qna" items = "${qna }">
 					<tr class="secretV17">
-					
+						
+						<!-- 답변 대기중일 경우 -->
 						<c:if test="${qna.reply == null}">
-							<td><strong>&lt;답변중&gt;</strong></td>
-						</c:if>
-						<c:if test = "${qna.reply != null }">
-							<td><strong>&lt;답변완료&gt;</strong></td>
+							<td><strong>&lt;답변대기중&gt;</strong></td>
+							
+							<!-- 비밀글일 경우 클릭안되게 하기 -->
+							<c:if test = "${qna.secret == 0 }">
+								<td class="lt">
+									<i class="fas fa-lock" style = "color:#00000059">
+										비밀글 입니다.
+									</i>
+								</td>
+								<td>${qna.uploaddate }</td>
+								<td>${qna.writeId }</td>	<!-- 뒤에 몇글자 **처리 -->
+							</c:if>
+							
+							<!-- 비밀글이 아닐경우 -->
+							<c:if test = "${qna.secret == 1 }">
+								<td class="lt">
+									<i class="fas fa-lock-open"style = "color:#00000059">
+										<a href="javascript:" class="talkShort">${qna.subject }</a>
+									</i>
+								</td>
+								<td>${qna.uploaddate }</td>
+								<td>${qna.writeId }</td>	<!-- 뒤에 몇글자 **처리 -->
+								<tr class="talkMore " style="display: table-row;">
+									<td colspan="4">
+										<div class="qnaList">
+											<div class="question">
+												<strong class="title">
+													<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문">
+												</strong>
+												<div class="account">
+													<p>${qna.content }</p>
+												</div>
+											</div>
+												
+											<div class="answer">
+												<strong class="title">
+													<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변">
+												</strong>
+												<div class="account">
+													<p></p>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</c:if>
 						</c:if>
 						
-						<c:if test = "${qna.secret == 0 }">
-							<td class="lt">
-								비밀글 입니다.
-							</td>
-							<td>${qna.uploaddate }</td>
-						<td>${qna.writeId }</td>	<!-- 뒤에 몇글자 **처리 -->
-						</c:if>
-						<!-- 비밀글이 아닐경우 -->
-						<c:if test = "${qna.secret == 1 }">
-							<td class="lt">
-								<a href="javascript:" class="talkShort">${qna.subject }</a>
-							</td>
-							<td>${qna.uploaddate }</td>
-							<td>${qna.writeId }</td>	<!-- 뒤에 몇글자 **처리 -->
-							<tr class="talkMore " style="display: table-row;">
-								<td colspan="4">
-									<div class="qnaList">
-										<div class="question">
-											<strong class="title">
-												<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문">
-											</strong>
-											<div class="account">
-												<p>${qna.content }</p>
-											</div>
-										</div>
-											
-										<div class="answer">
-											<strong class="title">
-												<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변">
-											</strong>
-											<div class="account">
-												<p>안녕하세요, 땡땡병원 입니다.<br><br>설 연휴동안은 정상 진료하지만 <br>설 당일은 휴무인점 안내드립니다. <br><br>만족스러운 답변이 되셨는지요?<br>감사합니다.<br></p>
-											</div>
-										</div>
-									</div>
+						<!-- 답변이 완료되었을 경우 -->
+						<c:if test = "${qna.reply != null }">
+							<td><strong>&lt;답변완료&gt;</strong></td>
+						
+							<c:if test = "${qna.secret == 0 }">
+								<td class="lt">
+									<i class="fas fa-lock"style = "color:#00000059">
+										비밀글 입니다.
+									</i>
 								</td>
-							</tr>
+								<td>${qna.uploaddate }</td>
+								<td>${qna.writeId }</td>	<!-- 뒤에 몇글자 **처리 -->
+							</c:if>
+							
+							<!-- 비밀글이 아닐경우 -->
+							<c:if test = "${qna.secret == 1 }">
+								<td class="lt">
+									<i class="fas fa-lock-open"style = "color:#00000059">
+										<a href="javascript:" class="talkShort">${qna.subject }</a>
+									</i>
+								</td>
+								<td>${qna.uploaddate }</td>
+								<td>${qna.writeId }</td>	<!-- 뒤에 몇글자 **처리 -->
+								<tr class="talkMore " style="display: table-row;">
+									<td colspan="4">
+										<div class="qnaList">
+											<div class="question">
+												<strong class="title">
+													<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문">
+												</strong>
+												<div class="account">
+													<p>${qna.content }</p>
+												</div>
+											</div>
+												
+											<div class="answer">
+												<strong class="title">
+													<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변">
+												</strong>
+												<div class="account">
+													<p>${qna.reply }</p>
+												</div>
+											</div>
+										</div>
+									</td>
+								</tr>
+							</c:if>
 						</c:if>
 						
 					</tr>
@@ -301,7 +354,7 @@ a.talkShort{color: black !important;}
 		
 		
 	</span>
-	<div class="center-block">
+									<div class="center-block">
 										<div class="row">
 											<div class="col">
 												<ul class="pagination">
@@ -324,7 +377,7 @@ a.talkShort{color: black !important;}
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="qna?page=${a }" class="page-link">${a}</a>
+																<a href="qna?page=${a }&ykiho=${ykiho}" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -358,7 +411,7 @@ a.talkShort{color: black !important;}
 	// 문의 등록
 	$("#qnaform").submit(function(event){
 		var frm = document.qnaform;
-		
+
 		if(frm.subject.value.length < 1){
 			alert("제목을 입력하세요.");
 			frm.subject.focus();
@@ -368,22 +421,21 @@ a.talkShort{color: black !important;}
 			frm.content.focus();
 			return false;
 		}
-		
-	if($("#qnaSecret").is(":checked") == true){
-		$("input[name='secret']").val("0");
-	}else{
-		$("input[name='secret']").val("1");
-	}
-
-	});
+	
+		if($("input:checkbox[id='qnaSecret']").is(":checked") == true){
+			$("input[name='secret']").val("0");
+		}else{
+			$("input[name='secret']").val("1");
+		}
+	});	// submit end
 
 	$(".talkList .talkMore").hide();
 	$(".talkList .talkShort").click(function(){
-		if($(this).parent().parent().next('.talkMore').is(":hidden")){
+		if($(this).parent().parent().parent().next('.talkMore').is(":hidden")){
 			$(".talkList .talkMore").hide();
-			$(this).parent().parent().next('.talkMore').show();
+			$(this).parent().parent().parent().next('.talkMore').show();
 		} else {
-			$(this).parent().parent().next('.talkMore').hide();
+			$(this).parent().parent().parent().next('.talkMore').hide();
 		}
 
 		// 클릭 위치가 가려질경우 스크롤 이동
