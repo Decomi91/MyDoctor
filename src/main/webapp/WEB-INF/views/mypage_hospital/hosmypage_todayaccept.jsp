@@ -10,11 +10,9 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
-<link rel="stylesheet" href="resources/css/menuStyles.css" />
+<link rel="stylesheet" href="resources/css/hosmenuStyles.css" />
 <link rel="stylesheet" href="resources/css/paging.css" />
 
-<style>
-</style>
 </head>
 <body class="is-preload">
 
@@ -35,23 +33,29 @@
 				<!-- Banner: body -->
 				<section id="banner">
 					<div class="content">
-						<jsp:include page="mypage_menu.jsp"></jsp:include>
+						<jsp:include page="hosmypage_menu.jsp"></jsp:include>
 						<div class="mypageContent">
 
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">Reservation</span>
+									<span class="noLink">Today Reservation</span>
 								</nav>
 
 								<div class="table-wrapper">
+								<form action = "diagnosis.net" method="post">
 									<table class="reservetable mypagetable">
 										<thead>
 											<tr>
-												<th width=30%>예약 시간</th>
-												<th width=25%>병원</th>
-												<th width=25%>진행 상황</th>
-												<th></th>
+												<th width=17.5%>예약 번호</th>
+												<th width=22.5%>예약 시간</th>
+												<th width=20%>환자 정보</th>
+												<th width=20%>처리 상태</th>
+												<th width=10%>취소</th>
+												<th width=10%>
+													<input type = "checkbox" name = "reserveAll" id = "reserveAll">
+													<label for = "reserveAll"></label>
+												</th>
 											</tr>
 										</thead>
 
@@ -62,37 +66,46 @@
 												<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
 												<c:forEach var = "rv" items = "${rv }">
 													<tr>
-														<td>${rv.reserveTime }</td>
-														<td>${rv.hosname }</td>
-														<c:if test = "${rv.acceptance == -1 || rv.acceptance == -2}">
-															<td><span class="hoscancel reservebox">취소된 예약</span></td>
-															<td></td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 0}">
-															<td><span class="hoswaiting reservebox">승인 대기중</span></td>
-															<td>
-																<a href = "cancel.do?reserveNo=${rv.reserveNo }">예약 취소&nbsp;<i class="fas fa-angle-right"></i></a>
-															</td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 1}">
-															<td><span class="hossoon reservebox">방문 예정</span></td>
-															<td></td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 2}">
-															<td><span class="hosfinish reservebox">진료 완료</span></td>
-															<td>
-																<a href="reviewwrite.do?reserveNo=${rv.reserveNo }">후기 작성&nbsp;<i class="fas fa-angle-right"></i></a>
-															</td>
-														</c:if>
+														<td>${num }</td>
+														<c:set var="num" value="${num-1 }"></c:set>
+														<td>
+															<a href = "reserveDetail.net?reserveNo=${rv.reserveNo }" id = "reserveTimeA">${rv.reserveTime }</a>
+														</td>
+														<td>${rv.name }</td>
+														<td>
+															<c:choose>
+																<c:when test="${rv.acceptance==1 }">승인됨</c:when>
+																<c:when test="${rv.acceptance==0 }">승인대기</c:when>
+																<c:when test="${rv.acceptance==-1 }">취소</c:when>
+															</c:choose>
+														</td>
+														<td>
+															<a href = "reserveX.net?reserveNo=${rv.reserveNo }&page=${page}">
+																<i class="fas fa-window-close reserveX" style = "color:red"></i>
+															</a>		
+														</td>
+														<td>
+															<input type = "checkbox" name = "reserveOk" id = "${rv.reserveNo }" class = "reserveOk" value = "${rv.reserveNo }">
+															<label for = "${rv.reserveNo }"></label>
+														</td>
 												</c:forEach>
 											</c:if>
 											<c:if test="${listcount == 0}">
 												<tr>
-													<td colspan = "4">등록된 글이 없습니다.</td>
+													<td colspan = "5">요청된 예약이 없습니다.</td>
 												</tr>
 											</c:if>
 										</tbody>
+										<tfoot>
+											<tr>
+												<td colspan = "5"></td>
+												<td>
+													<input type = "submit" id = "reserveOkbtn" value = "진료함">
+												</td>
+											</tr>
+										</tfoot>
 									</table>
+									</form>
 									
 									<div class="center-block">
 										<div class="row">
@@ -105,7 +118,7 @@
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="mypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="hosmypage_today.net?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -117,7 +130,7 @@
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="mypage.net?page=${a }" class="page-link">${a}</a>
+																<a href="hosmypage_today.net?page=${a }" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -129,7 +142,7 @@
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="mypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="hosmypage_today.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>
@@ -162,5 +175,21 @@
 	<script src="resources/js/breakpoints.min.js"></script>
 	<script src="resources/js/util.js"></script>
 	<script src="resources/js/main.js"></script>
+	<script>
+		$(function(){
+			$("#reserveAll").click(function(){
+				if($(this).prop("checked") == true)
+					$(".reserveOk").prop("checked", true);
+				else
+					$(".reserveOk").prop("checked", false);
+			});
+			
+			$(".reserveOk").click(function(){
+				if($(this).prop("checked") == false && $("#reserveAll").prop("checked") == true){
+					$("#reserveAll").prop("checked", false);
+				}
+			});
+		})
+	</script>
 </body>
 </html>

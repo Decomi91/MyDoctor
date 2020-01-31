@@ -201,7 +201,7 @@ public class MapController {
 	 * @API밀집부분
 	 */
 	@RequestMapping(value = "detail.net", method = RequestMethod.GET)
-	public String locationView(HdetailVO vo, Model model,HttpSession session) throws Exception {
+                 	public String locationView(HdetailVO vo, Model model,HttpSession session) throws Exception {
 		/*
 		 		1. 요양기호로 병원 검색됨 -> 기존 자료 사용
 		 		2. 병원 없을 경우
@@ -218,23 +218,19 @@ public class MapController {
 			String favorite = hospitalService.getFavorite_sel(fa_hos);
 			
 			if(favorite!=null) {
-			Map<String, String> fa = new HashMap<String, String>();
-			fa.put("id", member);
-			fa.put("hosid",favorite);
-			String count = hospitalService.getFavorite_re(fa);
-			if(count.equals("1")) {				
-				System.out.println("카운트: "+count);
-				model.addAttribute("count", count);
+				Map<String, String> fa = new HashMap<String, String>();
+				fa.put("id", member);
+				fa.put("hosid",favorite);
+				String count = hospitalService.getFavorite_re(fa);
+				
+				if(count.equals("1")) {				
+					model.addAttribute("count", count);
 				}
 			}
-				
-
 		}
 		
-		Hospital result = new Hospital();
+		Hospital result = hospitalService.getDetail(vo.getYkiho());//요양키넣어서 관리자승인받은거로 고쳐야함
 		Work_hs work_hs= work(vo.getYkiho());		
-		result = hospitalService.getDetail(vo.getYkiho());//요양키넣어서 관리자승인받은거로 고쳐야함
-		
 		
 		String hs_empty="";
 		if(result!=null) {
@@ -251,7 +247,7 @@ public class MapController {
 		
 		vo = detail(vo);			
 		model.addAttribute("vo", vo);	
-		return "details/hospitaldetail";
+		return "details/hospitaldetail";	
 	}
 
 	/**

@@ -2,14 +2,13 @@ package com.project.mydoctor.model;
 
 public class Reservation {
 	private int reserveNo;
-	private String id;	// 환자 아이디
-	private String name;	// 환자 이름
+	private String id; // 환자 아이디
+	private String name; // 환자 이름
 	private String hosid;
 	private String hosname;
 	private String disease;
 	private String reserveTime;
-	private int acceptance;	// 거절할 경우 -1, 대기중일 경우 0, 승낙할 경우 1, 진료완료 2
-	private int moreRes; // 추가 예약 없을 경우 0, 있을 경우 1
+	private int acceptance; // 거절할 경우 -1, 대기중일 경우 0, 승낙할 경우 1, 진료완료 2
 
 	public int getReserveNo() {
 		return reserveNo;
@@ -75,11 +74,4 @@ public class Reservation {
 		this.acceptance = acceptance;
 	}
 
-	public int getMoreRes() {
-		return moreRes;
-	}
-
-	public void setMoreRes(int moreRes) {
-		this.moreRes = moreRes;
-	}
 }

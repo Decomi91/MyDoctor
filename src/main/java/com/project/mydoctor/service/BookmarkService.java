@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.project.mydoctor.model.Bookmark;
+import com.project.mydoctor.model.Hospital;
 
 public interface BookmarkService {
 
@@ -13,7 +14,7 @@ public interface BookmarkService {
 
 	Bookmark isBookmark(Map<String, Object> map);
 
-	List<Bookmark> getBookmarkList(String memberId);
+	List<Hospital> getBookmarkList(String memberId, int page, int limit);
 
 	int getListCount(String memberId);
 

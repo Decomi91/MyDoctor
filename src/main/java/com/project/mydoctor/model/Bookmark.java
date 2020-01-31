@@ -4,15 +4,6 @@ public class Bookmark {
 	private String id;
 	private String hosid;
 	private String hosname;
-	private Hospital hospital;
-
-	public Hospital getHospital() {
-		return hospital;
-	}
-
-	public void setHospital(Hospital hospital) {
-		this.hospital = hospital;
-	}
 
 	public String getId() {
 		return id;

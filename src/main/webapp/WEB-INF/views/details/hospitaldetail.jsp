@@ -39,12 +39,12 @@
 							<h1 class="koreanfont hospitalnamesize" style="font-size: 3em;">
 							 <c:if test="${chk==1 and hs_empty eq '1'}">
 							 	<c:if test="${count eq '1' }">
-								<i class="icon far fa-heart solid"
+								<i class="icon far fa-heart solid detailIcon"
 									style="float: right; color: #f56a6a; margin-right: 5%"
 									id="fav_hos"></i>
 									</c:if>
-									<c:if test="${empty count  }">
-								<i class="icon far fa-heart"
+								<c:if test="${empty count  }">
+								<i class="icon far fa-heart detailIcon"
 									style="float: right; color: #f56a6a; margin-right: 5%"
 									id="fav_hos"></i>
 									</c:if>
@@ -57,42 +57,33 @@
 
 						<div class="table-wrapper" style="width: 50%">
 						
-                     <a
-								href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}"
-								class="button large reservationbtn koreanfont"
-								style="float: right; margin-top: 3%;" target="_blank">길찾기</a>
-                     <c:if test="${chk==1 }">
+                     <a href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}"
+							class="button large reservationbtn koreanfont"
+							style="float: right; margin-top: 3%;" target="_blank">길찾기</a>
+                     <c:if test="${chk==1 and hs_empty eq '1'}">
                         <a href="reserve.net?yki=${vo.ykiho }"
 									class="button large reservationbtn koreanfont"
 									style="float: right; margin-top: 3%;" id="res_hos">예약하기</a>
                      </c:if>
                      <div>
                         <i class="fas fa-phone-alt"></i>${vo.telno }<br>
-								<c:if test="${vo.hospUrl!='undefined'}">
-									<a href="${vo.hospUrl}" target="_blank">사이트 방문하기</a>
-								</c:if> 
-                          
+						<c:if test="${vo.hospUrl!='undefined'}">
+							<a href="${vo.hospUrl}" target="_blank">사이트 방문하기</a>
+						</c:if>
                      </div>
-
-
                   </div>
-                  
-
                </div>
-               
-               
             </section>
-
             
             <div class="table-wrapper" style="width: 70%">
-							<table>
-                        <thead>
-                           <tr>
-                              <th></th>
-                              <th>진료시간</th>
+				<table>
+                    <thead>
+                       <tr>
+                          <th></th>
+                          <th>진료시간</th>
 
-                           </tr>
-                        </thead>
+                       </tr>
+                    </thead>
                         <tbody>
                         <!-- DB데이터 -->
                         <c:choose>                        

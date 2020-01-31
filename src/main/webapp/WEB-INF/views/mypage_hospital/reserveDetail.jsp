@@ -26,7 +26,7 @@
 
 				<!-- Header -->
 				<header id="header">
-					<a href="index.html" class="logo"><strong>My Doctor</strong> by
+					<a href="main" class="logo"><strong>My Doctor</strong> by
 						team.5</a>
 
 				</header>
@@ -73,7 +73,7 @@
 											<td colspan = 3>${rv.disease }</td>
 										</tr>
 									</table>
-									<button id = "reserveDetailbtn">확인</button>
+									<button id = "reserveDetailbtn" onClick="history.back();">확인</button>
 								</div>
 								
 							</div>

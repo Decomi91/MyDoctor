@@ -29,7 +29,7 @@
 	
 	<select id = "select" parameterType = "map" resultType = "reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation order by reserveTime desc))
 		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
@@ -45,7 +45,9 @@
 	<select id = "reserveCount" parameterType = "String" resultType = "int">
 		select count(*)
 		from reservation
-		where id = #{memberId}
+		where id = #{memberId} and acceptance between 0 and 1
+			and sysdate &lt; reserveTime
+			
 	</select>
 	
 	<select id="getListCount" parameterType = "String" resultType = "int">
@@ -68,7 +70,7 @@
 	<!-- 병원측 -->
 	<select id = "hosGetReserveList" parameterType = "map" resultType = "reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation order by reserveTime desc, reserveNo asc))
 		where hosId = #{hosId} and acceptance = 0
@@ -86,12 +88,71 @@
 		where reserveNo = #{reserveNo}
 	</update>
 	
-	<select id="getreserves" parameterType="String" resultType="Map">
-		select count(case when acceptance=1 then 1 else null end) as accepted,
-				count(case when acceptance=0 then 1 else null end) as waited,
-				count(case when acceptance&lt;0 then 1 else null end) as cancel
-		from (select hosid, acceptance 
-				from reservation
-				where hosid = #{hosid} and to_Char(reserveTime,'yyyymmdd') = to_Char(sysdate, 'yyyymmdd'))
+	<select id="getreserves" parameterType="String" resultType="int">
+		select count(*)
+		from reservation 
+		where hosid = #{hosid} and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance=1
+		union all
+		select count(*)
+		from reservation 
+		where hosid = #{hosid} and acceptance=0
+		union all
+		select count(*)
+		from reservation 
+		where hosid = #{hosid} and acceptance&lt;0 and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD')
+	</select>
+	
+	<update id="diagnosisok" parameterType="int">
+		update reservation
+		set acceptance = 2
+		where reserveNo = #{reserveNo}
+	</update>
+	
+	<select id="hosGetTodayListCount" parameterType="String" resultType="int">
+		select count(*)
+		from reservation
+		where hosid=#{hosid} and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance=1
+	</select>
+	
+	<select id = "hosGetTodayReserveList" parameterType = "map" resultType = "reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance, moreRes
+						from
+						(select * from reservation 
+						where hosId = #{hosId} and acceptance = 1 and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD')
+						order by reserveTime desc, reserveNo asc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end}	
+	</select>
+	
+	<select id="hosGetDiagListCount" parameterType="String" resultType="int">
+		select count(*)
+		from reservation
+		where acceptance = 2 and hosid = #{hosid}
+	</select>
+	
+	<select id="hosGetDiagList" parameterType="map" resultType="reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance, moreRes
+						from
+						(select * from reservation 
+						where hosId = #{hosId} and acceptance = 2
+						order by reserveTime desc, reserveNo asc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id="hosGetAllReserveListCount" parameterType="String" resultType="int">
+		select count(*)
+		from reservation
+		where hosid = #{hosid}
+	</select>
+	
+	<select id="hosGetAllReserveList" parameterType="map" resultType="reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance, moreRes
+						from
+						(select * from reservation 
+						where hosId = #{hosId}
+						order by reserveTime desc, reserveNo asc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 </mapper>

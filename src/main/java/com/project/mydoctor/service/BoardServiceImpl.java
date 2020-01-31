@@ -63,4 +63,10 @@ public class BoardServiceImpl implements BoardService {
 		return abDAO.getMyReqList(map);
 	}
 
+	@Override
+	public int insert(AdminBoard ab) {
+		// TODO Auto-generated method stub
+		return abDAO.insert(ab);
+	}
+
 }

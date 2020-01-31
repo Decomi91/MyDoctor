@@ -1,5 +1,6 @@
 package com.project.mydoctor.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -29,8 +30,12 @@ public class ReservationDAO {
 		return sqlSession.update("Reservations.reserveOk", reserveNo);
 	}
 
-	public Map<String, Integer> getReserves(String id) {
-		return sqlSession.selectOne("Reservations.getreserves", id);
+	public List<Integer> getReserves(String id) {
+		return sqlSession.selectList("Reservations.getreserves", id);
+	}
+
+	public int diagnosisOk(int reserveNo) {
+		return sqlSession.update("Reservations.diagnosisok", reserveNo);
 	}
 
 }

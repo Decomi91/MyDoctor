@@ -20,4 +20,6 @@ public interface BoardService {
 
 	List<AdminBoard> getMyReqList(int page, int limit, String id);
 
+	int insert(AdminBoard ab);
+
 }

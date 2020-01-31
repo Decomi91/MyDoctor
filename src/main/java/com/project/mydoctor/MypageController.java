@@ -44,7 +44,7 @@ public class MypageController {
 	private MemberService memberService;
 
 	@Autowired
-	private ReserveService reserveService;
+	private HospitalService hospitalService;
 	@Autowired
 	private ReviewService reviewService;
 	@Autowired
@@ -53,7 +53,7 @@ public class MypageController {
 	private MypageService mypageService;
   
   @Autowired
-	private BookmarkService bookmarkSerivce;
+	private BookmarkService bookmarkService;
   
 	@Autowired
 	private BoardService boardService; //관리자에게 쓰는 요청사항
@@ -64,14 +64,13 @@ public class MypageController {
 		System.out.println(" 신 비번: "+newPassword);			
 		String id=(String)session.getAttribute("loginid");
 		int result=memberService.updatePass(newPassword, id);
-    
 
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (result == 1) {
 			out.println("<script>");
 			out.println("alert('비밀번호 수정을 완료했습니다.')");
-			out.println("location.href='mypage.net");
+			out.println("location.href='mypage.net'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
@@ -171,7 +170,7 @@ public class MypageController {
 		if (result == 1) {
 			out.println("<script>");
 			out.println("alert('정보 수정을 완료했습니다.')");
-			out.println("location.href='mypage.net");
+			out.println("location.href='mypage.net'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
@@ -257,42 +256,64 @@ public class MypageController {
 		mv.put("limit", limit);
 		return mv;
 	}
-	// 예약현황 탭
-	@RequestMapping(value = "/myreserve.net")
-	public ModelAndView gomyreserve(HttpSession session, ModelAndView mv,
-			@RequestParam(value = "page", defaultValue = "1", required = false) int page) throws Exception {
-
-		String memberId = session.getAttribute("loginid").toString();
-		int limit = 5; // 한 page에 5개의 글
-
-		// 총 예약수
-		int listcount = mypageService.getListCount(memberId);
-		System.out.println("listcount(총 예약수) : " + listcount);
-
-		int maxpage = (listcount + limit - 1) / limit;
-		int startpage = ((page - 1) / 10) * 10 + 1;
-		int endpage = startpage + 10 - 1;
-
-		System.out.println("총 페이지 수 = " + maxpage);
-		System.out.println("endpage : " + endpage);
-
-		if (endpage > maxpage) {
-			endpage = maxpage;
-		}
-
-		List<Reservation> rv = mypageService.select(memberId, page, limit);
-
-		mv.setViewName("mypage/reservation");
-		mv.addObject("rv", rv);
-		mv.addObject("page", page);
-		mv.addObject("maxpage", maxpage);
-		mv.addObject("startpage", startpage);
-		mv.addObject("endpage", endpage);
-		mv.addObject("listcount", listcount);
-		mv.addObject("limit", limit);
-
-		return mv;
+//jisu_0130_관리자에게 문의하기 입력
+	@RequestMapping(value="/writeReqToA")
+	public String writemyReqToA() {
+		return "mypage/mypage_writeReqToA";
+		
 	}
+	@RequestMapping(value = "/writeReqToA.do")
+	public void reqToAWriteProcess(AdminBoard ab, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		
+		int result = boardService.insert(ab);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (result == 1) {
+			out.println("<script>");
+			out.println("alert('문의를 완료했습니다.')");
+			out.println("location.href='mypage.net'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('문의에 실패했습니다. 잠시 후 다시 시도해 주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+			out.close();
+		}
+	}
+	
+	/*
+	 * // 예약현황 탭
+	 * 
+	 * @RequestMapping(value = "/myreserve.net") public ModelAndView
+	 * gomyreserve(HttpSession session, ModelAndView mv,
+	 * 
+	 * @RequestParam(value = "page", defaultValue = "1", required = false) int page)
+	 * throws Exception {
+	 * 
+	 * String memberId = session.getAttribute("loginid").toString(); int limit = 5;
+	 * // 한 page에 5개의 글
+	 * 
+	 * // 총 예약수 int listcount = mypageService.getListCount(memberId);
+	 * System.out.println("listcount(총 예약수) : " + listcount);
+	 * 
+	 * int maxpage = (listcount + limit - 1) / limit; int startpage = ((page - 1) /
+	 * 10) * 10 + 1; int endpage = startpage + 10 - 1;
+	 * 
+	 * System.out.println("총 페이지 수 = " + maxpage); System.out.println("endpage : " +
+	 * endpage);
+	 * 
+	 * if (endpage > maxpage) { endpage = maxpage; }
+	 * 
+	 * List<Reservation> rv = mypageService.select(memberId, page, limit);
+	 * 
+	 * mv.setViewName("mypage/reservation"); mv.addObject("rv", rv);
+	 * mv.addObject("page", page); mv.addObject("maxpage", maxpage);
+	 * mv.addObject("startpage", startpage); mv.addObject("endpage", endpage);
+	 * mv.addObject("listcount", listcount); mv.addObject("limit", limit);
+	 * 
+	 * return mv; }
+	 */
 
 	// 마이페이지 메인
 	@RequestMapping(value = "/mypage.net")
@@ -319,11 +340,6 @@ public class MypageController {
 
 		List<Reservation> rv = mypageService.select(memberId, page, limit);
 
-		/* 북마크 불러오기 */
-		int bookmarkcount = bookmarkSerivce.getListCount(memberId);
-		List<Bookmark> bm = bookmarkSerivce.getBookmarkList(memberId);
-
-
 		mv.setViewName("mypage/mypage");
 		mv.addObject("rv", rv);
 		mv.addObject("page", page);
@@ -332,9 +348,39 @@ public class MypageController {
 		mv.addObject("endpage", endpage);
 		mv.addObject("listcount", listcount);
 		mv.addObject("limit", limit);
-		mv.addObject("bm", bm);
-		mv.addObject("bookmarkcount", bookmarkcount);
 
+		return mv;
+	}
+
+	@RequestMapping(value = "/gobookmark.net")
+	public ModelAndView gobookmark(HttpSession session, ModelAndView mv,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) throws Exception {
+		String memberId = session.getAttribute("loginid").toString();
+		int limit = 5; // 한 page에 5개의 글
+
+		// 총 예약수
+		int listcount = bookmarkService.getListCount(memberId);
+		System.out.println("listcount(총 예약수) : " + listcount);
+
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+
+		
+		List<Hospital> bm = bookmarkService.getBookmarkList(memberId, page, limit);
+
+		mv.setViewName("mypage/bookmark");
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("limit", limit);
+		mv.addObject("bm", bm);
 		return mv;
 	}
 
@@ -355,4 +401,32 @@ public class MypageController {
 
 		return "mypage/chart";
 	}
+
+	@RequestMapping(value = "/bookmarkcancel.do")
+	public void bookmarkcancel(String ykiho, HttpSession session, HttpServletResponse response) throws IOException {
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+
+		Hospital hospital = hospitalService.getDetail(ykiho);
+
+		Map<String, Object> map = new HashMap<String, Object>();
+		map.put("id", session.getAttribute("loginid").toString());
+		map.put("hosid", hospital.getId());
+
+		int result = bookmarkService.delete(map);
+
+		if (result == 1) {
+			out.println("<script>");
+			out.println("alert('관심병원에서 해제되었습니다.');");
+			out.println("location.href='gobookmark.net';");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('해제를 실패하였습니다.');");
+			out.println("history.back();");
+			out.println("</script>");
+		}
+		out.close();
+	}
+
 }
