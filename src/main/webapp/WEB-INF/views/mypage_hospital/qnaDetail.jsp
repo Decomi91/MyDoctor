@@ -39,41 +39,44 @@
 						
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">상세 정보</span>
+									<span class="noLink">게시글 정보</span>
 								</nav>
 								
 								<div class = "table-wrapper reserveDetailDIV">
 									<table class="reservetable mypagetable reserveDetailTable">
 										<tr>
-											<th>예약 번호</th>
-											<td colspan = 3>${rv.reserveNo }
+											<th>게시자</th>
+											<td colspan = 3>${qna.writeId }</td>
 										</tr>
 										<tr>
-											<th>예약 시간</th>
-											<td colspan = 3>${rv.reserveTime }</td>
+											<th>게시일</th>
+											<td colspan = 3>${qna.uploaddate }</td>
 										</tr>
 										<tr>
-											<th>환자 이름</th>
-											<td>${rv.name }</td>
-											<th>연락처</th>
-											<td id = "reservephone">${member.phone }</td>
+											<th>${qna.head }</th>
+											<td colspan = 3>${qna.subject }</td>
 										</tr>
 										<tr>
-											<th>생년월일</th>
-											<td>${member.birth }</td>
-											<th>성별</th>
-											<td id = "reservegender">${member.gender }</td>
+											<th>내용</th>
+											<td colspan = 3>${qna.content }</td>
 										</tr>
 										<tr>
-											<th>주소</th>
-											<td colspan = 3>${member.address }</td>
-										</tr>
-										<tr>
-											<th>증상</th>
-											<td colspan = 3>${rv.disease }</td>
+											<th>답변</th>
+											<td colspan = 3>
+												<form action="replyInput" method="post">
+													<textarea name="reply" rows="10" cols="10">${qna.reply }</textarea><br>
+													<input type="hidden" name="boardNum" value="${qna.boardNum}">
+													<button type="submit">답변 달기</button> &nbsp;&nbsp;
+												</form>
+											</td>
 										</tr>
 									</table>
-									<button id = "reserveDetailbtn" onclick="javascript:history.back();">확인</button>
+									<br>
+									<form action="qnaDelete" method="post" id="del">
+										<input type="hidden" name="boardNum" value="${qna.boardNum}">
+										<a href="hosmyboard.net"><button type="button">확인</button></a>
+										<button type="submit">삭제</button>
+									</form>
 								</div>
 								
 							</div>
@@ -93,30 +96,13 @@
 	<script src="resources/js/main.js"></script>
 	<script>
 		$(function(){
-			if($("#reservegender").val() == 0){
-				$("#reservegender").text("남");
-			}else{
-				$("#reservegender").text("여");
-			}
-			
-			console.log($("#reservephone").text());
-			
-			function phoneFormat(num){
-				var formatNum = "";
-				
-				if(num.length == 11){
-					formatNum = num.replace(/(\d{3})(\d{4})(\d{4})/, "$1-$2-$3");
-				}else if(num.length == 10){
-					formatNum = num.replace(/(\d{3})(\d{3})(\d{4})/, "$1-$2-$3");
+			$('#del').submit(function(){
+				var del = confirm('정말 삭제하시겠습니까?');
+				if(del == false){
+					return false;
 				}
-				
-				return formatNum;
-			}
-			
-			var phone = $("#reservephone").text();
-			$("#reservephone").text(phoneFormat(phone));
+			})
 		})
-		
 	</script>
 </body>
 </html> 

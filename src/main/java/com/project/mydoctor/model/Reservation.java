@@ -64,7 +64,7 @@ public class Reservation {
 	}
 
 	public void setReserveTime(String reserveTime) {
-		this.reserveTime = reserveTime;
+		this.reserveTime = reserveTime.substring(0,reserveTime.length()-3);
 	}
 
 	public int getAcceptance() {

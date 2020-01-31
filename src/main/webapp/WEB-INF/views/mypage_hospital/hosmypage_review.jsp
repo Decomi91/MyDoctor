@@ -39,29 +39,23 @@
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">Reservation</span>
+									<span class="noLink">Reviews</span>
 								</nav>
-
+								친절 : ${score.kindness } 능력 : ${score.ability } 가격 : ${score.price }
 								<div class="table-wrapper">
-								<form action = "reserveOk.net">
+								<form action = "deleteBoard.net" method="post">
 									<table class="reservetable mypagetable">
 										<thead>
 											<tr>
-												<th width=15%>예약 번호</th>
-												<th width=20%>예약 시간</th>
-												<th width=20%>환자 정보</th>
-												<th width=20%>처리 상태</th>
-												<th width=10%>취소</th>
-												<th width=12.5%>
-													<input type = "checkbox" name = "reserveAll" id = "reserveAll">
-													<label for = "reserveAll"></label>
-												</th>
+												<th width=15%>번호</th>
+												<th width=50%>제목</th>
+												<th width=35%>게시일</th>
 											</tr>
 										</thead>
 
 										<tbody>
 										
-											<!-- 예약 내역이 있는 경우 -->
+											<!-- 후기 내역이 있는 경우 -->
 											<c:if test="${listcount > 0}">
 												<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
 												<c:forEach var = "rv" items = "${rv }">
@@ -69,39 +63,20 @@
 														<td>${num }</td>
 														<c:set var="num" value="${num-1 }"></c:set>
 														<td>
-															<a href = "reserveDetail.net?reserveNo=${rv.reserveNo }" id = "reserveTimeA">${rv.reserveTime }</a>
+															<a href = "reviewsDetail.net?reviewNum=${rv.reviewNum }">${rv.subject }</a>
 														</td>
-														<td>${rv.name }</td>
-														<td>
-															<c:choose>
-																<c:when test="${rv.acceptance==1 }">승인됨</c:when>
-																<c:when test="${rv.acceptance==0 }">승인대기</c:when>
-																<c:when test="${rv.acceptance==-1 }">취소</c:when>
-															</c:choose>
-														</td>
-														<td>
-															<a href = "reserveX.net?reserveNo=${rv.reserveNo }&page=${page}">
-																<i class="fas fa-window-close reserveX" style = "color:red"></i>
-															</a>		
-														</td>
-														<td>
-															<input type = "checkbox" name = "reserveOk" id = "${rv.reserveNo }" class = "reserveOk" value = "${rv.reserveNo }">
-															<label for = "${rv.reserveNo }"></label>
-														</td>
+														<td>${rv.uploaddate }</td>
+													</tr>
 												</c:forEach>
 											</c:if>
 											<c:if test="${listcount == 0}">
 												<tr>
-													<td colspan = "5">요청된 예약이 없습니다.</td>
+													<td colspan = "7">작성된 글이 없습니다.</td>
 												</tr>
 											</c:if>
 										</tbody>
 										<tfoot>
 											<tr>
-												<td colspan = "5"></td>
-												<td>
-													<input type = "submit" id = "reserveOkbtn" value = "승인">
-												</td>
 											</tr>
 										</tfoot>
 									</table>
@@ -118,7 +93,7 @@
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="hosmypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="hosmyreview.net?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -130,7 +105,7 @@
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="hosmypage.net?page=${a }" class="page-link">${a}</a>
+																<a href="hosmyreview.net?page=${a }" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -142,7 +117,7 @@
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="hosmypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="hosmyreview.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>
@@ -175,21 +150,5 @@
 	<script src="resources/js/breakpoints.min.js"></script>
 	<script src="resources/js/util.js"></script>
 	<script src="resources/js/main.js"></script>
-	<script>
-		$(function(){
-			$("#reserveAll").click(function(){
-				if($(this).prop("checked") == true)
-					$(".reserveOk").prop("checked", true);
-				else
-					$(".reserveOk").prop("checked", false);
-			});
-			
-			$(".reserveOk").click(function(){
-				if($(this).prop("checked") == false && $("#reserveAll").prop("checked") == true){
-					$("#reserveAll").prop("checked", false);
-				}
-			});
-		})
-	</script>
 </body>
 </html>

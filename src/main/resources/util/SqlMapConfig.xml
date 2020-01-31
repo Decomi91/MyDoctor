@@ -11,6 +11,7 @@
 		<typeAlias type="com.project.mydoctor.model.Reservation" alias="reservation"/>
 		<typeAlias type="com.project.mydoctor.model.Review" alias="review"/>
 		<typeAlias type="com.project.mydoctor.model.Bookmark" alias="bookmark"/>
+		<typeAlias type="com.project.mydoctor.model.Score" alias="score"/>
 	</typeAliases>
 	
 	<mappers>
@@ -21,5 +22,6 @@
 		<mapper resource="sql/reservation.xml"/>
 		<mapper resource="sql/review.xml"/>
 		<mapper resource="sql/bookmark.xml"/>
+		<mapper resource="sql/score.xml"/>
 	</mappers>
 </configuration>

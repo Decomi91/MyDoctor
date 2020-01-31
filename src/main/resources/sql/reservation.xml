@@ -72,14 +72,15 @@
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
 						reserveTime, acceptance, moreRes
 						from
-						(select * from reservation order by reserveTime desc, reserveNo asc))
-		where hosId = #{hosId} and acceptance = 0
-			and rnum &gt;= #{start} and rnum &lt;= #{end}	
+						(select * from reservation 
+						 where hosId = #{hosId} and acceptance = 1 and reserveTime &gt;= sysdate
+						 order by reserveTime desc, reserveNo asc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end}	
 	</select>
 	
 	<select id="hosGetListCount" parameterType = "String" resultType = "int">
 		select count(*) from reservation
-		where hosId = #{hosId}
+		where hosId = #{hosId} and acceptance = 1 and reserveTime &gt;= sysdate
 	</select>
 	
 	<update id = "reserveOk" parameterType = "int">
