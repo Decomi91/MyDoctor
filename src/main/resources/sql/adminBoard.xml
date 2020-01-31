@@ -43,4 +43,21 @@
  select * from(select rownum rnum, r.* from(select * from adminBoard where id=#{id} order by reqDate desc ) r)
  where rnum &gt;=#{start} and rnum &lt;=#{end}
  </select>
+ 
+<!--  create table adminBoard(
+  id varchar2(15) references members(id),
+  boardNum number(10) primary key,
+  subject varchar2(100) not null,
+  content varchar2(4000) not null,
+  checking number(1) default 0 not null ,
+  reply varchar2(3000),
+  reqDate date
+) -->
+ <insert id="insert" parameterType="adminboard">
+ <selectKey resultType="int" order="BEFORE" keyProperty="boardNum">
+ select nvl(max(boardNum),0)+1 from adminboard
+ </selectKey>
+ insert into adminboard (id, boardNum, subject, content, checking, reply, reqDate) values
+ (#{id}, #{boardNum}, #{subject}, #{content}, #{checking}, '답변준비중', sysdate)
+ </insert>
  </mapper>

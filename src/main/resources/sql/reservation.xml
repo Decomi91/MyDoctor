@@ -29,7 +29,7 @@
 	
 	<select id = "select" parameterType = "map" resultType = "reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation order by reserveTime desc))
 		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
@@ -70,7 +70,7 @@
 	<!-- 병원측 -->
 	<select id = "hosGetReserveList" parameterType = "map" resultType = "reservation">
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
-						reserveTime, acceptance, moreRes
+						reserveTime, acceptance
 						from
 						(select * from reservation 
 						 where hosId = #{hosId} and acceptance = 1 and reserveTime &gt;= sysdate

@@ -12,26 +12,26 @@ create table reservation(
 )
 
 insert into reservation
-values(2, 'test', 'testing', 'testing', 'hospital', 'kk', sysdate, '1', '1');
+values(2, 'test', 'testing', 'testing', 'hospital', 'kk', sysdate, '1');
 
 insert into reservation
-values(3, 'test', 'testing', 'testing', '토마토치과', 'kk', sysdate, '0', '1');
+values(3, 'test', 'testing', 'testing', '토마토치과', 'kk', sysdate, '0');
 insert into reservation
-values(4, 'test', 'testing', 'testing', '밝은이안과', 'kk', sysdate, '-1', '1');
+values(4, 'test', 'testing', 'testing', '밝은이안과', 'kk', sysdate, '-1');
 insert into reservation
-values(5, 'test', 'testing', 'testing', '땡땡병원', 'kk', sysdate, '0', '1');
+values(5, 'test', 'testing', 'testing', '땡땡병원', 'kk', sysdate, '0');
 
 insert into reservation
-values(8, 'test', 'testing', 'testing', '가나다병원', 'kk', sysdate, '0', '1');
+values(8, 'test', 'testing', 'testing', '가나다병원', 'kk', sysdate, '0');
 insert into reservation
-values(6, 'test', 'testing', 'testing', '123병원', 'kk', sysdate, '0', '1');
+values(6, 'test', 'testing', 'testing', '123병원', 'kk', sysdate, '0');
 insert into reservation
-values(7, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '1', '1');
+values(7, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '1');
 insert into reservation
-values(9, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '2', '1');
+values(9, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '2');
 
 insert into reservation
-values(10, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '0', '1');
+values(10, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '0');
 
 select * from reservation;
 drop table reservation;
@@ -45,21 +45,6 @@ from (select hosid, acceptance
 
 select * from reservation
 where hosId = 'gong1' and acceptance = 1 and reserveTime >= sysdate
-
-create table treatment(
-	treatNo			number(10) primary key,
-	reserveNo		number(10) references reservation(reserveNo),
-	id				varchar2(15) references members(id),
-	name			varchar2(15) not null,
-	hosid			varchar2(15) references hospitals(id),
-	hosname			varchar2(15) not null,
-	disease			varchar2(100) not null,
-	prescription	varchar2(1000) not null,
-	reserveTime		date,
-	treatTime		date
-)
-select * from treatment
-
 
 select count(*)
 from reservation 

@@ -28,8 +28,8 @@ create table hospitals(
 drop table hospitals cascade constraints
 select * from hospitals
 insert into hospitals values('testing','123','test',
-			'testaddr',029579599,'ABCD',1,0900,1700,0900,1700,0900,1700,
-			0900,1700,0900,1700,0900,1700,0900,1700,1,1,sysdate);
+			'testaddr',029579599,'ABCD',0900,1700,0900,1700,0900,1700,
+			0900,1700,0900,1700,0900,1700,0900,1700,1300, 1400, 1,1,sysdate);
 		
 
 create table bookmarks (
@@ -39,3 +39,4 @@ create table bookmarks (
 )
 select * from bookmarks
 drop table favorite
+

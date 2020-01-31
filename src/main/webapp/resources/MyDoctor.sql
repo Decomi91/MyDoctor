@@ -34,10 +34,11 @@ create table adminBoard(
   boardNum number(10) primary key,
   subject varchar2(100) not null,
   content varchar2(4000) not null,
-  checking number(1) not null default 0,
+  checking number(1) default 0 not null ,
   reply varchar2(3000),
   reqDate date
 )
+select * from adminboard;
 insert into adminboard values('test', 8, '문의test_sub', '문의 test_con', 0, '문의 답변', sysdate)
 insert into adminboard values('test', 9, '문의test_sub2', '문의 test_con2', 0, '문의 답변', sysdate)
 alter table adminBoard add(reqDate date)

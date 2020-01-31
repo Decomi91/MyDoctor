@@ -36,9 +36,9 @@
 						<jsp:include page="mypage_menu.jsp"></jsp:include>
 						<!-- 내가쓴 후기 시작 -->
 						<div class="mypageContent">
-							<label class="mod qnabtn tohos"><input type="radio"
+							<label class="mod qnabtn tohos" title="to.병원"><input type="radio"
 								name="reqselbtn" value="1" checked="checked" id="reqtoH">문의 내역</label> <label
-								class="mod qnabtn toadmin"><input type="radio"
+								class="mod qnabtn toadmin" title="to.관리자"><input type="radio"
 								name="reqselbtn" value="2" id="reqtoA">요청 내역</label>
 
 
