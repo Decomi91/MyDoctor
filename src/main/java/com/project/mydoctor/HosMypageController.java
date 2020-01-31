@@ -402,8 +402,8 @@ public class HosMypageController {
 		}
 		List<Review> rv = reviewService.getHosReviewList(page, limit, hosId);
 		Score score = reviewService.getScore(hosId);
-		System.out.println(score);
-		System.out.println(score.getKindness());
+		//System.out.println(score);
+		//System.out.println(score.getKindness());
 		
 		mv.setViewName("mypage_hospital/hosmypage_review");
 		mv.addObject("score", score);

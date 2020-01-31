@@ -12,7 +12,7 @@ public class Review {
 	private int ability;
 	private int price;
 	private Date uploaddate;
-	private Date visited;
+	private String visited;
 	private String reply;
 
 	public String getId() {
@@ -87,12 +87,12 @@ public class Review {
 		this.uploaddate = uploaddate;
 	}
 
-	public Date getVisited() {
+	public String getVisited() {
 		return visited;
 	}
 
-	public void setVisited(Date visited) {
-		this.visited = visited;
+	public void setVisited(String string) {
+		this.visited = string;
 	}
 
 	public String getReply() {
@@ -101,6 +101,13 @@ public class Review {
 
 	public void setReply(String reply) {
 		this.reply = reply;
+	}
+
+	@Override
+	public String toString() {
+		return "Review [id=" + id + ", hospital=" + hospital + ", reviewNum=" + reviewNum + ", subject=" + subject
+				+ ", content=" + content + ", kindness=" + kindness + ", ability=" + ability + ", price=" + price
+				+ ", uploaddate=" + uploaddate + ", visited=" + visited + ", reply=" + reply + "]";
 	}
 
 }

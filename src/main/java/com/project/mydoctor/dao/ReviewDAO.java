@@ -38,4 +38,12 @@ public class ReviewDAO {
 		return sqlSession.selectList("Review.hoslist", map);
 	}
 
+	public int insert(Review review) {
+		// TODO Auto-generated method stub
+		System.out.println(review.getVisited());
+		review.setVisited(review.getVisited().replaceAll("-", "").replaceAll(" ", "").replaceAll(":", ""));
+		System.out.println(review);
+		return sqlSession.insert("Review.insert",review);
+	}
+
 }
