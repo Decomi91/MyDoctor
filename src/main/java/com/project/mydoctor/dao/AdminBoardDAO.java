@@ -49,4 +49,9 @@ public class AdminBoardDAO {
 		return sqlSession.selectList("AdminBoards.reqlist", map);
 	}
 
+	public int insert(AdminBoard ab) {
+		// TODO Auto-generated method stub
+		return sqlSession.insert("AdminBoards.insert", ab);
+	}
+
 }

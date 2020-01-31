@@ -38,6 +38,7 @@ create table adminBoard(
   reply varchar2(3000),
   reqDate date
 )
+select * from adminboard;
 insert into adminboard values('test', 8, '문의test_sub', '문의 test_con', 0, '문의 답변', sysdate)
 insert into adminboard values('test', 9, '문의test_sub2', '문의 test_con2', 0, '문의 답변', sysdate)
 alter table adminBoard add(reqDate date)

@@ -53,7 +53,7 @@ public class MypageController {
 	private MypageService mypageService;
   
   @Autowired
-	private BookmarkService bookmarkSerivce;
+	private BookmarkService bookmarkService;
   
 	@Autowired
 	private BoardService boardService; //관리자에게 쓰는 요청사항
@@ -70,7 +70,7 @@ public class MypageController {
 		if (result == 1) {
 			out.println("<script>");
 			out.println("alert('비밀번호 수정을 완료했습니다.')");
-			out.println("location.href='mypage.net");
+			out.println("location.href='mypage.net'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
@@ -170,7 +170,7 @@ public class MypageController {
 		if (result == 1) {
 			out.println("<script>");
 			out.println("alert('정보 수정을 완료했습니다.')");
-			out.println("location.href='mypage.net");
+			out.println("location.href='mypage.net'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
@@ -256,7 +256,32 @@ public class MypageController {
 		mv.put("limit", limit);
 		return mv;
 	}
-
+//jisu_0130_관리자에게 문의하기 입력
+	@RequestMapping(value="/writeReqToA")
+	public String writemyReqToA() {
+		return "mypage/mypage_writeReqToA";
+		
+	}
+	@RequestMapping(value = "/writeReqToA.do")
+	public void reqToAWriteProcess(AdminBoard ab, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		
+		int result = boardService.insert(ab);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (result == 1) {
+			out.println("<script>");
+			out.println("alert('문의를 완료했습니다.')");
+			out.println("location.href='mypage.net'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('문의에 실패했습니다. 잠시 후 다시 시도해 주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+			out.close();
+		}
+	}
+	
 	/*
 	 * // 예약현황 탭
 	 * 
