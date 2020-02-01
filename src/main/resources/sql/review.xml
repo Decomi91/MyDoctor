@@ -23,6 +23,28 @@
 		 select * from(select rownum rnum, r.* from(select * from reviews where hospital=#{id} order by visited desc ) r)
 		 where rnum &gt;=#{start} and rnum &lt;=#{end}
 	 </select>
+	 
+	 
+<!-- 	  id varchar2(15) references members(id),
+  hospital varchar2(15) references hospitals(id),
+  reviewNum number(10) primary key,
+  subject varchar2(100) not null,
+  content varchar2(4000) not null,
+  kindness number(2) not null,
+  ability number(2) not null,
+  price number(2) not null,
+  visited date,
+  uploaddate date,
+  reply varchar2(3000) -->
+	 
+	 <insert id="insert" parameterType="review">
+	 <selectKey resultType="int" order="BEFORE" keyProperty="reviewNum">
+ select nvl(max(reviewNum),0)+1 from reviews
+ </selectKey>
+ insert into reviews (id,hospital, reviewNum, subject, content, kindness, ability, price, visited, uploaddate) values
+ (#{id}, #{hospital}, #{reviewNum}, #{subject}, #{content},#{kindness}, #{ability}, #{price}, #{visited}, sysdate)
+ </insert>
+	
 	 <select id="getDetail" parameterType="review" resultType="review">
 	 	select * from reviews
 	 	where reviewNum = #{reviewNum} and hospital = #{hospital} 

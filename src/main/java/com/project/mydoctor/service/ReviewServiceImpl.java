@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.project.mydoctor.dao.ReviewDAO;
+import com.project.mydoctor.model.AdminBoard;
 import com.project.mydoctor.model.Review;
 import com.project.mydoctor.model.Score;
 
@@ -55,6 +56,11 @@ private ReviewDAO rdao;
 	}
 
 	@Override
+	public int insert(Review review) {
+		return rdao.insert(review);
+  }
+  
+  @Override
 	public Review getDetail(int reviewNum, String hospital) {
 		Review rev = new Review();
 		rev.setReviewNum(reviewNum);

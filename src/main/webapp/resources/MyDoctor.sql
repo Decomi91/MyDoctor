@@ -112,6 +112,8 @@ create table reviews(
   uploaddate date,
   reply varchar2(3000)
 )
+drop table reviews;
+select * from reviews;
 select avg(kindness), avg(ability), avg(price) 
 	 	from reviews
 	 	where hospital = 'gong1'

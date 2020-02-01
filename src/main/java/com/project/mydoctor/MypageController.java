@@ -44,12 +44,13 @@ public class MypageController {
 	private QnaService qnaService;//병원에게 쓰는 qna
 	@Autowired
 	private MypageService mypageService;
-  
-  @Autowired
+    @Autowired
 	private BookmarkService bookmarkService;
-  
-	@Autowired
+    @Autowired
 	private BoardService boardService; //관리자에게 쓰는 요청사항
+    @Autowired
+   	private ReserveService reserveService;
+    
 	//새로 입력받은 비밀번호로 비밀번호 update합니다.
 	@RequestMapping(value="/pwmodify.do")	
 	public void updatePass(@RequestParam("new_password") String newPassword, HttpServletResponse response, 
@@ -377,12 +378,40 @@ public class MypageController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/review.net")
-	public String writeReview() {
+	//jisu_0131_후기작성폼에 진료기록 불러옵니다.
+	@RequestMapping(value = "/reviewwrite.do")
+	public ModelAndView record(ModelAndView mv, int reserveNo, HttpSession session) {
+		
+		 
+		Reservation r = reserveService.getReserveDetail(reserveNo);
+		mv.addObject("reserveRecord", r);
+		mv.setViewName("mypage/review");
+		return mv;
 
-		return "writeform/review";
 	}
-
+//jisu_0131_리뷰 입력
+	@RequestMapping(value = "/ReviewAddAction.do")
+	public void reviewWriteProcess(Review review, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		
+		int result = reviewService.insert(review);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (result == 1) {
+			out.println("<script>");
+			out.println("alert('리뷰 감사합니다.')");
+			out.println("location.href='mypage.net'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('리뷰 작성에 실패했습니다. 잠시 후 다시 시도해 주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+			out.close();
+		}
+	}
+	
+	
+	
 	@RequestMapping(value = "/detail")
 	public String detailQna() {
 
