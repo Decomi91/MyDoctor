@@ -114,6 +114,15 @@ create table reviews(
   uploaddate date,
   reply varchar2(3000)
 )
+select * from hospitals
+ select * from(select rownum rnum, r.* from
+ (select rv.*, h.yadmNm from reviews rv join hospitals h on  rv.hospital=h.id and rv.id='test'
+ order by visited desc ) r
+		 where rnum &gt;=#{start} and rnum &lt;=#{end}
+
+select 
+
+		 
 drop table reviews;
 select * from reviews;
 select avg(kindness), avg(ability), avg(price) 
@@ -123,7 +132,7 @@ drop table reviews
 alter table reviews add(visited date)
 insert into reviews values('test', 'gong1', 1, 'testSub',
 	'testCont', 5,5,5,sysdate,sysdate,'ok')
-insert into reviews values('test', 'gong1', 2, 'testSub',
+insert into reviews values('test2', 'gong1', 2, 'testSub',
 	'testCont', 3,4,5,sysdate,sysdate,'ok')
 insert into reviews values('test', 'gong1', 3, 'testSub',
 	'testCont', 3,4,5,sysdate,sysdate,'ok')
@@ -131,7 +140,7 @@ insert into reviews values('test', 'gong1', 4, 'testSub',
 	'testCont', 3,4,5,sysdate,sysdate,'ok')
 insert into reviews values('test', 'gong1', 5, 'testSub',
 	'testCont', 3,4,5,sysdate,sysdate,'ok')
-insert into reviews values('test', 'gong1', 6, 'testSub',
+insert into reviews values('test2', 'gong1', 6, 'testSub',
 	'testCont', 3,4,5,sysdate,sysdate,'ok')
 update reviews set visited = sysdate
 select * from(select rownum rnum, r.* from(select * from reviews where id='test' order by visited desc ) r)

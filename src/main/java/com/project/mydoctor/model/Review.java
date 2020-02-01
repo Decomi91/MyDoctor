@@ -17,6 +17,14 @@ public class Review {
 	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date visited;
 	private String reply;
+private String yadmnm;
+	public String getYadmnm() {
+	return yadmnm;
+}
+
+public void setYadmnm(String yadmnm) {
+	this.yadmnm = yadmnm;
+}
 
 	public String getId() {
 		return id;

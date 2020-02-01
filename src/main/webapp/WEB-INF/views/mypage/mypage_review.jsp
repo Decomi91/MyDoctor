@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML>
 
 <html>
@@ -11,6 +12,9 @@
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
 <link rel="stylesheet" href="resources/css/menuStyles.css" />
+<style>
+.rateResult{margin:2% 0}
+</style>
 </head>
 <body class="is-preload">
  
@@ -41,12 +45,19 @@
 					<div class="accordion">	
 					<c:forEach var="r" items="${myreviewlist}">
 			<div class="accordion__item">
-    <h3 class="accordion__title js-title">${r.hospital }&nbsp;${r.visited }</h3>
+    <h3 class="accordion__title js-title" >${r.yadmnm }&nbsp;&#40;
+    <fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${r.visited }"/>&#41;</h3>
     <div class="accordion__copy accordion__copy--open js-copy">
    <div><strong>${r.subject }</strong><br>
   ${r.content }</div>
-    <div><hr>
+  <div>
+ 								
+<div class="rateResult">
+  💗 ${r.kindness}/5 &nbsp; 🩺 ${r.ability }/5 &nbsp; 🧾 ${r.price}/5 </div>
+    <div>
+    <hr>
     <i class="fas fa-share fa-flip-vertical"></i> ${r.reply }
+    </div>
     </div>
     </div>
     </div>
@@ -111,8 +122,17 @@ $title.click(function () {
   $(this).next(copy).slideToggle();
   $(this).parent().siblings().children().next().slideUp();
   return false;
-
+  
 });
+ 
+ 
+
+  
+ 
+
+ 
+
+
 </script>
 </body>
 </html>
