@@ -82,6 +82,8 @@ insert into boards values('test', 'gong1', 10, 1,'문의', 'testSub',
 'testCont','2020-02-02','ok')
 insert into boards values('test', 'gong1', 11, 1,'문의', 'testSub',
 'testCont','2020-02-21','ok')
+insert into boards values('test', 'gong1', 12, 0,'문의', 'testSub',
+'testCont','2020-02-21','ok')
 			insert all 
 			into boards values('test', '123', 'testing', 2, 1,'문의', 'testSub',
 			'testCont',sysdate,'ok')
@@ -122,6 +124,14 @@ alter table reviews add(visited date)
 insert into reviews values('test', 'gong1', 1, 'testSub',
 	'testCont', 5,5,5,sysdate,sysdate,'ok')
 insert into reviews values('test', 'gong1', 2, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 3, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 4, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 5, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 6, 'testSub',
 	'testCont', 3,4,5,sysdate,sysdate,'ok')
 update reviews set visited = sysdate
 select * from(select rownum rnum, r.* from(select * from reviews where id='test' order by visited desc ) r)
