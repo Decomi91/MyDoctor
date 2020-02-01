@@ -1,15 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<c:if test="${chk!=1 }">
+	<jsp:forward page="/main"></jsp:forward>
+</c:if>
 <div style="padding-top: 0" class="mypageSection sectionDisplay">
 	<div class="mypageHeader">
 		<div id="mypageHeaderdiv">
 			<ul>
-				<li><a href='mypage'><span>My page</span></a></li>
+				<li><a href='mypage.net'><span>My page</span></a></li>
 				<li><i class="icon solid fas fa-user-circle mypageBell"
 					style="color: #f56a6a; font-size: 500%"></i></li>
-				<li>병원 예약내용이&nbsp; <a href="myreserve.net">
-						? </a> 건 있습니다.
+				<li>병원 예약내용이&nbsp; <a href="mypage.net">
+						${yesaccept } </a> 건 있습니다.
 				</li>
 			</ul>
 

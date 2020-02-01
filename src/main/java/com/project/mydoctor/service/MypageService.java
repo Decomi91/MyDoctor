@@ -2,6 +2,7 @@ package com.project.mydoctor.service;
 
 import java.util.List;
 
+import com.project.mydoctor.model.Qna;
 import com.project.mydoctor.model.Reservation;
 
 public interface MypageService {
@@ -29,6 +30,5 @@ public interface MypageService {
 	int hosGetAllReserveListCount(String hosId);
 
 	List<Reservation> hosGetAllReserveList(String hosId, int page, int limit);
-
 	
 }

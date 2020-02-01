@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
 import com.project.mydoctor.model.Review;
+import com.project.mydoctor.model.Score;
 
 
 @Repository
@@ -23,6 +24,23 @@ public class ReviewDAO {
 	public List<Review> getMyReviewList(HashMap<String, Object> map) {
 		// TODO Auto-generated method stub
 		return sqlSession.selectList("Review.list", map);
+	}
+
+	public Score getScore(String hosId) {
+		return sqlSession.selectOne("Review.getscore", hosId);
+	}
+
+	public int getHosListCount(String hosId) {
+		return sqlSession.selectOne("Review.hoslistcount", hosId);
+	}
+
+	public List<Review> getHosReviewList(HashMap<String, Object> map) {
+		return sqlSession.selectList("Review.hoslist", map);
+	}
+
+	public int insert(Review review) {
+		
+		return sqlSession.insert("Review.insert",review);
 	}
 
 }

@@ -425,22 +425,18 @@ button[name=modifySubmit], button[name=modifyReset] {
 	text-align: center;
 }
 
-<!--
-reviewï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ rating-->.right {
-	float: right;
-}
+ 
+<!--ë³„ì   -->
 
-.left {
-	float: left;
-}
+
 
 .rating .stars {
-	margin-right: 15px;
+	
 }
 
 .rating .stars .star {
-	float: left;
-	padding: 5px 2px;
+	 
+
 	cursor: pointer;
 }
 
@@ -448,7 +444,7 @@ reviewï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ rating-->.right {
 	font-family: 'FontAwesome';
 	content: '\f005';
 	color: #d0e8f0;
-	font-size: 3em;
+	font-size: 2em;
 }
 
 .rating .stars .star:hover:before, .rating .stars .star.to_rate:before,
@@ -597,7 +593,7 @@ reviewï¿½ï¿½ï¿½ï¿½ ï¿½Îºï¿½ rating-->.right {
 	display: inline-block;
 }
 
-/* ¸¶ÀÌÆäÀÌÁö ¸Ş´º_°ü¸®ÀÚ¿¡°Ô ¿äÃ»ÇÏ±â */
+/* ë§ˆì´í˜ì´ì§€ ë©”ë‰´_ê´€ë¦¬ìì—ê²Œ ìš”ì²­í•˜ê¸° */
 .writeReqToADiv{width:100%; text-align:center; }
 .writeReqToA{padding-top:10% !important; 
 display: inline-block;border-bottom: 1px solid;

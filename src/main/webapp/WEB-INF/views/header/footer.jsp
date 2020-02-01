@@ -46,7 +46,7 @@
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
                         <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
-								예약내용이 &nbsp;&nbsp; <a href="myreserve.net">${yesaccept }</a> 건 있습니다.
+								예약내용이 &nbsp;&nbsp; <a href="mypage.net">${yesaccept }</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">
@@ -72,19 +72,19 @@
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
                         <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;오늘 병원
-                        예약이 &nbsp;&nbsp; <a href="hosmypage.net">${accepted }</a> 건 있습니다.
+                        예약이 &nbsp;&nbsp; <a href="hosmypage_today.net">${accepted }</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">
-                     <li class="icon solid fas fa-address-book mypageacess"><a
-                        href="hosmypage.net">마이페이지</a></li>
+                     <li class="icon solid fas fa-hospital mypageacess"><a
+                        href="hosmypage.net">예약 확인</a></li>
                      <li
-                        class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
-                        href="#">여기 뭐써야했지</a></li>
+                        class="icon solid far fa-address-book mypagelisecond-child mypageacess"><a
+                        href="diagnosisList.net">진료 기록</a></li>
                      <li class="icon solid far fa-calendar-alt mypageacess"><a
-                        href="#">예약내역</a></li>
+                        href="reserveAll.net">전체 기록</a></li>
                      <li class="icon solid fas fa-clipboard-list mypageacess"><a
-                        href="#">진료기록</a></li>
+                        href="hosmyboard.net">게시판 관리</a></li>
                   </ul>
                   <a href="logout" class="button primary fit koreanfont">로그아웃</a>
                </section>

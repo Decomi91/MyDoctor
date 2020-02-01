@@ -43,4 +43,6 @@ public class ReserveServiceImpl implements ReserveService {
 	public int diagnosisOk(int reserveNo) {
 		return rDAO.diagnosisOk(reserveNo);
 	}
+
+	
 }
