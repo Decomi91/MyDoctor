@@ -42,7 +42,7 @@
  select nvl(max(reviewNum),0)+1 from reviews
  </selectKey>
  insert into reviews (id,hospital, reviewNum, subject, content, kindness, ability, price, visited, uploaddate) values
- (#{id}, #{hospital}, #{reviewNum}, #{subject}, #{content},#{kindness}, #{ability}, #{price}, to_date('#{visited}','YYYYMMDDHH24mi' ), sysdate)
+ (#{id}, #{hospital}, #{reviewNum}, #{subject}, #{content},#{kindness}, #{ability}, #{price}, #{visited}, sysdate)
  </insert>
 	
  </mapper>

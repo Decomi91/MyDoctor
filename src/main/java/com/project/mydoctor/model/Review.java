@@ -1,6 +1,8 @@
 package com.project.mydoctor.model;
 
-import java.sql.Date;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Review {
 	private String id;
@@ -12,7 +14,8 @@ public class Review {
 	private int ability;
 	private int price;
 	private Date uploaddate;
-	private String visited;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
+	private Date visited;
 	private String reply;
 
 	public String getId() {
@@ -87,11 +90,11 @@ public class Review {
 		this.uploaddate = uploaddate;
 	}
 
-	public String getVisited() {
+	public Date getVisited() {
 		return visited;
 	}
 
-	public void setVisited(String string) {
+	public void setVisited(Date string) {
 		this.visited = string;
 	}
 
