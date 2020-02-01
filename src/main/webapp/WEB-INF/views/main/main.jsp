@@ -10,7 +10,7 @@
 <meta name="viewport"
    content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<script src="https://code.jquery.com/jquery-3.4.1.js"></script>
 <!-- 지도관련 스크립트 -->
 <script type="text/javascript"
    src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
@@ -100,7 +100,7 @@ $(function() {
                       },success : function(data) {                     
                         var item = data.response.body.items.item;
                         
-                        var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                        var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
                         var imageSize = new kakao.maps.Size(24, 35); 
                         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
                         
@@ -301,7 +301,7 @@ $(function() {
                         var total = data.response.body.totalCount;
                         var item = data.response.body.items.item;
                         //console.log(item)
-                        var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                        var imageSrc = "https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
                         var imageSize = new kakao.maps.Size(24, 35); 
                         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
                   

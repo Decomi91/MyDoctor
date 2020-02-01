@@ -57,8 +57,15 @@ private ReviewDAO rdao;
 
 	@Override
 	public int insert(Review review) {
-		// TODO Auto-generated method stub
 		return rdao.insert(review);
+  }
+  
+  @Override
+	public Review getDetail(int reviewNum, String hospital) {
+		Review rev = new Review();
+		rev.setReviewNum(reviewNum);
+		rev.setHospital(hospital);
+		return rdao.getDetail(rev);
 	}
 
 

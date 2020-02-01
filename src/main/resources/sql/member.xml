@@ -51,4 +51,7 @@ update members set password=#{password} where id=#{id}
  		select * from members
  		where id = #{id}
  	</select>
+ 	<update id="removehosaccount" parameterType="member">
+ 		update hospitals set joinok=-1 where id=#{id} and password = #{password}
+ 	</update>
  </mapper>

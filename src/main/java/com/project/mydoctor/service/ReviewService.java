@@ -19,4 +19,6 @@ public interface ReviewService {
 	List<Review> getHosReviewList(int page, int limit, String hosId);
 
 	int insert(Review review);
+  
+	Review getDetail(int reviewNum, String attribute);
 }

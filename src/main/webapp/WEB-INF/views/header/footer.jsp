@@ -54,9 +54,9 @@
                         href="mypage.net">마이페이지</a></li>
                      <li
                         class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
-                        href="#">관심병원</a></li>
+                        href="gobookmark.net">관심병원</a></li>
                      <li class="icon solid far fa-calendar-alt mypageacess"><a
-                        href="myreserve.net">예약내역</a></li>
+                        href="mypage.net">예약내역</a></li>
                      <li class="icon solid fas fa-clipboard-list mypageacess"><a
                         href="#">진료기록</a></li>
                   </ul>

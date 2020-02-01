@@ -76,4 +76,8 @@ public class HospitalDAO {
 	public int fa_delete(Map<String, String> fa) {
 		return sqlSession.delete("Hospitals.fa_delete",fa);
 	}
+
+	public String getHosId(String ykiho) {
+		return sqlSession.selectOne("Hospitals.getHosId", ykiho);
+	}
 }

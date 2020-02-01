@@ -31,4 +31,6 @@ public interface MemberService {
 	int updatePass(String newPassword, String id);
 	
 	int removeaccount(String id);
+
+	int removehosaccount(Member mem);
 }

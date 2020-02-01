@@ -45,4 +45,8 @@
  (#{id}, #{hospital}, #{reviewNum}, #{subject}, #{content},#{kindness}, #{ability}, #{price}, #{visited}, sysdate)
  </insert>
 	
+	 <select id="getDetail" parameterType="review" resultType="review">
+	 	select * from reviews
+	 	where reviewNum = #{reviewNum} and hospital = #{hospital} 
+	 </select>
  </mapper>

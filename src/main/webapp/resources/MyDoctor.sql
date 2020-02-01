@@ -68,6 +68,20 @@ insert into boards values('test', 'gong1', 2, 1,'문의', 'testSub',
 'testCont','2019-12-31','ok')
 insert into boards values('test', 'gong1', 3, 1,'문의', 'testSub',
 'testCont','2019-12-31','')
+insert into boards values('test', 'gong1', 5, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 6, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 7, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 8, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 9, 1,'문의', 'testSub',
+'testCont','2020-02-02','ok')
+insert into boards values('test', 'gong1', 10, 1,'문의', 'testSub',
+'testCont','2020-02-02','ok')
+insert into boards values('test', 'gong1', 11, 1,'문의', 'testSub',
+'testCont','2020-02-21','ok')
 			insert all 
 			into boards values('test', '123', 'testing', 2, 1,'문의', 'testSub',
 			'testCont',sysdate,'ok')
@@ -81,6 +95,10 @@ insert into boards values('test', 'gong1', 3, 1,'문의', 'testSub',
 			'testCont',sysdate,'ok')
 			select * from dual;
 select * from boards
+select count(*) from boards
+	 	where boardsTarget = 'nowbi'
+	 	
+	 	
 create table reviews(
   id varchar2(15) references members(id),
   hospital varchar2(15) references hospitals(id),

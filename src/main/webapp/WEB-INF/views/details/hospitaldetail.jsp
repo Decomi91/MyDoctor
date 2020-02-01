@@ -10,6 +10,8 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
+<link rel="stylesheet" href="resources/css/paging.css" />
+
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
 </head>
 <body class="is-preload">
@@ -188,13 +190,12 @@
             
             <nav id="boardMenu">
                <ul>
-                  <li id="reviewli"><a class="menuLink" href="#"
-							id="reviewa">
-                        후기 </a></li>
-                  <li id="qnali"><a class="menuLink" href="#"
-							id="qnaa"> 문의
-                  </a></li>
-
+                  	<li id="reviewli">
+                  		<a class="menuLink" href="#" id="reviewa">후기 </a>
+                	</li>
+                 	<li id="qnali">
+                 		<a class="menuLink" href="#" id="qnaa"> 문의</a>
+                 	</li>
                </ul>
             </nav>
             <div id="boardcontent">review/Q&A 게시판 영역</div>
@@ -247,25 +248,9 @@
 		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 		infowindow.open(map, marker); 
 		
-		 $('#reviewli').click(function() {
-		    $(this).addClass('selectedBoard');
-		    $('#reviewa').addClass('selectedBoard');
-		    $('#qnali').removeClass('selectedBoard');
-		    $('#qnaa').removeClass('selectedBoard');
-		 })
-		 $('#qnali').click(function() {
-		    $(this).addClass('selectedBoard');
-		    $('#qnaa').addClass('selectedBoard');
-		    $('#reviewli').removeClass('selectedBoard');
-		    $('#reviewa').removeClass('selectedBoard');
-		    $('#boardcontent').empty();
-		    $('#boardcontent').load("qna");
-		 })
-
 		 
-		 // bookmark yuri
-		 $(function(){
-			function getUrlParams() {
+
+		 	function getUrlParams() {
 				var params = {};
 				window.location.search.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(str, key, value) { params[key] = value; });
 				return params;
@@ -275,7 +260,23 @@
 			ykiho = oParams.ykiho;
 			console.log("ykiho = " + ykiho);
 			
-			 
+			$('#reviewli').click(function() {
+			    $(this).addClass('selectedBoard');
+			    $('#reviewa').addClass('selectedBoard');
+			    $('#qnali').removeClass('selectedBoard');
+			    $('#qnaa').removeClass('selectedBoard');
+			 })
+			 $('#qnali').click(function() {
+			    $(this).addClass('selectedBoard');
+			    $('#qnaa').addClass('selectedBoard');
+			    $('#reviewli').removeClass('selectedBoard');
+			    $('#reviewa').removeClass('selectedBoard');
+			    $('#boardcontent').empty();
+			    $('#boardcontent').load("qna", {ykiho : ykiho},function(){});
+			 })
+		 // bookmark yuri
+		 $(function(){
+		
 			$("#fav_hos").click(function() {
 				if ($(this).hasClass('solid')) {
 					chk = -1;

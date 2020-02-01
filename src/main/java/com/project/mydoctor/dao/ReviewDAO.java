@@ -39,8 +39,11 @@ public class ReviewDAO {
 	}
 
 	public int insert(Review review) {
-		
 		return sqlSession.insert("Review.insert",review);
+  }
+  
+	public Review getDetail(Review rev) {
+		return sqlSession.selectOne("Review.getDetail", rev);
 	}
 
 }
