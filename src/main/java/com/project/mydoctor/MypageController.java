@@ -29,6 +29,7 @@ import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
 import com.project.mydoctor.service.QnaService;
+import com.project.mydoctor.service.ReserveService;
 import com.project.mydoctor.service.ReviewService;
 
 @Controller
