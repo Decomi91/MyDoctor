@@ -23,4 +23,9 @@
 		 select * from(select rownum rnum, r.* from(select * from reviews where hospital=#{id} order by visited desc ) r)
 		 where rnum &gt;=#{start} and rnum &lt;=#{end}
 	 </select>
+	 <select id="getDetail" parameterType="review" resultType="review">
+	 	select * from reviews
+	 	where reviewNum = #{reviewNum} and hospital = #{hospital} 
+	 </select>
+	 
  </mapper>

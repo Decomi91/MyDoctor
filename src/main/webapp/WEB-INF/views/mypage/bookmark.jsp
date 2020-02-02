@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>마이페이지 - 진료 기록</title>
+<title>마이페이지 - 관심병원</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />

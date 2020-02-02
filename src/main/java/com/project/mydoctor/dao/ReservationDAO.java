@@ -38,4 +38,8 @@ public class ReservationDAO {
 		return sqlSession.update("Reservations.diagnosisok", reserveNo);
 	}
 
+	public int hoscancel(int reserveNo) {
+		return sqlSession.update("Reservations.hoscancel", reserveNo);
+	}
+
 }

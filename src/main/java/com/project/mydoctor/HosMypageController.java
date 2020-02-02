@@ -132,7 +132,7 @@ public class HosMypageController {
 	@GetMapping(value="/reserveX.net")
 	public ModelAndView reserveX(ModelAndView mv, int page, int reserveNo, HttpServletResponse response, HttpSession session) throws Exception {
 		int result = reserveService.cancel(reserveNo);
-		
+
 		if(result == 1) {
 			mv.addObject("page", page);
 			List<Integer> mypageList = reserveService.getReserves((String)session.getAttribute("loginid"));
@@ -401,8 +401,6 @@ public class HosMypageController {
 		}
 		List<Review> rv = reviewService.getHosReviewList(page, limit, hosId);
 		Score score = reviewService.getScore(hosId);
-		System.out.println(score);
-		System.out.println(score.getKindness());
 		
 		mv.setViewName("mypage_hospital/hosmypage_review");
 		mv.addObject("score", score);
@@ -414,6 +412,49 @@ public class HosMypageController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("limit", limit);
 
+		return mv;
+	}
+	
+	@GetMapping(value="reviewsDetail.net")
+	public ModelAndView reviewsDetail(int reviewNum, ModelAndView mv, HttpServletResponse response, HttpSession session) throws Exception{
+		Review rev = reviewService.getDetail(reviewNum, (String)session.getAttribute("loginid"));
+		if(rev != null) {
+			mv.addObject("rev", rev);
+			mv.setViewName("mypage_hospital/reviewDetail");
+		}else {
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('로딩시 이상 발생'); history.back();</script>");
+			out.close();
+			return null;
+		}
+		
+		return mv;
+	}
+	
+	@GetMapping(value="hossignout.net")
+	public ModelAndView hossignout(ModelAndView mv) throws Exception{
+		mv.setViewName("mypage_hospital/hosmypage_signout");
+		
+		return mv;
+	}
+	
+	@PostMapping(value="hosquitprocess.do")
+	public ModelAndView hosquitprocess(ModelAndView mv, String password, HttpSession session, HttpServletResponse response) throws Exception{
+		Member mem = new Member();
+		mem.setId((String)session.getAttribute("loginid"));
+		mem.setPassword(password);
+		int result = memberService.removehosaccount(mem); 
+		if(result == 1) {
+			session.invalidate();
+			mv.setViewName("redirect:/main");
+		}else {
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('비밀번호 오류'); history.back(); </script>");
+			out.close();
+			
+			return null;
+		}
+		
 		return mv;
 	}
 }

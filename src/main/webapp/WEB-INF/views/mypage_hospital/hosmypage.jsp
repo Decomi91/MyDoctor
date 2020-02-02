@@ -39,7 +39,7 @@
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">Reservation</span>
+									<span class="noLink">Reservation wait</span>
 								</nav>
 
 								<div class="table-wrapper">

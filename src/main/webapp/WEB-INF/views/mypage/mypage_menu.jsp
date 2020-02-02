@@ -11,8 +11,8 @@
 				<li><a href='mypage'><span>My page</span></a></li>
 				<li><i class="icon solid fas fa-user-circle mypageBell"
 					style="color: #f56a6a; font-size: 500%"></i></li>
-				<li>병원 예약내용이&nbsp; <a href="myreserve.net">
-						? </a> 건 있습니다.
+				<li>병원 예약내용이&nbsp; <a href="mypage.net">
+						${yesaccept } </a> 건 있습니다.
 				</li>
 			</ul>
 
@@ -22,7 +22,9 @@
 	<div class="mypageMenu">
 		<div id='cssmenu'>
 			<ul>
-				<li><a href='mypage.net'><span>예약 확인</span></a></li>
+				<li><a href='reserveCheck.net'><span>예약 확인</span></a></li>
+				<li><a href='finish.net'><span>진료 기록</span></a></li>
+				<li><a href='mypage.net'><span>전체 기록</span></a></li>
 				<li><a href='gobookmark.net'><span>관심 병원</span></a></li>
 				<li><a href='modifyck.do'><span>나의 정보 수정</span></a></li>
 				<li><a href='myreview.net'><span>내가 쓴 후기</span></a></li>

@@ -38,4 +38,8 @@ public class ReviewDAO {
 		return sqlSession.selectList("Review.hoslist", map);
 	}
 
+	public Review getDetail(Review rev) {
+		return sqlSession.selectOne("Review.getDetail", rev);
+	}
+
 }
