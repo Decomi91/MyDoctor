@@ -38,6 +38,10 @@ public class ReviewDAO {
 		return sqlSession.selectList("Review.hoslist", map);
 	}
 
+	public int insert(Review review) {
+		return sqlSession.insert("Review.insert",review);
+  }
+  
 	public Review getDetail(Review rev) {
 		return sqlSession.selectOne("Review.getDetail", rev);
 	}

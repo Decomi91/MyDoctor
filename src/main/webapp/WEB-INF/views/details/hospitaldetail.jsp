@@ -198,7 +198,7 @@
                  	</li>
                </ul>
             </nav>
-            <div id="boardcontent">review/Q&A 게시판 영역</div>
+            <div id="boardcontent"></div>
 
          </div>
       </div>
@@ -259,12 +259,16 @@
 			oParams = getUrlParams();
 			ykiho = oParams.ykiho;
 			console.log("ykiho = " + ykiho);
-			
+			$('#boardcontent').load("review", {ykiho : ykiho},function(){});
+			$('#reviewli').addClass('selectedBoard');
+		    $('#reviewa').addClass('selectedBoard');
 			$('#reviewli').click(function() {
 			    $(this).addClass('selectedBoard');
 			    $('#reviewa').addClass('selectedBoard');
 			    $('#qnali').removeClass('selectedBoard');
 			    $('#qnaa').removeClass('selectedBoard');
+			    $('#boardcontent').empty();
+			    $('#boardcontent').load("review", {ykiho : ykiho},function(){});
 			 })
 			 $('#qnali').click(function() {
 			    $(this).addClass('selectedBoard');

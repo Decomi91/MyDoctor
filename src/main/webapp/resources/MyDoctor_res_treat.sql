@@ -11,27 +11,18 @@ create table reservation(
 	acceptance		number(1) default 0
 )
 
-insert into reservation
-values(2, 'test', 'testing', 'testing', 'hospital', 'kk', sysdate, '1');
-
-insert into reservation
-values(3, 'test', 'testing', 'testing', '토마토치과', 'kk', sysdate, '0');
-insert into reservation
-values(4, 'test', 'testing', 'testing', '밝은이안과', 'kk', sysdate, '-1');
-insert into reservation
-values(5, 'test', 'testing', 'testing', '땡땡병원', 'kk', sysdate, '0');
-
-insert into reservation
-values(8, 'test', 'testing', 'testing', '가나다병원', 'kk', sysdate, '0');
-insert into reservation
-values(6, 'test', 'testing', 'testing', '123병원', 'kk', sysdate, '0');
-insert into reservation
-values(7, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '1');
-insert into reservation
-values(9, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '2');
-
-insert into reservation
-values(10, 'test', 'testing', 'testing', '덕산병원', 'kk', sysdate, '0');
+insert all
+into reservation values(1, 'test', 'testing', 'testing', '공안과의원','감기', sysdate, '1')
+into reservation values(2, 'test', 'testing', 'testing', 'hospital','감기', sysdate, '1')
+into reservation values(3, 'test', 'testing', 'testing', '토마토치과','감기', sysdate, '0')
+into reservation values(4, 'test', 'testing', 'testing', '밝은이안과','감기', sysdate, '-1')
+into reservation values(5, 'test', 'testing', 'testing', '땡땡병원','감기', sysdate, '0')
+into reservation values(8, 'test', 'testing', 'testing', '가나다병원','감기', sysdate, '0')
+into reservation values(6, 'test', 'testing', 'testing', '123병원','감기', sysdate, '0')
+into reservation values(7, 'test', 'testing', 'testing', '덕산병원','감기', sysdate, '1')
+into reservation values(9, 'test', 'testing', 'testing', '덕산병원','감기', sysdate, '2')
+into reservation values(10, 'test', 'testing', 'testing', '덕산병원','감기', sysdate, '0')
+select * from dual;
 
 select * from reservation;
 drop table reservation;

@@ -30,7 +30,9 @@ select * from hospitals
 insert into hospitals values('testing','123','test',
 			'testaddr',029579599,'ABCD',0900,1700,0900,1700,0900,1700,
 			0900,1700,0900,1700,0900,1700,0900,1700,1300, 1400, 1,1,sysdate);
-		
+insert into hospitals values('gong1','123','공일병원',
+			'testaddr',029579599,'ABCD',0900,1700,0900,1700,0900,1700,
+			0900,1700,0900,1700,0900,1700,0900,1700,1300, 1400, 1,1,sysdate);		
 
 create table bookmarks (
   id varchar2(15) references members(id),

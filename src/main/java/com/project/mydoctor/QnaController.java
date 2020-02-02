@@ -2,7 +2,9 @@ package com.project.mydoctor;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -10,15 +12,19 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
-import com.project.mydoctor.model.Hospital;
 import com.project.mydoctor.model.Qna;
+import com.project.mydoctor.model.Review;
+import com.project.mydoctor.model.Score;
 import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.QnaService;
+import com.project.mydoctor.service.ReviewService;
 
 @Controller
 public class QnaController {
@@ -28,6 +34,9 @@ public class QnaController {
 	@Autowired
 	private HospitalService hospitalService;
 
+	@Autowired
+	private ReviewService reviewService;
+	
 /////jisu_0122//////////
 	// @RequestMapping(value = "/qna")
 	public String writeQna() {
@@ -108,5 +117,111 @@ public class QnaController {
 		mv.addObject("ykiho", ykiho);
 		
 		return mv;
+	}
+	
+	@ResponseBody
+	@GetMapping(value="qnapage")
+	public Map<String, Object> qnaPage(@RequestParam(value = "ykiho") String ykiho,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		String hosId = hospitalService.getHosId(ykiho);
+		
+		int limit = 5; // 한 page에 5개의 글
+		int listcount = qnaService.getCount(hosId);
+		
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+
+		List<Qna> qna = qnaService.getQnaList(hosId, page, limit);
+		System.out.println(ykiho);
+		map.put("ykiho", ykiho);
+		map.put("qna", qna);
+		map.put("page", page);
+		map.put("maxpage", maxpage);
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		map.put("listcount", listcount);
+		map.put("limit", limit);
+		map.put("ykiho", ykiho);
+		
+		return map;
+	}
+	
+	@RequestMapping(value = "/review")
+	public ModelAndView reviewMore(ModelAndView mv,@RequestParam(value = "ykiho") String ykiho,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) {
+		
+		System.out.println("ykiho = " + ykiho);
+		String hosId = hospitalService.getHosId(ykiho);
+		
+		int limit = 5; // 한 page에 5개의 글
+		int listcount = reviewService.getHosListCount(hosId);
+		
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+
+		List<Review> review = reviewService.getHosReviewList(page, limit, hosId);
+		Score score = reviewService.getScore(hosId);
+		if(score == null) {
+			score.setAbility(0);
+			score.setKindness(0);
+			score.setPrice(0);
+		}
+		mv.setViewName("details/review");
+		mv.addObject("ykiho", ykiho);
+		mv.addObject("review", review);
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("limit", limit);
+		mv.addObject("ykiho", ykiho);
+		mv.addObject("score", score);
+		
+		return mv;
+	}
+	
+	@ResponseBody
+	@GetMapping(value="reviewpage")
+	public Map<String, Object> reviewPage(@RequestParam(value = "ykiho") String ykiho,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) {
+		Map<String,Object> map = new HashMap<String, Object>();
+		String hosId = hospitalService.getHosId(ykiho);
+		
+		int limit = 5; // 한 page에 5개의 글
+		int listcount = reviewService.getHosListCount(hosId);
+		
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
+
+		if (endpage > maxpage) {
+			endpage = maxpage;
+		}
+
+		List<Review> review = reviewService.getHosReviewList(page, limit, hosId);
+		System.out.println(ykiho);
+		map.put("ykiho", ykiho);
+		map.put("review", review);
+		map.put("page", page);
+		map.put("maxpage", maxpage);
+		map.put("startpage", startpage);
+		map.put("endpage", endpage);
+		map.put("listcount", listcount);
+		map.put("limit", limit);
+		map.put("ykiho", ykiho);
+		
+		return map;
 	}
 }

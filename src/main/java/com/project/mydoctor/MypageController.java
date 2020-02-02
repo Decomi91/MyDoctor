@@ -29,6 +29,7 @@ import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
 import com.project.mydoctor.service.QnaService;
+import com.project.mydoctor.service.ReserveService;
 import com.project.mydoctor.service.ReviewService;
 
 @Controller
@@ -44,20 +45,20 @@ public class MypageController {
 	private QnaService qnaService;// 병원에게 쓰는 qna
 	@Autowired
 	private MypageService mypageService;
-
-	@Autowired
+  @Autowired
 	private BookmarkService bookmarkService;
-
-	@Autowired
-	private BoardService boardService; // 관리자에게 쓰는 요청사항
-	// 새로 입력받은 비밀번호로 비밀번호 update합니다.
-
-	@RequestMapping(value = "/pwmodify.do")
-	public void updatePass(@RequestParam("new_password") String newPassword, HttpServletResponse response,
-			HttpSession session) throws IOException {
-		System.out.println(" 신 비번: " + newPassword);
-		String id = (String) session.getAttribute("loginid");
-		int result = memberService.updatePass(newPassword, id);
+  @Autowired
+  private BoardService boardService; //관리자에게 쓰는 요청사항
+  @Autowired
+ 	private ReserveService reserveService;
+    
+	//새로 입력받은 비밀번호로 비밀번호 update합니다.
+	@RequestMapping(value="/pwmodify.do")	
+	public void updatePass(@RequestParam("new_password") String newPassword, HttpServletResponse response, 
+    HttpSession session) throws IOException{
+		System.out.println(" 신 비번: "+newPassword);			
+		String id=(String)session.getAttribute("loginid");
+		int result=memberService.updatePass(newPassword, id);
 
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -188,6 +189,7 @@ public class MypageController {
 		if (endpage > maxpage)
 			endpage = maxpage;
 		List<Review> reviewlist = reviewService.getMyReviewList(page, limit, id);
+		
 		mv.setViewName("mypage/mypage_review");
 		mv.addObject("maxpage", maxpage);
 		mv.addObject("startpage", startpage);
@@ -195,6 +197,7 @@ public class MypageController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("myreviewlist", reviewlist);
 		mv.addObject("limit", limit);
+		
 		return mv;
 	}
 
@@ -423,12 +426,40 @@ public class MypageController {
 		return mv;
 	}
 
-	@RequestMapping(value = "/review.net")
-	public String writeReview() {
+	//jisu_0131_후기작성폼에 진료기록 불러옵니다.
+	@RequestMapping(value = "/reviewwrite.do")
+	public ModelAndView record(ModelAndView mv, int reserveNo, HttpSession session) {
+		
+		 
+		Reservation r = reserveService.getReserveDetail(reserveNo);
+		mv.addObject("reserveRecord", r);
+		mv.setViewName("mypage/review");
+		return mv;
 
-		return "writeform/review";
 	}
-
+//jisu_0131_리뷰 입력
+	@RequestMapping(value = "/ReviewAddAction.do")
+	public void reviewWriteProcess(Review review, HttpServletResponse response, HttpServletRequest request) throws IOException {
+		
+		int result = reviewService.insert(review);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (result == 1) {
+			out.println("<script>");
+			out.println("alert('리뷰 감사합니다.')");
+			out.println("location.href='mypage.net'");
+			out.println("</script>");
+		} else {
+			out.println("<script>");
+			out.println("alert('리뷰 작성에 실패했습니다. 잠시 후 다시 시도해 주세요.')");
+			out.println("history.back()");
+			out.println("</script>");
+			out.close();
+		}
+	}
+	
+	
+	
 	@RequestMapping(value = "/detail")
 	public String detailQna() {
 

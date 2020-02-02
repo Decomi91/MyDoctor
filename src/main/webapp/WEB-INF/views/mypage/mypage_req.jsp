@@ -34,7 +34,7 @@
 					<div class="content">
 						<!-- 마이페이지 메뉴 include -->
 						<jsp:include page="mypage_menu.jsp"></jsp:include>
-						<!-- 내가쓴 후기 시작 -->
+						<!-- 내가쓴 문의 시작 -->
 						<div class="mypageContent">
 							<label class="mod qnabtn tohos" title="to.병원"><input type="radio"
 								name="reqselbtn" value="1" checked="checked" id="reqtoH">문의 내역</label> <label
@@ -46,7 +46,7 @@
 								<div class="accordion">
 									<c:forEach var="r" items="${myqnalist}">
 										<div class="accordion__item">
-											<h3 class="accordion__title js-title">${r.boardsTarget }&nbsp;&#40;${r.uploaddate }&#41;</h3>
+											<h3 class="accordion__title js-title">${r.yadmnm }&nbsp;&#40;${r.uploaddate }&#41;</h3>
 											<div class="accordion__copy accordion__copy--hide js-copy">
 												<div>
 													<strong>${r.subject }</strong><br> ${r.content }
