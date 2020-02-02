@@ -29,7 +29,8 @@
 	 	select count(*) from boards where writeid=#{id}
 	 </select>
 	 <select id="qnalist" parameterType="java.util.Map" resultType="qna">
-		 select * from(select rownum rnum, r.* from(select * from boards where writeid=#{id} order by uploaddate desc ) r)
+		 select * from(select rownum rnum, r.* from
+		 (select b.*, h.yadmNm from boards b join hospitals h on  b. boardsTarget=h.id and b.writeid=#{id} order by uploaddate desc ) r)
 		 where rnum &gt;=#{start} and rnum &lt;=#{end}
 	 </select>
  	<select id="hosGetBoardCount" parameterType="String" resultType="int">
