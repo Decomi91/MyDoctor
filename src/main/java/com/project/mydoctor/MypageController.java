@@ -29,6 +29,7 @@ import com.project.mydoctor.service.HospitalService;
 import com.project.mydoctor.service.MemberService;
 import com.project.mydoctor.service.MypageService;
 import com.project.mydoctor.service.QnaService;
+import com.project.mydoctor.service.ReserveService;
 import com.project.mydoctor.service.ReviewService;
 
 @Controller
@@ -188,6 +189,7 @@ public class MypageController {
 		if (endpage > maxpage)
 			endpage = maxpage;
 		List<Review> reviewlist = reviewService.getMyReviewList(page, limit, id);
+		
 		mv.setViewName("mypage/mypage_review");
 		mv.addObject("maxpage", maxpage);
 		mv.addObject("startpage", startpage);
@@ -195,6 +197,7 @@ public class MypageController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("myreviewlist", reviewlist);
 		mv.addObject("limit", limit);
+		
 		return mv;
 	}
 	

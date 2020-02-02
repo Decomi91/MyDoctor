@@ -239,7 +239,7 @@ a.talkShort{color: black !important;}
 					<th scope="col">작성자</th>
 				</tr>
 			</thead>
-			<tbody>
+			<tbody id="tableB">
 		
 			<c:if test="${listcount > 0}">
 				<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
@@ -365,7 +365,7 @@ a.talkShort{color: black !important;}
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="qna?page=${page-1}&ykiho=${ykiho}" class="page-link">이전</a>&nbsp;
+															<a href="javascript:pagination({page:${page-1 }, ykiho:'${ykiho}'});" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -377,7 +377,7 @@ a.talkShort{color: black !important;}
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="qna?page=${a }&ykiho=${ykiho}" class="page-link">${a}</a>
+																<a href="javascript:pagination({page:${a }, ykiho:'${ykiho}'});" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -389,7 +389,7 @@ a.talkShort{color: black !important;}
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="qna?page=${page+1}&ykiho=${ykiho}"  class="page-link">&nbsp;다음</a>
+															<a href="javascript:pagination({page:${page+1 }, ykiho:'${ykiho}'});"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>
@@ -428,7 +428,7 @@ a.talkShort{color: black !important;}
 			$("input[name='secret']").val("1");
 		}
 	});	// submit end
-
+	
 	$(".talkList .talkMore").hide();
 	$(".talkList .talkShort").click(function(){
 		if($(this).parent().parent().parent().next('.talkMore').is(":hidden")){
@@ -444,10 +444,167 @@ a.talkShort{color: black !important;}
 		}
 	});
 	
-	$.ajax({
-		url : "bookmark.net"
-		
-	})
+	function pagination(data){
+		$.ajax({
+			url:'qnapage',
+			data : {'ykiho' : data.ykiho, 'page' : data.page},
+			dataType: 'json',
+			success:function(data){
+				console.log(1);
+				var table = '';
+				$('#tableB').empty();
+				if(data.listcount > 0){
+					data.qna.forEach(function(item, index){
+						table += '<tr class="secretV17">';
+						console.log(item.reply);
+						console.log(item.secret);
+						if(item.reply == null){
+							table += '<td><strong>&lt;답변대기중&gt;</strong></td>'; 
+							if(item.secret == 0){
+								table += '<td class="lt">'
+								 		+ '<i class="fas fa-lock" style = "color:#00000059">'
+												+ '비밀글 입니다.'
+										+ '</i>'
+										+'</td>'
+										+'<td>' + item.uploaddate +'</td>'
+										+'<td>' + item.writeId +'</td>';
+							}else{
+								table += '<td class="lt">'
+										+ '<i class="fas fa-lock-open"style = "color:#00000059">'
+											+ '<a href="javascript:" class="talkShort">' + item.subject + '</a>'
+										+ '</i>'
+										+'</td>'
+										+'<td>' + item.uploaddate +'</td>'
+										+'<td>' + item.writeId +'</td>'
+									+'<tr class="talkMore " style="display: table-row;">'
+									+ '<td colspan="4">'
+										+'<div class="qnaList">'
+										+ '<div class="question">'
+											+'<strong class="title">'
+												+'<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문">'
+											+'</strong>'
+											+'<div class="account">'
+											+ '<p>' + item.content + '</p>'
+											+'</div>'
+										+ '</div>'
+										+ '<div class="answer">'
+											+'<strong class="title">'
+												+'<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변">'
+											+'</strong>'
+											+'<div class="account">'
+												+ '<p></p>'
+											+'</div>'
+										+ '</div>'
+										+'</div>'
+									+ '</td>'
+									+'</tr>';
+							}
+						}else{
+							table += '<td><strong>&lt;답변완료&gt;</strong></td>'; 
+							if(item.secret == 0){
+								table += '<td class="lt">'
+								 		+ '<i class="fas fa-lock" style = "color:#00000059">'
+												+ '비밀글 입니다.'
+										+ '</i>'
+										+'</td>'
+										+'<td>' + item.uploaddate +'</td>'
+										+'<td>' + item.writeId +'</td>';
+							}else{
+								table += '<td class="lt">'
+										+ '<i class="fas fa-lock-open"style = "color:#00000059">'
+											+ '<a href="javascript:" class="talkShort">' + item.subject + '</a>'
+										+ '</i>'
+										+'</td>'
+										+'<td>' + item.uploaddate +'</td>'
+										+'<td>' + item.writeId +'</td>'
+									+'<tr class="talkMore " style="display: table-row;">'
+									+ '<td colspan="4">'
+										+'<div class="qnaList">'
+										+ '<div class="question">'
+											+'<strong class="title">'
+												+'<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_q.png" alt="질문">'
+											+'</strong>'
+											+'<div class="account">'
+											+ '<p>' + item.content + '</p>'
+											+'</div>'
+										+ '</div>'
+										+ '<div class="answer">'
+											+'<strong class="title">'
+												+'<img src="http://fiximage.10x10.co.kr/web2015/shopping/ico_a.png" alt="답변">'
+											+'</strong>'
+											+'<div class="account">'
+												+ '<p>' + item.reply + '</p>'
+											+'</div>'
+										+ '</div>'
+										+'</div>'
+									+ '</td>'
+									+'</tr>';
+							}
+						}
+						
+						table += '</tr>';
+						
+					})
+				}
+				var num = data.listcount-(data.page-1)*10;
+				$('#tableB').append(table);
+				
+				$('.pagination').empty();
+				var paging = '';
+				
+				if(data.page<=1){
+					paging += '<li class="page-item">'
+							+ '<a class="page-link"  href="#">이전</a>'
+							+'</li>';	
+				}else{
+					paging += '<li class="page-item">'
+								+'<a href="jav	ascript:pagination({page:' + (data.page-1) + ', ykiho:\''+data.ykiho+'\'});" class="page-link">이전</a>'
+							+ '</li>'; 
+				}
+				paging += '&nbsp;';
+				for(var a = data.startpage; a<=data.endpage; a++){
+					if(a == data.page){
+						paging += '<li class="page-item">'
+									+ '<a class="page-link" href="#">' + a + '</a>'
+								+'</li>'; 
+					}else{
+						paging += '<li class="page-item">'
+									+ '<a href="javascript:pagination({page:' + a +', ykiho:\'' + data.ykiho + '\'});" class="page-link">' 
+										+ a 
+									+ '</a>'	
+								+'</li>';
+					}
+					paging += '&nbsp;';
+				}
+				if(data.page>= data.maxpage){
+					paging += '<li class="page-item">'
+								+'<a class="page-link" href="#">&nbsp;다음</a>'
+							+ '</li>';
+				}else{
+					paging += '<li class="page-item">'
+								+'<a href="javascript:pagination({page:' + (data.page+1) +', ykiho:\'' + data.ykiho + '\'});" class="page-link">&nbsp;다음</a>'
+							+ '</li>';
+				}
+				$('.pagination').append(paging);
+			},
+			complete:function(){
+				$(".talkList .talkMore").hide();
+				$(".talkList .talkShort").click(function(){
+					if($(this).parent().parent().parent().next('.talkMore').is(":hidden")){
+						$(".talkList .talkMore").hide();
+						$(this).parent().parent().parent().next('.talkMore').show();
+					} else {
+						$(this).parent().parent().parent().next('.talkMore').hide();
+					}
+
+					// 클릭 위치가 가려질경우 스크롤 이동
+					if($(window).scrollTop()>$(this).parent().parent().offset().top-47) {
+						$('html, body').animate({scrollTop:$(this).parent().parent().offset().top-47}, 'fast');
+					}
+				});
+			}
+		})
+	}
 	
 </script>
 </body>
