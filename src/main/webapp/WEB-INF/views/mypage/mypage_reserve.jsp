@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>My Doctor - 마이페이지(전체기록)</title>
+<title>My Doctor - 마이페이지(예약확인)</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -38,10 +38,10 @@
 						<jsp:include page="mypage_menu.jsp"></jsp:include>
 						<div class="mypageContent">
 
-							<!-- Reservation -->
+		 					<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">전체 기록</span>
+									<span class="noLink">예약 확인</span>
 								</nav>
 
 								<div class="table-wrapper">
@@ -64,10 +64,6 @@
 													<tr>
 														<td>${rv.reserveTime }</td>
 														<td>${rv.hosname }</td>
-														<c:if test = "${rv.acceptance == -1 || rv.acceptance == -2}">
-															<td><span class="hoscancel reservebox">취소된 예약</span></td>
-															<td></td>
-														</c:if>
 														<c:if test = "${rv.acceptance == 0}">
 															<td><span class="hoswaiting reservebox">승인 대기중</span></td>
 															<td>
@@ -77,12 +73,6 @@
 														<c:if test = "${rv.acceptance == 1}">
 															<td><span class="hossoon reservebox">방문 예정</span></td>
 															<td></td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 2}">
-															<td><span class="hosfinish reservebox">진료 완료</span></td>
-															<td>
-																<a href="reviewwrite.do?reserveNo=${rv.reserveNo }">후기 작성&nbsp;<i class="fas fa-angle-right"></i></a>
-															</td>
 														</c:if>
 												</c:forEach>
 											</c:if>
@@ -105,7 +95,7 @@
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="mypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="reserveCheck.net?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -117,7 +107,7 @@
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="mypage.net?page=${a }" class="page-link">${a}</a>
+																<a href="reserveCheck.net?page=${a }" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -129,7 +119,7 @@
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="mypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="reserveCheck.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>

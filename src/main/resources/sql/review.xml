@@ -9,8 +9,7 @@
 	 </select>
 	 <select id="list" parameterType="java.util.Map" resultType="review">
 		 select * from(select rownum rnum, r.* from(
-		select rv.*, h.yadmNm from reviews rv join hospitals h on  rv.hospital=h.id and rv.id=#{id}
- order by visited desc) r)
+		select rv.*, h.yadmNm from reviews rv join hospitals h on  rv.hospital=h.id and rv.id=#{id} order by visited desc) r)
 		 where rnum &gt;=#{start} and rnum &lt;=#{end}
 	 </select>
 	 <select id="getscore" parameterType="String" resultType="score">
