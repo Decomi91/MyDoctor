@@ -8,7 +8,7 @@ public class Reservation {
 	private String hosname;
 	private String disease;
 	private String reserveTime;
-	private int acceptance; // 거절할 경우 -1, 대기중일 경우 0, 승낙할 경우 1, 진료완료 2
+	private int acceptance; // 병원에서 거절 -2, 거절할 경우 -1, 대기중일 경우 0, 승낙할 경우 1, 진료완료 2
 
 	public int getReserveNo() {
 		return reserveNo;

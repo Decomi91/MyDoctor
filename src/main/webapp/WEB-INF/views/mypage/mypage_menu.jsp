@@ -22,7 +22,9 @@
 	<div class="mypageMenu">
 		<div id='cssmenu'>
 			<ul>
-				<li><a href='mypage.net'><span>예약 확인</span></a></li>
+				<li><a href='reserveCheck.net'><span>예약 확인</span></a></li>
+				<li><a href='finish.net'><span>진료 기록</span></a></li>
+				<li><a href='mypage.net'><span>전체 기록</span></a></li>
 				<li><a href='gobookmark.net'><span>관심 병원</span></a></li>
 				<li><a href='modifyck.do'><span>나의 정보 수정</span></a></li>
 				<li><a href='myreview.net'><span>내가 쓴 후기</span></a></li>

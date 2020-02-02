@@ -9,169 +9,221 @@
 <title>Insert title here</title>
 <style>
 table {
-    border-collapse: collapse;
-    border: 0;
-    empty-cells: show;
-    border-spacing: 2px;
-    width:100%
+	border-collapse: collapse;
+	border: 0;
+	empty-cells: show;
+	border-spacing: 2px;
+	width: 100%
 }
-body, h3{
-    font-family: 'Core Sans C','Noto Sans KR','Malgun Gothic','맑은 고딕','Dotum','돋움',sans-serif;
-    line-height: 1.6;
-    color: #555;
+
+body, h3 {
+	font-family: 'Core Sans C', 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕',
+		'Dotum', '돋움', sans-serif;
+	line-height: 1.6;
+	color: #555;
 }
+
 .sorting .option {
-    position: absolute;
-    right: 0;
-    top: 0;
+	position: absolute;
+	right: 0;
+	top: 0;
 }
- button {
-    margin: 0;
-    padding: 0;
+
+button {
+	margin: 0;
+	padding: 0;
 }
+
 .sorting {
-    position: relative;
-    width: 100%;
-    font-size: 11px;
+	position: relative;
+	width: 100%;
+	font-size: 11px;
 }
 
 .paging {
-    width: 100%;
-    text-align: center;
-    height: 25px;
+	width: 100%;
+	text-align: center;
+	height: 25px;
 }
+
 .btnRed {
-    color: #fff;
-    background:#f56a6a;
-    border: 1px solid #f56a6a;
+	color: #fff;
+	background: #f56a6a;
+	border: 1px solid #f56a6a;
 }
+
 .btnW100 {
-    width: 98px;
-    padding-left: 0;
-    padding-right: 0;
+	width: 98px;
+	padding-left: 0;
+	padding-right: 0;
 }
+
 .btnS1 {
-    font-size: 11px;
-    line-height: 13px;
-    padding: 9px 10px 10px;
+	font-size: 11px;
+	line-height: 13px;
+	padding: 9px 10px 10px;
 }
+
 .btn {
-    display: inline-block;
-    text-align: center;
-    font-weight: bold;
-    vertical-align: middle;
-    cursor: pointer;
+	display: inline-block;
+	text-align: center;
+	font-weight: bold;
+	vertical-align: middle;
+	cursor: pointer;
 }
+
 .boardForm .btnArea a {
-    margin: 0 0 0 5px;
+	margin: 0 0 0 5px;
 }
+
 .btnGry {
-    color: #fff;
-    background: #666;
-    border: 1px solid #666;
+	color: #fff;
+	background: #666;
+	border: 1px solid #666;
 }
-a{text-decoration: none;}
+
+a {
+	text-decoration: none;
+}
+
 .btnS2 {
-    font-size: 16px;
-    line-height: 0.9;
-    padding: 10px 20px;
-    vertical-align: top;
+	font-size: 16px;
+	line-height: 0.9;
+	padding: 10px 20px;
+	vertical-align: top;
 }
+
 .btnRed:hover {
-    background: #ef6464;
-    border: 1px solid #ef6464;
-     color:white !important;
+	background: #ef6464;
+	border: 1px solid #ef6464;
+	color: white !important;
 }
+
 .btnGry:hover {
-    background: #3a3a3a;
-    border: 1px solid #3a3a3a;
-    color:white !important;
+	background: #3a3a3a;
+	border: 1px solid #3a3a3a;
+	color: white !important;
 }
+
 .qnaV15 .talkList tr.secretV17 .lt {
-    padding-left: 18px;
-/*     background: url(http://fiximage.10x10.co.kr/web2017/common/ico_lock.png) 0 40% no-repeat;
- */}
+	padding-left: 18px;
+	/*     background: url(http://fiximage.10x10.co.kr/web2017/common/ico_lock.png) 0 40% no-repeat;
+ */
+}
+
 .qnaV15 .talkList td {
-    padding: 10px 0;
-    font-size: 13px;
-    text-align: center;
- 
+	padding: 10px 0;
+	font-size: 13px;
+	text-align: center;
 }
+
+input[type='submit'].qnabtn, input[type='reset'].qnabtn {
+	box-shadow: none !important;
+	background: #ef7979;
+	width: 15% !important;
+	border-radius: 0 !important;
+	color: white !important;
+	height: 35px !important;
+	line-height: 35px !important;
+	font-family: 'Core Sans C', 'Noto Sans KR', 'Malgun Gothic', '맑은 고딕', 'Dotum', '돋움', sans-serif;
+}
+
+input[type='reset'].qnabtn{background:#5f5f5f !important}
+
 .talkList td {
-    
-    border-bottom: 1px solid #ddd;
-    vertical-align: top;
-     
+	border-bottom: 1px solid #ddd;
+	vertical-align: top;
 }
+
 .lt {
-    text-align: left !important;
+	text-align: left !important;
 }
+
 td {
-    display: table-cell;}
-    
+	display: table-cell;
+}
+
 .talkList thead th {
-    display: block;
-    visibility: hidden;
-    width: 0;
-    height: 0;
+	display: block;
+	visibility: hidden;
+	width: 0;
+	height: 0;
 }
+
 caption {
-    overflow: hidden;
-    width: 0;
-    height: 0;
-    font-size: 0;
-    line-height: 0;
-    text-indent: -9999px;
+	overflow: hidden;
+	width: 0;
+	height: 0;
+	font-size: 0;
+	line-height: 0;
+	text-indent: -9999px;
 }
+
 .pdtDetailV15 h3 {
-    
-    color: #000;
-    font-weight: bold;
-    margin-block-start: 1em;
-    margin-block-end: 1em;
-    margin-inline-start: 0px;
-    margin-inline-end: 0px;
+	color: #000;
+	font-weight: bold;
+	margin-block-start: 1em;
+	margin-block-end: 1em;
+	margin-inline-start: 0px;
+	margin-inline-end: 0px;
 }
+
 .boardForm fieldset {
-    padding: 60px 80px 50px 80px;
-    border:0
-    display: block;
-    margin-inline-start: 2px;
-    margin-inline-end: 2px;
-    padding-block-start: 5%;
-    padding-inline-start: 5%;
-    padding-inline-end: 5%;
-    padding-block-end: 5%;
-    min-inline-size: min-content;
-    background-color:#f5f6f7;
-    
+	padding: 60px 80px 50px 80px;
+	border: 0 display: block;
+	margin-inline-start: 2px;
+	margin-inline-end: 2px;
+	padding-block-start: 5%;
+	padding-inline-start: 5%;
+	padding-inline-end: 5%;
+	padding-block-end: 5%;
+	min-inline-size: min-content;
+	background-color: #f5f6f7;
 }
+
 legend {
-    visibility: hidden;
-    width: 0;
-    height: 0;
-    padding:0
+	visibility: hidden;
+	width: 0;
+	height: 0;
+	padding: 0
 }
-#qnaMsg{width:100%; margin:2% 0;}
-.btnArea{text-align:center;}
+
+#qnaMsg {
+	width: 100%;
+	margin: 2% 0;
+}
+
+.btnArea {
+	text-align: center;
+}
+
 .qnaList {
-    padding: 15px 80px;
-    text-align: left;
+	padding: 15px 80px;
+	text-align: left;
 }
-tr.talkMore{background-color:#f5f6f7;}
+
+tr.talkMore {
+	background-color: #f5f6f7;
+}
+
 .qnaList .answer {
-    margin-top: 5%;
-    padding-top: 2%;
-    border-top: 1px solid #ddd;
+	margin-top: 5%;
+	padding-top: 2%;
+	border-top: 1px solid #ddd;
 }
+
 .qnaList .title {
-    width: 60px;
-    text-align: left;
+	width: 60px;
+	text-align: left;
 }
+
 .qnaList .title, .qnaList .account {
-    float: left;
+	float: left;
 }
-a.talkShort{color: black !important;}
+
+a.talkShort {
+	color: black !important;
+}
 </style>
 </head>
 <body>
@@ -216,8 +268,8 @@ a.talkShort{color: black !important;}
 				</ul>
 				
 				<div class="btnArea ct tMar30">
-					<input type = "submit" class="btn btnS1 btnRed btnW100" value = "등록">
-					<input type = "reset" onclick="$('#inquiryForm').hide();return false;" value = "취소">
+					<input type = "submit" class = "qnabtn" value = "등록">
+					<input type = "reset" class = "qnabtn" onclick="$('#inquiryForm').hide();return false;" value = "취소">
 				</div>
 				
 			</fieldset>
@@ -232,12 +284,12 @@ a.talkShort{color: black !important;}
 				<col width="140"> <col width=""> <col width="90"> <col width="120">
 			</colgroup>
 			<thead>
-				<tr>
-					<th scope="col">답변여부</th>
-					<th scope="col">답변내용</th>
-					<th scope="col">작성일자</th>
-					<th scope="col">작성자</th>
-				</tr>
+			<tr>
+				<th scope="col">답변여부</th>
+				<th scope="col">답변내용</th>
+				<th scope="col">작성일자</th>
+				<th scope="col">작성자</th>
+			</tr>
 			</thead>
 			<tbody>
 		
@@ -365,7 +417,7 @@ a.talkShort{color: black !important;}
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="qna?page=${page-1}&ykiho=${ykiho}" class="page-link">이전</a>&nbsp;
+															<a href="qna?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -389,7 +441,7 @@ a.talkShort{color: black !important;}
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="qna?page=${page+1}&ykiho=${ykiho}"  class="page-link">&nbsp;다음</a>
+															<a href="qna?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>
@@ -444,10 +496,6 @@ a.talkShort{color: black !important;}
 		}
 	});
 	
-	$.ajax({
-		url : "bookmark.net"
-		
-	})
 	
 </script>
 </body>

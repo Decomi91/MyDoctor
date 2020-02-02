@@ -161,4 +161,35 @@
 						order by reserveTime desc, reserveNo asc))
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
+	
+	<select id = "reserveOkay" parameterType = "map" resultType = "reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance
+						from
+						(select * from reservation where acceptance between 0 and 1 order by reserveTime desc))
+		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id = "reserveCounti" parameterType = "String" resultType = "int">
+		select count(*)
+		from reservation
+		where id = #{memberId} and acceptance between 0 and 1
+			
+	</select>
+	
+	<select id = "reserveCountf" parameterType = "String" resultType = "int">
+		select count(*)
+		from reservation
+		where id = #{memberId} and acceptance = 2
+			
+	</select>
+	
+	<select id = "finish" parameterType = "map" resultType = "reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance
+						from
+						(select * from reservation where acceptance = 2 order by reserveTime desc))
+		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
 </mapper>

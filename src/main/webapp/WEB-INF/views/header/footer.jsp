@@ -46,12 +46,12 @@
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
                         <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
-								예약내용이 &nbsp;&nbsp; <a href="mypage.net">${yesaccept }</a> 건 있습니다.
+								예약내용이 &nbsp;&nbsp; <a href="reserveCheck.net">${yesaccept }</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">
                      <li class="icon solid fas fa-address-book mypageacess"><a
-                        href="mypage.net">마이페이지</a></li>
+                        href="reserveCheck.net">마이페이지</a></li>
                      <li
                         class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
                         href="gobookmark.net">관심병원</a></li>

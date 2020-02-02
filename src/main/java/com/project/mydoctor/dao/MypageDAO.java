@@ -23,7 +23,7 @@ public class MypageDAO {
 	public int yesAccept(String memberId) {
 		return sqlSession.selectOne("Reservations.yesAccept", memberId);
 	}
-  
+
 	public int reserveCount(String memberId) {
 		return sqlSession.selectOne("Reservations.reserveCount", memberId);
 	}
@@ -62,5 +62,21 @@ public class MypageDAO {
 
 	public List<Reservation> hosGetAllReserveList(HashMap<String, Object> map) {
 		return sqlSession.selectList("Reservations.hosGetAllReserveList", map);
+	}
+
+	public List<Reservation> reserveOk(HashMap<String, Object> map) {
+		return sqlSession.selectList("Reservations.reserveOkay", map);
+	}
+
+	public int reserveCounti(String memberId) {
+		return sqlSession.selectOne("Reservations.reserveCounti", memberId);
+	}
+
+	public int reserveCountf(String memberId) {
+		return sqlSession.selectOne("Reservations.reserveCountf", memberId);
+	}
+
+	public List<Reservation> finish(HashMap<String, Object> map) {
+		return sqlSession.selectList("Reservations.finish", map);
 	}
 }
