@@ -58,7 +58,7 @@
                      <li class="icon solid far fa-calendar-alt mypageacess"><a
                         href="mypage.net">예약내역</a></li>
                      <li class="icon solid fas fa-clipboard-list mypageacess"><a
-                        href="#">진료기록</a></li>
+                        href="finish.net">진료기록</a></li>
                   </ul>
                   <a href="logout" class="button primary fit koreanfont">로그아웃</a>
                </section>

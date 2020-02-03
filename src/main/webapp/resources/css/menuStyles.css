@@ -426,7 +426,7 @@ button[name=modifySubmit], button[name=modifyReset] {
 }
 
  
-<!--별점  -->
+<!--蹂꾩젏  -->
 
 
 
@@ -463,6 +463,7 @@ button[name=modifySubmit], button[name=modifyReset] {
 	width: 75%;
 	margin: 0 auto;
 	margin-bottom: 10px;
+	    text-align: left;
 }
 
 .bookmarkHosname {
@@ -593,7 +594,7 @@ button[name=modifySubmit], button[name=modifyReset] {
 	display: inline-block;
 }
 
-/* 마이페이지 메뉴_관리자에게 요청하기 */
+/* 留덉씠�럹�씠吏� 硫붾돱_愿�由ъ옄�뿉寃� �슂泥��븯湲� */
 .writeReqToADiv{width:100%; text-align:center; }
 .writeReqToA{padding-top:10% !important; 
 display: inline-block;border-bottom: 1px solid;

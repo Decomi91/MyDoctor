@@ -8,10 +8,10 @@
 	<div class="mypageHeader">
 		<div id="mypageHeaderdiv">
 			<ul>
-				<li><a href='mypage.net'><span>My page</span></a></li>
+				<li><a href='reserveCheck.net'><span>My page</span></a></li>
 				<li><i class="icon solid fas fa-user-circle mypageBell"
 					style="color: #f56a6a; font-size: 500%"></i></li>
-				<li>병원 예약내용이&nbsp; <a href="mypage.net">
+				<li>예약이&nbsp; <a href="reserveCheck.net">
 						${yesaccept } </a> 건 있습니다.
 				</li>
 			</ul>

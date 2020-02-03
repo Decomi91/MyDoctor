@@ -50,4 +50,6 @@
 	 	select * from reviews
 	 	where reviewNum = #{reviewNum} and hospital = #{hospital} 
 	 </select>
+	
+	
  </mapper>
