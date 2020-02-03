@@ -1,8 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
     pageEncoding="utf-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
-    <%@ taglib uri = "http://java.sun.com/jsp/jstl/functions" prefix = "fn" %>
-
+    <%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
+	<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
     
 <!DOCTYPE html>
 <html>
@@ -215,7 +215,10 @@ a.talkShort{color: black !important;}
 							<td class="lt">
 								<a href="javascript:" class="talkShort">${review.subject }</a>
 							</td>
-							<td>${review.uploaddate }</td>
+							<td>
+								<fmt:formatDate value="${review.uploaddate }" pattern="yyyy-MM-dd" var="dateFmt"/>
+								<c:out value="${ dateFmt}"></c:out>
+							</td>
 							<td>${fn:substring(review.id, 0, 3)}****</td>	<!-- 뒤에 몇글자 **처리 -->
 							<tr class="talkMore " style="display: table-row;">
 								<td colspan="4">
@@ -297,7 +300,7 @@ a.talkShort{color: black !important;}
 			$('html, body').animate({scrollTop:$(this).parent().parent().offset().top-47}, 'fast');
 		}
 	});
-
+	
 	function pagination(data){
 		$.ajax({
 			url:'reviewpage',

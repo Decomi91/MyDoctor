@@ -30,5 +30,12 @@ public interface MypageService {
 	int hosGetAllReserveListCount(String hosId);
 
 	List<Reservation> hosGetAllReserveList(String hosId, int page, int limit);
-	
+
+	List<Reservation> reserveOk(String memberId, int page, int limit);
+
+	int reserveCounti(String loginId);
+
+	int reserveCountf(String memberId);
+
+	List<Reservation> finish(String memberId, int page, int limit);
 }

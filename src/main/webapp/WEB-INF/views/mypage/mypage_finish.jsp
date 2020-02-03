@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>My Doctor - 마이페이지(전체기록)</title>
+<title>My Doctor - 마이페이지(진료완료)</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />

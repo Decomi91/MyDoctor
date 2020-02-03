@@ -19,7 +19,7 @@
 	</select>
 	
 	<select id = "getBookmarkList" parameterType = "map" resultType = "hospital">
-			select * from (select rownum rnum, b.*
+		select * from (select rownum rnum, b.*
 				  from ( select * from hospitals
 		                 where id in (select hosid from bookmarks 
 					                  where id = #{memberId})
