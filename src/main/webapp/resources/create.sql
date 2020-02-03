@@ -50,7 +50,7 @@ create table bookmarks (
   hosid varchar2(15) references hospitals(id),
   hosname varchar2(50)
 )
-
+--review:0 ; 후기x
 create table reservation(
 	reserveNo		number(10) primary key,
 	id				varchar2(15) references members(id),
@@ -60,9 +60,9 @@ create table reservation(
 	disease			varchar2(100) not null,
 	reserveTime		date,
 	acceptance		number(1) default 0,
-	review         number(1) default 0
+	review         number(1) default 0 
 )
-
+select * from reservation;
 
 
 create table adminBoard(
