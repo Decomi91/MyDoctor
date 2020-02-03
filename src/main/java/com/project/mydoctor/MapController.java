@@ -217,11 +217,13 @@ public class MapController {
 			String fa_hos = vo.getYkiho();
 			String favorite = hospitalService.getFavorite_sel(fa_hos);
 			
+			
 			if(favorite!=null) {
 				Map<String, String> fa = new HashMap<String, String>();
 				fa.put("id", member);
 				fa.put("hosid",favorite);
 				String count = hospitalService.getFavorite_re(fa);
+				
 				
 				if(count.equals("1")) {				
 					model.addAttribute("count", count);
@@ -230,6 +232,7 @@ public class MapController {
 		}
 		
 		Hospital result = hospitalService.getDetail(vo.getYkiho());//요양키넣어서 관리자승인받은거로 고쳐야함
+		
 		Work_hs work_hs= work(vo.getYkiho());		
 		
 		String hs_empty="";
