@@ -495,7 +495,7 @@ a.talkShort {
 			$('html, body').animate({scrollTop:$(this).parent().parent().offset().top-47}, 'fast');
 		}
 	});
-	
+	function pagination(data){
 		$.ajax({
 			url:'qnapage',
 			data : {'ykiho' : data.ykiho, 'page' : data.page},

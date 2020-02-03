@@ -12,7 +12,7 @@
 			</ul>
 			<table id = "hosSidebarTable">
 				<tr>
-					<td>오늘의 예약</td>
+					<td>오늘의 진료</td>
 					<td>대기중인 예약</td>
 				</tr>
 				<tr>
@@ -35,11 +35,11 @@
 		<div id='cssmenu'>
 			<ul>
 				<li><a href='hosmypage.net'><span>예약 확인</span></a></li>
-				<li><a href='diagnosisList.net'><span>진료 기록</span></a></li>
+				<!-- <li><a href='diagnosisList.net'><span>진료 기록</span></a></li> -->
 				<li><a href='reserveAll.net'><span>전체 기록</span></a></li>
 				<li><a href='hosmyboard.net'><span>게시판 관리</span></a></li>
 				<li><a href='hosmyreview.net'><span>후기 확인</span></a></li>
-				<li><a href='#'><span>병원 정보 수정</span></a></li>
+				
 				<li class='last'><a href='hossignout.net'><span>회원탈퇴</span></a></li>
 			</ul>
 		</div>

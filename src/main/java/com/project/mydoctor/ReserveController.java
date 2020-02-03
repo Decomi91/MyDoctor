@@ -130,7 +130,7 @@ public class ReserveController {
 		PrintWriter out = response.getWriter();
 
 		if (passwordCheck == 1) {
-			int result = reserveservice.cancel(reserveNo);
+			int result = reserveservice.hoscancel(reserveNo);
 
 			if (result == 1) {
 				out.println("<script>");

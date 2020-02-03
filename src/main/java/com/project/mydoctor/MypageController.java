@@ -357,41 +357,37 @@ public class MypageController {
 	}
 	
 	// 마이페이지 진료기록
-		@RequestMapping(value = "/finish.net")
-		public ModelAndView gofinish(HttpSession session, ModelAndView mv,
-				@RequestParam(value = "page", defaultValue = "1", required = false) int page) throws Exception {
-		
-			String memberId = session.getAttribute("loginid").toString();
-			int limit = 5; // 한 page에 5개의 글
+	@RequestMapping(value = "/finish.net")
+	public ModelAndView gofinish(HttpSession session, ModelAndView mv,
+			@RequestParam(value = "page", defaultValue = "1", required = false) int page) throws Exception {
 
-			// 예약된 + 예약신청한 수
-			int listcount = mypageService.reserveCountf(memberId);
-			System.out.println("listcount(총 예약수) : " + listcount);
+		String memberId = session.getAttribute("loginid").toString();
+		int limit = 5; // 한 page에 5개의 글
 
-			int maxpage = (listcount + limit - 1) / limit;
-			int startpage = ((page - 1) / 10) * 10 + 1;
-			int endpage = startpage + 10 - 1;
+		// 진료완료된 수
+		int listcount = mypageService.reserveCountf(memberId);
 
-			System.out.println("총 페이지 수 = " + maxpage);
-			System.out.println("endpage : " + endpage);
+		int maxpage = (listcount + limit - 1) / limit;
+		int startpage = ((page - 1) / 10) * 10 + 1;
+		int endpage = startpage + 10 - 1;
 
-			if (endpage > maxpage) {
-				endpage = maxpage;
-			}
-
-			List<Reservation> rv = mypageService.finish(memberId, page, limit);
-
-			mv.setViewName("mypage/mypage_finish");
-			mv.addObject("rv", rv);
-			mv.addObject("page", page);
-			mv.addObject("maxpage", maxpage);
-			mv.addObject("startpage", startpage);
-			mv.addObject("endpage", endpage);
-			mv.addObject("listcount", listcount);
-			mv.addObject("limit", limit);
-
-			return mv;
+		if (endpage > maxpage) {
+			endpage = maxpage;
 		}
+
+		List<Reservation> rv = mypageService.finish(memberId, page, limit);
+
+		mv.setViewName("mypage/mypage_finish");
+		mv.addObject("rv", rv);
+		mv.addObject("page", page);
+		mv.addObject("maxpage", maxpage);
+		mv.addObject("startpage", startpage);
+		mv.addObject("endpage", endpage);
+		mv.addObject("listcount", listcount);
+		mv.addObject("limit", limit);
+
+		return mv;
+	}
 
 	@RequestMapping(value = "/gobookmark.net")
 	public ModelAndView gobookmark(HttpSession session, ModelAndView mv,
@@ -439,12 +435,26 @@ public class MypageController {
 	}
 //jisu_0131_리뷰 입력
 	@RequestMapping(value = "/ReviewAddAction.do")
-	public void reviewWriteProcess(Review review, HttpServletResponse response, HttpServletRequest request) throws IOException {
+	public void reviewWriteProcess(Review review, HttpServletResponse response, HttpServletRequest request,
+							@RequestParam(value = "id") String memberId,
+							@RequestParam(value = "hospital") String hosId,
+							@RequestParam(value = "visited") String reserveTime,
+							Reservation reservation) throws IOException {
 		
 		int result = reviewService.insert(review);
+		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		if (result == 1) {
+			reservation.setId(memberId);
+			reservation.setHosid(hosId);
+			reservation.setTime(reserveTime);
+			System.out.println("r" + reserveTime);
+			
+			int reviewCheck = reserveService.reviewCheck(reservation);
+			if(reviewCheck == 1) {
+				System.out.println("성공");
+			}
 			out.println("<script>");
 			out.println("alert('리뷰 감사합니다.')");
 			out.println("location.href='mypage.net'");
