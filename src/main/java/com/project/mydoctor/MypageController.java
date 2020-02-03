@@ -457,7 +457,7 @@ public class MypageController {
 			}
 			out.println("<script>");
 			out.println("alert('리뷰 감사합니다.')");
-			out.println("location.href='mypage.net'");
+			out.println("location.href='finish.net'");
 			out.println("</script>");
 		} else {
 			out.println("<script>");
