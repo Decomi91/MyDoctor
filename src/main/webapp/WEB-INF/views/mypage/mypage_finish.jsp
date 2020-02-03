@@ -41,7 +41,7 @@
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">전체 기록</span>
+									<span class="noLink">진료 기록</span>
 								</nav>
 
 								<div class="table-wrapper">
@@ -57,6 +57,8 @@
 
 										<tbody>
 										
+										
+										
 											<!-- 예약 내역이 있는 경우 -->
 											<c:if test="${listcount > 0}">
 												<c:set var = "num" value = "${listcount-(page-1)*10 }"/>
@@ -64,26 +66,18 @@
 													<tr>
 														<td>${rv.reserveTime }</td>
 														<td>${rv.hosname }</td>
-														<c:if test = "${rv.acceptance == -1 || rv.acceptance == -2}">
-															<td><span class="hoscancel reservebox">취소된 예약</span></td>
-															<td></td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 0}">
-															<td><span class="hoswaiting reservebox">승인 대기중</span></td>
-															<td>
-																<a href = "cancel.do?reserveNo=${rv.reserveNo }">예약 취소&nbsp;<i class="fas fa-angle-right"></i></a>
-															</td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 1}">
-															<td><span class="hossoon reservebox">방문 예정</span></td>
-															<td></td>
-														</c:if>
-														<c:if test = "${rv.acceptance == 2}">
-															<td><span class="hosfinish reservebox">진료 완료</span></td>
+														<td><span class="hosfinish reservebox">진료 완료</span></td>
+													 	<c:choose>
+															<c:when test= "${rv.review eq '0'}">
 															<td>
 																<a href="reviewwrite.do?reserveNo=${rv.reserveNo }">후기 작성&nbsp;<i class="fas fa-angle-right"></i></a>
 															</td>
-														</c:if>
+															</c:when>
+															<c:otherwise>
+															<td>후기완료</td>
+															</c:otherwise>
+														</c:choose>
+													</tr>
 												</c:forEach>
 											</c:if>
 											<c:if test="${listcount == 0}">
@@ -105,7 +99,7 @@
 													</c:if>
 													<c:if test="${page > 1}">
 														<li class="page-item">
-															<a href="mypage.net?page=${page-1}" class="page-link">이전</a>&nbsp;
+															<a href="finish.net?page=${page-1}" class="page-link">이전</a>&nbsp;
 														</li>
 													</c:if>
 													
@@ -117,7 +111,7 @@
 														</c:if>
 														<c:if test="${a != page}">
 															<li class="page-item">
-																<a href="mypage.net?page=${a }" class="page-link">${a}</a>
+																<a href="finish.net?page=${a }" class="page-link">${a}</a>
 															</li>
 														</c:if>
 													</c:forEach>
@@ -129,7 +123,7 @@
 													</c:if>
 													<c:if test="${page<maxpage}">
 														<li class="page-item">
-															<a href="mypage.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
+															<a href="finish.net?page=${page+1}"  class="page-link">&nbsp;다음</a>
 														</li>
 													</c:if>
 												</ul>

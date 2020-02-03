@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>My Doctor - 마이페이지</title>
+<title>My Doctor - 마이페이지(오늘의 진료)</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -92,7 +92,7 @@
 											</c:if>
 											<c:if test="${listcount == 0}">
 												<tr>
-													<td colspan = "5">요청된 예약이 없습니다.</td>
+													<td colspan = "6">요청된 예약이 없습니다.</td>
 												</tr>
 											</c:if>
 										</tbody>
@@ -100,7 +100,7 @@
 											<tr>
 												<td colspan = "5"></td>
 												<td>
-													<input type = "submit" id = "reserveOkbtn" value = "진료함">
+													<input type = "submit" id = "reserveOkbtn" value = "완료">
 												</td>
 											</tr>
 										</tfoot>

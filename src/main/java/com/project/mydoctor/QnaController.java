@@ -63,14 +63,20 @@ public class QnaController {
 			@RequestParam(value = "ykiho") String ykiho) throws IOException {
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
-
-		System.out.println("secret = " + qna.getSecret());
+		System.out.println("dd" + ykiho);
 		qna.setWriteId((String) session.getAttribute("loginid"));
+		
 		String hosId = hospitalService.getHosId(ykiho);
+		System.out.println("hosid = " + hosId);
 		qna.setBoardsTarget(hosId);
-
+		
+		System.out.println(qna.getBoardNum());
+		System.out.println(qna.getBoardsTarget());
+		System.out.println(qna.getContent());
+		System.out.println(qna.getHead());
+		System.out.println(qna.getReply());
 		int result = qnaService.insert(qna);
-
+		
 		if (result == 1) {
 			out.println("<script>");
 			out.println("alert('문의글이 등록되었습니다.');");
@@ -171,11 +177,14 @@ public class QnaController {
 		}
 
 		List<Review> review = reviewService.getHosReviewList(page, limit, hosId);
-		Score score = reviewService.getScore(hosId);
-		if(score == null) {
+		try{
+			Score score = reviewService.getScore(hosId);
+		}catch (NullPointerException e) {
+			Score score = new Score();
 			score.setAbility(0);
 			score.setKindness(0);
 			score.setPrice(0);
+			mv.addObject("score", score);
 		}
 		mv.setViewName("details/review");
 		mv.addObject("ykiho", ykiho);
@@ -187,7 +196,7 @@ public class QnaController {
 		mv.addObject("listcount", listcount);
 		mv.addObject("limit", limit);
 		mv.addObject("ykiho", ykiho);
-		mv.addObject("score", score);
+		
 		
 		return mv;
 	}

@@ -198,6 +198,7 @@ public class HosMypageController {
 
 		// 총 예약수
 		int listcount = mypageService.hosGetTodayListCount(hosId);
+		System.out.println(listcount);
 
 		int maxpage = (listcount + limit - 1) / limit;
 		int startpage = ((page - 1) / 10) * 10 + 1;
