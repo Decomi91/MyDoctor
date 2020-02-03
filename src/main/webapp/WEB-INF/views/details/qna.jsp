@@ -657,6 +657,7 @@ a.talkShort {
 		})
 	}
 	
+	
 </script>
 </body>
 </html>

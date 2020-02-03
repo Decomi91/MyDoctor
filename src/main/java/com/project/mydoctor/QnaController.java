@@ -177,15 +177,16 @@ public class QnaController {
 		}
 
 		List<Review> review = reviewService.getHosReviewList(page, limit, hosId);
+		Score score;
 		try{
-			Score score = reviewService.getScore(hosId);
+			score = reviewService.getScore(hosId);
 		}catch (NullPointerException e) {
-			Score score = new Score();
+			score = new Score();
 			score.setAbility(0);
 			score.setKindness(0);
 			score.setPrice(0);
-			mv.addObject("score", score);
 		}
+		mv.addObject("score", score);
 		mv.setViewName("details/review");
 		mv.addObject("ykiho", ykiho);
 		mv.addObject("review", review);
