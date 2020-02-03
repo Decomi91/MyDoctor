@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.project.mydoctor.model.AdminBoard;
 import com.project.mydoctor.model.Member;
 import com.project.mydoctor.model.Qna;
 import com.project.mydoctor.model.Reservation;
@@ -44,7 +46,7 @@ public class HosMypageController {
 	
 	@Autowired
 	private ReviewService reviewService;
-	
+
 	// 병원 마이페이지 메인
 	@RequestMapping(value = "/hosmypage.net")
 	public ModelAndView gomypage(HttpSession session, ModelAndView mv,
