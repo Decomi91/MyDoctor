@@ -238,7 +238,7 @@ a.talkShort {
 	<!-- 글쓰기 폼 start -->
 	<div id="inquiryForm" class="boardForm tMar05" style="display: block;">
 		<form id = "qnaform" name="qnaform" method="post" action="qnaWrite.net">
-			<input type="hidden" name="ykiho" value = "">
+			<input type="hidden" name="ykiho" value = "${ykiho }">
 			<input type = "hidden" name = "secret" value = "1">
 			<input type = "hidden" name = "head" value = "문의글">
 			<input type = "hidden" name = "reply" value = "">
@@ -495,7 +495,7 @@ a.talkShort {
 			$('html, body').animate({scrollTop:$(this).parent().parent().offset().top-47}, 'fast');
 		}
 	});
-	
+	function pagination(data){
 		$.ajax({
 			url:'qnapage',
 			data : {'ykiho' : data.ykiho, 'page' : data.page},
