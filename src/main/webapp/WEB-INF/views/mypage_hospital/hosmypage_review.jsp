@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt"%>
 <!DOCTYPE HTML>
 
 <html>
@@ -12,7 +13,9 @@
 <link rel="stylesheet" href="resources/css/main.css" />
 <link rel="stylesheet" href="resources/css/hosmenuStyles.css" />
 <link rel="stylesheet" href="resources/css/paging.css" />
-
+<style>
+.hosRate{width:100%; text-align:center;}
+</style>
 </head>
 <body class="is-preload">
 
@@ -41,7 +44,7 @@
 								<nav>
 									<span class="noLink">Reviews</span>
 								</nav>
-								친절 : ${score.kindness } 능력 : ${score.ability } 가격 : ${score.price }
+								<h2 class="hosRate"> 💗  ${score.kindness } &nbsp;&nbsp; 🩺 ${score.ability } &nbsp;&nbsp; 🧾 ${score.price }</h2>
 								<div class="table-wrapper">
 								<form action = "deleteBoard.net" method="post">
 									<table class="reservetable mypagetable">
@@ -65,7 +68,7 @@
 														<td>
 															<a href = "reviewsDetail.net?reviewNum=${rv.reviewNum }">${rv.subject }</a>
 														</td>
-														<td>${rv.uploaddate }</td>
+														<td><fmt:formatDate pattern="yyyy-MM-dd HH:mm" value="${rv.uploaddate }"/></td>
 													</tr>
 												</c:forEach>
 											</c:if>
