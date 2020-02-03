@@ -114,6 +114,18 @@ create table reviews(
   uploaddate date,
   reply varchar2(3000)
 )
+select * from reviews
+drop table reviews
+select * from reservation rv
+left outer join reviews re
+on re.id = rv.id
+where re.hospital = 'testing'
+and re.id = 'test'
+and rv.acceptance =2
+and re.visited = rv.reservetime
+
+
+
 select * from hospitals
  select * from(select rownum rnum, r.* from
  (select rv.*, h.yadmNm from reviews rv join hospitals h on  rv.hospital=h.id and rv.id='test'
@@ -166,3 +178,8 @@ delete members cascade constraints;
 delete reviews
 
 drop table hospitals;
+
+select (select count(*) from reservation where acceptance = 1) as yesaccept
+		from reservation
+		where id = 'test'
+    group by id

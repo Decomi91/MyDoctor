@@ -9,6 +9,24 @@ public class Reservation {
 	private String disease;
 	private String reserveTime;
 	private int acceptance; // 병원에서 거절 -2, 거절할 경우 -1, 대기중일 경우 0, 승낙할 경우 1, 진료완료 2
+	private int review;
+	private String Time;
+	
+	public String getTime() {
+		return Time;
+	}
+
+	public void setTime(String time) {
+		Time = time;
+	}
+
+	public int getReview() {
+		return review;
+	}
+
+	public void setReview(int review) {
+		this.review = review;
+	}
 
 	public int getReserveNo() {
 		return reserveNo;

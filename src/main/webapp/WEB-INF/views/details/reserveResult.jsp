@@ -39,7 +39,7 @@
 							</div>
 
 							<div class = "reserveIcon">
-								<a href="mypage.net"><i class="fas fa-check-circle fa-4x" style = "color : #f56a6a;"></i>
+								<a href="reserveCheck.net"><i class="fas fa-check-circle fa-4x" style = "color : #f56a6a;"></i>
 								<span style = "color : #f56a6a; font-weight : bold; position: relative; bottom: 11px;">예약 확인</span></a>
 							</div>
 						</div>
