@@ -75,5 +75,15 @@ public class MemberDAO {
 	public int removehosaccount(Member mem) {
 		return sqlSession.update("Members.removehosaccount", mem);
 	}
+
+	public String findId(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Members.findId", map);
+	}
+
+	public int findPwd(Map<String, Object> map) {
+		
+		return sqlSession.selectOne("Members.findPwd", map);
+	}
 }
 

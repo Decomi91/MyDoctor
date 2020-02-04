@@ -1,6 +1,7 @@
 package com.project.mydoctor;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
@@ -18,6 +19,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -49,6 +51,37 @@ public class MemberController {
 	
 	@Autowired
 	private QnaService qnaService;
+	
+	//jisu_0204_아이디 찾습니다
+	@RequestMapping(value="/id.find")
+	public  void findId(@RequestParam("name") String name, @RequestParam("email") String email,
+			HttpServletRequest request,
+			HttpServletResponse response) throws Exception{
+		String foundId = memberService.findId(name, email);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		if (foundId == null) {
+			out.println("<script>");
+			out.println("alert('해당 계정이 존재하지 않습니다. 회원가입 후 이용해 주세요');");
+			out.println("history.back();");
+			out.println("</script>");
+			out.close();
+		}
+		out.println("<script>");
+		out.println("alert('아이디는 "+foundId+" 입니다');");
+		out.println("location.href='findAccount'");
+		out.println("</script>");
+		out.close();
+		
+
+	}
+	//jisu_0204_아이디/비밀번호 찾기 페이지로 이동
+	@GetMapping(value="/findAccount")
+	public String findAccount() {
+
+		return "header/findAccount";
+
+	}
 	
 	@GetMapping(value="/joinForm")
 	public ModelAndView joinForm(ModelAndView mv) {

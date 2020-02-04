@@ -30,7 +30,7 @@
                         <li class="nobordertop">ID<input type="text" id="id" name="id" class="logininput"></li>
                         <li class="nobordertop">PASSWORD<input type="password" id="password" name="password" class="logininput"><br></li>
                         <li class="nobordertop"><button type="submit" class="button primary fit loginbtn">Login</button></li>
-                        <li><a href="#" class="privacybtn privacybtnline">ID/비밀번호
+                        <li><a href="findAccount" class="privacybtn privacybtnline">ID/비밀번호
                               찾기 </a><a href="joinForm" class="privacybtn">회원가입</a></li>
                      </ul>
                   </form>
