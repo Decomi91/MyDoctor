@@ -42,7 +42,7 @@ create table members(
 	name		varchar2(20) not null,
 	phone		number(12) not null,
 	address		varchar2(100),
-	email		varchar2(50),
+	email		varchar2(50) primary key,
 	birth		date,
 	gender		number(1),
 	userkey		number(1)

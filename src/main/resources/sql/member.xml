@@ -5,7 +5,7 @@
  <mapper namespace="Members">
  <!-- id찾기 -->
  <select id="findId" parameterType="map" resultType="String">
- select id from members where name=#{name} and email=#{email}
+ select id from members where name=#{name} and email=#{email} and not userkey=0
  </select>
  <!-- 비밀번호 찾기 -->
   <select id="findPwd" parameterType="map" resultType="int">
