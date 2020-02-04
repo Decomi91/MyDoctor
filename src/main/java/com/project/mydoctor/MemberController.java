@@ -1,10 +1,13 @@
 package com.project.mydoctor;
 
 import java.io.ByteArrayOutputStream;
+import java.io.IOException;
 import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -18,6 +21,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
@@ -52,7 +56,14 @@ public class MemberController {
 	
 	@GetMapping(value="/joinForm")
 	public ModelAndView joinForm(ModelAndView mv) {
+		
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String today = format.format(date);
+		
 		mv.setViewName("member/joinForm");
+		mv.addObject("today", today);
+		
 		return mv;
 	}
 
@@ -221,5 +232,14 @@ public class MemberController {
 	@PostMapping(value = "/idcheck")
 	public String idcheck(String id, String pub) {
 		return memberService.idcheck(id, pub);
+	}
+	
+	@RequestMapping(value = "/ididCheck.do")
+	public void ididCheck(@RequestParam(value = "id") String id, HttpServletResponse response) throws IOException {
+		int result = memberService.ididCheck(id);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
 	}
 }

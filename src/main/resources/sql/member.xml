@@ -54,4 +54,10 @@ update members set password=#{password} where id=#{id}
  	<update id="removehosaccount" parameterType="member">
  		update hospitals set joinok=-1 where id=#{id} and password = #{password}
  	</update>
+ 	
+ 	<!-- yuri ID 중복체크 -->
+ 	<select id = "ididCheck" parameterType = "String" resultType = "member">
+ 		select * from members
+ 		where id = #{id}
+ 	</select>
  </mapper>
