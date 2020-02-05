@@ -64,7 +64,27 @@ table tr td:nth-child(2n-1) {
 
 						<div class="table-wrapper" style="width: 50%">
 						
-                     <a href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}"
+                   
+                     <div>
+                     	 <c:if test="${vo.addr!='undefined'}">
+				                            주소 :${vo.addr}<br>
+				                     </c:if>
+				                     <c:if test="${vo.postNo!='undefined'}">
+				                            우편번호 ${vo.postNo}<br>
+				                     </c:if>                   
+				                     <c:if test="${vo.estbDd!='undefined'}">
+				                              개설일자 : ${vo.estbDd}<br>
+				                     </c:if>
+				                     <c:if test="${vo.drTotCnt!='undefined'}">
+				                              총 의사수 : ${vo.drTotCnt}<br>
+				                     </c:if>
+                        <i class="fas fa-phone-alt"></i>&nbsp;${vo.telno }<br>
+						<c:if test="${vo.hospUrl!='undefined'}">
+							<a href="${vo.hospUrl}" target="_blank">사이트 방문하기</a>
+							
+						</c:if>
+                     </div>
+                       <a href="https://map.kakao.com/link/to/${vo.yadmNm },${vo.YPos },${vo.XPos}"
 							class="button large reservationbtn koreanfont"
 							style="float: right; margin-top: 3%;" target="_blank">길찾기</a>
                      <c:if test="${chk==1 and hs_empty eq '1'}">
@@ -72,12 +92,7 @@ table tr td:nth-child(2n-1) {
 									class="button large reservationbtn koreanfont"
 									style="float: right; margin-top: 3%;" id="res_hos">예약하기</a>
                      </c:if>
-                     <div>
-                        <i class="fas fa-phone-alt"></i>&nbsp;${vo.telno }<br>
-						<c:if test="${vo.hospUrl!='undefined'}">
-							<a href="${vo.hospUrl}" target="_blank">사이트 방문하기</a>
-						</c:if>
-                     </div>
+                     
                   </div>
                </div>
             </section>
@@ -188,7 +203,7 @@ table tr td:nth-child(2n-1) {
                         
                      </table>
                      </div>
-            
+            <c:if test="${chk eq '1' and hs_empty eq '1'}">
             <nav id="boardMenu">
                <ul>
                   	<li id="reviewli">
@@ -199,6 +214,7 @@ table tr td:nth-child(2n-1) {
                  	</li>
                </ul>
             </nav>
+            </c:if>
             <div id="boardcontent"></div>
 
          </div>
@@ -257,7 +273,7 @@ table tr td:nth-child(2n-1) {
 				return params;
 				}
 			
-			//oParams = getUrlParams(); 오류땜에 잠시 주석처리
+			oParams = getUrlParams();
 			ykiho = oParams.ykiho;
 			console.log("ykiho = " + ykiho);
 			$('#boardcontent').load("review", {ykiho : ykiho},function(){});
