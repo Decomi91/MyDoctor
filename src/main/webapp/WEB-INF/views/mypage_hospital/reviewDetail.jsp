@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix = "fn" uri = "http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE HTML>
 
 <html>
@@ -46,7 +47,7 @@
 									<table class="reservetable mypagetable reserveDetailTable">
 										<tr>
 											<th>게시자</th>
-											<td colspan = 3>${rev.id }</td>
+											<td colspan = 3>${fn:substring(rev.id, 0, 3)}****</td>
 										</tr>
 										<tr>
 											<th>게시일</th>
@@ -59,6 +60,16 @@
 										<tr>
 											<th>내용</th>
 											<td colspan = 3>${rev.content }</td>
+										</tr>
+										<tr>
+											<th>답변</th>
+											<td colspan = 3>
+												<form action="replyInputReview" method="post">
+													<textarea name="reply" rows="10" cols="10">${rev.reply }</textarea><br>
+													<input type="hidden" name="reviewNum" value="${rev.reviewNum}">
+													<button type="submit">답변 달기</button> &nbsp;&nbsp;
+												</form>
+											</td>
 										</tr>
 									</table>
 									<br>

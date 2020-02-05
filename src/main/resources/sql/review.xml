@@ -51,5 +51,9 @@
 	 	where reviewNum = #{reviewNum} and hospital = #{hospital} 
 	 </select>
 	
-	
+	<update id="setReply" parameterType="review">
+		update reviews
+		set reply = #{reply}
+		where reviewNum = #{reviewNum}
+	</update>
  </mapper>

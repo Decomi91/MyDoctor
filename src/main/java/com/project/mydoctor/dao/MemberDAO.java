@@ -75,5 +75,10 @@ public class MemberDAO {
 	public int removehosaccount(Member mem) {
 		return sqlSession.update("Members.removehosaccount", mem);
 	}
+
+	// yuri
+	public Member ididCheck(String id) {
+		return sqlSession.selectOne("Members.ididCheck", id);
+	}
 }
 

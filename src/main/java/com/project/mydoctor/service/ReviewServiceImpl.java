@@ -68,5 +68,10 @@ private ReviewDAO rdao;
 		return rdao.getDetail(rev);
 	}
 
+	@Override
+	public int setReply(Review review) {
+		return rdao.setReply(review);
+	}
+
 
 }

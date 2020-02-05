@@ -46,4 +46,8 @@ public class ReviewDAO {
 		return sqlSession.selectOne("Review.getDetail", rev);
 	}
 
+	public int setReply(Review review) {
+		return sqlSession.update("Review.setReply", review);
+	}
+
 }

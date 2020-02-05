@@ -21,4 +21,6 @@ public interface ReviewService {
 	int insert(Review review);
   
 	Review getDetail(int reviewNum, String attribute);
+
+	int setReply(Review review);
 }

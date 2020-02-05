@@ -41,16 +41,16 @@ select * from dual;
 
 --reservation
 insert all
-into reservation values(1, 'user1', '유저일', 'gong1', '공안과의원','결막염', sysdate, '1')
-into reservation values(2, 'user1', '유저일', 'hos2', 'hospital','감기', sysdate, '1')
-into reservation values(3, 'user1', '유저일', 'hos3', '토마토치과','감기', sysdate, '0')
-into reservation values(4, 'user1', '유저일', 'hos4', '밝은이안과','감기', sysdate, '-1')
-into reservation values(5, 'user1', '유저일', 'hos5', '땡땡병원','감기', sysdate, '0')
-into reservation values(8, 'user1', '유저일', 'hos6', '가나다병원','감기', sysdate, '0')
-into reservation values(6, 'user1', '유저일', 'hos7', '123병원','감기', sysdate, '0')
-into reservation values(7, 'user1', '유저일', 'hos1', '덕산병원','감기', sysdate, '1')
-into reservation values(9, 'user1', '유저일', 'hos1', '덕산병원','감기', sysdate, '2')
-into reservation values(10, 'user1', '유저일', 'hos1', '덕산병원','감기', sysdate, '0')
+into reservation values(1, 'user1', '유저일', 'gong1', '공안과의원','결막염', sysdate, '1','0')
+into reservation values(2, 'user1', '유저일', 'hos2', 'hospital','감기', sysdate, '1','0')
+into reservation values(3, 'user1', '유저일', 'hos3', '토마토치과','감기', sysdate, '0','0')
+into reservation values(4, 'user1', '유저일', 'hos4', '밝은이안과','감기', sysdate, '-1','0')
+into reservation values(5, 'user1', '유저일', 'hos5', '땡땡병원','감기', sysdate, '0','0')
+into reservation values(8, 'user1', '유저일', 'hos6', '가나다병원','감기', sysdate, '0','0')
+into reservation values(6, 'user1', '유저일', 'hos7', '123병원','감기', sysdate, '0','0')
+into reservation values(7, 'user1', '유저일', 'hos1', '덕산병원','감기', sysdate, '1','0')
+into reservation values(9, 'user1', '유저일', 'hos1', '덕산병원','감기', sysdate, '2','0')
+into reservation values(10, 'user1', '유저일', 'hos1', '덕산병원','감기', sysdate, '0','0')
 select * from dual;
 
 --adminboard(관리자에게문의)
