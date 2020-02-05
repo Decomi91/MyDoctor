@@ -33,4 +33,8 @@ public interface MemberService {
 	int removeaccount(String id);
 
 	int removehosaccount(Member mem);
+
+	String findId(String name, String email);
+
+	int idExist(String name, String id, String email);
 }

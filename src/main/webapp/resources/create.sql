@@ -6,6 +6,8 @@ drop table adminboard;
 drop table boards;
 drop table hospitals;
 drop table members;
+select * from reservation;
+select * from members;
 
 create table hospitals(
 	id			varchar2(15) primary key,
@@ -40,7 +42,7 @@ create table members(
 	name		varchar2(20) not null,
 	phone		number(12) not null,
 	address		varchar2(100),
-	email		varchar2(50),
+	email		varchar2(50) primary key,
 	birth		date,
 	gender		number(1),
 	userkey		number(1)
@@ -62,7 +64,7 @@ create table reservation(
 	acceptance		number(1) default 0,
 	review         number(1) default 0 
 )
-select * from reservation;
+
 
 
 create table adminBoard(

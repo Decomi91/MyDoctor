@@ -460,4 +460,21 @@ public class HosMypageController {
 		
 		return mv;
 	}
+	
+	@PostMapping(value="replyInputReview")
+	public ModelAndView replyInputReview(Review review, HttpServletResponse response, ModelAndView mv, HttpSession session) throws IOException {
+		System.out.println(review.getReviewNum());
+		response.setContentType("text/html;charset=utf-8");
+		int result = reviewService.setReply(review);
+		if(result == 1) {
+			mv.addObject("reviewNum", review.getReviewNum());
+			mv.setViewName("redirect:/reviewsDetail.net");
+		}else {
+			PrintWriter out = response.getWriter();
+			out.print("<script>alert('답변 입력시 오류 발생'); history.back();</script>");
+			out.close();
+			return null;
+		}
+		return mv;
+	}
 }
