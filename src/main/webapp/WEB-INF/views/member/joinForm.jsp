@@ -200,13 +200,7 @@ var marker = new daum.maps.Marker({
 	  	   var checkemail=false;
 	  	   
 	  	   $('#form').submit(function() {
-	  		   var idpattern = /^\w{5,10}$/;
-	  		   var id = $("input[name='id']").val();
-	  		    console.log("id = " + id);
-	  		   if(!idpattern.test(id)){
-	  			   alert("ID는 영문자 숫자 _로 5~10자 가능합니다.");
-	  			   return false;
-	  		   }
+	  		 
 	  		   
 	  		 	if(idCheck < 1){
 					alert("ID 중복 검사를 하세요.");
@@ -274,6 +268,15 @@ var marker = new daum.maps.Marker({
 	    		 data : {"id" : id},
 	    		 success : function(resp){
 	    			 r = false;
+	    			 
+	    			var idpattern = /^\w{5,10}$/;
+	   	  		   var id = $("input[name='id']").val();
+	   	  		    console.log("id = " + id);
+	   	  		   if(!idpattern.test(id)){
+	   	  			   alert("ID는 영문자 숫자 _로 5~10자 가능합니다.");
+	   	  			   return false;
+	   	  		   }
+	   	  		   
 	    			 if(resp == 1){
 	    				 alert("중복된 ID가 존재합니다.");
 	    				 $("input[name='id']").val("");
