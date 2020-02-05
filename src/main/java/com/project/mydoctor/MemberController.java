@@ -157,7 +157,7 @@ public class MemberController {
 			}
 		} else {
 			PrintWriter out = response.getWriter();
-			out.print("<script>alert('로그인 오류 발생'); history.go(-1);</script>");
+			out.print("<script>alert('아이디 또는 비밀번호를 확인해주세요'); history.go(-1);</script>");
 			out.close();
 			return null;
 		}
