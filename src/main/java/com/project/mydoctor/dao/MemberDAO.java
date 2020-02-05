@@ -71,5 +71,9 @@ public class MemberDAO {
 	public Member select(String id) {
 		return sqlSession.selectOne("Members.select", id);
 	}
+
+	public int removehosaccount(Member mem) {
+		return sqlSession.update("Members.removehosaccount", mem);
+	}
 }
 

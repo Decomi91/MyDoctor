@@ -43,4 +43,14 @@ public class ReserveServiceImpl implements ReserveService {
 	public int diagnosisOk(int reserveNo) {
 		return rDAO.diagnosisOk(reserveNo);
 	}
+
+  @Override
+	public int hoscancel(int reserveNo) {
+		return rDAO.hoscancel(reserveNo);
+	}
+
+@Override
+public int reviewCheck(Reservation reservation) {
+	return rDAO.reviewCheck(reservation);
+}
 }

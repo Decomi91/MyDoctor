@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>My Doctor - 마이페이지</title>
+<title>My Doctor - 마이페이지(전체기록)</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -41,7 +41,7 @@
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">Reservation</span>
+									<span class="noLink">전체 기록</span>
 								</nav>
 
 								<div class="table-wrapper">

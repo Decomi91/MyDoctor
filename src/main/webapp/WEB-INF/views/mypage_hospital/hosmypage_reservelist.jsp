@@ -5,7 +5,7 @@
 
 <html>
 <head>
-<title>My Doctor - 마이페이지</title>
+<title>My Doctor - 마이페이지(전체 기록)</title>
 <meta charset="utf-8" />
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
@@ -39,7 +39,7 @@
 							<!-- Reservation -->
 							<div id="reservationDIV">
 								<nav>
-									<span class="noLink">Today Reservation</span>
+									<span class="noLink">All Reservation</span>
 								</nav>
 
 								<div class="table-wrapper">
@@ -70,11 +70,11 @@
 														<td>${rv.name }</td>
 														<td>
 															<c:choose>
-																<c:when test="${rv.acceptance==2 }">진료완료</c:when>
-																<c:when test="${rv.acceptance==1 }">승인됨</c:when>
-																<c:when test="${rv.acceptance==0 }">승인대기</c:when>
-																<c:when test="${rv.acceptance==-1 }">취소</c:when>
-																<c:when test="${rv.acceptance==-2 }">환자취소</c:when>
+																<c:when test="${rv.acceptance==2 }"><span class="hosfinish reservebox">진료 완료</span></c:when>
+																<c:when test="${rv.acceptance==1 }"><span class="hossoon reservebox">방문 예정</span></c:when>
+																<c:when test="${rv.acceptance==0 }"><span class="hoswaiting reservebox">승인 대기중</span></c:when>
+																<c:when test="${rv.acceptance==-1 }"><span class="hoscancel reservebox">환자취소</span></c:when>
+																<c:when test="${rv.acceptance==-2 }"><span class = "reservebox"style = "background : #ff833b">병원취소</span></c:when>
 															</c:choose>
 														</td>
 												</c:forEach>

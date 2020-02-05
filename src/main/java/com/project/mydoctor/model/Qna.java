@@ -10,6 +10,14 @@ public class Qna {
 	private String content;
 	private String uploaddate;
 	private String reply;	// ""(빈값)이면 답변중
+	private String yadmnm;
+	public String getYadmnm() {
+		return yadmnm;
+	}
+
+	public void setYadmnm(String yadmnm) {
+		this.yadmnm = yadmnm;
+	}
 
 	public String getWriteId() {
 		return writeId;

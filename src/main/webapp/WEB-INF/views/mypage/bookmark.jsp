@@ -6,7 +6,7 @@
 <html>
 <head>
 <meta charset="utf-8">
-<title>마이페이지 - 진료 기록</title>
+<title>마이페이지 - 관심병원</title>
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
@@ -43,7 +43,7 @@
 									<span class="noLink">관심 병원</span>
 								</nav>
 								
-								<div class = "table-wrapper">
+								<div class = "table-wrapper" style = "text-align: center;">
 									
 									<c:if test="${listcount > 0}">
 										<c:forEach var = "bm" items = "${bm }">
@@ -62,16 +62,12 @@
 												<div class = "bookmarkHosInfo" style = "display : none">
 													<span class = "infoSpan">${bm.addr }</span>
 													<span class = "infoSpan infoHphone">${bm.hphone }</span>
-													<span>
-														<i class="fas fa-grin-hearts"></i> ? / 10
-													</span>
-													<span>(13)</span>
 												</div>
 											</div>
 										</c:forEach>
 									</c:if>
 									<c:if test="${listcount == 0 }">
-									등록된 관심병원이 없습니다.
+									<span>등록된 관심병원이 없습니다.</span>
 									</c:if>
 									
 									<div class="center-block">

@@ -66,6 +66,11 @@
 		where reserveNo = #{reserveNo}
 	</update>
 	
+	<update id = "hoscancel" parameterType = "int">
+		update reservation
+		set acceptance = -1
+		where reserveNo = #{reserveNo}
+	</update>
 	
 	<!-- 병원측 -->
 	<select id = "hosGetReserveList" parameterType = "map" resultType = "reservation">
@@ -73,14 +78,14 @@
 						reserveTime, acceptance
 						from
 						(select * from reservation 
-						 where hosId = #{hosId} and acceptance = 0 and reserveTime &gt;= sysdate
-						 order by reserveTime desc, reserveNo asc))
+						 where hosId = #{hosId} and acceptance = 0 and to_Char(reserveTime,'YYYYMMDD') &gt;= to_Char(sysdate, 'YYYYMMDD')
+						 order by reserveNo asc))
 		where rnum &gt;= #{start} and rnum &lt;= #{end}	
 	</select>
 	
 	<select id="hosGetListCount" parameterType = "String" resultType = "int">
 		select count(*) from reservation
-		where hosId = #{hosId} and acceptance = 0 and reserveTime &gt;= sysdate
+		where hosId = #{hosId} and acceptance = 0 and to_Char(reserveTime,'YYYYMMDD') &gt;= to_Char(sysdate, 'YYYYMMDD')
 	</select>
 	
 	<update id = "reserveOk" parameterType = "int">
@@ -111,7 +116,7 @@
 	
 	<select id="hosGetTodayListCount" parameterType="String" resultType="int">
 		select count(*)
-		from reservation
+		from reservation 
 		where hosid=#{hosid} and to_Char(reserveTime,'YYYYMMDD') = to_Char(sysdate, 'YYYYMMDD') and acceptance between 0 and 1
 	</select>
 	
@@ -128,7 +133,7 @@
 	<select id="hosGetDiagListCount" parameterType="String" resultType="int">
 		select count(*)
 		from reservation
-		where acceptance = 2 and hosid = #{hosid}
+		where acceptance = 1 and hosid = #{hosid}
 	</select>
 	
 	<select id="hosGetDiagList" parameterType="map" resultType="reservation">
@@ -136,7 +141,7 @@
 						reserveTime, acceptance
 						from
 						(select * from reservation 
-						where hosId = #{hosId} and acceptance = 2
+						where hosId = #{hosId} and acceptance = 1
 						order by reserveTime desc, reserveNo asc))
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
@@ -156,4 +161,44 @@
 						order by reserveTime desc, reserveNo asc))
 		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
+	
+	<select id = "reserveOkay" parameterType = "map" resultType = "reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance
+						from
+						(select * from reservation 
+						where acceptance between 0 and 1 
+						and to_Char(reserveTime,'YYYYMMDD') &gt;= to_Char(sysdate, 'YYYYMMDD')
+						order by reserveTime))
+		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<select id = "reserveCounti" parameterType = "String" resultType = "int">
+		select count(*)
+		from reservation
+		where id = #{memberId} and acceptance between 0 and 1
+			
+	</select>
+	
+	<select id = "reserveCountf" parameterType = "String" resultType = "int">
+		select count(*)
+		from reservation
+		where id = #{memberId} and acceptance = 2
+			
+	</select>
+	
+	<select id = "finish" parameterType = "map" resultType = "reservation">
+		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
+						reserveTime, acceptance, review
+						from
+						(select * from reservation where acceptance = 2 order by reserveTime desc))
+		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+	</select>
+	
+	<update id = "reviewCheck" parameterType = "reservation">
+		update reservation
+		set review = 1
+		where id = #{id} and hosid = #{hosid} and reserveTime = to_date(#{time}, 'yyyy-mm-dd hh24:mi:ss')
+	</update>
+	
 </mapper>

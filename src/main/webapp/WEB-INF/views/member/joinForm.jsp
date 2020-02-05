@@ -13,6 +13,11 @@
      <script src="https://t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 	<script src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
      <script src="resources/js/jquery.min.js"></script>
+     <style type="text/css">
+     	#menu {
+     		font-family: jua !important;
+     	}
+     </style>
 </head>
 <body class="is-preload">
 
@@ -28,10 +33,10 @@
 					<a href="main" class="logo"><strong>My Doctor</strong> by team.5</a>
 				</header>
 				
-				<section id="banner">
+				<section id="banner" style="padding-top: 45px;">
 			         <form id="form" name="joinform" action="join" method="post" style="min-width:100%;display: flex;">
 			         	<table class="table">
-			         		<caption><h1>회원가입</h1></caption>
+			         		<caption><h1 id="menu">회원가입</h1></caption>
 			         		<tbody>
                            		<tr>
                               		<td style="width: 15%">아이디</td>
@@ -55,12 +60,12 @@
 								</tr>
 								<tr>
 									<td>주소</td>
-									<td colspan="2"><input type="text" name="address" placeholder="주소검색을 누르세요" required="required" readonly="readonly" id="address"></td>
-									<td colspan="2"><a class="btn btn-primary" onclick='javascript:postAddress()'>주소검색</a></td>
+									<td colspan="3"><input type="text" name="address" placeholder="주소검색을 누르세요" required="required" readonly="readonly" id="address"></td>
+									<td><a class="btn btn-primary" onclick='javascript:postAddress()'>주소검색</a></td>
 								</tr>
 								<tr>
 								<td>지도화면</td>
-								<td colspan="2"><div id="map" style="width:500px;height:300px;margin-top:10px;display:none;"></div></td>
+								<td colspan="3"><div id="map" style="width:500px;height:300px;margin-top:10px;display:none;"></div></td>
 								</tr>
 								<tr>
 									<td>이메일주소</td>

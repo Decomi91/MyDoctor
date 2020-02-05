@@ -13,6 +13,11 @@
 <link rel="stylesheet" href="resources/css/paging.css" />
 
 <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<style>
+table tr td:nth-child(2n-1) {
+    text-align: center;
+}
+</style>
 </head>
 <body class="is-preload">
 	<!-- Wrapper -->
@@ -68,7 +73,7 @@
 									style="float: right; margin-top: 3%;" id="res_hos">예약하기</a>
                      </c:if>
                      <div>
-                        <i class="fas fa-phone-alt"></i>${vo.telno }<br>
+                        <i class="fas fa-phone-alt"></i>&nbsp;${vo.telno }<br>
 						<c:if test="${vo.hospUrl!='undefined'}">
 							<a href="${vo.hospUrl}" target="_blank">사이트 방문하기</a>
 						</c:if>
@@ -77,12 +82,12 @@
                </div>
             </section>
             
-            <div class="table-wrapper" style="width: 70%">
+            <div class="table-wrapper" style="width: 90%; margin : 0 auto">
 				<table>
                     <thead>
                        <tr>
-                          <th></th>
-                          <th>진료시간</th>
+                          
+                          <th colspan = 4 style = "text-align : center">진료시간</th>
 
                        </tr>
                     </thead>
@@ -93,87 +98,83 @@
                            <tr>
                               <td>월요일</td>
                               <td>0${work.monStart}  ~ ${work.monEnd}</td>
+                                <td style = "color:blue">토요일</td>
+                              <c:choose>
+                              <c:when test="${work.satStart eq 0}"><td style="color: red">휴진</td></c:when>
+                              <c:otherwise><td style = "color:blue">${work.satStart}  ~ ${work.satEnd}</td></c:otherwise>
+                              </c:choose>
                            </tr>
                            <tr>
                               <td>화요일</td>
                               <td>0${work.tueStart}  ~ ${work.tueEnd}</td>
+                               <td style = "color:red">일요일</td>
+                           	  <c:choose>
+                              <c:when test="${work.sunStart eq 0}"><td style="color: red">휴진</td></c:when>
+                              <c:otherwise><td style = "color:red">${work.sunStart}  ~ ${work.sunEnd}</td></c:otherwise>
+                              </c:choose>
                            </tr>
                            <tr>
                               <td>수요일</td>
                               <td>0${work.wedStart}  ~ ${work.wedEnd}</td>
+                               <td style = "font-weight: bold; color: black;">점심시간</td>
+                              <c:choose>
+                              <c:when test="${work.lunchStart eq 0}"><td style="color: red">점심시간 없음</td></c:when>
+                              <c:otherwise><td style = "font-weight: bold; color: black;">${work.lunchStart } ~ ${work.lunchEnd }</td></c:otherwise>
+                              </c:choose>  
                            </tr>
                            <tr>
                               <td>목요일</td>
-                              <td>0${work.thuStart}  ~ ${work.thuEnd}</td>
+                              <td colspan = 3>0${work.thuStart}  ~ ${work.thuEnd}</td>
                            </tr>
                            <tr>
                               <td>금요일</td>
-                              <td>0${work.friStart}  ~ ${work.friEnd}</td>
-                           </tr>
-                           <tr>
-                              <td>토요일</td>
-                              <c:choose>
-                              <c:when test="${work.satStart eq 0}"><td style="color: red">휴진</td></c:when>
-                              <c:otherwise><td>${work.satStart}  ~ ${work.satEnd}</td></c:otherwise>
-                              </c:choose>
-                           </tr>
-                           <tr>
-                          	  <td>일요일</td>
-                           	  <c:choose>
-                              <c:when test="${work.sunStart eq 0}"><td style="color: red">휴진</td></c:when>
-                              <c:otherwise><td>${work.sunStart}  ~ ${work.sunEnd}</td></c:otherwise>
-                              </c:choose>
-                           </tr>
-                           <tr style="color: #f56a6a">
-                              <td>점심시간</td>
-                              <c:choose>
-                              <c:when test="${work.lunchStart eq 0}"><td style="color: red">점심시간 없음</td></c:when>
-                              <c:otherwise><td>${work.lunchStart } ~ ${work.lunchEnd }</td></c:otherwise>
-                              </c:choose>                             
-                           </tr>
+                              <td colspan = 3>0${work.friStart}  ~ ${work.friEnd}</td>
                            </c:when>
                            <c:when test="${hs_empty eq 2 }">
                           <tr>
                               <td>월요일</td>
                               <td>${work.trmtMonStart}  ~ ${work.trmtMonEnd}</td>
+                              <td style = "color:blue">토요일</td>
+                              <c:choose>
+                              <c:when test="${work.trmtSatStart eq 0}"><td style="color: red">휴진</td></c:when>
+                              <c:otherwise><td style = "color:blue">${work.trmtSatStart}  ~ ${work.trmtSatEnd}</td></c:otherwise>
+                              </c:choose>
                            </tr>
                            <tr>
                               <td>화요일</td>
                               <td>${work.trmtTueStart}  ~ ${work.trmtTueEnd}</td>
+                              <td style = "color:red">일요일</td>
+                           	  <c:choose>
+                              <c:when test="${work.trmtSunStart eq 0}"><td style="color: red">휴진</td></c:when>
+                              <c:otherwise><td style = "color:red">${work.trmtSunStart}  ~ ${work.trmtSunEnd}</td></c:otherwise>
+                              </c:choose>
                            </tr>
                            <tr>
                               <td>수요일</td>
                               <td>${work.trmtWedStart}  ~ ${work.trmtWedEnd}</td>
+                              <td style = "font-weight: bold; color: black;">점심시간</td>
+                              <c:choose>
+                              <c:when test="${fn:contains(work.lunchWeek,'없음')}"><td style="color: red">점심시간 없음</td></c:when>
+                              <c:otherwise><td style = "font-weight: bold; color: black;">PM ${work.lunchWeek }</td></c:otherwise>
+                              </c:choose> 
                            </tr>
                            <tr>
                               <td>목요일</td>
-                              <td>${work.trmtThuStart}  ~ ${work.trmtThuEnd}</td>
+                              <td colspan = 3>${work.trmtThuStart}  ~ ${work.trmtThuEnd}</td>
                            </tr>
                            <tr>
                               <td>금요일</td>
-                              <td>${work.trmtFriStart}  ~ ${work.trmtFriEnd}</td>
+                              <td colspan = 3>${work.trmtFriStart}  ~ ${work.trmtFriEnd}</td>
+                           </tr>
+                        <!--    <tr>
+                              
                            </tr>
                            <tr>
-                              <td>토요일</td>
-                              <c:choose>
-                              <c:when test="${work.trmtSatStart eq 0}"><td style="color: red">휴진</td></c:when>
-                              <c:otherwise><td>${work.trmtSatStart}  ~ ${work.trmtSatEnd}</td></c:otherwise>
-                              </c:choose>
-                           </tr>
-                           <tr>
-                          	  <td>일요일</td>
-                           	  <c:choose>
-                              <c:when test="${work.trmtSunStart eq 0}"><td style="color: red">휴진</td></c:when>
-                              <c:otherwise><td>${work.trmtSunStart}  ~ ${work.trmtSunEnd}</td></c:otherwise>
-                              </c:choose>
+                          	  
                            </tr>
                            <tr style="color: #f56a6a">
-                           <td>점심시간</td>
-                              <c:choose>
-                              <c:when test="${fn:contains(work.lunchWeek,'없음')}"><td style="color: red">점심시간 없음</td></c:when>
-                              <c:otherwise><td>PM ${work.lunchWeek }</td></c:otherwise>
-                              </c:choose>                             
-                           </tr>
+                                                       
+                           </tr> -->
                            </c:when>                          
                            <c:otherwise>  
                            <!-- 데이터아예 없을경우 -->                       
@@ -190,16 +191,15 @@
             
             <nav id="boardMenu">
                <ul>
-                  <li id="reviewli"><a class="menuLink" href="#"
-							id="reviewa">
-                        후기 </a></li>
-                  <li id="qnali"><a class="menuLink" href="#"
-							id="qnaa"> 문의
-                  </a></li>
-
+                  	<li id="reviewli">
+                  		<a class="menuLink" href="#" id="reviewa">후기 </a>
+                	</li>
+                 	<li id="qnali">
+                 		<a class="menuLink" href="#" id="qnaa"> 문의</a>
+                 	</li>
                </ul>
             </nav>
-            <div id="boardcontent">review/Q&A 게시판 영역</div>
+            <div id="boardcontent"></div>
 
          </div>
       </div>
@@ -249,20 +249,7 @@
 		// 마커 위에 인포윈도우를 표시합니다. 두번째 파라미터인 marker를 넣어주지 않으면 지도 위에 표시됩니다
 		infowindow.open(map, marker); 
 		
-		 $('#reviewli').click(function() {
-		    $(this).addClass('selectedBoard');
-		    $('#reviewa').addClass('selectedBoard');
-		    $('#qnali').removeClass('selectedBoard');
-		    $('#qnaa').removeClass('selectedBoard');
-		 })
-		 $('#qnali').click(function() {
-		    $(this).addClass('selectedBoard');
-		    $('#qnaa').addClass('selectedBoard');
-		    $('#reviewli').removeClass('selectedBoard');
-		    $('#reviewa').removeClass('selectedBoard');
-		    $('#boardcontent').empty();
-		    $('#boardcontent').load("qna", {"ykiho" : ykiho});
-		 })
+		 
 
 		 	function getUrlParams() {
 				var params = {};
@@ -270,10 +257,28 @@
 				return params;
 				}
 			
-			oParams = getUrlParams();
+			//oParams = getUrlParams(); 오류땜에 잠시 주석처리
 			ykiho = oParams.ykiho;
 			console.log("ykiho = " + ykiho);
-			
+			$('#boardcontent').load("review", {ykiho : ykiho},function(){});
+			$('#reviewli').addClass('selectedBoard');
+		    $('#reviewa').addClass('selectedBoard');
+			$('#reviewli').click(function() {
+			    $(this).addClass('selectedBoard');
+			    $('#reviewa').addClass('selectedBoard');
+			    $('#qnali').removeClass('selectedBoard');
+			    $('#qnaa').removeClass('selectedBoard');
+			    $('#boardcontent').empty();
+			    $('#boardcontent').load("review", {ykiho : ykiho},function(){});
+			 })
+			 $('#qnali').click(function() {
+			    $(this).addClass('selectedBoard');
+			    $('#qnaa').addClass('selectedBoard');
+			    $('#reviewli').removeClass('selectedBoard');
+			    $('#reviewa').removeClass('selectedBoard');
+			    $('#boardcontent').empty();
+			    $('#boardcontent').load("qna", {ykiho : ykiho},function(){});
+			 })
 		 // bookmark yuri
 		 $(function(){
 		

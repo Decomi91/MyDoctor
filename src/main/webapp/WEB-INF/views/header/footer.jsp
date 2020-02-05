@@ -9,8 +9,8 @@
          
             <!-- Search -->
             <section id="search" class="alt">
-               <form method="post" action="#">
-                  <input type="text" name="query" id="query" placeholder="Search" />
+               <form method="post" action="Allquery.net">
+                   <input type="text" name="Allquery" id="Allquery" placeholder="모든 병원 검색" />
                </form>
             </section>
       
@@ -46,19 +46,19 @@
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
                         <i class="icon solid fas fa-bell" style="color: #f56a6a"></i>&nbsp;&nbsp;병원
-								예약내용이 &nbsp;&nbsp; <a href="myreserve.net">${yesaccept }</a> 건 있습니다.
+								예약내용이 &nbsp;&nbsp; <a href="reserveCheck.net">${yesaccept }</a> 건 있습니다.
                      </p>
                   </div>
                   <ul class="contact">
                      <li class="icon solid fas fa-address-book mypageacess"><a
-                        href="mypage.net">마이페이지</a></li>
+                        href="reserveCheck.net">마이페이지</a></li>
                      <li
                         class="icon solid far fa-hospital mypagelisecond-child mypageacess"><a
-                        href="#">관심병원</a></li>
+                        href="gobookmark.net">관심병원</a></li>
                      <li class="icon solid far fa-calendar-alt mypageacess"><a
-                        href="myreserve.net">예약내역</a></li>
+                        href="mypage.net">예약내역</a></li>
                      <li class="icon solid fas fa-clipboard-list mypageacess"><a
-                        href="#">진료기록</a></li>
+                        href="finish.net">진료기록</a></li>
                   </ul>
                   <a href="logout" class="button primary fit koreanfont">로그아웃</a>
                </section>

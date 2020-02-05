@@ -120,4 +120,42 @@ HashMap<String, Object> map = new HashMap<String, Object>();
 		return mDAO.hosGetAllReserveList(map);
 	}
 
+	@Override
+	public List<Reservation> reserveOk(String memberId, int page, int limit) {
+	HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		
+		map.put("memberId", memberId);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		
+		return mDAO.reserveOk(map);
+	}
+	
+	  @Override
+		public int reserveCounti(String memberId) {
+			return mDAO.reserveCounti(memberId);
+		}
+
+	@Override
+	public int reserveCountf(String memberId) {
+		return mDAO.reserveCountf(memberId);
+	}
+
+	@Override
+	public List<Reservation> finish(String memberId, int page, int limit) {
+HashMap<String, Object> map = new HashMap<String, Object>();
+		
+		int startrow = (page-1) * limit + 1;
+		int endrow = startrow + limit - 1;
+		
+		map.put("memberId", memberId);
+		map.put("start", startrow);
+		map.put("end", endrow);
+		
+		return mDAO.finish(map);
+	}
+
 }

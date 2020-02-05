@@ -8,7 +8,7 @@ import com.project.mydoctor.model.Reservation;
 public interface ReserveService {
 
 	int insert(Map<String, Object> map);
-	
+
 	Reservation getReserveDetail(int reserveNo);
 
 	int cancel(int reserveNo);
@@ -19,4 +19,7 @@ public interface ReserveService {
 
 	int diagnosisOk(int reserveNo);
 
+	int hoscancel(int reserveNo);
+
+	int reviewCheck(Reservation reservation);
 }

@@ -39,7 +39,7 @@
 							</div>
 
 							<div class = "reserveIcon">
-								<a href="mypage.net"><i class="fas fa-check-circle fa-4x" style = "color : #f56a6a;"></i>
+								<a href="reserveCheck.net"><i class="fas fa-check-circle fa-4x" style = "color : #f56a6a;"></i>
 								<span style = "color : #f56a6a; font-weight : bold; position: relative; bottom: 11px;">예약 확인</span></a>
 							</div>
 						</div>
@@ -47,7 +47,7 @@
 						<div id = "reserveForm">
 							<font color = "black">${loginid }</font>님<br>
 							<font color = "black">${hosname }&nbsp; ${reserveDate }</font>에 예약이 완료되었습니다.<br>
-							예약 승인 정보는 <a href="mypage.net">마이페이지 → 예약현황</a> 에서 확인하실 수 있습니다.
+							예약 승인 정보는 <a href="reserveCheck.net">마이페이지 → 예약현황</a> 에서 확인하실 수 있습니다.
 							<br>
 							<br>
 							추가 예약을 원하시면<a href="reserve.net?yki=${yki }"> 클릭</a>해주세요.

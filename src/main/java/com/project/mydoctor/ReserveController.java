@@ -130,17 +130,17 @@ public class ReserveController {
 		PrintWriter out = response.getWriter();
 
 		if (passwordCheck == 1) {
-			int result = reserveservice.cancel(reserveNo);
+			int result = reserveservice.hoscancel(reserveNo);
 
 			if (result == 1) {
 				out.println("<script>");
 				out.println("alert('예약이 취소되었습니다.');");
-				out.println("location.href='mypage.net';");
+				out.println("location.href='reserveCheck.net';");
 				out.println("</script>");
 			} else {
 				out.println("<script>");
 				out.println("alert('예약 취소를 실패하였습니다.');");
-				out.println("location.href='mypage.net';");
+				out.println("location.href='reserveCheck.net';");
 				out.println("</script>");
 			}
 		} else {

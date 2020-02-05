@@ -1,6 +1,8 @@
 package com.project.mydoctor.model;
 
-import java.sql.Date;
+import java.util.Date;
+
+import org.springframework.format.annotation.DateTimeFormat;
 
 public class Review {
 	private String id;
@@ -12,8 +14,17 @@ public class Review {
 	private int ability;
 	private int price;
 	private Date uploaddate;
+	@DateTimeFormat(pattern = "yyyy-MM-dd HH:mm")
 	private Date visited;
 	private String reply;
+private String yadmnm;
+	public String getYadmnm() {
+	return yadmnm;
+}
+
+public void setYadmnm(String yadmnm) {
+	this.yadmnm = yadmnm;
+}
 
 	public String getId() {
 		return id;
@@ -91,8 +102,8 @@ public class Review {
 		return visited;
 	}
 
-	public void setVisited(Date visited) {
-		this.visited = visited;
+	public void setVisited(Date string) {
+		this.visited = string;
 	}
 
 	public String getReply() {
@@ -101,6 +112,13 @@ public class Review {
 
 	public void setReply(String reply) {
 		this.reply = reply;
+	}
+
+	@Override
+	public String toString() {
+		return "Review [id=" + id + ", hospital=" + hospital + ", reviewNum=" + reviewNum + ", subject=" + subject
+				+ ", content=" + content + ", kindness=" + kindness + ", ability=" + ability + ", price=" + price
+				+ ", uploaddate=" + uploaddate + ", visited=" + visited + ", reply=" + reply + "]";
 	}
 
 }

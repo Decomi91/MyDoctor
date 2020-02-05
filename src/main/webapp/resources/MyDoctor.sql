@@ -68,6 +68,22 @@ insert into boards values('test', 'gong1', 2, 1,'문의', 'testSub',
 'testCont','2019-12-31','ok')
 insert into boards values('test', 'gong1', 3, 1,'문의', 'testSub',
 'testCont','2019-12-31','')
+insert into boards values('test', 'gong1', 5, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 6, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 7, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 8, 1,'문의', 'testSub',
+'testCont','2019-12-31','ok')
+insert into boards values('test', 'gong1', 9, 1,'문의', 'testSub',
+'testCont','2020-02-02','ok')
+insert into boards values('test', 'gong1', 10, 1,'문의', 'testSub',
+'testCont','2020-02-02','ok')
+insert into boards values('test', 'gong1', 11, 1,'문의', 'testSub',
+'testCont','2020-02-21','ok')
+insert into boards values('test', 'gong1', 12, 0,'문의', 'testSub',
+'testCont','2020-02-21','ok')
 			insert all 
 			into boards values('test', '123', 'testing', 2, 1,'문의', 'testSub',
 			'testCont',sysdate,'ok')
@@ -98,6 +114,29 @@ create table reviews(
   uploaddate date,
   reply varchar2(3000)
 )
+select * from reviews
+drop table reviews
+select * from reservation rv
+left outer join reviews re
+on re.id = rv.id
+where re.hospital = 'testing'
+and re.id = 'test'
+and rv.acceptance =2
+and re.visited = rv.reservetime
+
+
+
+select * from hospitals
+ select * from(select rownum rnum, r.* from
+ (select rv.*, h.yadmNm from reviews rv join hospitals h on  rv.hospital=h.id and rv.id='test'
+ order by visited desc ) r
+		 where rnum &gt;=#{start} and rnum &lt;=#{end}
+
+select 
+
+		 
+drop table reviews;
+select * from reviews;
 select avg(kindness), avg(ability), avg(price) 
 	 	from reviews
 	 	where hospital = 'gong1'
@@ -105,7 +144,15 @@ drop table reviews
 alter table reviews add(visited date)
 insert into reviews values('test', 'gong1', 1, 'testSub',
 	'testCont', 5,5,5,sysdate,sysdate,'ok')
-insert into reviews values('test', 'gong1', 2, 'testSub',
+insert into reviews values('test2', 'gong1', 2, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 3, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 4, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
+insert into reviews values('test', 'gong1', 5, 'testSub',
+	'testCont', 3,4,5,sysdate,sysdate,'ok')
+insert into reviews values('test2', 'gong1', 6, 'testSub',
 	'testCont', 3,4,5,sysdate,sysdate,'ok')
 update reviews set visited = sysdate
 select * from(select rownum rnum, r.* from(select * from reviews where id='test' order by visited desc ) r)
@@ -131,3 +178,8 @@ delete members cascade constraints;
 delete reviews
 
 drop table hospitals;
+
+select (select count(*) from reservation where acceptance = 1) as yesaccept
+		from reservation
+		where id = 'test'
+    group by id
