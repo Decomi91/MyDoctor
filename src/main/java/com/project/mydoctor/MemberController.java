@@ -6,6 +6,8 @@ import java.io.InputStream;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -85,7 +87,14 @@ public class MemberController {
 	
 	@GetMapping(value="/joinForm")
 	public ModelAndView joinForm(ModelAndView mv) {
+		
+		Date date = new Date();
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+		String today = format.format(date);
+		
 		mv.setViewName("member/joinForm");
+		mv.addObject("today", today);
+		
 		return mv;
 	}
 
@@ -254,5 +263,14 @@ public class MemberController {
 	@PostMapping(value = "/idcheck")
 	public String idcheck(String id, String pub) {
 		return memberService.idcheck(id, pub);
+	}
+	
+	@RequestMapping(value = "/ididCheck.do")
+	public void ididCheck(@RequestParam(value = "id") String id, HttpServletResponse response) throws IOException {
+		int result = memberService.ididCheck(id);
+		
+		response.setContentType("text/html;charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(result);
 	}
 }

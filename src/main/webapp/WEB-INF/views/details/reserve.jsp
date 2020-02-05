@@ -77,7 +77,7 @@
 									</tr>
 									<tr>
 										<td>예약 날짜</td>
-										<td>	<!-- min에 ${date}로 오늘 날짜 받아와서 넣기 -->
+										<td>
 											<input type = "date" name = "reserveDate" min = "${today }" id = "reserveDate">
 										</td>
 										<td>예약 시간</td>

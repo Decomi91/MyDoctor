@@ -124,5 +124,12 @@ public class MemberServiceImpl implements MemberService {
 		}
 	}
 
+	// yuri ID 중복체크
+	@Override
+	public int ididCheck(String id) {
+		Member member = mDao.ididCheck(id);
+		return (member == null) ? 0 : 1;	// 중복X : 0, 중복O : 1
+	}
+
 }
 

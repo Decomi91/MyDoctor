@@ -1,6 +1,5 @@
 package com.project.mydoctor.service;
 
-import javax.servlet.http.HttpSession;
 import java.util.List;
 
 import com.project.mydoctor.model.Member;
@@ -34,7 +33,10 @@ public interface MemberService {
 
 	int removehosaccount(Member mem);
 
-	String findId(String name, String email);
+	// yuri id 중복 체크
+	int ididCheck(String id);
+
+  String findId(String name, String email);
 
 	int idExist(String name, String id, String email);
 }
