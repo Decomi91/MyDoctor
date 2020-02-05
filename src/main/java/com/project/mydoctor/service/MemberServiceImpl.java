@@ -100,6 +100,29 @@ public class MemberServiceImpl implements MemberService {
 	public int removehosaccount(Member mem) {
 		return mDao.removehosaccount(mem);
 	}
+////////////jisu_0204_아이디 찾기, 해당 계정 있는지 확인
+	@Override
+	public String findId(String name, String email) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("name", name);
+		map.put("email", email);
+		return mDao.findId(map);
+	}
+
+	
+	////////////jisu_0204_비밀번호찾기-해당 계정 있는지 확인: userkey리턴해서 탈퇴회원인지 확인
+	@Override
+	public int idExist(String name, String id, String email) {
+		Map<String,Object> map=new HashMap<String, Object>();
+		map.put("name", name);
+		map.put("email", email);
+		map.put("id", id);
+		try {
+		return mDao.findPwd(map);}
+		catch(NullPointerException e) {
+			return 2;
+		}
+	}
 
 	// yuri ID 중복체크
 	@Override

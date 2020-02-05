@@ -35,4 +35,8 @@ public interface MemberService {
 
 	// yuri id 중복 체크
 	int ididCheck(String id);
+
+  String findId(String name, String email);
+
+	int idExist(String name, String id, String email);
 }
