@@ -257,7 +257,7 @@ table tr td:nth-child(2n-1) {
 				return params;
 				}
 			
-			oParams = getUrlParams();
+			//oParams = getUrlParams(); 오류땜에 잠시 주석처리
 			ykiho = oParams.ykiho;
 			console.log("ykiho = " + ykiho);
 			$('#boardcontent').load("review", {ykiho : ykiho},function(){});

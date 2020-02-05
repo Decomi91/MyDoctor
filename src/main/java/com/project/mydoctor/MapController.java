@@ -7,7 +7,6 @@ import java.io.InputStreamReader;
 import java.io.PrintWriter;
 import java.net.URL;
 import java.net.URLEncoder;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
@@ -27,15 +26,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.project.mydoctor.model.Bookmark;
+import com.google.gson.Gson;
+import com.project.mydoctor.model.All_Hs;
+import com.project.mydoctor.model.All_test;
 import com.project.mydoctor.model.HdetailVO;
 import com.project.mydoctor.model.Hospital;
 import com.project.mydoctor.model.Work_hs;
-
 import com.project.mydoctor.service.BookmarkService;
 import com.project.mydoctor.service.HospitalService;
 
@@ -54,6 +53,132 @@ public class MapController {
 
 	@Autowired
 	private BookmarkService bookmarkService;
+	
+	
+	
+	/**
+	 * @author 김건수 
+	 * @param Allquery
+	 * @return
+	 * @throws Exception
+	 * @모든병원검색
+	 */
+	@RequestMapping(value = "Allquery.net",method = RequestMethod.POST)
+	public String Allquery(String Allquery,@RequestParam(required = false,defaultValue = "1")int p,
+			@RequestParam(required = false,defaultValue = "no")String kim,@RequestParam(required = false, defaultValue = "no")String kim2,@RequestParam(required = false, defaultValue = "no")String kim3, Model model)throws Exception {		
+		Map<String, Object> all = new HashMap<String, Object>();
+		ArrayList<All_Hs> all_one = new ArrayList<All_Hs>();
+		Gson gson = new Gson();		
+		
+		try {
+			all = Alldetail(URLEncoder.encode(Allquery,"UTF-8"),p,kim,kim2);			
+			if((Long)all.get("total")==1) {						
+				all_one.add((All_Hs) all.get("result_all"));
+				model.addAttribute("all", all_one);				
+				model.addAttribute("total", all.get("total"));	
+				model.addAttribute("hidden", Allquery);
+				if(p>=2 || kim3.equals("kim3"))					
+					return "details/all_click";
+			}else {			
+				JSONObject a = (JSONObject) all.get("result_all");
+				String real = a.toJSONString();
+				All_test testing = gson.fromJson(real, All_test.class);
+				model.addAttribute("all", testing.getItem());
+				model.addAttribute("total", all.get("total"));
+				model.addAttribute("hidden", Allquery);	
+				if(p>=2 || kim3.equals("kim3")) 
+					return "details/all_click";
+				
+			}
+				
+			
+		}catch (NullPointerException e) {		
+			model.addAttribute("msg", "검색된 결과가없습니다");
+			model.addAttribute("hidden", Allquery);
+			model.addAttribute("total", "0");
+			if(kim3.equals("kim3")) 
+				return "details/all_click";
+			
+		}
+	
+	
+		return "details/allquery";
+	}
+	
+	
+	/**
+	 * @author 김건수
+	 * @param Allquery
+	 * @return hdtailVO
+	 * 
+	 */
+	public Map<String, Object>Alldetail(String all,int p,String kim,String kim2) throws Exception{
+		Map<String, Object> result_hs = new HashMap<String, Object>();		
+		All_Hs all_one = new All_Hs();		
+		JSONParser jsonparser = new JSONParser();
+		String url = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?numOfRows=10&_type=json&ServiceKey=G9rzPM3G3d1FVN%2F8ZyPSkwQ7B0IICxPX3Sks%2FrUY2wLu94BsUzYPUHzcNhSwJj%2FIjuLsoBMYMJ7JcX4thVA7Lg%3D%3D"
+				+ "&yadmNm="+all+"&pageNo="+p;
+		if(!kim.equals("no")) 
+		url +="&sidoCd="+kim;
+		if(!kim2.equals("no")) 
+		url +="&dgsbjtCd="+kim2;
+
+		JSONObject jsonobject = (JSONObject) jsonparser.parse(readUrl(url));
+		
+		JSONObject json = (JSONObject) jsonobject.get("response");
+		JSONObject body = (JSONObject) json.get("body");
+		
+		Long total = (Long) body.get("totalCount");
+		if(total==1) {	
+			try {
+			JSONObject items = (JSONObject) body.get("items");				
+			JSONObject item = (JSONObject) items.get("item");
+			//ㅅㅄ ㅄㅄ ㅂㄷㅅ ㅂ ㅅㅄ ㅄㅄ ㅄ ㅄ ㅄ ㅄ ㄷㅄ ㄷ
+			all_one.setClCd(items.get("clCd"));
+			all_one.setAddr(item.get("addr"));
+			all_one.setClCdNm(item.get("clCdNm"));
+			all_one.setDrTotCnt(item.get("drTotCnt"));
+			all_one.setEstbDd(item.get("estbDd"));
+			all_one.setGdrCnt(item.get("gdrCnt"));
+			all_one.setIntnCnt(item.get("intnCnt"));
+			all_one.setPostNo(item.get("postNo"));
+			all_one.setHospUrl(item.get("hospUrl"));
+			all_one.setResdntCnt(item.get("resdntCnt"));
+			all_one.setSdrCnt(item.get("sdrCnt"));
+			all_one.setSgguCd(item.get("sgguCd"));
+			all_one.setSgguCdNm(item.get("sgguCdNm"));
+			all_one.setSidoCd(item.get("sidoCd"));
+			all_one.setSidoCdNm(item.get("sidoCdNm"));
+			all_one.setTelno(item.get("telno"));
+			all_one.setXPos(item.get("XPos"));
+			all_one.setYPos(item.get("YPos"));
+			all_one.setYadmNm(item.get("yadmNm"));
+			all_one.setYkiho(item.get("ykiho"));
+			result_hs.put("result_all", all_one);
+			result_hs.put("total",total);
+			return result_hs;
+			}catch (Exception e) {
+				System.out.println("캐치 ㅡㅡ");
+				return result_hs;
+			}
+			
+		}else if(total==0) {			
+			return null;
+		}else {		
+		try {
+		JSONObject items = (JSONObject) body.get("items");		
+		result_hs.put("result_all", items);		
+		result_hs.put("total", total);	
+		return result_hs;
+		}catch (ClassCastException e) {
+				System.out.println("개빡치네 캐치몇번째야");
+				return result_hs;
+			}
+		}
+		
+	
+	}
+	
 	
 	@ResponseBody
 	@RequestMapping(value = "favorites_add.net",method = RequestMethod.POST)
