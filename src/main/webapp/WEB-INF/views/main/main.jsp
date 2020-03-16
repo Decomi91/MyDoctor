@@ -22,10 +22,12 @@
 
 }
 
+    
 </style>  
 
-
+  
 <script type="text/javascript">
+//테스트
 $(function(){  
  
 	 function location(lon,lat){
