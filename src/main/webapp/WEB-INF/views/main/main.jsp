@@ -50,7 +50,7 @@ $(function(){
             image: markerImage
             });
 
-         	kakao.maps.event.addListener(map, 'dragend', function() {
+         /* 드래그 일시적으로 잠금	kakao.maps.event.addListener(map, 'dragend', function() {
   				var level = map.getLevel();
    				var latlng = map.getCenter(); 
 
@@ -58,7 +58,7 @@ $(function(){
    				console.log(latlng.getLat());
    				hs(latlng.getLng(),latlng.getLat());
          	});
-         
+          */
          
             marker.setMap(map);  
             
@@ -381,9 +381,9 @@ $(function(){
 
    if(navigator.geolocation){
 	   //console.log("뭔데");	
-	  	
-	   
-      navigator.geolocation.getCurrentPosition(onSuccess,onError)//geo funtion
+	 console.log(navigator.geolocation.getCurrentPosition(hi(20)));
+	  
+     // navigator.geolocation.getCurrentPosition(onSuccess,onError)//geo funtion
       
       
       
@@ -391,11 +391,17 @@ $(function(){
    }else{
 	alert("뭥미") ;
    }
+	function hi(zzz){
+		console.log("하이메소드");
+		console.log(zzz);
+		
+	}
 
-
-    function onSuccess(position) {    	  
+    function onSuccess(position) {       	
        var lon = position.coords.longitude, // 경도
-       lat = position.coords.latitude; // 위도              
+       lat = position.coords.latitude; // 위도 
+       console.log(lon);
+       console.log(position);
        location(lon,lat);    
     }
     function onError(){
