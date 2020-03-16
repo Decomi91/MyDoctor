@@ -27,7 +27,7 @@
 
   
 <script type="text/javascript">
-//테스트 ddd   zxz
+//테스트 ddd   zxzㅁㄴㅇㅁㄴㅇ
 $(function(){  
  
 	 function location(lon,lat){
