@@ -29,6 +29,9 @@
 <script type="text/javascript">
 //테스트 ddd   zxzㅁㄴㅇㅁㄴㅇ
 $(function(){  
+	
+    
+ 
  
 	 function location(lon,lat){
          //지도
@@ -59,22 +62,25 @@ $(function(){
    				hs(latlng.getLng(),latlng.getLat());
          	});
           */
+          
+          kakao.maps.event.addListener(map, 'dragend', function() {
+				var level = map.getLevel();
+ 				var latlng = map.getCenter(); 
+
+ 				//console.log(latlng.getLng());
+ 				//console.log(latlng.getLat());
+ 				hs(latlng.getLng(),latlng.getLat());	});
          
             marker.setMap(map);  
             
             hs(lon, lat);
-        
-            $("#nearhospital").click(function() {
-               $("#map").empty();
-               $("#div_result").empty();
-             map = new kakao.maps.Map(mapContainer, mapOption);   
-             marker.setMap(map);  
-               hs(lon, lat);
-            });//clcik      
+
             
             
          
          function hs(xPos, yPos) {
+            	
+        	
             $.ajax({
                      url : "intro_hs",
                      type : "POST",
@@ -103,15 +109,19 @@ $(function(){
                         function custonSort(a, b) {
                                   if(Number(a.distance) == Number(b.distance)){ return 0} 
                                   return  Number(a.distance) > Number(b.distance) ? 1 : -1;}
-                                item.sort(custonSort);
+                        	console.log(item.sort());
+                                //item.sort(custonSort);
                         
-                        
+                        //console.log(item);
                      
                         
                          
                          var out ="";
                         $.each(item,function(index,items){      
                            var iwContent = '<div style="padding:5px;">'+((index++)+1)+"."+items.yadmNm+'</div>'; 
+                           //console.log(index);
+                           //console.log(items);
+                           
                             // 마커를 생성합니다
                             var marker = new kakao.maps.Marker({
                                 map: map, // 마커를 표시할 지도
@@ -135,8 +145,10 @@ $(function(){
                            out +="</tr>";
                            out +="</table>";
                            
-                           $("#div_result").html(out);                           
-                            
+                           $("#div_result").html(out);     
+                           
+                           
+               
                             
                             
                             //마우스
@@ -208,6 +220,7 @@ $(function(){
                               }
                               item.sort(custonSort);
                            }
+                        	
                      
 
                            var out =""   ;
@@ -307,6 +320,9 @@ $(function(){
             $("#map").empty();
             $("#div_result").empty();
             
+         
+                
+                
             
             // 마커를 클릭하면 장소명을 표출할 인포윈도우 입니다
             var infowindow = new kakao.maps.InfoWindow({zIndex:1});
@@ -331,27 +347,42 @@ $(function(){
             var out ="";
             
             // 키워드 검색 완료 시 호출되는 콜백함수 입니다
-            function placesSearchCB (data, status, pagination) {
-               
+            function placesSearchCB (data, status, pagination) {              
                 if (status === kakao.maps.services.Status.OK) {
-                    for (var i=0; i<data.length; i++) {
-                        displayMarker(data[i],i);
+                	   //마스크해봄
+                    const url ="https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+lat+"&lng="+lon+"&m=5000";
+                    const xhr = new XMLHttpRequest(); //리퀘스트 객체를 만든다.
+                    xhr.onreadystatechange = function(){
+                        if(xhr.readyState == 4 && xhr.status == 200){
+                            const jsonObj = JSON.parse(xhr.response);
+                            console.log(jsonObj);
+                            for (var i=0; i<data.length; i++) {
+                            	console.log(data[i]);
+                                displayMarker(data[i],i);
+                                
+                                out +="<table>";
+                                out +="<tr>";
+                                /* out +="<td rowspan ='3' class='table-wrapper'></td>"; */                      
+                                out +="<th>"+data[i].place_name+"</th>";
+                                out +="<td style='width:70%'><a id = 'place_name"+i+"' href='"+data[i].place_url+"' target='_blank'>상세정보</a></td>";
+                                out +="</tr>";
+                                 
+                                out +="<tr>";
+                                out +="<td colspan='2'>"+data[i].address_name+"</td>";
+                                out +="</tr>";
+                                 
+                                out +="</table>";
+                                
+                                $("#div_result").html(out);
+                            }       
                         
-                        out +="<table>";
-                        out +="<tr>";
-                        /* out +="<td rowspan ='3' class='table-wrapper'></td>"; */                      
-                        out +="<th>"+data[i].place_name+"</th>";
-                        out +="<td style='width:70%'><a id = 'place_name"+i+"' href='"+data[i].place_url+"' target='_blank'>상세정보</a></td>";
-                        out +="</tr>";
-                         
-                        out +="<tr>";
-                        out +="<td colspan='2'>"+data[i].address_name+"</td>";
-                        out +="</tr>";
-                         
-                        out +="</table>";
-                        
-                        $("#div_result").html(out);
-                    }       
+                            
+                        };};
+                        xhr.open('GET', url, true);
+                        xhr.send(); 
+                	
+                	
+                
                 }
             }
 
@@ -380,10 +411,22 @@ $(function(){
          }
 
    if(navigator.geolocation){
-	   //console.log("뭔데");	
-	 console.log(navigator.geolocation.getCurrentPosition(hi(20)));
+	   
+	   
+	   
+
+	
 	  
-     // navigator.geolocation.getCurrentPosition(onSuccess,onError)//geo funtion
+      navigator.geolocation.getCurrentPosition(onSuccess,onError)//geo funtion
+      
+      $("#nearhospital").click(function() {
+          $("#map").empty();
+          $("#div_result").empty();
+       	// map = new kakao.maps.Map(mapContainer, mapOption);   
+        	//marker.setMap(map);  
+          //hs(lon, lat);
+         navigator.geolocation.getCurrentPosition(onSuccess,onError)//geo funtion
+       });//clcik      
       
       
       
@@ -391,17 +434,15 @@ $(function(){
    }else{
 	alert("뭥미") ;
    }
-	function hi(zzz){
-		console.log("하이메소드");
-		console.log(zzz);
-		
-	}
+   
+  
 
+	
     function onSuccess(position) {       	
        var lon = position.coords.longitude, // 경도
        lat = position.coords.latitude; // 위도 
-       console.log(lon);
-       console.log(position);
+       //console.log(lon);
+       //console.log(position);
        location(lon,lat);    
     }
     function onError(){
