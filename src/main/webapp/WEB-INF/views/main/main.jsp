@@ -104,6 +104,7 @@
                     },
                     complete: function() {
                         $('#roding').removeClass('roding');
+                        $("#nearpharmacy").prop("disabled", false);
                         $("#mask").prop("disabled", false);
                     },
                     success: function(data) {
