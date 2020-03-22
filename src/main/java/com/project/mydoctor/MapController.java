@@ -281,7 +281,7 @@ public class MapController {
 		parameter = parameter + addr;
 		parameter = parameter + "&xPos=" + xPos;
 		parameter = parameter + "&yPos=" + yPos;
-		parameter = parameter + "&radius=" + 100000;
+		parameter = parameter + "&radius=" + 10000;
 		parameter = parameter + "&_type=json";
 		if (query != "")
 			parameter = parameter + "&yadmNm=" + URLEncoder.encode(query, "UTF-8");
