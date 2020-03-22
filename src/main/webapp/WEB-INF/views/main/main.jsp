@@ -53,23 +53,12 @@ $(function(){
             image: markerImage
             });
 
-         /* 드래그 일시적으로 잠금	kakao.maps.event.addListener(map, 'dragend', function() {
-  				var level = map.getLevel();
-   				var latlng = map.getCenter(); 
-
-   				console.log(latlng.getLng());
-   				console.log(latlng.getLat());
-   				hs(latlng.getLng(),latlng.getLat());
-         	});
-          */
           
           kakao.maps.event.addListener(map, 'dragend', function() {
 				var level = map.getLevel();
  				var latlng = map.getCenter(); 
-
- 				//console.log(latlng.getLng());
- 				//console.log(latlng.getLat());
- 				hs(latlng.getLng(),latlng.getLat());	});
+ 				hs(latlng.getLng(),latlng.getLat());	
+ 				});
          
             marker.setMap(map);  
             
@@ -95,30 +84,24 @@ $(function(){
                       },complete:function(){
                          $('#roding').removeClass('roding');
                          $("#nearpharmacy").prop("disabled", false);
-                      },success : function(data) {                     
+                      },success : function(data) {    
+                     
                         var item = data.response.body.items.item;
                         
                         var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
                         var imageSize = new kakao.maps.Size(24, 35); 
-                        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-                        
-                     
-                        
-                        
-                        
-                        function custonSort(a, b) {
-                                  if(Number(a.distance) == Number(b.distance)){ return 0} 
-                                  return  Number(a.distance) > Number(b.distance) ? 1 : -1;}
-                        	console.log(item.sort());
-                                //item.sort(custonSort);
+                        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);                      
+                        	//console.log(item.sort());
+                                item.sort(custonSort);
                         
                         //console.log(item);
                      
                         
                          
                          var out ="";
-                        $.each(item,function(index,items){      
-                           var iwContent = '<div style="padding:5px;">'+((index++)+1)+"."+items.yadmNm+'</div>'; 
+                        $.each(item,function(index,items){
+                        	//console.log(items.YPos, items.XPos);
+                          // var iwContent = '<div style="padding:5px;">'+((index++)+1)+"."+items.yadmNm+'</div>'; 
                            //console.log(index);
                            //console.log(items);
                            
@@ -348,16 +331,8 @@ $(function(){
             
             // 키워드 검색 완료 시 호출되는 콜백함수 입니다
             function placesSearchCB (data, status, pagination) {              
-                if (status === kakao.maps.services.Status.OK) {
-                	   //마스크해봄
-                    const url ="https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+lat+"&lng="+lon+"&m=5000";
-                    const xhr = new XMLHttpRequest(); //리퀘스트 객체를 만든다.
-                    xhr.onreadystatechange = function(){
-                        if(xhr.readyState == 4 && xhr.status == 200){
-                            const jsonObj = JSON.parse(xhr.response);
-                            console.log(jsonObj);
-                            for (var i=0; i<data.length; i++) {
-                            	console.log(data[i]);
+                if (status === kakao.maps.services.Status.OK) {                                      
+                            for (var i=0; i<data.length; i++) {                            
                                 displayMarker(data[i],i);
                                 
                                 out +="<table>";
@@ -377,14 +352,12 @@ $(function(){
                             }       
                         
                             
-                        };};
-                        xhr.open('GET', url, true);
-                        xhr.send(); 
+                        };
                 	
                 	
                 
                 }
-            }
+       
 
             // 지도에 마커를 표시하는 함수입니다
             function displayMarker(place,i) {
@@ -406,17 +379,167 @@ $(function(){
                 });
             }            
                            });//pha
-      
+                           
+          $("#mask").click(function(){
+        	  const maskapi ="https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+lat+"&lng="+lon+"&m=5000";				
+        	  $.ajax({
+                  url : maskapi,
+                  type : "get",
+                  dataType : "json",      
+                  data : {},
+                  beforeSend:function(){                         
+                     $('#roding').addClass('roding');
+                     $("#nearpharmacy").prop("disabled", true);
+                   },complete:function(){
+                      $('#roding').removeClass('roding');
+                      $("#nearpharmacy").prop("disabled", false);
+                   },success : function(data) {              	   
+                	   $("#map").empty();
+           			   $("#div_result").empty();       
+           			  //지도
+           	         var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+           	         mapOption = {
+           	            center : new kakao.maps.LatLng(lat, lon), // 지도의 중심좌표
+           	            level : 6
+           	         };
+           	         var map = new kakao.maps.Map(mapContainer, mapOption);      
+           	         //자신위치 마커
+           	          var imageSrc = 'resources/images/mymarker.png',     
+           	          imageSize = new kakao.maps.Size(64, 69), 
+           	          imageOption = {offset: new kakao.maps.Point(27, 69)};
+           	      
+           	         var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption),
+           	             markerPosition = new kakao.maps.LatLng(lat, lon); 
+           	         var marker = new kakao.maps.Marker({
+           	             position: markerPosition, 
+           	            image: markerImage
+           	            });
+           	         marker.setMap(map);  
+           	    	       
+                       var out ="";
+                       var item = data.stores;
+                       console.log(item);
+                       
+                       
+                       //var imageSrc = "http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
+                       //var imageSize =  new kakao.maps.Size(24, 35);
+                       //var markerImage = ;//imageSrc에서 mask로바꿨음  
+                       var maskmarker ="";
+                       var de ;
+                       var size="";
+                       var Stock="";
+                     $.each(item,function(index,items){
+                    	 console.log(index);  
+                    	 maskmarker = 'resources/mask/';
+                         de="";
+                    	 size="24,35"
+                    	 switch (items.remain_stat){
+                    	    case "plenty" :
+                    	     console.log("plenty입니다");
+                    	     maskmarker +="blue.png";
+                    	     size="50,50";
+                    	     Stock ="100개 이상";
+                    	     	break; 
+                    	    case "some" :
+                       	     console.log("some입니다");
+                       	  	maskmarker +="green.png";
+                       	    size="50,50";
+                       	    Stock ="30개 이상 100개미만";
+                       	     	break; 
+                    	    case "few" :
+                       	     console.log("few입니다");
+                       	     maskmarker +="gray.png";
+                       	     size="50,50";
+                       	     Stock ="2개 이상 30개 미만";
+                       	     	break; 
+                    	    default :
+                    	     console.log("디폴트")
+                    	     maskmarker +="red.png";
+                    	     de="de";
+                    	    	break;
+                    	     	//return true;  continue와 같은효과
+                    	}
+                    	 
+                    	  var iwContent = '<div style="padding:5px;">'+items.name+'</div>'; 
+
+                           // 마커를 생성합니다
+                           var marker = new kakao.maps.Marker({
+                               map: map, // 마커를 표시할 지도
+                               position: new kakao.maps.LatLng(items.lat, items.lng) , // 마커를 표시할 위치
+                               title :items.name, // 마커의 타이틀, 마커에 마우스를 올리면 타이틀이 표시됩니다
+                               image : new kakao.maps.MarkerImage(maskmarker, new kakao.maps.Size(size)), // 마커 이미지                            
+                           });
+                           
+                           
+                          
+                    	 if(de!="de"){
+                          out +="<table>";
+                          out +="<tr>";                     
+                          out +="<th style='width:70%'><a style='color: black;'>"+items.name+"</a></th>";
+                          out +="<td><a target='_blank' href='https://map.kakao.com/link/to/"+items.name+","+items.lat+","+items.lng+"'>길찾기</a></td>";
+                          out +="</tr>";                          
+                          out +="<tr>";
+                          out +="<td colspan='2'>재고상태 :"+Stock+"</td>";
+                          out +="</tr>";
+                          out +="<tr>";
+                          out +="<td colspan='2'>입고 시간 :"+items.stock_at+"</td>";
+                          out +="</tr>";
+                          out +="</table>";
+                    	 }
+                     
+                          $("#div_result").html(out);     
+                            
+                           
+                           //마우스
+                         /*  var iwContent = '<div style="padding:5px;">'+items.yadmNm+'</div>';                        
+                           kakao.maps.event.addListener(marker, 'mouseover', function() {                            
+                               infowindow.open(map, marker);
+                           });
+                           
+                           kakao.maps.event.addListener(marker, 'mouseout', function() {
+                               infowindow.close();
+                           });                                                   
+                       
+                           kakao.maps.event.addListener(marker, 'click', function() {
+                              $("a[id=yadm"+(index+1)+"]").focus();
+                    
+                           });  */
+                           
+                      
+                           var infowindow = new kakao.maps.InfoWindow({
+                              content : iwContent
+                          }); 
+                           
+                          //마우스함수끝
+                           
+
+                       });
+               
+                   },error : function(data, err) {
+                       alert("결과내용이없음")
+                   }
+                });//ajax
+        	  
+        	  
+        	  
+        	  
+          });//마스크
+               
          
-         }
+	 };//location
+         
+         
+	   //마스크해봄
+   /*   const url ="https://8oi9s0nnth.apigw.ntruss.com/corona19-masks/v1/storesByGeo/json?lat="+lat+"&lng="+lon+"&m=5000";
+     const xhr = new XMLHttpRequest(); //리퀘스트 객체를 만든다.
+     xhr.onreadystatechange = function(){
+         
+	 };
+     xhr.open('GET', url, true);
+     xhr.send();  */
 
    if(navigator.geolocation){
-	   
-	   
-	   
 
-	
-	  
       navigator.geolocation.getCurrentPosition(onSuccess,onError)//geo funtion
       
       $("#nearhospital").click(function() {
@@ -453,7 +576,9 @@ $(function(){
 
 
    
-   
+    function custonSort(a, b) {
+        if(Number(a.distance) == Number(b.distance)){ return 0} 
+        return  Number(a.distance) > Number(b.distance) ? 1 : -1;} //정렬
  
  
  
@@ -489,8 +614,11 @@ $(function(){
                   <tr>
                      <td class="content">
                         <div>
+                        	
                            <button class="nearhospital koreanfont primary" id="nearhospital">주변 병원</button>
-                           <button class="nearpharmacy koreanfont" id="nearpharmacy">주변 약국</button><br>
+                           <button class="nearpharmacy koreanfont" id="nearpharmacy">주변 약국</button>
+                           <button class="nearpharmacy koreanfont" id="mask">주변 마스크 현황</button><br>
+                        
                            <!-- 지도 -->
                            <div id="result">                  
                               <div id='map' style='width: 100%; height: 350px;'></div>
@@ -551,12 +679,20 @@ $(function(){
    <script>
       $("#nearpharmacy").click(function() {
          $("#nearhospital").removeClass('primary');
+         $("#mask").removeClass('primary');
          $("#nearpharmacy").addClass('primary');
       })
       $("#nearhospital").click(function() {
          $("#nearpharmacy").removeClass('primary');
+         $("#mask").removeClass('primary');
          $("#nearhospital").addClass('primary');
       })
+      $("#mask").click(function() {
+    	 $("#nearhospital").removeClass('primary');
+    	 $("#nearpharmacy").removeClass('primary');
+         $("#mask").addClass('primary');
+      })
+      
    </script>
 </body>
 </html>
