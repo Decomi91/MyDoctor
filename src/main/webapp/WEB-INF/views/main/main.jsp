@@ -1,29 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
-   pageEncoding="utf-8"%>
+	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <!DOCTYPE HTML>
 
 <html>
 
 <head>
-    <title>My Doctor</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1, user-scalable=no" />
-    <link rel="stylesheet" href="resources/css/main.css" />
-    <script src="http://code.jquery.com/jquery-3.4.1.js"></script>
-    <!-- 지도관련 스크립트 -->
-    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
-    <style type="text/css">
-        .roding {
-            background-image: url("resources/images/ajax-loader.gif");
-            background-repeat: no-repeat;
-            background-position: center;
+<title>My Doctor</title>
+<meta charset="utf-8" />
+<meta name="viewport"
+	content="width=device-width, initial-scale=1, user-scalable=no" />
+<link rel="stylesheet" href="resources/css/main.css" />
+<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+<!-- 지도관련 스크립트 -->
+<script type="text/javascript"
+	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
+<style type="text/css">
+.roding {
+	background-image: url("resources/images/ajax-loader.gif");
+	background-repeat: no-repeat;
+	background-position: center;
+}
+</style>
 
-        }
-    </style>
 
-
-    <script type="text/javascript">
+<script type="text/javascript">
         //테스트 ddd   zxzㅁㄴㅇㅁㄴㅇ
         $(function() {
             //카카오톡 기본마크
@@ -455,94 +456,105 @@
 </head>
 
 <body class="is-preload">
-    <%-- <jsp:include page="header.jsp" /> --%>
-    <!-- Wrapper -->
-    <div id="wrapper">
-        <!-- Main -->
-        <div id="main">
-            <div class="inner">
-                <!-- Main -->
-                <!--             <div id="main"> -->
-                <!--                <div class="inner"> -->
-                <!-- Header -->
-                <header id="header">
+	<%-- <jsp:include page="header.jsp" /> --%>
+	<!-- Wrapper -->
+	<div id="wrapper">
+		<!-- Main -->
+		<div id="main">
+			<div class="inner">
+				<!-- Main -->
+				<!--             <div id="main"> -->
+				<!--                <div class="inner"> -->
+				<!-- Header -->
+				<header id="header">
 
-                    <a href="main" class="logo"><strong>My Doctor</strong> by
-                        team.5</a>
-                </header>
-                <!--                </div> -->
-                <!--             </div> -->
-                <!-- Banner: body -->
-                <section id="banner">
+					<a href="main" class="logo"><strong>My Doctor</strong> by
+						team.5</a>
+				</header>
+				<!--                </div> -->
+				<!--             </div> -->
+				<!-- Banner: body -->
+				<section id="banner" style="display:block; ">
 
-                    <table>
-                        <tbody>
-                            <tr>
-                                <td class="content">
-                                    <div>
+					<table>
+						<tbody>
+							<tr>
+								<td class="content">
+									<div>
 
-                                        <button class="nearhospital koreanfont primary" id="nearhospital">주변 병원</button>
-                                        <button class="nearpharmacy koreanfont" id="nearpharmacy">주변 약국</button>
-                                        <button class="nearpharmacy koreanfont" id="mask">주변 마스크 현황</button><br>
+										<button class="nearhospital koreanfont primary"
+											id="nearhospital">주변 병원</button>
+										<button class="nearpharmacy koreanfont" id="nearpharmacy">주변
+											약국</button>
+										<button class="nearpharmacy koreanfont" id="mask">주변
+											마스크 현황</button>
+										<br>
 
-                                        <!-- 지도 -->
-                                        <div id="result">
-                                            <div id='map' style='width: 100%; height: 350px;'></div>
-                                            <!-- <img src="resources/images/pic10.jpg" alt="" class = "mapsize"/> -->
-                                        </div>
-                                    </div>
-                                </td>
+										<!-- 지도 -->
+										<div id="result">
+											<div id='map' style='width: 100%; height: 350px;'></div>
+											<!-- <img src="resources/images/pic10.jpg" alt="" class = "mapsize"/> -->
+										</div>
+									</div>
+								</td>
 
-                                <td class="content" id="roding">
-                                    <div>
-                                        <select name="demo-category" id="demo-category" class="categorysel">
-                                            <option value="">진료과목</option>
-                                            <option value="01">내과</option>
-                                            <option value="04">외과</option>
-                                            <option value="05">정형외과</option>
-                                            <option value="08">성형외과</option>
-                                            <option value="10">산부인과</option>
-                                            <option value="11">소아청소년과</option>
-                                            <option value="12">안과</option>
-                                            <option value="13">이비인후과</option>
-                                            <option value="14">피부과</option>
-                                            <option value="15">비뇨기과</option>
-                                            <option value="49">치과</option>
-                                        </select>
-                                        <section id="search" class="alt hospitalsearch">
-                                            <input type="text" name="query" id="hs_query" placeholder="병원이름을 입력하세요." />
-                                        </section>
+								<td class="content" id="roding">
+									<div>
+										<select name="demo-category" id="demo-category"
+											class="categorysel">
+											<option value="">진료과목</option>
+											<option value="01">내과</option>
+											<option value="04">외과</option>
+											<option value="05">정형외과</option>
+											<option value="08">성형외과</option>
+											<option value="10">산부인과</option>
+											<option value="11">소아청소년과</option>
+											<option value="12">안과</option>
+											<option value="13">이비인후과</option>
+											<option value="14">피부과</option>
+											<option value="15">비뇨기과</option>
+											<option value="49">치과</option>
+										</select>
+										<section id="search" class="alt hospitalsearch">
+											<input type="text" name="query" id="hs_query"
+												placeholder="병원이름을 입력하세요." />
+										</section>
 
-                                        <!-- 병원 list -->
-                                        <div style="overflow:auto;" class="mapsize" id="div_result">
-                                        </div>
-                                    </div>
-                                </td>
-                            </tr>
-                        </tbody>
-                    </table>
+										<!-- 병원 list -->
+										<div style="overflow: auto;" class="mapsize" id="div_result">
+										</div>
+									</div>
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				<div ><div style="float: left; width: 30%">${el.e1 }</div><div style="float: right; width: 70%">${el.e2 }</div></div>
 
+				
 
-                </section>
-                <!-- banner end -->
+				</section>
+				<!-- banner end -->
 
-
-            </div>
-        </div>
-        <!-- Sidebar -->
-        <jsp:include page="../header/footer.jsp"></jsp:include>
-
-    </div>
-
-    <!-- Scripts -->
+				<!-- corona -->
+			
 
 
-    <script src="resources/js/jquery.min.js"></script>
-    <script src="resources/js/browser.min.js"></script>
-    <script src="resources/js/breakpoints.min.js"></script>
-    <script src="resources/js/util.js"></script>
-    <script src="resources/js/main.js"></script>
-    <script>
+			</div>
+		</div>
+		<!-- Sidebar -->
+		<jsp:include page="../header/footer.jsp"></jsp:include>
+
+	</div>
+
+	<!-- Scripts -->
+
+
+	<script src="resources/js/jquery.min.js"></script>
+	<script src="resources/js/browser.min.js"></script>
+	<script src="resources/js/breakpoints.min.js"></script>
+	<script src="resources/js/util.js"></script>
+	<script src="resources/js/main.js"></script>
+	<script>
         $("#nearpharmacy").click(function() {
             $("#nearhospital").removeClass('primary');
             $("#mask").removeClass('primary');

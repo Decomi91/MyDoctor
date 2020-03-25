@@ -16,16 +16,16 @@ create table hospitals(
 	addr		varchar2(100) not null,
 	hphone		number(12) not null,
 	yki			varchar2(100) not null,
-	monStart	number(4),
-	monEnd		number(4),
-	tueStart	number(4),
-	tueEnd		number(4),
-	wedStart	number(4),
-	wedEnd		number(4),
-	thuStart	number(4),
-	thuEnd		number(4),
-	friStart	number(4),
-	friEnd		number(4),
+	monStart	number(4) not null,
+	monEnd		number(4) not null,
+	tueStart	number(4) not null,
+	tueEnd		number(4) not null,
+	wedStart	number(4) not null, 
+	wedEnd		number(4) not null,
+	thuStart	number(4) not null,
+	thuEnd		number(4) not null,
+	friStart	number(4) not null,
+	friEnd		number(4) not null,
 	satStart	number(4) default 0,
 	satEnd		number(4) default 0,
 	sunStart	number(4) default 0,
@@ -41,7 +41,7 @@ create table members(
 	password	varchar2(15) not null,
 	name		varchar2(20) not null,
 	phone		number(12) not null,
-	address		varchar2(100),
+	address		varchar2(100) not null,
 	email		varchar2(50) primary key,
 	birth		date,
 	gender		number(1),
@@ -78,7 +78,7 @@ create table adminBoard(
 )
 --병원에 문의
 create table boards (
-  writeId varchar2(15),
+  writeId varchar2(15) not null,
   boardsTarget varchar2(15) references hospitals(id),
   boardNum number primary key,
   secret number(1) default 1 not null ,
@@ -86,7 +86,7 @@ create table boards (
   subject varchar2(100) not null,
   content varchar2(4000) not null,
   uploaddate date,
-  reply varchar2(3000)
+  reply varchar2(3000) not null
 )
 
 create table reviews(
