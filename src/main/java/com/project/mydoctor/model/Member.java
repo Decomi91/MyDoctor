@@ -10,6 +10,7 @@ public class Member {
 	private String birth;
 	private byte gender;
 	private byte userkey;
+	
 	public String getId() {
 		return id;
 	}

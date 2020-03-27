@@ -123,8 +123,8 @@ public class MemberController {
 	@PostMapping(value = "/loginMember")
 	public ModelAndView loginMember(Member member, String user, ModelAndView mv, HttpSession session,
 			HttpServletResponse response) throws Exception {
-		int result = 0;
-		int chk = 0;
+		int result = 0;//아이디확인
+		int chk = 0; //일반회원,병원
 		response.setContentType("text/html;charset=utf-8");
 
 		if (user.equals("pub")) {
@@ -135,19 +135,20 @@ public class MemberController {
 			chk = 2;
 		}
 
-		if (result == 1) {
+		if (result == 1) {//아이디확인있으면
 			session.setAttribute("loginid", member.getId());
 			session.setAttribute("chk", chk);
 
-			if (member.getId().equals("admin")) {
+			if (member.getId().equals("admin")) {//어드민확인용
 				mv.setViewName("redirect:/hospitalcontrol");
 				session.setAttribute("accepctReq", hospitalService.getSignRequestCount());
 				session.setAttribute("adminReq", boardService.getAdminRequestNoCheckListCount());
-			}else {
+			}else {//어드민이아니면
 				mv.setViewName("redirect:/main");
-				if(chk==1) {
+				
+				if(chk==1) {//일반회원조건문
 					session.setAttribute("yesaccept", mypageService.reserveCount(member.getId()));
-				}else {
+				}else {//병원회원
 					List<Integer> mypageList = reserveService.getReserves(member.getId());
 					session.setAttribute("accepted", mypageList.get(0));
 					session.setAttribute("wait", mypageList.get(1));
@@ -155,7 +156,7 @@ public class MemberController {
 					session.setAttribute("qnawait", qnaService.getNoReplyQnaCount(member.getId()));
 				}
 			}
-		} else {
+		} else {//아이디가없으면
 			PrintWriter out = response.getWriter();
 			out.print("<script>alert('아이디 또는 비밀번호를 확인해주세요'); history.go(-1);</script>");
 			out.close();

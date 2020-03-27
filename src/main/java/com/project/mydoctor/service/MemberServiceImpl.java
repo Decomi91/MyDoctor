@@ -131,5 +131,11 @@ public class MemberServiceImpl implements MemberService {
 		return (member == null) ? 0 : 1;	// 중복X : 0, 중복O : 1
 	}
 
+	@Override
+	public Member kakaoid(String id) {
+		Member m = mDao.ididCheck(id);
+		return m;
+	}
+
 }
 

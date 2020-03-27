@@ -34,6 +34,11 @@
                               찾기 </a><a href="joinForm" class="privacybtn">회원가입</a></li>
                      </ul>
                   </form>
+                 <div id="kakao_id_login" style="text-align: center"> 
+                 <a href="${kakao_url}"> <img width="223" src="resources/images/kakao.png" /></a> 
+                 </div>
+
+
                </nav>
             </c:if>
             <!-- id값=null아닌경우_마이페이지 -->
