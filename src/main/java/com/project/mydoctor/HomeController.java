@@ -137,7 +137,7 @@ public class HomeController {
 		System.out.println("카카오 아이디확인용" +result);
 		
 		if(result!=null) {//있을경우
-			session.setAttribute("loginid", result.getName());
+			session.setAttribute("loginid", result.getId());
 			session.setAttribute("chk", chk);
 			session.setAttribute("yesaccept", mypageService.reserveCount(result.getId()));
 			System.out.println("있어서 완료함");
@@ -145,7 +145,7 @@ public class HomeController {
 		}else {//없을경우 DB안에 넣는다			
 			memberservice.insertMember(m);
 			System.out.println("디비삽입성공");
-			session.setAttribute("loginid", m.getName());
+			session.setAttribute("loginid", m.getId());
 			session.setAttribute("chk", chk);
 			session.setAttribute("yesaccept", mypageService.reserveCount(m.getId()));			
 			System.out.println("삽입후 완료");
