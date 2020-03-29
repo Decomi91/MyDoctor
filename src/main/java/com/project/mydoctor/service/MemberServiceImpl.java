@@ -133,8 +133,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member kakaoid(String id) {
-		Member m = mDao.ididCheck(id);
-		return m;
+		
+		return mDao.ididCheck(id);
+	}
+
+	@Override
+	public Member bcpub(String id) {		
+		return null;
 	}
 
 }

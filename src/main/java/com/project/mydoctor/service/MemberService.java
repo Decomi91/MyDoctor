@@ -5,6 +5,8 @@ import java.util.List;
 import com.project.mydoctor.model.Member;
 
 public interface MemberService {
+	
+	Member bcpub(String id);
 
 	int insertMember(Member member);
 

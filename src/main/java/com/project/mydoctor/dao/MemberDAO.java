@@ -89,5 +89,9 @@ public class MemberDAO {
 		
 		return sqlSession.selectOne("Members.findPwd", map);
 	}
+	
+	public Member bclogin(String id) {
+		return sqlSession.selectOne("Members.bcpub",id);
+	}
 }
 
