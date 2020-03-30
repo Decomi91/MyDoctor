@@ -65,6 +65,12 @@ public class Member {
 	public void setUserkey(byte userkey) {
 		this.userkey = userkey;
 	}
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone + ", address="
+				+ address + ", email=" + email + ", birth=" + birth + ", gender=" + gender + ", userkey=" + userkey
+				+ "]";
+	}
 	
 	
 }

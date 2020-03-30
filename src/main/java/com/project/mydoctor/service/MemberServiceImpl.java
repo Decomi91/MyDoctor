@@ -139,7 +139,7 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public Member bcpub(String id) {		
-		return null;
+		return mDao.bclogin(id);
 	}
 
 }

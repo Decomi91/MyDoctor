@@ -142,7 +142,9 @@ public class MemberController {
 		// memberService.bcpub(member.getId()).getPassword();
 		// System.out.println(bc.matches(member.getPassword(),
 		// memberService.bcpub(member.getId()).getPassword()));
-
+		System.out.println(member);
+		System.out.println(memberService.bcpub(member.getId()));
+		//System.out.println(bc.matches(member.getPassword(), memberService.bcpub(member.getId())));
 		if (user.equals("pub")) {
 			// 널포인트땜에 예외처리해놓습니다
 			//조건문처리보다는 깔끔해보여서 했습니다
@@ -164,7 +166,9 @@ public class MemberController {
 			result = memberService.isHosId(member);
 			chk = 2;
 		}
-
+		System.out.println(member);
+		System.out.println(result);
+		System.out.println(chk);
 		if (result == 1) {// 아이디확인있으면
 			session.setAttribute("loginid", member.getId());
 			session.setAttribute("chk", chk);
