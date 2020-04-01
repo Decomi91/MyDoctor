@@ -82,7 +82,7 @@ body {
 
 .card {
 	/* height: 430px; */
-	height: 710px;
+	height: 730px;
 	margin-top: auto;
 	margin-bottom: auto;
 	width: 510px;
@@ -330,10 +330,10 @@ input:focus {
 						<input id="sunEnd" name="sunEnd" placeholder="일 종료시간 (휴무 00 표기)"
 							class="day" required maxlength="4" pattern="[0-9]{4}"
 							title="ex)11:00 -> 1100">
-						<input id="lunchStart" name="lunchStart" placeholder="점심 종료시간 (기호 :생략)"
+						<input id="lunchStart" name="lunchStart" placeholder="점심 시작시간 (기호 :생략)"
 							class="day" required maxlength="4" pattern="[0-9]{4}"
-							title="ex)11:00 -> 1100">
-						<input id="lunchEnd" name="lunchEnd" placeholder="점심 종료시간 (기호 :생략)"
+							title="ex)11:00 -> 1100"> <span style="color: white;">~</span>
+						 <input id="lunchEnd" name="lunchEnd" placeholder="점심 종료시간 (기호 :생략)"
 							class="day" required maxlength="4" pattern="[0-9]{4}"
 							title="ex)11:00 -> 1100">
 
@@ -820,7 +820,7 @@ input:focus {
       	                    success: function(data) {
       	                    	var result =data.response.body.items.item;
       	                        //서버에서 json 데이터 response 후 목록에 뿌려주기 위함
-      	                        response(
+      	                       response(
       	                            $.map(result, function(item) {
       	                            
       	                            	
@@ -889,11 +889,7 @@ input:focus {
       	        }
       	    });
            
-        
-           
-           
-           
-           
+
           }); //onload;
           
           //폼서브밋 하이픈삭제

@@ -90,4 +90,13 @@ public class Qna {
 	public void setReply(String reply) {
 		this.reply = reply;
 	}
+
+	@Override
+	public String toString() {
+		return "Qna [writeId=" + writeId + ", boardsTarget=" + boardsTarget + ", boardNum=" + boardNum + ", secret="
+				+ secret + ", head=" + head + ", subject=" + subject + ", content=" + content + ", uploaddate="
+				+ uploaddate + ", reply=" + reply + ", yadmnm=" + yadmnm + "]";
+	}
+	
+	
 }

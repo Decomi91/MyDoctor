@@ -34,7 +34,7 @@
  	</select>
  	<!-- 김건수 즐겨찾기 처음 -->
 	<select id="fa_sel" parameterType="String" resultType="String">
- 	select id from hospitals where yki=#{yki}
+ 	select id from hospitals where yki=#{yki} and joinok = 1
  	</select> 
  	<!-- 김건수 즐겨찾기 두번째 -->
  	<select id="fa_re" resultType="String">

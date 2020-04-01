@@ -109,8 +109,7 @@ public class MemberController {
 		// String encryptPass = bc.encode(member.getPassword());
 		// 숫자높아질수록 해쉬를 생성하고 검증하는 시간 길어지고 시간이길어짐 기본값 10- > 보안우수
 		// member.setPassword(BCrypt.hashpw(member.getPassword(), BCrypt.gensalt(10)));
-		member.setPassword(bc.encode(member.getPassword()));
-		System.out.println("암호화된것" + member.getPassword());
+		member.setPassword(bc.encode(member.getPassword()));		
 		int result = memberService.insertMember(member);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -138,13 +137,6 @@ public class MemberController {
 
 		response.setContentType("text/html;charset=utf-8");
 
-		// Member m = new Member();
-		// memberService.bcpub(member.getId()).getPassword();
-		// System.out.println(bc.matches(member.getPassword(),
-		// memberService.bcpub(member.getId()).getPassword()));
-		System.out.println(member);
-		System.out.println(memberService.bcpub(member.getId()));
-		//System.out.println(bc.matches(member.getPassword(), memberService.bcpub(member.getId())));
 		if (user.equals("pub")) {
 			// 널포인트땜에 예외처리해놓습니다
 			//조건문처리보다는 깔끔해보여서 했습니다
@@ -160,15 +152,10 @@ public class MemberController {
 				out.close();
 				return null;
 			}
-			// result = memberService.isId(member);
-			// chk = 1;
 		} else {
 			result = memberService.isHosId(member);
 			chk = 2;
 		}
-		System.out.println(member);
-		System.out.println(result);
-		System.out.println(chk);
 		if (result == 1) {// 아이디확인있으면
 			session.setAttribute("loginid", member.getId());
 			session.setAttribute("chk", chk);

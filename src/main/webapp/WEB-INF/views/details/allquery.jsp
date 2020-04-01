@@ -62,11 +62,12 @@ $(function(){
 				"kim2" :$("#kim2 option:selected").val(),
 				"kim3" : "kim3"
 			},
-			success : function(data) {				
+			success : function(data) {
+				console.log(data)
 				$('tbody').last().append(data);		
 			},
 			error : function(err) {
-				alert("페이지가 더이상없습니다");
+				
 			}
 
 		});//ajax

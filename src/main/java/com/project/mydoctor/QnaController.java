@@ -61,6 +61,8 @@ public class QnaController {
 	@RequestMapping(value = "/qnaWrite.net", method = RequestMethod.POST)
 	public void qna_write(HttpSession session, HttpServletResponse response, Qna qna,
 			@RequestParam(value = "ykiho") String ykiho) throws IOException {
+		System.out.println("여기인거같은데");
+		System.out.println(qna);
 		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
 		System.out.println("dd" + ykiho);
@@ -69,12 +71,14 @@ public class QnaController {
 		String hosId = hospitalService.getHosId(ykiho);
 		System.out.println("hosid = " + hosId);
 		qna.setBoardsTarget(hosId);
-
+		
 		System.out.println(qna.getBoardNum());
 		System.out.println(qna.getBoardsTarget());
 		System.out.println(qna.getContent());
 		System.out.println(qna.getHead());
 		System.out.println(qna.getReply());
+		
+		
 		int result = qnaService.insert(qna);
 
 		if (result == 1) {

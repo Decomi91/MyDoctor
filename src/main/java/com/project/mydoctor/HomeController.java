@@ -126,16 +126,11 @@ public class HomeController {
 		m.setGender((byte) 0);
 		m.setUserkey((byte) 1);
 		
-
-		
-		
-		Member result = null;
-		System.out.println("멤버초기상태"+result);
+		Member result = null;		
 		int chk = 1;
 		
 		result = memberservice.kakaoid(id);
-		System.out.println("카카오 아이디확인용" +result);
-		
+				
 		if(result!=null) {//있을경우
 			session.setAttribute("loginid", result.getId());
 			session.setAttribute("chk", chk);
@@ -151,21 +146,7 @@ public class HomeController {
 			System.out.println("삽입후 완료");
 		}
 		
-		mv.setViewName("redirect:/main");
-		
-		System.out.println("sns로그인컨트롤러탔다\n");
-		System.out.println("이메일");	
-		System.out.println(kemail);
-		System.out.println("이름");	
-		System.out.println(kname);
-		System.out.println("성별");
-		System.out.println(kgender);
-		System.out.println("생일");
-		System.out.println(kbirthday);
-		System.out.println("나이");
-		System.out.println(kage);
-		System.out.println("이미지");
-		System.out.println(kimage);		
+		mv.setViewName("redirect:/main");	
 		return mv;
 	}
 
