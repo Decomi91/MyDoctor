@@ -1,17 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=utf-8"
 	pageEncoding="utf-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE HTML>
 
 <html>
 
 <head>
 <title>My Doctor</title>
+ 
 <meta charset="utf-8" />
+<meta name="_csrf" content="${_csrf.token}"/>
+
+<meta name="_csrf_header" content="${_csrf.headerName}"/>
+
+
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, user-scalable=no" />
 <link rel="stylesheet" href="resources/css/main.css" />
-<script src="http://code.jquery.com/jquery-3.4.1.js"></script>
+ <!--  <script src="https://code.jquery.com/jquery-3.4.1.js"></script> --> 
+  <script type="text/javascript" src="resources/js/jquery-3.4.1.min.js"></script> 
 <!-- 지도관련 스크립트 -->
 <script type="text/javascript"
 	src="//dapi.kakao.com/v2/maps/sdk.js?appkey=938fec5f1038f5f89dbb95889b66091b&libraries=services"></script>
@@ -27,8 +35,12 @@
 <script type="text/javascript">
         //테스트 ddd   zxzㅁㄴㅇㅁㄴㅇ
         $(function() {
+        	var token = $("meta[name='_csrf']").attr("content");
+			console.log(token);
+        	var header = $("meta[name='_csrf_header']").attr("content");
+			console.log(header);
             //카카오톡 기본마크
-            var markerImage = new kakao.maps.MarkerImage("http://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", new kakao.maps.Size(24, 35)),
+            var markerImage = new kakao.maps.MarkerImage("https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png", new kakao.maps.Size(24, 35)),
                 //자신위치 마커           
                 mymarkerImage = new kakao.maps.MarkerImage('resources/images/mymarker.png', new kakao.maps.Size(64, 69), {
                     offset: new kakao.maps.Point(27, 69)
@@ -98,10 +110,11 @@
                         'xPos': xPos,
                         'yPos': yPos
                     },
-                    beforeSend: function() {
+                    beforeSend: function(xhr) {                    	                    
                         $('#roding').addClass('roding');
                         $("#nearpharmacy").prop("disabled", true);
                         $("#mask").prop("disabled", true);
+                        xhr.setRequestHeader(header, token);
                     },
                     complete: function() {
                         $('#roding').removeClass('roding');
@@ -158,11 +171,12 @@
                         'cate': $("#demo-category option:selected").val(),
                         'query': $("#hs_query").val()
                     },
-                    beforeSend: function() {
+                    beforeSend: function(xhr) {
                         $("#div_result").empty();
                         $('#roding').addClass('roding');
                         $("#nearpharmacy").prop("disabled", true);
                         $("#mask").prop("disabled", true);
+                        xhr.setRequestHeader(header, token);
                     },
                     complete: function() {
                         $('#roding').removeClass('roding');
@@ -226,7 +240,8 @@
 
 
 
-            function location(lon, lat, map) {
+            function location(lon, lat) {
+            	
                 map = maps(lon, lat, 7);
 
                 mymarker = myplace(lon, lat);
@@ -249,6 +264,15 @@
                     }
                 });
 
+                
+
+                   $("#nearhospital").click(function() {
+                       $("#map").empty();
+                       $("#div_result").empty();
+                       location(lon, lat); 
+                   }); //clcik      
+ 
+                
 
                 //약국
                 $("#nearpharmacy").click(function() {
@@ -417,35 +441,24 @@
 
 
             }; //location
+            
+            
 
             if (navigator.geolocation) {
-
                 navigator.geolocation.getCurrentPosition(onSuccess, onError) //geo funtion
 
-                $("#nearhospital").click(function() {
-                    $("#map").empty();
-                    $("#div_result").empty();
-                    navigator.geolocation.getCurrentPosition(onSuccess, onError) //geo funtion
-                }); //clcik      
-
-
-
-
             } else {
-                alert("뭥미");
+                alert("geolocation 미지원 브라우저입니다");
             }
-
-
-
 
             function onSuccess(position) {
                 var lon = position.coords.longitude, // 경도
-                    lat = position.coords.latitude; // 위도 
-
-                location(lon, lat, map);
+                    lat = position.coords.latitude; // 위도          
+                location(lon, lat);
             }
 
             function onError() {
+       
                 var lon = 126.9738851, // 경도
                     lat = 37.5646291; // 위도                  
                 location(lon, lat);
@@ -540,12 +553,20 @@
 
 
 			</div>
+		
 		</div>
 		<!-- Sidebar -->
 		<jsp:include page="../header/footer.jsp"></jsp:include>
 
 	</div>
-
+		<div>
+			<form>
+			<sec:csrfInput/>
+			</form>
+			</div>
+		
+	
+	
 	<!-- Scripts -->
 
 

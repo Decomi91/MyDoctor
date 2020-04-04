@@ -1,11 +1,72 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/security"
-    xmlns:beans="http://www.springframework.org/schema/beans"
-    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-    xsi:schemaLocation="http://www.springframework.org/schema/beans
+<beans:beans
+	xmlns="http://www.springframework.org/schema/security"
+	xmlns:beans="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans
     http://www.springframework.org/schema/beans/spring-beans.xsd
     http://www.springframework.org/schema/security
-    http://www.springframework.org/schema/security/spring-security.xsd">      
-    <beans:bean id="bcryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />  
- 
+    http://www.springframework.org/schema/security/spring-security.xsd">
+	<beans:bean id="bcryptPasswordEncoder"
+		class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder" />
+	<http auto-config='true' use-expressions="true">
+		<intercept-url pattern="/*" requires-channel="https"
+			access="permitAll" />
+		<logout logout-url="/logout" logout-success-url="/main"
+			invalidate-session="true" />
+	<!-- 		<http-basic/>
+			 <csrf request-matcher-ref="csrfMatcher"/> -->
+		<!--  <intercept-url pattern="/intro_hs"  requires-channel="http"/> -->
+			<!-- 특정 URI <intercept-url pattern="/intro_hs" requires-channel="http"/>
+		<csrf disabled="false" /> -->
+		
+	
+   <!--  <headers>
+        <frame-options policy="SAMEORIGIN"/>
+    </headers> -->
+	</http>
+	
+	 
+	
+	
+<!-- 	<beans:bean id="csrfMatcher" class="org.springframework.security.web.util.matcher.AndRequestMatcher">
+    <beans:constructor-arg value="#{T(org.springframework.security.web.csrf.CsrfFilter).DEFAULT_CSRF_MATCHER}"/>
+    <beans:constructor-arg>
+        <beans:bean class="org.springframework.security.web.util.matcher.NegatedRequestMatcher"></beans:bean>
+          <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+            <beans:constructor-arg value="intro_hs"></beans:constructor-arg>
+          </beans:bean>                
+  </beans:constructor-arg>
+</beans:bean>
+	
+	
+	
+
+ -->
+<!-- <beans:bean id="csrfMatcher" class="org.springframework.security.web.util.matcher.OrRequestMatcher">
+        <beans:constructor-arg>
+            <beans:list value-type="org.springframework.security.web.util.matcher.RequestMatcher">
+                <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                    <beans:constructor-arg name="pattern" value="**/intro_hs"/>
+                    <beans:constructor-arg name="httpMethod" value="POST"/>
+                </beans:bean>
+                <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                    <beans:constructor-arg name="pattern" value="**/intro_hs"/>
+                    <beans:constructor-arg name="httpMethod" value="PUT"/>
+                </beans:bean>
+                <beans:bean class="org.springframework.security.web.util.matcher.AntPathRequestMatcher">
+                    <beans:constructor-arg name="pattern" value="**/intro_hs"/>
+                    <beans:constructor-arg name="httpMethod" value="DELETE"/>
+                </beans:bean>
+          </beans:list>
+        </beans:constructor-arg>
+</beans:bean> -->
+
+
+ 	<authentication-manager>
+<!-- 		<authentication-provider> <user-service> <user name="master" password="kim1234" 
+			authorities="ROLE_USER" /> </user-service> </authentication-provider> -->
+	</authentication-manager> 
+
+
 </beans:beans>

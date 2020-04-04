@@ -169,7 +169,7 @@ table tr td:nth-child(2n-1) {
                               <td>${work.trmtWedStart}  ~ ${work.trmtWedEnd}</td>
                               <td style = "font-weight: bold; color: black;">점심시간</td>
                               <c:choose>
-                              <c:when test="${fn:contains(work.lunchWeek,'없음')}"><td style="color: red">점심시간 없음</td></c:when>
+                              <c:when test="${fn:contains(work.lunchWeek,'없음')}"> <td style="color: red">점심시간 없음</td></c:when>
                               <c:otherwise><td style = "font-weight: bold; color: black;">PM ${work.lunchWeek }</td></c:otherwise>
                               </c:choose> 
                            </tr>

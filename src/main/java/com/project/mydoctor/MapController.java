@@ -44,7 +44,7 @@ import com.project.mydoctor.service.HospitalService;
  * @맵관련
  *
  */
-@CrossOrigin(origins = "*")
+
 @Controller
 public class MapController {
 	private static final Logger logger = LoggerFactory.getLogger(MapController.class);
@@ -219,9 +219,10 @@ public class MapController {
 	 * @author 김건수
 	 * @현재위치 좌표
 	 */
-	@ResponseBody
-	@RequestMapping(value = "intro_hs")
+	
+	@RequestMapping(value = "intro_hs",method = RequestMethod.POST)
 	public void intro_hs(HttpServletRequest req, HttpServletResponse res) throws Exception {
+		System.out.println("들어옴");
 		String xPos = req.getParameter("xPos");
 		String yPos = req.getParameter("yPos");
 		String addr = "http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?numOfRows=100&ServiceKey=G9rzPM3G3d1FVN%2F8ZyPSkwQ7B0IICxPX3Sks%2FrUY2wLu94BsUzYPUHzcNhSwJj%2FIjuLsoBMYMJ7JcX4thVA7Lg%3D%3D";

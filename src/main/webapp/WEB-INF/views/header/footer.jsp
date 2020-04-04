@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+    <%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!-- Sidebar -->
 
       
@@ -20,6 +21,7 @@
             <c:if test="${loginid == null }">
                <nav id="menu">
                   <form action="loginMember" method="post">
+                  	 <sec:csrfInput/>
                      <header class="major">
                         <h2>Login</h2>
                      </header>
@@ -46,7 +48,10 @@
             <c:if test="${loginid !=null && !(loginid eq 'admin') && chk==1}">
                <section>
                   <header class="major">
-                     <h2>${loginid }님 환영합니다</h2>
+                  <c:choose>
+                  	<c:when test="${kakao !=null }"><h2>${kakao }님 환영합니다</h2></c:when>                  
+                     <c:when test="${kakao eq null }"><h2>${loginid }님 환영합니다</h2></c:when>
+                     </c:choose>
                   </header>
                   <div class="box" style="margin-bottom: 1em">
                      <p class="reservationnoti">
@@ -65,7 +70,14 @@
                      <li class="icon solid fas fa-clipboard-list mypageacess"><a
                         href="finish.net">진료기록</a></li>
                   </ul>
-                  <a href="logout" class="button primary fit koreanfont">로그아웃</a>
+                  <form action="logout" method="POST"> 
+                   <sec:csrfInput/>
+                  <input type="submit" class="button primary fit koreanfont" value="로그아웃"/> 
+                  </form>
+
+
+                  
+                  <!-- <a href="logout" class="button primary fit koreanfont">로그아웃</a> -->
                </section>
             </c:if>
             <!-- 병원id로 로그인했을 경우 -->

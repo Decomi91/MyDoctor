@@ -16,6 +16,7 @@ import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -45,6 +46,9 @@ public class HomeController {
 	
 	@Autowired
 	private MypageService mypageService;
+	
+	@Autowired
+	private BCryptPasswordEncoder bc;
 	
 	
 	String url = "http://ncov.mohw.go.kr/";
@@ -124,7 +128,7 @@ public class HomeController {
 		m.setEmail(kakao_account.path("email").asText());
 		m.setBirth("01"+kakao_account.path("birthday").asText());
 		m.setGender((byte) 0);
-		m.setUserkey((byte) 1);
+		
 		
 		Member result = null;		
 		int chk = 1;
@@ -135,13 +139,15 @@ public class HomeController {
 			session.setAttribute("loginid", result.getId());
 			session.setAttribute("chk", chk);
 			session.setAttribute("yesaccept", mypageService.reserveCount(result.getId()));
-			System.out.println("있어서 완료함");
-			
-		}else {//없을경우 DB안에 넣는다			
+			session.setAttribute("kakao", result.getName());
+			System.out.println("있어서 완료함");		
+		}else {//없을경우 DB안에 넣는다
+			m.setPassword(bc.encode(m.getPassword()));
 			memberservice.insertMember(m);
 			System.out.println("디비삽입성공");
 			session.setAttribute("loginid", m.getId());
 			session.setAttribute("chk", chk);
+			session.setAttribute("kakao", m.getName());
 			session.setAttribute("yesaccept", mypageService.reserveCount(m.getId()));			
 			System.out.println("삽입후 완료");
 		}

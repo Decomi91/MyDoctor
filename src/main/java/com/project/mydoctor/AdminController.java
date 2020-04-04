@@ -234,7 +234,7 @@ public class AdminController {
 		} else if(session.getAttribute("loginid").equals("admin")) {
 			int result =  hosService.setJoinOkay(hosid);
 			if(result == 1) {
-				session.setAttribute("accepctReq", (int)session.getAttribute("accepctReq")-1);
+				session.setAttribute("accepctReq", (Integer)session.getAttribute("accepctReq")-1);
 				mv.setViewName("redirect:/hospitalSignlist");
 			}else {
 				PrintWriter out = response.getWriter();
@@ -306,7 +306,7 @@ public class AdminController {
 			int result = boardService.setAdminRequestReply(board);
 			if(result == 1) {
 				if(board.getChecking()==1) {					
-					session.setAttribute("adminReq", (int)session.getAttribute("adminReq")-1);
+					session.setAttribute("adminReq", (Integer)session.getAttribute("adminReq")-1);
 				}
 				mv.setViewName("redirect:/requestToAdmin");				
 			}else {

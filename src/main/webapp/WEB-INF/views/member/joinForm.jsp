@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="sec" uri="http://www.springframework.org/security/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -72,6 +73,7 @@ input[type='radio']+label{margin-top: 0;}
 				
 				<section id="banner" style="padding-top: 45px;">
 			         <form id="form" name="joinform" action="join" method="post" style="min-width:100%;display: flex;">
+			         	<sec:csrfInput/>
 			         	<table class="table">
 			         		<caption id="menu" style = "color: black"><font size = 10>회원가입</font></caption>
 			         		<tbody>

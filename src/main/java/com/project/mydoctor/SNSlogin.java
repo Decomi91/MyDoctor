@@ -16,7 +16,7 @@ import org.codehaus.jackson.map.ObjectMapper;
 public class SNSlogin {
 	
 	private static final String CLIENT_ID = "e83a4d65bd01e957173ff18b53ca8b11";
-	private static final String REDIRECT_URI = "http://localhost:8088/mydoctor/kakaologin";
+	private static final String REDIRECT_URI = "https://192.168.0.4:8443/mydoctor/kakaologin";
 
 	String url = "http://ncov.mohw.go.kr/";
 

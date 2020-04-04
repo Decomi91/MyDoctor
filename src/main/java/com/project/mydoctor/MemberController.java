@@ -16,8 +16,11 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.web.authentication.logout.SecurityContextLogoutHandler;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -132,6 +135,7 @@ public class MemberController {
 	@PostMapping(value = "/loginMember")
 	public ModelAndView loginMember(Member member, String user, ModelAndView mv, HttpSession session,
 			HttpServletResponse response) throws Exception {
+		System.out.println("로그인");
 		int result = 0;// 아이디확인
 		int chk = 0; // 일반회원,병원
 
@@ -186,9 +190,11 @@ public class MemberController {
 		return mv;
 	}
 
-	@GetMapping(value = "/logout")
-	public ModelAndView logout(HttpSession session, ModelAndView mv) {
+	@PostMapping(value = "/logout")
+	public ModelAndView logout(HttpSession session, ModelAndView mv,HttpServletRequest request,HttpServletResponse response) {
+		System.out.println("로그아웃");
 		session.invalidate();
+	
 		mv.setViewName("redirect:/main");
 		return mv;
 	}
