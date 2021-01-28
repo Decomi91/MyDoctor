@@ -227,6 +227,7 @@ a.talkShort {
 </style>
 </head>
 <body>
+<c:if test="${chk eq '1' and hs_empty eq '1'}">
 <div class="section qnaV15" id="detail04">
 	<div class="sorting">
 		<h2>Q&amp;A </h2>
@@ -659,5 +660,6 @@ a.talkShort {
 	
 	
 </script>
+</c:if>
 </body>
 </html>

@@ -306,7 +306,7 @@ public class MypageController {
 		}
 
 		List<Reservation> rv = mypageService.select(memberId, page, limit);
-
+		System.out.println(rv.get(0).getHosid());
 		mv.setViewName("mypage/mypage");
 		mv.addObject("rv", rv);
 		mv.addObject("page", page);

@@ -75,5 +75,23 @@ public class MemberDAO {
 	public int removehosaccount(Member mem) {
 		return sqlSession.update("Members.removehosaccount", mem);
 	}
+
+	// yuri
+	public Member ididCheck(String id) {
+		return sqlSession.selectOne("Members.ididCheck", id);
+}
+	public String findId(Map<String, Object> map) {
+		// TODO Auto-generated method stub
+		return sqlSession.selectOne("Members.findId", map);
+	}
+
+	public int findPwd(Map<String, Object> map) {
+		
+		return sqlSession.selectOne("Members.findPwd", map);
+	}
+	
+	public Member bclogin(String id) {
+		return sqlSession.selectOne("Members.bcpub",id);
+	}
 }
 

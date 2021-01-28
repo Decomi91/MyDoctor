@@ -10,6 +10,7 @@ public class Member {
 	private String birth;
 	private byte gender;
 	private byte userkey;
+	
 	public String getId() {
 		return id;
 	}
@@ -63,6 +64,12 @@ public class Member {
 	}
 	public void setUserkey(byte userkey) {
 		this.userkey = userkey;
+	}
+	@Override
+	public String toString() {
+		return "Member [id=" + id + ", password=" + password + ", name=" + name + ", phone=" + phone + ", address="
+				+ address + ", email=" + email + ", birth=" + birth + ", gender=" + gender + ", userkey=" + userkey
+				+ "]";
 	}
 	
 	

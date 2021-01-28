@@ -67,7 +67,7 @@
 										<td>성별</td>
 										<td colspan="4">
 											<c:choose>
-												<c:when test="${member.gender == 1}">
+												<c:when test="${member.gender == 0}">
 													남자
 												</c:when>
 												<c:otherwise>

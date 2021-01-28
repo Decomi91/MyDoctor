@@ -3187,7 +3187,7 @@ input[type="submit"].disabled, input[type="submit"]:disabled, input[type="reset"
 
 .nearhospital, .nearpharmacy {
 	display: inline-block;
-	width: 48%;
+	/* width: 48%; */
 	margin-bottom: 5%
 }
 

@@ -31,8 +31,8 @@
 		select * from (select rownum rnum, reserveNo, id, name, hosid, hosname, disease,
 						reserveTime, acceptance
 						from
-						(select * from reservation order by reserveTime desc))
-		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+						(select * from reservation where id = #{memberId}  order by reserveTime desc))
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<select id = "yesAccept" parameterType = "String" resultType = "int">
@@ -101,7 +101,7 @@
 		union all
 		select count(*)
 		from reservation 
-		where hosid = #{hosid} and acceptance=0
+		where hosid = #{hosid} and acceptance=0 and reserveTime &lt;= sysdate
 		union all
 		select count(*)
 		from reservation 
@@ -168,9 +168,10 @@
 						from
 						(select * from reservation 
 						where acceptance between 0 and 1 
+						and id = #{memberId} 
 						and to_Char(reserveTime,'YYYYMMDD') &gt;= to_Char(sysdate, 'YYYYMMDD')
 						order by reserveTime))
-		where id = #{memberId} and rnum &gt;= #{start} and rnum &lt;= #{end}
+		where rnum &gt;= #{start} and rnum &lt;= #{end}
 	</select>
 	
 	<select id = "reserveCounti" parameterType = "String" resultType = "int">

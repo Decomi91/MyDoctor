@@ -177,6 +177,7 @@ a.talkShort{color: black !important;}
 </style>
 </head>
 <body>
+<c:if test="${chk eq '1' and hs_empty eq '1'}">
 <div class="section reviewStars" id="reviewStar">
 	<div class="reviewStar">
 		<div>
@@ -281,6 +282,7 @@ a.talkShort{color: black !important;}
 			</div>
 		</div>
 </div>
+</c:if>
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.24.0/moment.min.js"></script>
 <script>
 	// 문의하기 click
